@@ -4,10 +4,10 @@ namespace SurveyQuestionsConfigurator.Models
 {
     public class SliderQuestion : Question
     {
-        private int startValue;
-        private int endValue;
-        private string startValueCaption;
-        private string endValueCaption;
+        private int mStartValue;
+        private int mEndValue;
+        private string mStartValueCaption;
+        private string mEndValueCaption;
 
         public SliderQuestion()
         {
@@ -16,7 +16,7 @@ namespace SurveyQuestionsConfigurator.Models
 
         public int StartValue
         {
-            get => startValue;
+            get => mStartValue;
             set
             {
                 if (value < 0 || value > 100)
@@ -24,17 +24,17 @@ namespace SurveyQuestionsConfigurator.Models
                         nameof(value),
                         "Start value must be between 0 and 100.");
 
-                if (endValue != 0 && value >= endValue)
+                if (mEndValue != 0 && value >= mEndValue)
                     throw new ArgumentException(
                         "Start value must be less than end value.");
 
-                startValue = value;
+                mStartValue = value;
             }
         }
 
         public int EndValue
         {
-            get => endValue;
+            get => mEndValue;
             set
             {
                 if (value < 0 || value > 100)
@@ -42,17 +42,17 @@ namespace SurveyQuestionsConfigurator.Models
                         nameof(value),
                         "End value must be between 0 and 100.");
 
-                if (value <= startValue)
+                if (value <= mStartValue)
                     throw new ArgumentException(
                         "End value must be greater than start value.");
 
-                endValue = value;
+                mEndValue = value;
             }
         }
 
         public string StartValueCaption
         {
-            get => startValueCaption;
+            get => mStartValueCaption;
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
@@ -68,7 +68,7 @@ namespace SurveyQuestionsConfigurator.Models
 
         public string EndValueCaption
         {
-            get => endValueCaption;
+            get => mEndValueCaption;
             set
             {
                 if (string.IsNullOrWhiteSpace(value))

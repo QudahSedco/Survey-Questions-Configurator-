@@ -4,30 +4,31 @@ namespace SurveyQuestionsConfigurator.Models
 {
     public abstract class Question
     {
-        private string questionText;
-        private int questionOrder;
+        public int Id{ get; protected set; }
+        private string mQuestionText;
+        private int mQuestionOrder;
         public QuestionType QuestionType { get; protected set;}
 
         public string QuestionText
         {
-            get => questionText;
+            get => mQuestionText;
 
             set
             {
                 if (String.IsNullOrWhiteSpace(value))
                     throw new ArgumentException(nameof(value), "Question text cannot be null or empty.");
-                questionText = value;
+                mQuestionText = value;
             }
         }
 
         public int QuestionOrder
         {
-            get => questionOrder;
+            get => mQuestionOrder;
             set
             {
                 if (value < 1)
                     throw new ArgumentOutOfRangeException(nameof(value), "Value cannont be less than 1");
-                questionOrder = value;
+                mQuestionOrder = value;
             }
         }
     }

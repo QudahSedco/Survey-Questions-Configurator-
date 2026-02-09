@@ -8,7 +8,7 @@ namespace SurveyQuestionsConfigurator.Models
 {
     internal class SmileyFacesQuestion : Question
     {
-        private int numberOfSmileyFaces;
+        private int mNumberOfSmileyFaces;
 
         public SmileyFacesQuestion() {
             QuestionType = QuestionType.Smiley;
@@ -16,7 +16,7 @@ namespace SurveyQuestionsConfigurator.Models
 
         public int NumberOfSmileyFaces
         {
-            get => numberOfSmileyFaces;
+            get => mNumberOfSmileyFaces;
             set
             {
                 if (value < 2 || value > 5)
@@ -24,7 +24,7 @@ namespace SurveyQuestionsConfigurator.Models
                         nameof(value),
                         "Number of smiley faces must be between 2 and 5.");
 
-                numberOfSmileyFaces = value;
+                mNumberOfSmileyFaces = value;
             }
         }
     }

@@ -15,11 +15,7 @@ namespace SurveyQuestionsConfigurator
         [STAThread]
         static void Main()
         {
-            StarQuestion q = new StarQuestion();
-            q.QuestionText = "How satisfied are you?";
-            q.QuestionOrder = 0;
-            q.NumberOfStars = 3;
-
+          
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

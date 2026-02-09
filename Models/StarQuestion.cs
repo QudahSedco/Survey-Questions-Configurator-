@@ -8,7 +8,7 @@ namespace SurveyQuestionsConfigurator.Models
 {
     internal class StarQuestion : Question
     {
-        private int numberStars;
+        private int mNumberStars;
 
         public StarQuestion()
         {
@@ -17,7 +17,7 @@ namespace SurveyQuestionsConfigurator.Models
 
         public int NumberOfStars
         {
-            get => numberStars;
+            get => mNumberStars;
             set
             {
                 if (value < 1 || value > 10)
@@ -25,7 +25,7 @@ namespace SurveyQuestionsConfigurator.Models
                         nameof(value),
                         "Number of stars must be between 1 and 10.");
 
-                numberStars = value;
+                mNumberStars = value;
             }
         }
 
