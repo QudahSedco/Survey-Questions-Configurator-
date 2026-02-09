@@ -9,9 +9,8 @@ namespace SurveyQuestionsConfigurator.Models
         private string mStartValueCaption;
         private string mEndValueCaption;
 
-        public SliderQuestion()
+        public SliderQuestion() : base(QuestionType.Slider)
         {
-            QuestionType = QuestionType.Slider;
         }
 
         public int StartValue
@@ -62,7 +61,6 @@ namespace SurveyQuestionsConfigurator.Models
                 if (value.Length > 100)
                     throw new ArgumentException(
                         "Start value caption cannot exceed 100 characters.");
-
             }
         }
 
@@ -78,8 +76,6 @@ namespace SurveyQuestionsConfigurator.Models
                 if (value.Length > 100)
                     throw new ArgumentException(
                         "End value caption cannot exceed 100 characters.");
-
-                
             }
         }
     }

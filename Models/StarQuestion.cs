@@ -10,9 +10,8 @@ namespace SurveyQuestionsConfigurator.Models
     {
         private int mNumberStars;
 
-        public StarQuestion()
+        public StarQuestion() : base(QuestionType.Star)
         {
-            QuestionType = QuestionType.Star;
         }
 
         public int NumberOfStars

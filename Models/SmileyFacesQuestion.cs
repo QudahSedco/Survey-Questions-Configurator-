@@ -10,8 +10,8 @@ namespace SurveyQuestionsConfigurator.Models
     {
         private int mNumberOfSmileyFaces;
 
-        public SmileyFacesQuestion() {
-            QuestionType = QuestionType.Smiley;
+        public SmileyFacesQuestion() : base(QuestionType.Smiley)
+        {
         }
 
         public int NumberOfSmileyFaces

@@ -42,6 +42,10 @@ namespace SurveyQuestionsConfigurator.Repositories
                         {
                             AddStarQuestion(starQuestion, connection, transaction);
                         }
+                        else if (pQuestion is SmileyFacesQuestion smileyFacesQuestion)
+                        {
+                            AddSmileyFaceQuestion(smileyFacesQuestion, connection, transaction);
+                        }
 
                         transaction.Commit();
                     }
@@ -61,9 +65,9 @@ namespace SurveyQuestionsConfigurator.Repositories
 
         public List<Question> GetAllQuestions()
         {
-            var list = new List<Question>();
+            var tList = new List<Question>();
 
-            string sql = @"
+            string tSql = @"
         SELECT
             question_id,
             question_text,
@@ -72,12 +76,12 @@ namespace SurveyQuestionsConfigurator.Repositories
         FROM Questions
         ORDER BY question_order";
 
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            using (SqlCommand cmd = new SqlCommand(sql, connection))
+            using (SqlConnection tConnection = new SqlConnection(ConnectionString))
+            using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
             {
-                connection.Open();
+                tConnection.Open();
 
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                using (SqlDataReader reader = tCmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
@@ -109,12 +113,12 @@ namespace SurveyQuestionsConfigurator.Repositories
                         question.QuestionText = reader.GetString(1);
                         question.QuestionOrder = reader.GetInt32(2);
 
-                        list.Add(question);
+                        tList.Add(question);
                     }
                 }
             }
 
-            return list;
+            return tList;
         }
 
         public Question GetQuestionByID(int pId)
@@ -127,16 +131,28 @@ namespace SurveyQuestionsConfigurator.Repositories
             throw new NotImplementedException();
         }
 
-        private void AddStarQuestion(StarQuestion pQuestion, SqlConnection connection, SqlTransaction transaction)
+        private void AddStarQuestion(StarQuestion pQuestion, SqlConnection pConnection, SqlTransaction pTransaction)
         {
-            string sql = @"INSERT INTO Star_Questions (question_id, number_of_stars) VALUES (@id, @stars)";
+            string tSql = @"INSERT INTO Star_Questions (question_id, number_of_stars) VALUES (@id, @stars)";
 
-            using (SqlCommand cmd = new SqlCommand(sql, connection, transaction))
+            using (SqlCommand cmd = new SqlCommand(tSql, pConnection, pTransaction))
             {
                 cmd.Parameters.AddWithValue("@id", pQuestion.Id);
                 cmd.Parameters.AddWithValue("@stars", pQuestion.NumberOfStars);
 
                 cmd.ExecuteNonQuery();
+            }
+        }
+
+        private void AddSmileyFaceQuestion(SmileyFacesQuestion pQuestion, SqlConnection pConnection, SqlTransaction pTransaction)
+        {
+            string tSql = "INSERT INTO Smiley_Faces_Questions(questions_id,number_of_smiley_faces) VALUES (@id,@NumberOfSmileyFaces)";
+
+            using (SqlCommand tCmd = new SqlCommand(tSql, pConnection, pTransaction))
+            {
+                tCmd.Parameters.AddWithValue("@id", pQuestion.Id);
+                tCmd.Parameters.AddWithValue("@NumberOfSmileyFaces", pQuestion.NumberOfSmileyFaces);
+                tCmd.ExecuteNonQuery();
             }
         }
     }

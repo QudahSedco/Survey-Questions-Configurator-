@@ -33,7 +33,11 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
@@ -45,7 +49,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(918, 274);
+            this.button1.Location = new System.Drawing.Point(906, 316);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -77,11 +81,39 @@
             this.listBox1.Size = new System.Drawing.Size(233, 264);
             this.listBox1.TabIndex = 5;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.textBox2);
+            this.panel1.Location = new System.Drawing.Point(588, 301);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 100);
+            this.panel1.TabIndex = 6;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(67, 77);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 0;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(459, 433);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1147, 656);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.numericUpDown1);
@@ -91,6 +123,8 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -103,6 +137,9 @@
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button button2;
     }
 }
 

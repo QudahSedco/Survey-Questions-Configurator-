@@ -7,7 +7,15 @@ namespace SurveyQuestionsConfigurator.Models
         public int Id { get; set; }
         private string mQuestionText;
         private int mQuestionOrder;
-        public QuestionType QuestionType { get; protected set; }
+        public QuestionType QuestionType { get; }
+
+        protected Question(QuestionType questionType)
+        {
+            QuestionType = questionType;
+        }
+
+        public Question()
+        { }
 
         public string QuestionText
         {
@@ -30,6 +38,12 @@ namespace SurveyQuestionsConfigurator.Models
                     throw new ArgumentOutOfRangeException(nameof(value), "Value cannont be less than 1");
                 mQuestionOrder = value;
             }
+        }
+
+        //prop just to display the question text and question type in the list next to each other
+        public string DisplayText
+        {
+            get { return $"{QuestionText} - {QuestionType}"; }
         }
     }
 }

@@ -3,33 +3,26 @@ using SurveyQuestionsConfigurator.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SurveyQuestionsConfigurator
 {
-    public partial class Form1 : Form
+    public partial class Form2 : Form
     {
         private QuestionRepository questionRepository;
 
-        public Form1()
+        public Form2()
         {
             InitializeComponent();
-            questionRepository = new QuestionRepository();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
+            this.StartPosition = FormStartPosition.CenterParent;
             comboBox1.DataSource = Enum.GetValues(typeof(QuestionType));
-            listBox1.DataSource = questionRepository.GetAllQuestions();
-            //question text here is the question obj property
-            listBox1.DisplayMember = "DisplayText";
+            questionRepository = new QuestionRepository();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -42,17 +35,17 @@ namespace SurveyQuestionsConfigurator
             {
                 question = new StarQuestion
                 {
-                    QuestionText = textBox1.Text,
-                    QuestionOrder = (int)numericUpDown1.Value,
-                    NumberOfStars = 5
+                    QuestionText = textBoxQuestionText.Text,
+                    QuestionOrder = (int)numericUpDownQuestionOrder.Value,
+                    NumberOfStars = trackBar1.Value
                 };
             }
             else if (selectedType == QuestionType.Smiley)
             {
                 question = new SmileyFacesQuestion
                 {
-                    QuestionText = textBox1.Text,
-                    QuestionOrder = (int)numericUpDown1.Value,
+                    QuestionText = textBoxQuestionText.Text,
+                    QuestionOrder = (int)numericUpDownQuestionOrder.Value,
                     NumberOfSmileyFaces = 5
                 };
             }
@@ -79,22 +72,35 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e)
         {
-            panel1.Visible = (QuestionType)comboBox1.SelectedItem == QuestionType.Star;
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+        }
+
+        private const int MaxStars = 10;
+
+        private void UpdateStars(int value)
+        {
+            label4.Text =
+                new string('★', value) +
+                new string('☆', MaxStars - value);
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            UpdateStars(trackBar1.Value);
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            panel1.Visible = (QuestionType)comboBox1.SelectedItem == QuestionType.Star;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            using (var form = new Form2())
-            {
-                form.ShowDialog(this);
-            }
+            panel1.Visible = (QuestionType)comboBox1.SelectedItem == QuestionType.Star;
         }
     }
 }
