@@ -28,6 +28,5 @@ namespace SurveyQuestionsConfigurator.Models
                 mNumberStars = value;
             }
         }
-
     }
 }

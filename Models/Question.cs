@@ -4,10 +4,10 @@ namespace SurveyQuestionsConfigurator.Models
 {
     public abstract class Question
     {
-        public int Id{ get; protected set; }
+        public int Id { get; set; }
         private string mQuestionText;
         private int mQuestionOrder;
-        public QuestionType QuestionType { get; protected set;}
+        public QuestionType QuestionType { get; protected set; }
 
         public string QuestionText
         {
