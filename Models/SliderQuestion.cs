@@ -61,6 +61,7 @@ namespace SurveyQuestionsConfigurator.Models
                 if (value.Length > 100)
                     throw new ArgumentException(
                         "Start value caption cannot exceed 100 characters.");
+                mStartValueCaption = value;
             }
         }
 
@@ -76,6 +77,7 @@ namespace SurveyQuestionsConfigurator.Models
                 if (value.Length > 100)
                     throw new ArgumentException(
                         "End value caption cannot exceed 100 characters.");
+                mEndValueCaption = value;
             }
         }
     }

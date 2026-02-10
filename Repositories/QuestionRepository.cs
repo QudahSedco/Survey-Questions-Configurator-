@@ -16,35 +16,39 @@ namespace SurveyQuestionsConfigurator.Repositories
 
         public void AddQuestion(Question pQuestion)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection tConnection = new SqlConnection(ConnectionString))
             {
-                connection.Open();
+                tConnection.Open();
 
-                using (SqlTransaction transaction = connection.BeginTransaction())
+                using (SqlTransaction transaction = tConnection.BeginTransaction())
                 {
                     try
                     {
-                        string baseSql =
+                        string tbBaseSql =
                             @"INSERT INTO Questions (question_text, question_order, question_type)
                       VALUES (@text, @order, @type);
                       SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
-                        using (SqlCommand cmd = new SqlCommand(baseSql, connection, transaction))
+                        using (SqlCommand tCmd = new SqlCommand(tbBaseSql, tConnection, transaction))
                         {
-                            cmd.Parameters.AddWithValue("@text", pQuestion.QuestionText);
-                            cmd.Parameters.AddWithValue("@order", pQuestion.QuestionOrder);
-                            cmd.Parameters.AddWithValue("@type", (int)pQuestion.QuestionType);
+                            tCmd.Parameters.AddWithValue("@text", pQuestion.QuestionText);
+                            tCmd.Parameters.AddWithValue("@order", pQuestion.QuestionOrder);
+                            tCmd.Parameters.AddWithValue("@type", (int)pQuestion.QuestionType);
 
-                            pQuestion.Id = (int)cmd.ExecuteScalar();
+                            pQuestion.Id = (int)tCmd.ExecuteScalar();
                         }
 
                         if (pQuestion is StarQuestion starQuestion)
                         {
-                            AddStarQuestion(starQuestion, connection, transaction);
+                            AddStarQuestion(starQuestion, tConnection, transaction);
                         }
                         else if (pQuestion is SmileyFacesQuestion smileyFacesQuestion)
                         {
-                            AddSmileyFaceQuestion(smileyFacesQuestion, connection, transaction);
+                            AddSmileyFaceQuestion(smileyFacesQuestion, tConnection, transaction);
+                        }
+                        else if (pQuestion is SliderQuestion sliderQuestion)
+                        {
+                            AddSliderQuestion(sliderQuestion, tConnection, transaction);
                         }
 
                         transaction.Commit();
@@ -60,21 +64,24 @@ namespace SurveyQuestionsConfigurator.Repositories
 
         public void DeleteQuestionById(int pId)
         {
-            throw new NotImplementedException();
+            using (SqlConnection tConnection = new SqlConnection(ConnectionString))
+            {
+                String tSql = "DELETE FROM Questions WHERE question_id = @id";
+
+                using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
+                {
+                    tConnection.Open();
+                    tCmd.Parameters.AddWithValue("@id", pId);
+                    tCmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public List<Question> GetAllQuestions()
         {
             var tList = new List<Question>();
 
-            string tSql = @"
-        SELECT
-            question_id,
-            question_text,
-            question_order,
-            question_type
-        FROM Questions
-        ORDER BY question_order";
+            string tSql = "SELECT question_id, question_text, question_order, question_type FROM Questions ORDER BY question_order";
 
             using (SqlConnection tConnection = new SqlConnection(ConnectionString))
             using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
@@ -85,8 +92,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                 {
                     while (reader.Read())
                     {
-                        QuestionType type =
-                            (QuestionType)reader.GetInt32(3);
+                        QuestionType type = (QuestionType)reader.GetInt32(3);
 
                         Question question;
 
@@ -152,6 +158,21 @@ namespace SurveyQuestionsConfigurator.Repositories
             {
                 tCmd.Parameters.AddWithValue("@id", pQuestion.Id);
                 tCmd.Parameters.AddWithValue("@NumberOfSmileyFaces", pQuestion.NumberOfSmileyFaces);
+                tCmd.ExecuteNonQuery();
+            }
+        }
+
+        private void AddSliderQuestion(SliderQuestion pQuestion, SqlConnection pConnection, SqlTransaction pTransaction)
+        {
+            string tSql = @"INSERT INTO Slider_Questions(questions_id,start_value,end_value,start_value_caption,end_value_caption)
+                 VALUES (@id,@startValue,@endValue,@startCaption,@endCaption)";
+            using (SqlCommand tCmd = new SqlCommand(tSql, pConnection, pTransaction))
+            {
+                tCmd.Parameters.AddWithValue("@id", pQuestion.Id);
+                tCmd.Parameters.AddWithValue("@startValue", pQuestion.StartValue);
+                tCmd.Parameters.AddWithValue("@endValue", pQuestion.EndValue);
+                tCmd.Parameters.AddWithValue("@startCaption", pQuestion.StartValueCaption);
+                tCmd.Parameters.AddWithValue("@endCaption", pQuestion.EndValueCaption);
                 tCmd.ExecuteNonQuery();
             }
         }

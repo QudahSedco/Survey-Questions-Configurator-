@@ -20,9 +20,7 @@ namespace SurveyQuestionsConfigurator.Models
             set
             {
                 if (value < 2 || value > 5)
-                    throw new ArgumentOutOfRangeException(
-                        nameof(value),
-                        "Number of smiley faces must be between 2 and 5.");
+                    throw new ArgumentOutOfRangeException(nameof(value), "Number of smiley faces must be between 2 and 5.");
 
                 mNumberOfSmileyFaces = value;
             }

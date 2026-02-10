@@ -25,6 +25,10 @@ namespace SurveyQuestionsConfigurator.Models
             {
                 if (String.IsNullOrWhiteSpace(value))
                     throw new ArgumentException(nameof(value), "Question text cannot be null or empty.");
+
+                if (value.Length > 500)
+                    throw new ArgumentOutOfRangeException(nameof(value), "Question text cannot be more than 500");
+
                 mQuestionText = value;
             }
         }
@@ -32,10 +36,12 @@ namespace SurveyQuestionsConfigurator.Models
         public int QuestionOrder
         {
             get => mQuestionOrder;
+
             set
             {
                 if (value < 1)
                     throw new ArgumentOutOfRangeException(nameof(value), "Value cannont be less than 1");
+
                 mQuestionOrder = value;
             }
         }

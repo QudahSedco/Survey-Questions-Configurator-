@@ -26,67 +26,10 @@ namespace SurveyQuestionsConfigurator
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            comboBox1.DataSource = Enum.GetValues(typeof(QuestionType));
-            listBox1.DataSource = questionRepository.GetAllQuestions();
-            //question text here is the question obj property
+            LoadQuestions();
+            //DisplayText text here is the question obj property that combines question text and question type
             listBox1.DisplayMember = "DisplayText";
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            QuestionType selectedType =
-                (QuestionType)comboBox1.SelectedItem;
-            Question question = null;
-
-            if (selectedType == QuestionType.Star)
-            {
-                question = new StarQuestion
-                {
-                    QuestionText = textBox1.Text,
-                    QuestionOrder = (int)numericUpDown1.Value,
-                    NumberOfStars = 5
-                };
-            }
-            else if (selectedType == QuestionType.Smiley)
-            {
-                question = new SmileyFacesQuestion
-                {
-                    QuestionText = textBox1.Text,
-                    QuestionOrder = (int)numericUpDown1.Value,
-                    NumberOfSmileyFaces = 5
-                };
-            }
-
-            try
-            {
-                questionRepository.AddQuestion(question);
-
-                MessageBox.Show(
-                    "Star question added successfully.",
-                    "Success",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
-                );
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    "An error occurred while saving the question.",
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
-            }
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            panel1.Visible = (QuestionType)comboBox1.SelectedItem == QuestionType.Star;
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-            panel1.Visible = (QuestionType)comboBox1.SelectedItem == QuestionType.Star;
+            btnDelete.Enabled = false;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -94,7 +37,59 @@ namespace SurveyQuestionsConfigurator
             using (var form = new Form2())
             {
                 form.ShowDialog(this);
+                LoadQuestions();
             }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItem != null)
+                btnDelete.Enabled = true;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            Question tSelectedQuestion = (Question)listBox1.SelectedItem;
+
+            DialogResult answer = MessageBox.Show(this,
+            $"Are you sure you want to delete the following message?\n\n{tSelectedQuestion.QuestionText}",
+            "Confirm Delete",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question
+);
+            // dont forget to put try  catch here
+            try
+            {
+                if (answer == DialogResult.Yes)
+                {
+                    questionRepository.DeleteQuestionById(tSelectedQuestion.Id);
+                    LoadQuestions();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this,
+                    $"An error occurred while deleting the question.{ex}",
+                    "Delete Failed",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+
+        private void LoadQuestions()
+        {
+            listBox1.DataSource = null;
+            listBox1.DataSource = questionRepository.GetAllQuestions();
+            listBox1.DisplayMember = "DisplayText";
         }
     }
 }
