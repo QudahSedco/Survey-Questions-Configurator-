@@ -18,6 +18,6 @@ namespace SurveyQuestionsConfigurator.Repositories
 
         void UpdateQuestion(Question pQuestion);
 
-        Question GetQuestionByID(int pId);
+        Question GetChildQuestion(Question pQuestion);
     }
 }

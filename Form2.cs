@@ -17,16 +17,52 @@ namespace SurveyQuestionsConfigurator
     {
         private QuestionRepository questionRepository;
 
-        public Form2()
+        public Form2(Question question)
         {
             InitializeComponent();
-            this.StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterParent;
 
-            comboBox1.DataSource = Enum.GetValues(typeof(QuestionType));
             questionRepository = new QuestionRepository();
+            comboBox1.DataSource = Enum.GetValues(typeof(QuestionType));
 
-            comboBox1.SelectedIndex = 0;
-            comboBox1_SelectedIndexChanged(null, null);
+            if (question != null)
+            {
+                comboBox1.SelectedItem = question.QuestionType;
+                Updatemode(question);
+            }
+            else
+            {
+                comboBox1.SelectedIndex = 0;
+                UpdateStars(trackBar1.Value);
+            }
+        }
+
+        private void Updatemode(Question question)
+        {
+            comboBox1.Enabled = false;
+
+            textBoxQuestionText.Text = question.QuestionText;
+            numericUpDownQuestionOrder.Value = question.QuestionOrder;
+
+            if (question is StarQuestion starQuestion)
+            {
+                trackBar1.Value = starQuestion.NumberOfStars;
+                lblNumberOfStars.Text = starQuestion.NumberOfStars.ToString();
+                UpdateStars(starQuestion.NumberOfStars);
+            }
+            if (question is SmileyFacesQuestion smileyFacesQuestion)
+            {
+                trackBar2.Value = smileyFacesQuestion.NumberOfSmileyFaces;
+                lblFacesNumber.Text = smileyFacesQuestion.NumberOfSmileyFaces.ToString();
+                UpdateSmileyFace(smileyFacesQuestion.NumberOfSmileyFaces);
+            }
+            if (question is SliderQuestion sliderQuestion)
+            {
+                numericUpDownStartValue.Value = sliderQuestion.StartValue;
+                numericUpDownEndValue.Value = sliderQuestion.EndValue;
+                textBoxStartCaption.Text = sliderQuestion.StartValueCaption;
+                textBoxEndCaption.Text = sliderQuestion.EndValueCaption;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -147,12 +183,11 @@ namespace SurveyQuestionsConfigurator
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             UpdateStars(trackBar1.Value);
+            lblNumberOfStars.Text = trackBar1.Value.ToString();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            if (panel1.Visible == true)
-                UpdateStars(0);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -212,7 +247,10 @@ namespace SurveyQuestionsConfigurator
 
         private void lblFacesNumber_Click(object sender, EventArgs e)
         {
+        }
 
+        private void label6_Click_1(object sender, EventArgs e)
+        {
         }
     }
 }

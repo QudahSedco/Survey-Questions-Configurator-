@@ -55,6 +55,7 @@
             this.textBoxEndCaption = new System.Windows.Forms.TextBox();
             this.lblEndCaption = new System.Windows.Forms.Label();
             this.lblFacesNumber = new System.Windows.Forms.Label();
+            this.lblNumberOfStars = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuestionOrder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -136,7 +137,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 24);
+            this.label3.Location = new System.Drawing.Point(3, 23);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(81, 13);
             this.label3.TabIndex = 6;
@@ -174,6 +175,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblNumberOfStars);
             this.panel1.Controls.Add(this.trackBar1);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
@@ -337,7 +339,7 @@
             // lblEndCaption
             // 
             this.lblEndCaption.AutoSize = true;
-            this.lblEndCaption.Location = new System.Drawing.Point(13, 107);
+            this.lblEndCaption.Location = new System.Drawing.Point(12, 107);
             this.lblEndCaption.Name = "lblEndCaption";
             this.lblEndCaption.Size = new System.Drawing.Size(64, 13);
             this.lblEndCaption.TabIndex = 18;
@@ -354,11 +356,21 @@
             this.lblFacesNumber.Text = "2";
             this.lblFacesNumber.Click += new System.EventHandler(this.lblFacesNumber_Click);
             // 
+            // lblNumberOfStars
+            // 
+            this.lblNumberOfStars.AutoSize = true;
+            this.lblNumberOfStars.Location = new System.Drawing.Point(239, 23);
+            this.lblNumberOfStars.Name = "lblNumberOfStars";
+            this.lblNumberOfStars.Size = new System.Drawing.Size(13, 13);
+            this.lblNumberOfStars.TabIndex = 9;
+            this.lblNumberOfStars.Text = "0";
+            this.lblNumberOfStars.Click += new System.EventHandler(this.label6_Click_1);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(946, 539);
+            this.ClientSize = new System.Drawing.Size(570, 534);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -416,5 +428,6 @@
         private System.Windows.Forms.TextBox textBoxEndCaption;
         private System.Windows.Forms.TextBox textBoxStartCaption;
         private System.Windows.Forms.Label lblFacesNumber;
+        private System.Windows.Forms.Label lblNumberOfStars;
     }
 }

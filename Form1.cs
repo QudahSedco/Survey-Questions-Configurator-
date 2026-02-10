@@ -30,19 +30,17 @@ namespace SurveyQuestionsConfigurator
             //DisplayText text here is the question obj property that combines question text and question type
             listBox1.DisplayMember = "DisplayText";
             btnDelete.Enabled = false;
+            btnUpdate.Enabled = false;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            using (var form = new Form2())
+            Question question = null;
+            using (var form = new Form2(question))
             {
                 form.ShowDialog(this);
                 LoadQuestions();
             }
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -52,7 +50,10 @@ namespace SurveyQuestionsConfigurator
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBox1.SelectedItem != null)
+            {
                 btnDelete.Enabled = true;
+                btnUpdate.Enabled = true;
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -90,6 +91,19 @@ namespace SurveyQuestionsConfigurator
             listBox1.DataSource = null;
             listBox1.DataSource = questionRepository.GetAllQuestions();
             listBox1.DisplayMember = "DisplayText";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Question tSelectedQuestion = (Question)listBox1.SelectedItem;
+
+            tSelectedQuestion = questionRepository.GetChildQuestion(tSelectedQuestion);
+
+            using (var form = new Form2(tSelectedQuestion))
+            {
+                form.ShowDialog(this);
+                LoadQuestions();
+            }
         }
     }
 }
