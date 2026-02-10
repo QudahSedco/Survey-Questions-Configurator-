@@ -16,6 +16,7 @@ namespace SurveyQuestionsConfigurator
     public partial class Form2 : Form
     {
         private QuestionRepository questionRepository;
+        private Question editingQuestion;
 
         public Form2(Question question)
         {
@@ -27,6 +28,7 @@ namespace SurveyQuestionsConfigurator
 
             if (question != null)
             {
+                editingQuestion = question;
                 comboBox1.SelectedItem = question.QuestionType;
                 Updatemode(question);
             }
@@ -130,6 +132,8 @@ namespace SurveyQuestionsConfigurator
                         EndValueCaption = textBoxEndCaption.Text
                     };
                 }
+
+                questionRepository.UpdateQuestion(question);
 
                 questionRepository.AddQuestion(question);
 
@@ -251,6 +255,52 @@ namespace SurveyQuestionsConfigurator
 
         private void label6_Click_1(object sender, EventArgs e)
         {
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (textBoxQuestionText.Text == String.Empty)
+            {
+                errorProvider1.SetError(textBoxQuestionText, "Question text cant be empty");
+                return;
+            }
+
+            if (editingQuestion is StarQuestion starQuestion)
+            {
+                starQuestion.QuestionText = textBoxQuestionText.Text;
+                starQuestion.QuestionOrder = (int)numericUpDownQuestionOrder.Value;
+                starQuestion.NumberOfStars = trackBar1.Value;
+
+                questionRepository.UpdateQuestion(starQuestion);
+            }
+            else if (editingQuestion is SmileyFacesQuestion smileyQuestion)
+            {
+                smileyQuestion.QuestionText = textBoxQuestionText.Text;
+                smileyQuestion.QuestionOrder = (int)numericUpDownQuestionOrder.Value;
+                smileyQuestion.NumberOfSmileyFaces = trackBar2.Value;
+
+                questionRepository.UpdateQuestion(smileyQuestion);
+            }
+            else if (editingQuestion is SliderQuestion sliderQuestion)
+            {
+                if (numericUpDownStartValue.Value >= numericUpDownEndValue.Value)
+                {
+                    errorProvider1.SetError(numericUpDownStartValue, "Start value must be less than end value");
+                    return;
+                }
+
+                sliderQuestion.QuestionText = textBoxQuestionText.Text;
+                sliderQuestion.QuestionOrder = (int)numericUpDownQuestionOrder.Value;
+                sliderQuestion.StartValue = (int)numericUpDownStartValue.Value;
+                sliderQuestion.EndValue = (int)numericUpDownEndValue.Value;
+                sliderQuestion.StartValueCaption = textBoxStartCaption.Text;
+                sliderQuestion.EndValueCaption = textBoxEndCaption.Text;
+
+                questionRepository.UpdateQuestion(sliderQuestion);
+            }
+
+            MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.Close();
         }
     }
 }
