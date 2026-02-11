@@ -22,6 +22,9 @@ namespace SurveyQuestionsConfigurator
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
 
             mQuestionRepository = new QuestionRepository();
             comboBox1.DataSource = Enum.GetValues(typeof(QuestionType));
@@ -39,7 +42,7 @@ namespace SurveyQuestionsConfigurator
                 btnUpdate.Visible = false;
                 button1.Visible = true;
                 comboBox1.SelectedIndex = 0;
-                UpdateStars(trackBar1.Value);
+                UpdateStars(trackBarStars.Value);
             }
         }
 
@@ -52,13 +55,13 @@ namespace SurveyQuestionsConfigurator
 
             if (pQuestion is StarQuestion tStarQuestion)
             {
-                trackBar1.Value = tStarQuestion.NumberOfStars;
+                trackBarStars.Value = tStarQuestion.NumberOfStars;
                 lblNumberOfStars.Text = tStarQuestion.NumberOfStars.ToString();
                 UpdateStars(tStarQuestion.NumberOfStars);
             }
             if (pQuestion is SmileyFacesQuestion tSmileyFacesQuestion)
             {
-                trackBar2.Value = tSmileyFacesQuestion.NumberOfSmileyFaces;
+                trackBarSmileyFaces.Value = tSmileyFacesQuestion.NumberOfSmileyFaces;
                 lblFacesNumber.Text = tSmileyFacesQuestion.NumberOfSmileyFaces.ToString();
                 UpdateSmileyFace(tSmileyFacesQuestion.NumberOfSmileyFaces);
             }
@@ -88,9 +91,9 @@ namespace SurveyQuestionsConfigurator
             {
                 if (tSelectedType == QuestionType.Star)
                 {
-                    if (trackBar1.Value < 1)
+                    if (trackBarStars.Value < 1)
                     {
-                        errorProvider1.SetError(trackBar1, "Number of stars cannot be less than 1");
+                        errorProvider1.SetError(trackBarStars, "Number of stars cannot be less than 1");
                         return;
                     }
 
@@ -98,7 +101,7 @@ namespace SurveyQuestionsConfigurator
                     {
                         QuestionText = textBoxQuestionText.Text,
                         QuestionOrder = (int)numericUpDownQuestionOrder.Value,
-                        NumberOfStars = trackBar1.Value
+                        NumberOfStars = trackBarStars.Value
                     };
                 }
                 else if (tSelectedType == QuestionType.Smiley)
@@ -107,7 +110,7 @@ namespace SurveyQuestionsConfigurator
                     {
                         QuestionText = textBoxQuestionText.Text,
                         QuestionOrder = (int)numericUpDownQuestionOrder.Value,
-                        NumberOfSmileyFaces = trackBar2.Value
+                        NumberOfSmileyFaces = trackBarSmileyFaces.Value
                     };
                 }
                 else if (tSelectedType == QuestionType.Slider)
@@ -194,8 +197,8 @@ namespace SurveyQuestionsConfigurator
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            UpdateStars(trackBar1.Value);
-            lblNumberOfStars.Text = trackBar1.Value.ToString();
+            UpdateStars(trackBarStars.Value);
+            lblNumberOfStars.Text = trackBarStars.Value.ToString();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -233,8 +236,8 @@ namespace SurveyQuestionsConfigurator
 
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
-            UpdateSmileyFace(trackBar2.Value);
-            lblFacesNumber.Text = trackBar2.Value.ToString();
+            UpdateSmileyFace(trackBarSmileyFaces.Value);
+            lblFacesNumber.Text = trackBarSmileyFaces.Value.ToString();
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -278,7 +281,7 @@ namespace SurveyQuestionsConfigurator
             {
                 tStarQuestion.QuestionText = textBoxQuestionText.Text;
                 tStarQuestion.QuestionOrder = (int)numericUpDownQuestionOrder.Value;
-                tStarQuestion.NumberOfStars = trackBar1.Value;
+                tStarQuestion.NumberOfStars = trackBarStars.Value;
 
                 mQuestionRepository.UpdateQuestion(tStarQuestion);
             }
@@ -286,7 +289,7 @@ namespace SurveyQuestionsConfigurator
             {
                 tSmileyQuestion.QuestionText = textBoxQuestionText.Text;
                 tSmileyQuestion.QuestionOrder = (int)numericUpDownQuestionOrder.Value;
-                tSmileyQuestion.NumberOfSmileyFaces = trackBar2.Value;
+                tSmileyQuestion.NumberOfSmileyFaces = trackBarSmileyFaces.Value;
 
                 mQuestionRepository.UpdateQuestion(tSmileyQuestion);
             }
@@ -322,7 +325,12 @@ namespace SurveyQuestionsConfigurator
                 mQuestionRepository.UpdateQuestion(tSliderQuestion);
             }
 
-            MessageBox.Show($"{mEditingQuestion.QuestionType} question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(this, $"{mEditingQuestion.QuestionType} question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.Close();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
             this.Close();
         }
     }

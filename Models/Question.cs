@@ -4,7 +4,7 @@ namespace SurveyQuestionsConfigurator.Models
 {
     public abstract class Question
     {
-        public int mId { get; set; }
+        private int mId;
         private string mQuestionText;
         private int mQuestionOrder;
         public QuestionType QuestionType { get; }
@@ -13,9 +13,6 @@ namespace SurveyQuestionsConfigurator.Models
         {
             QuestionType = questionType;
         }
-
-        public Question()
-        { }
 
         public string QuestionText
         {

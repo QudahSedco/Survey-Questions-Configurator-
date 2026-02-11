@@ -31,20 +31,20 @@
             this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.textBoxQuestionText = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblQuestionText = new System.Windows.Forms.Label();
             this.numericUpDownQuestionOrder = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblQuestionOrder = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.trackBarStars = new System.Windows.Forms.TrackBar();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblTypeOfQuestion = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblNumberOfStars = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblFacesNumber = new System.Windows.Forms.Label();
-            this.trackBar2 = new System.Windows.Forms.TrackBar();
+            this.trackBarSmileyFaces = new System.Windows.Forms.TrackBar();
             this.lblSmileyFaces = new System.Windows.Forms.Label();
             this.lblNumberofSmileyfaces = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -57,12 +57,13 @@
             this.numericUpDownStartValue = new System.Windows.Forms.NumericUpDown();
             this.lblStartValue = new System.Windows.Forms.Label();
             this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuestionOrder)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarStars)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarSmileyFaces)).BeginInit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEndValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartValue)).BeginInit();
@@ -70,7 +71,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(247, 315);
+            this.button1.Location = new System.Drawing.Point(304, 318);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -80,24 +81,24 @@
             // 
             // textBoxQuestionText
             // 
-            this.textBoxQuestionText.Location = new System.Drawing.Point(243, 59);
+            this.textBoxQuestionText.Location = new System.Drawing.Point(183, 46);
             this.textBoxQuestionText.Name = "textBoxQuestionText";
             this.textBoxQuestionText.Size = new System.Drawing.Size(164, 20);
             this.textBoxQuestionText.TabIndex = 1;
             // 
-            // label1
+            // lblQuestionText
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(164, 62);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Question Text";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.lblQuestionText.AutoSize = true;
+            this.lblQuestionText.Location = new System.Drawing.Point(104, 49);
+            this.lblQuestionText.Name = "lblQuestionText";
+            this.lblQuestionText.Size = new System.Drawing.Size(73, 13);
+            this.lblQuestionText.TabIndex = 2;
+            this.lblQuestionText.Text = "Question Text";
+            this.lblQuestionText.Click += new System.EventHandler(this.label1_Click);
             // 
             // numericUpDownQuestionOrder
             // 
-            this.numericUpDownQuestionOrder.Location = new System.Drawing.Point(243, 99);
+            this.numericUpDownQuestionOrder.Location = new System.Drawing.Point(183, 86);
             this.numericUpDownQuestionOrder.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -117,19 +118,19 @@
             0,
             0});
             // 
-            // label2
+            // lblQuestionOrder
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(159, 101);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Question Order";
+            this.lblQuestionOrder.AutoSize = true;
+            this.lblQuestionOrder.Location = new System.Drawing.Point(99, 88);
+            this.lblQuestionOrder.Name = "lblQuestionOrder";
+            this.lblQuestionOrder.Size = new System.Drawing.Size(78, 13);
+            this.lblQuestionOrder.TabIndex = 4;
+            this.lblQuestionOrder.Text = "Question Order";
             // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(243, 142);
+            this.comboBox1.Location = new System.Drawing.Point(183, 129);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(164, 21);
             this.comboBox1.TabIndex = 5;
@@ -145,15 +146,15 @@
             this.label3.Text = "Number of stars";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
-            // trackBar1
+            // trackBarStars
             // 
-            this.trackBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBar1.Location = new System.Drawing.Point(100, 52);
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(121, 45);
-            this.trackBar1.TabIndex = 7;
-            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            this.trackBarStars.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.trackBarStars.Location = new System.Drawing.Point(100, 52);
+            this.trackBarStars.Name = "trackBarStars";
+            this.trackBarStars.Size = new System.Drawing.Size(121, 45);
+            this.trackBarStars.TabIndex = 7;
+            this.trackBarStars.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.trackBarStars.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // label4
             // 
@@ -164,23 +165,23 @@
             this.label4.Size = new System.Drawing.Size(0, 25);
             this.label4.TabIndex = 8;
             // 
-            // label5
+            // lblTypeOfQuestion
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(151, 145);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(86, 13);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Type of question";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
+            this.lblTypeOfQuestion.AutoSize = true;
+            this.lblTypeOfQuestion.Location = new System.Drawing.Point(91, 132);
+            this.lblTypeOfQuestion.Name = "lblTypeOfQuestion";
+            this.lblTypeOfQuestion.Size = new System.Drawing.Size(86, 13);
+            this.lblTypeOfQuestion.TabIndex = 9;
+            this.lblTypeOfQuestion.Text = "Type of question";
+            this.lblTypeOfQuestion.Click += new System.EventHandler(this.label5_Click);
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.lblNumberOfStars);
-            this.panel1.Controls.Add(this.trackBar1);
+            this.panel1.Controls.Add(this.trackBarStars);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Location = new System.Drawing.Point(142, 174);
+            this.panel1.Location = new System.Drawing.Point(94, 161);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(281, 100);
             this.panel1.TabIndex = 10;
@@ -203,12 +204,12 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.lblFacesNumber);
-            this.panel2.Controls.Add(this.trackBar2);
+            this.panel2.Controls.Add(this.trackBarSmileyFaces);
             this.panel2.Controls.Add(this.lblSmileyFaces);
             this.panel2.Controls.Add(this.lblNumberofSmileyfaces);
-            this.panel2.Location = new System.Drawing.Point(139, 177);
+            this.panel2.Location = new System.Drawing.Point(82, 154);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(281, 100);
+            this.panel2.Size = new System.Drawing.Size(309, 100);
             this.panel2.TabIndex = 11;
             // 
             // lblFacesNumber
@@ -222,17 +223,17 @@
             this.lblFacesNumber.Text = "2";
             this.lblFacesNumber.Click += new System.EventHandler(this.lblFacesNumber_Click);
             // 
-            // trackBar2
+            // trackBarSmileyFaces
             // 
-            this.trackBar2.Location = new System.Drawing.Point(100, 52);
-            this.trackBar2.Maximum = 5;
-            this.trackBar2.Minimum = 2;
-            this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Size = new System.Drawing.Size(104, 45);
-            this.trackBar2.TabIndex = 2;
-            this.trackBar2.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
-            this.trackBar2.Value = 2;
-            this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
+            this.trackBarSmileyFaces.Location = new System.Drawing.Point(115, 52);
+            this.trackBarSmileyFaces.Maximum = 5;
+            this.trackBarSmileyFaces.Minimum = 2;
+            this.trackBarSmileyFaces.Name = "trackBarSmileyFaces";
+            this.trackBarSmileyFaces.Size = new System.Drawing.Size(104, 45);
+            this.trackBarSmileyFaces.TabIndex = 2;
+            this.trackBarSmileyFaces.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.trackBarSmileyFaces.Value = 2;
+            this.trackBarSmileyFaces.Scroll += new System.EventHandler(this.trackBar2_Scroll);
             // 
             // lblSmileyFaces
             // 
@@ -248,7 +249,7 @@
             // lblNumberofSmileyfaces
             // 
             this.lblNumberofSmileyfaces.AutoSize = true;
-            this.lblNumberofSmileyfaces.Location = new System.Drawing.Point(3, 24);
+            this.lblNumberofSmileyfaces.Location = new System.Drawing.Point(12, 26);
             this.lblNumberofSmileyfaces.Name = "lblNumberofSmileyfaces";
             this.lblNumberofSmileyfaces.Size = new System.Drawing.Size(118, 13);
             this.lblNumberofSmileyfaces.TabIndex = 0;
@@ -264,7 +265,7 @@
             this.panel3.Controls.Add(this.numericUpDownEndValue);
             this.panel3.Controls.Add(this.numericUpDownStartValue);
             this.panel3.Controls.Add(this.lblStartValue);
-            this.panel3.Location = new System.Drawing.Point(155, 169);
+            this.panel3.Location = new System.Drawing.Point(95, 156);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(284, 145);
             this.panel3.TabIndex = 12;
@@ -359,7 +360,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(247, 315);
+            this.btnUpdate.Location = new System.Drawing.Point(303, 317);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.TabIndex = 13;
@@ -367,32 +368,43 @@
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.button2_Click);
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(94, 318);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 14;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(570, 534);
+            this.ClientSize = new System.Drawing.Size(494, 354);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.lblTypeOfQuestion);
             this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblQuestionOrder);
             this.Controls.Add(this.numericUpDownQuestionOrder);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblQuestionText);
             this.Controls.Add(this.textBoxQuestionText);
             this.Controls.Add(this.button1);
             this.Name = "Form2";
             this.Text = "Form2";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuestionOrder)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarStars)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarSmileyFaces)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEndValue)).EndInit();
@@ -406,20 +418,20 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBoxQuestionText;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblQuestionText;
         private System.Windows.Forms.NumericUpDown numericUpDownQuestionOrder;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblQuestionOrder;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.TrackBar trackBarStars;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblTypeOfQuestion;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblNumberofSmileyfaces;
         private System.Windows.Forms.Label lblSmileyFaces;
-        private System.Windows.Forms.TrackBar trackBar2;
+        private System.Windows.Forms.TrackBar trackBarSmileyFaces;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label lblStartValue;
         private System.Windows.Forms.NumericUpDown numericUpDownStartValue;
@@ -432,5 +444,6 @@
         private System.Windows.Forms.Label lblFacesNumber;
         private System.Windows.Forms.Label lblNumberOfStars;
         private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

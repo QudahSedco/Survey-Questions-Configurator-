@@ -20,9 +20,7 @@ namespace SurveyQuestionsConfigurator.Models
             set
             {
                 if (value < 1 || value > 10)
-                    throw new ArgumentOutOfRangeException(
-                        nameof(value),
-                        "Number of stars must be between 1 and 10.");
+                    throw new ArgumentOutOfRangeException(nameof(value), "Number of stars must be between 1 and 10.");
 
                 mNumberStars = value;
             }

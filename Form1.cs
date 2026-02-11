@@ -21,6 +21,10 @@ namespace SurveyQuestionsConfigurator
         public Form1()
         {
             InitializeComponent();
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = true;
+            StartPosition = FormStartPosition.CenterScreen;
             questionRepository = new QuestionRepository();
         }
 
