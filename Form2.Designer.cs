@@ -40,22 +40,22 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblNumberOfStars = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblFacesNumber = new System.Windows.Forms.Label();
             this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.lblSmileyFaces = new System.Windows.Forms.Label();
             this.lblNumberofSmileyfaces = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.lblStartValue = new System.Windows.Forms.Label();
-            this.numericUpDownStartValue = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownEndValue = new System.Windows.Forms.NumericUpDown();
-            this.lblEndValue = new System.Windows.Forms.Label();
-            this.lblStartCaption = new System.Windows.Forms.Label();
-            this.textBoxStartCaption = new System.Windows.Forms.TextBox();
-            this.textBoxEndCaption = new System.Windows.Forms.TextBox();
             this.lblEndCaption = new System.Windows.Forms.Label();
-            this.lblFacesNumber = new System.Windows.Forms.Label();
-            this.lblNumberOfStars = new System.Windows.Forms.Label();
+            this.textBoxEndCaption = new System.Windows.Forms.TextBox();
+            this.textBoxStartCaption = new System.Windows.Forms.TextBox();
+            this.lblStartCaption = new System.Windows.Forms.Label();
+            this.lblEndValue = new System.Windows.Forms.Label();
+            this.numericUpDownEndValue = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownStartValue = new System.Windows.Forms.NumericUpDown();
+            this.lblStartValue = new System.Windows.Forms.Label();
             this.btnUpdate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuestionOrder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
@@ -64,8 +64,8 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEndValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartValue)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -186,6 +186,16 @@
             this.panel1.TabIndex = 10;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // lblNumberOfStars
+            // 
+            this.lblNumberOfStars.AutoSize = true;
+            this.lblNumberOfStars.Location = new System.Drawing.Point(239, 23);
+            this.lblNumberOfStars.Name = "lblNumberOfStars";
+            this.lblNumberOfStars.Size = new System.Drawing.Size(13, 13);
+            this.lblNumberOfStars.TabIndex = 9;
+            this.lblNumberOfStars.Text = "0";
+            this.lblNumberOfStars.Click += new System.EventHandler(this.label6_Click_1);
+            // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
@@ -200,6 +210,17 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(281, 100);
             this.panel2.TabIndex = 11;
+            // 
+            // lblFacesNumber
+            // 
+            this.lblFacesNumber.AutoSize = true;
+            this.lblFacesNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFacesNumber.Location = new System.Drawing.Point(220, 25);
+            this.lblFacesNumber.Name = "lblFacesNumber";
+            this.lblFacesNumber.Size = new System.Drawing.Size(14, 16);
+            this.lblFacesNumber.TabIndex = 3;
+            this.lblFacesNumber.Text = "2";
+            this.lblFacesNumber.Click += new System.EventHandler(this.lblFacesNumber_Click);
             // 
             // trackBar2
             // 
@@ -248,47 +269,52 @@
             this.panel3.Size = new System.Drawing.Size(284, 145);
             this.panel3.TabIndex = 12;
             // 
-            // lblStartValue
+            // lblEndCaption
             // 
-            this.lblStartValue.AutoSize = true;
-            this.lblStartValue.Location = new System.Drawing.Point(10, 12);
-            this.lblStartValue.Name = "lblStartValue";
-            this.lblStartValue.Size = new System.Drawing.Size(58, 13);
-            this.lblStartValue.TabIndex = 13;
-            this.lblStartValue.Text = "Start value";
-            this.lblStartValue.Click += new System.EventHandler(this.label6_Click);
+            this.lblEndCaption.AutoSize = true;
+            this.lblEndCaption.Location = new System.Drawing.Point(12, 107);
+            this.lblEndCaption.Name = "lblEndCaption";
+            this.lblEndCaption.Size = new System.Drawing.Size(64, 13);
+            this.lblEndCaption.TabIndex = 18;
+            this.lblEndCaption.Text = "End caption";
             // 
-            // numericUpDownStartValue
+            // textBoxEndCaption
             // 
-            this.numericUpDownStartValue.Location = new System.Drawing.Point(89, 10);
-            this.numericUpDownStartValue.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numericUpDownStartValue.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownStartValue.Name = "numericUpDownStartValue";
-            this.numericUpDownStartValue.Size = new System.Drawing.Size(164, 20);
-            this.numericUpDownStartValue.TabIndex = 14;
-            this.numericUpDownStartValue.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownStartValue.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            this.textBoxEndCaption.Location = new System.Drawing.Point(89, 104);
+            this.textBoxEndCaption.Name = "textBoxEndCaption";
+            this.textBoxEndCaption.Size = new System.Drawing.Size(164, 20);
+            this.textBoxEndCaption.TabIndex = 17;
+            this.textBoxEndCaption.TextChanged += new System.EventHandler(this.textBoxEndCaption_TextChanged);
+            // 
+            // textBoxStartCaption
+            // 
+            this.textBoxStartCaption.Location = new System.Drawing.Point(89, 75);
+            this.textBoxStartCaption.Name = "textBoxStartCaption";
+            this.textBoxStartCaption.Size = new System.Drawing.Size(164, 20);
+            this.textBoxStartCaption.TabIndex = 13;
+            // 
+            // lblStartCaption
+            // 
+            this.lblStartCaption.AutoSize = true;
+            this.lblStartCaption.Location = new System.Drawing.Point(10, 75);
+            this.lblStartCaption.Name = "lblStartCaption";
+            this.lblStartCaption.Size = new System.Drawing.Size(67, 13);
+            this.lblStartCaption.TabIndex = 13;
+            this.lblStartCaption.Text = "Start caption";
+            // 
+            // lblEndValue
+            // 
+            this.lblEndValue.AutoSize = true;
+            this.lblEndValue.Location = new System.Drawing.Point(10, 46);
+            this.lblEndValue.Name = "lblEndValue";
+            this.lblEndValue.Size = new System.Drawing.Size(55, 13);
+            this.lblEndValue.TabIndex = 16;
+            this.lblEndValue.Text = "End value";
+            this.lblEndValue.Click += new System.EventHandler(this.label7_Click);
             // 
             // numericUpDownEndValue
             // 
             this.numericUpDownEndValue.Location = new System.Drawing.Point(88, 44);
-            this.numericUpDownEndValue.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
             this.numericUpDownEndValue.Minimum = new decimal(new int[] {
             1,
             0,
@@ -303,69 +329,33 @@
             0,
             0});
             // 
-            // lblEndValue
+            // numericUpDownStartValue
             // 
-            this.lblEndValue.AutoSize = true;
-            this.lblEndValue.Location = new System.Drawing.Point(10, 46);
-            this.lblEndValue.Name = "lblEndValue";
-            this.lblEndValue.Size = new System.Drawing.Size(55, 13);
-            this.lblEndValue.TabIndex = 16;
-            this.lblEndValue.Text = "End value";
-            this.lblEndValue.Click += new System.EventHandler(this.label7_Click);
+            this.numericUpDownStartValue.Location = new System.Drawing.Point(89, 10);
+            this.numericUpDownStartValue.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.numericUpDownStartValue.Name = "numericUpDownStartValue";
+            this.numericUpDownStartValue.Size = new System.Drawing.Size(164, 20);
+            this.numericUpDownStartValue.TabIndex = 14;
+            this.numericUpDownStartValue.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownStartValue.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
-            // lblStartCaption
+            // lblStartValue
             // 
-            this.lblStartCaption.AutoSize = true;
-            this.lblStartCaption.Location = new System.Drawing.Point(10, 75);
-            this.lblStartCaption.Name = "lblStartCaption";
-            this.lblStartCaption.Size = new System.Drawing.Size(67, 13);
-            this.lblStartCaption.TabIndex = 13;
-            this.lblStartCaption.Text = "Start caption";
-            // 
-            // textBoxStartCaption
-            // 
-            this.textBoxStartCaption.Location = new System.Drawing.Point(89, 75);
-            this.textBoxStartCaption.Name = "textBoxStartCaption";
-            this.textBoxStartCaption.Size = new System.Drawing.Size(164, 20);
-            this.textBoxStartCaption.TabIndex = 13;
-            // 
-            // textBoxEndCaption
-            // 
-            this.textBoxEndCaption.Location = new System.Drawing.Point(89, 104);
-            this.textBoxEndCaption.Name = "textBoxEndCaption";
-            this.textBoxEndCaption.Size = new System.Drawing.Size(164, 20);
-            this.textBoxEndCaption.TabIndex = 17;
-            this.textBoxEndCaption.TextChanged += new System.EventHandler(this.textBoxEndCaption_TextChanged);
-            // 
-            // lblEndCaption
-            // 
-            this.lblEndCaption.AutoSize = true;
-            this.lblEndCaption.Location = new System.Drawing.Point(12, 107);
-            this.lblEndCaption.Name = "lblEndCaption";
-            this.lblEndCaption.Size = new System.Drawing.Size(64, 13);
-            this.lblEndCaption.TabIndex = 18;
-            this.lblEndCaption.Text = "End caption";
-            // 
-            // lblFacesNumber
-            // 
-            this.lblFacesNumber.AutoSize = true;
-            this.lblFacesNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFacesNumber.Location = new System.Drawing.Point(220, 25);
-            this.lblFacesNumber.Name = "lblFacesNumber";
-            this.lblFacesNumber.Size = new System.Drawing.Size(14, 16);
-            this.lblFacesNumber.TabIndex = 3;
-            this.lblFacesNumber.Text = "2";
-            this.lblFacesNumber.Click += new System.EventHandler(this.lblFacesNumber_Click);
-            // 
-            // lblNumberOfStars
-            // 
-            this.lblNumberOfStars.AutoSize = true;
-            this.lblNumberOfStars.Location = new System.Drawing.Point(239, 23);
-            this.lblNumberOfStars.Name = "lblNumberOfStars";
-            this.lblNumberOfStars.Size = new System.Drawing.Size(13, 13);
-            this.lblNumberOfStars.TabIndex = 9;
-            this.lblNumberOfStars.Text = "0";
-            this.lblNumberOfStars.Click += new System.EventHandler(this.label6_Click_1);
+            this.lblStartValue.AutoSize = true;
+            this.lblStartValue.Location = new System.Drawing.Point(10, 12);
+            this.lblStartValue.Name = "lblStartValue";
+            this.lblStartValue.Size = new System.Drawing.Size(58, 13);
+            this.lblStartValue.TabIndex = 13;
+            this.lblStartValue.Text = "Start value";
+            this.lblStartValue.Click += new System.EventHandler(this.label6_Click);
             // 
             // btnUpdate
             // 
@@ -405,8 +395,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEndValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartValue)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

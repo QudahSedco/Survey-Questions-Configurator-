@@ -4,7 +4,7 @@ namespace SurveyQuestionsConfigurator.Models
 {
     public abstract class Question
     {
-        public int Id { get; set; }
+        public int mId { get; set; }
         private string mQuestionText;
         private int mQuestionOrder;
         public QuestionType QuestionType { get; }
@@ -50,6 +50,18 @@ namespace SurveyQuestionsConfigurator.Models
         public string DisplayText
         {
             get { return $"{mQuestionText} - {QuestionType}"; }
+        }
+
+        public int Id
+        {
+            get => mId;
+            set
+            {
+                if (value <= 0)
+                    throw new ArgumentOutOfRangeException(nameof(value), "Id must be a positive value.");
+
+                mId = value;
+            }
         }
     }
 }

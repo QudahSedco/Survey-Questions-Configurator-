@@ -71,6 +71,7 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
+        //create button handles the create  new question logic
         private void button1_Click(object sender, EventArgs e)
         {
             if (textBoxQuestionText.Text == String.Empty)
@@ -136,11 +137,10 @@ namespace SurveyQuestionsConfigurator
                     {
                         QuestionText = textBoxQuestionText.Text,
                         QuestionOrder = (int)numericUpDownQuestionOrder.Value,
-                        StartValue = (int)numericUpDownStartValue.Value,
-                        EndValue = (int)numericUpDownEndValue.Value,
                         StartValueCaption = textBoxStartCaption.Text,
                         EndValueCaption = textBoxEndCaption.Text
                     };
+                    ((SliderQuestion)tQuestion).SetRange((int)numericUpDownStartValue.Value, (int)numericUpDownEndValue.Value);
                 }
 
                 mQuestionRepository.AddQuestion(tQuestion);
@@ -265,6 +265,7 @@ namespace SurveyQuestionsConfigurator
         {
         }
 
+        //update button handles update logic
         private void button2_Click(object sender, EventArgs e)
         {
             if (textBoxQuestionText.Text == String.Empty)
@@ -314,8 +315,7 @@ namespace SurveyQuestionsConfigurator
 
                 tSliderQuestion.QuestionText = textBoxQuestionText.Text;
                 tSliderQuestion.QuestionOrder = (int)numericUpDownQuestionOrder.Value;
-                tSliderQuestion.StartValue = (int)numericUpDownStartValue.Value;
-                tSliderQuestion.EndValue = (int)numericUpDownEndValue.Value;
+                tSliderQuestion.SetRange((int)numericUpDownStartValue.Value, (int)numericUpDownEndValue.Value);
                 tSliderQuestion.StartValueCaption = textBoxStartCaption.Text;
                 tSliderQuestion.EndValueCaption = textBoxEndCaption.Text;
 
