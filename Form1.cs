@@ -35,10 +35,10 @@ namespace SurveyQuestionsConfigurator
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Question question = null;
-            using (var form = new Form2(question))
+            Question tQuestion = null;
+            using (var tForm = new Form2(tQuestion))
             {
-                form.ShowDialog(this);
+                tForm.ShowDialog(this);
                 LoadQuestions();
             }
         }
@@ -99,9 +99,9 @@ namespace SurveyQuestionsConfigurator
 
             tSelectedQuestion = questionRepository.GetChildQuestion(tSelectedQuestion);
 
-            using (var form = new Form2(tSelectedQuestion))
+            using (var tForm = new Form2(tSelectedQuestion))
             {
-                form.ShowDialog(this);
+                tForm.ShowDialog(this);
                 LoadQuestions();
             }
         }

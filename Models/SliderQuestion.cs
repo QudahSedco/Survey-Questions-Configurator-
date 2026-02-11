@@ -18,14 +18,10 @@ namespace SurveyQuestionsConfigurator.Models
             get => mStartValue;
             set
             {
-                if (value < 0 || value > 100)
+                if (value < 0 || value > 99)
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
                         "Start value must be between 0 and 100.");
-
-                if (mEndValue != 0 && value >= mEndValue)
-                    throw new ArgumentException(
-                        "Start value must be less than end value.");
 
                 mStartValue = value;
             }
@@ -36,14 +32,10 @@ namespace SurveyQuestionsConfigurator.Models
             get => mEndValue;
             set
             {
-                if (value < 0 || value > 100)
+                if (value < 1 || value > 100)
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
                         "End value must be between 0 and 100.");
-
-                if (value <= mStartValue)
-                    throw new ArgumentException(
-                        "End value must be greater than start value.");
 
                 mEndValue = value;
             }
@@ -79,6 +71,16 @@ namespace SurveyQuestionsConfigurator.Models
                         "End value caption cannot exceed 100 characters.");
                 mEndValueCaption = value;
             }
+        }
+
+        public void SetRange(int pStartValue, int pEndValue)
+        {
+            if (pStartValue >= pEndValue || pEndValue <= pStartValue)
+                throw new ArgumentException(
+                    "Start value must be less than end value.");
+
+            StartValue = pStartValue;
+            EndValue = pEndValue;
         }
     }
 }

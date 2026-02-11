@@ -15,55 +15,59 @@ namespace SurveyQuestionsConfigurator
 {
     public partial class Form2 : Form
     {
-        private QuestionRepository questionRepository;
-        private Question editingQuestion;
+        private QuestionRepository mQuestionRepository;
+        private Question mEditingQuestion;
 
-        public Form2(Question question)
+        public Form2(Question pQuestion)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;
 
-            questionRepository = new QuestionRepository();
+            mQuestionRepository = new QuestionRepository();
             comboBox1.DataSource = Enum.GetValues(typeof(QuestionType));
 
-            if (question != null)
+            if (pQuestion != null)
             {
-                editingQuestion = question;
-                comboBox1.SelectedItem = question.QuestionType;
-                Updatemode(question);
+                mEditingQuestion = pQuestion;
+                comboBox1.SelectedItem = pQuestion.QuestionType;
+                Updatemode(pQuestion);
+                btnUpdate.Visible = true;
+                button1.Visible = false;
             }
             else
             {
+                btnUpdate.Visible = false;
+                button1.Visible = true;
                 comboBox1.SelectedIndex = 0;
                 UpdateStars(trackBar1.Value);
             }
         }
 
-        private void Updatemode(Question question)
+        private void Updatemode(Question pQuestion)
         {
             comboBox1.Enabled = false;
 
-            textBoxQuestionText.Text = question.QuestionText;
-            numericUpDownQuestionOrder.Value = question.QuestionOrder;
+            textBoxQuestionText.Text = pQuestion.QuestionText;
+            numericUpDownQuestionOrder.Value = pQuestion.QuestionOrder;
 
-            if (question is StarQuestion starQuestion)
+            if (pQuestion is StarQuestion tStarQuestion)
             {
-                trackBar1.Value = starQuestion.NumberOfStars;
-                lblNumberOfStars.Text = starQuestion.NumberOfStars.ToString();
-                UpdateStars(starQuestion.NumberOfStars);
+                trackBar1.Value = tStarQuestion.NumberOfStars;
+                lblNumberOfStars.Text = tStarQuestion.NumberOfStars.ToString();
+                UpdateStars(tStarQuestion.NumberOfStars);
             }
-            if (question is SmileyFacesQuestion smileyFacesQuestion)
+            if (pQuestion is SmileyFacesQuestion tSmileyFacesQuestion)
             {
-                trackBar2.Value = smileyFacesQuestion.NumberOfSmileyFaces;
-                lblFacesNumber.Text = smileyFacesQuestion.NumberOfSmileyFaces.ToString();
-                UpdateSmileyFace(smileyFacesQuestion.NumberOfSmileyFaces);
+                trackBar2.Value = tSmileyFacesQuestion.NumberOfSmileyFaces;
+                lblFacesNumber.Text = tSmileyFacesQuestion.NumberOfSmileyFaces.ToString();
+                UpdateSmileyFace(tSmileyFacesQuestion.NumberOfSmileyFaces);
             }
-            if (question is SliderQuestion sliderQuestion)
+            if (pQuestion is SliderQuestion tSliderQuestion)
             {
-                numericUpDownStartValue.Value = sliderQuestion.StartValue;
-                numericUpDownEndValue.Value = sliderQuestion.EndValue;
-                textBoxStartCaption.Text = sliderQuestion.StartValueCaption;
-                textBoxEndCaption.Text = sliderQuestion.EndValueCaption;
+                numericUpDownStartValue.Value = tSliderQuestion.StartValue;
+                numericUpDownEndValue.Value = tSliderQuestion.EndValue;
+                textBoxStartCaption.Text = tSliderQuestion.StartValueCaption;
+                textBoxEndCaption.Text = tSliderQuestion.EndValueCaption;
             }
         }
 
@@ -75,31 +79,37 @@ namespace SurveyQuestionsConfigurator
                 return;
             }
 
-            QuestionType selectedType =
-                (QuestionType)comboBox1.SelectedItem;
-            Question question = null;
+            QuestionType tSelectedType = (QuestionType)comboBox1.SelectedItem;
+
+            Question tQuestion = null;
 
             try
             {
-                if (selectedType == QuestionType.Star)
+                if (tSelectedType == QuestionType.Star)
                 {
-                    question = new StarQuestion
+                    if (trackBar1.Value < 1)
+                    {
+                        errorProvider1.SetError(trackBar1, "Number of stars cannot be less than 1");
+                        return;
+                    }
+
+                    tQuestion = new StarQuestion
                     {
                         QuestionText = textBoxQuestionText.Text,
                         QuestionOrder = (int)numericUpDownQuestionOrder.Value,
                         NumberOfStars = trackBar1.Value
                     };
                 }
-                else if (selectedType == QuestionType.Smiley)
+                else if (tSelectedType == QuestionType.Smiley)
                 {
-                    question = new SmileyFacesQuestion
+                    tQuestion = new SmileyFacesQuestion
                     {
                         QuestionText = textBoxQuestionText.Text,
                         QuestionOrder = (int)numericUpDownQuestionOrder.Value,
                         NumberOfSmileyFaces = trackBar2.Value
                     };
                 }
-                else if (selectedType == QuestionType.Slider)
+                else if (tSelectedType == QuestionType.Slider)
                 {
                     if (numericUpDownStartValue.Value >= numericUpDownEndValue.Value)
                     {
@@ -122,7 +132,7 @@ namespace SurveyQuestionsConfigurator
                         return;
                     }
 
-                    question = new SliderQuestion
+                    tQuestion = new SliderQuestion
                     {
                         QuestionText = textBoxQuestionText.Text,
                         QuestionOrder = (int)numericUpDownQuestionOrder.Value,
@@ -133,23 +143,21 @@ namespace SurveyQuestionsConfigurator
                     };
                 }
 
-                questionRepository.UpdateQuestion(question);
-
-                questionRepository.AddQuestion(question);
+                mQuestionRepository.AddQuestion(tQuestion);
 
                 MessageBox.Show(
-                    $"{question.QuestionType} question added successfully.",
+                    $"{tQuestion.QuestionType} question added successfully.",
                     "Success",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information
                 );
 
-                this.Close();
+                Close();
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show(
-                    "error happend while trying to save question",
+                    "error happend while trying to save question please try again",
                     "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
@@ -165,18 +173,18 @@ namespace SurveyQuestionsConfigurator
         {
         }
 
-        private void UpdateStars(int value)
+        private void UpdateStars(int pValue)
         {
             label4.Text =
-                new string('★', value) +
-                new string('☆', 10 - value);
+                new string('★', pValue) +
+                new string('☆', 10 - pValue);
         }
 
-        private void UpdateSmileyFace(int value)
+        private void UpdateSmileyFace(int pValue)
         {
             string str = "";
 
-            for (int i = 0; i < value; i++)
+            for (int i = 0; i < pValue; i++)
             {
                 str += ":) ";
             }
@@ -265,41 +273,56 @@ namespace SurveyQuestionsConfigurator
                 return;
             }
 
-            if (editingQuestion is StarQuestion starQuestion)
+            if (mEditingQuestion is StarQuestion tStarQuestion)
             {
-                starQuestion.QuestionText = textBoxQuestionText.Text;
-                starQuestion.QuestionOrder = (int)numericUpDownQuestionOrder.Value;
-                starQuestion.NumberOfStars = trackBar1.Value;
+                tStarQuestion.QuestionText = textBoxQuestionText.Text;
+                tStarQuestion.QuestionOrder = (int)numericUpDownQuestionOrder.Value;
+                tStarQuestion.NumberOfStars = trackBar1.Value;
 
-                questionRepository.UpdateQuestion(starQuestion);
+                mQuestionRepository.UpdateQuestion(tStarQuestion);
             }
-            else if (editingQuestion is SmileyFacesQuestion smileyQuestion)
+            else if (mEditingQuestion is SmileyFacesQuestion tSmileyQuestion)
             {
-                smileyQuestion.QuestionText = textBoxQuestionText.Text;
-                smileyQuestion.QuestionOrder = (int)numericUpDownQuestionOrder.Value;
-                smileyQuestion.NumberOfSmileyFaces = trackBar2.Value;
+                tSmileyQuestion.QuestionText = textBoxQuestionText.Text;
+                tSmileyQuestion.QuestionOrder = (int)numericUpDownQuestionOrder.Value;
+                tSmileyQuestion.NumberOfSmileyFaces = trackBar2.Value;
 
-                questionRepository.UpdateQuestion(smileyQuestion);
+                mQuestionRepository.UpdateQuestion(tSmileyQuestion);
             }
-            else if (editingQuestion is SliderQuestion sliderQuestion)
+            else if (mEditingQuestion is SliderQuestion tSliderQuestion)
             {
                 if (numericUpDownStartValue.Value >= numericUpDownEndValue.Value)
                 {
-                    errorProvider1.SetError(numericUpDownStartValue, "Start value must be less than end value");
+                    errorProvider1.SetError(numericUpDownStartValue, " slider start value cant be more than slider end value");
+                    return;
+                }
+                if (numericUpDownEndValue.Value <= numericUpDownStartValue.Value)
+                {
+                    errorProvider1.SetError(numericUpDownStartValue, " slider end value cant be less than slider start value");
+                    return;
+                }
+                if (textBoxStartCaption.Text == String.Empty)
+                {
+                    errorProvider1.SetError(textBoxStartCaption, "Start caption cant be empty");
+                    return;
+                }
+                if (textBoxEndCaption.Text == String.Empty)
+                {
+                    errorProvider1.SetError(textBoxEndCaption, "End caption cant be empty");
                     return;
                 }
 
-                sliderQuestion.QuestionText = textBoxQuestionText.Text;
-                sliderQuestion.QuestionOrder = (int)numericUpDownQuestionOrder.Value;
-                sliderQuestion.StartValue = (int)numericUpDownStartValue.Value;
-                sliderQuestion.EndValue = (int)numericUpDownEndValue.Value;
-                sliderQuestion.StartValueCaption = textBoxStartCaption.Text;
-                sliderQuestion.EndValueCaption = textBoxEndCaption.Text;
+                tSliderQuestion.QuestionText = textBoxQuestionText.Text;
+                tSliderQuestion.QuestionOrder = (int)numericUpDownQuestionOrder.Value;
+                tSliderQuestion.StartValue = (int)numericUpDownStartValue.Value;
+                tSliderQuestion.EndValue = (int)numericUpDownEndValue.Value;
+                tSliderQuestion.StartValueCaption = textBoxStartCaption.Text;
+                tSliderQuestion.EndValueCaption = textBoxEndCaption.Text;
 
-                questionRepository.UpdateQuestion(sliderQuestion);
+                mQuestionRepository.UpdateQuestion(tSliderQuestion);
             }
 
-            MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"{mEditingQuestion.QuestionType} question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
         }
     }
