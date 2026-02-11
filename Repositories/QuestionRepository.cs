@@ -1,4 +1,5 @@
-﻿using SurveyQuestionsConfigurator.Models;
+﻿using Serilog;
+using SurveyQuestionsConfigurator.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -21,46 +22,55 @@ namespace SurveyQuestionsConfigurator.Repositories
         {
             using (SqlConnection tConnection = new SqlConnection(mConnectionString))
             {
-                tConnection.Open();
-
-                using (SqlTransaction tTransaction = tConnection.BeginTransaction())
+                try
                 {
-                    try
+                    tConnection.Open();
+
+                    using (SqlTransaction tTransaction = tConnection.BeginTransaction())
                     {
-                        string tSql =
-                            @"INSERT INTO Questions (question_text, question_order, question_type)
+                        try
+                        {
+                            string tSql =
+                                @"INSERT INTO Questions (question_text, question_order, question_type)
                       VALUES (@text, @order, @type);
                       SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
-                        using (SqlCommand tCmd = new SqlCommand(tSql, tConnection, tTransaction))
-                        {
-                            tCmd.Parameters.AddWithValue("@text", pQuestion.QuestionText);
-                            tCmd.Parameters.AddWithValue("@order", pQuestion.QuestionOrder);
-                            tCmd.Parameters.AddWithValue("@type", (int)pQuestion.QuestionType);
+                            using (SqlCommand tCmd = new SqlCommand(tSql, tConnection, tTransaction))
+                            {
+                                tCmd.Parameters.AddWithValue("@text", pQuestion.QuestionText);
+                                tCmd.Parameters.AddWithValue("@order", pQuestion.QuestionOrder);
+                                tCmd.Parameters.AddWithValue("@type", (int)pQuestion.QuestionType);
 
-                            pQuestion.Id = (int)tCmd.ExecuteScalar();
-                        }
+                                pQuestion.Id = (int)tCmd.ExecuteScalar();
+                            }
 
-                        if (pQuestion is StarQuestion starQuestion)
-                        {
-                            AddStarQuestion(starQuestion, tConnection, tTransaction);
-                        }
-                        else if (pQuestion is SmileyFacesQuestion smileyFacesQuestion)
-                        {
-                            AddSmileyFaceQuestion(smileyFacesQuestion, tConnection, tTransaction);
-                        }
-                        else if (pQuestion is SliderQuestion sliderQuestion)
-                        {
-                            AddSliderQuestion(sliderQuestion, tConnection, tTransaction);
-                        }
+                            if (pQuestion is StarQuestion starQuestion)
+                            {
+                                AddStarQuestion(starQuestion, tConnection, tTransaction);
+                            }
+                            else if (pQuestion is SmileyFacesQuestion smileyFacesQuestion)
+                            {
+                                AddSmileyFaceQuestion(smileyFacesQuestion, tConnection, tTransaction);
+                            }
+                            else if (pQuestion is SliderQuestion sliderQuestion)
+                            {
+                                AddSliderQuestion(sliderQuestion, tConnection, tTransaction);
+                            }
 
-                        tTransaction.Commit();
+                            tTransaction.Commit();
+                        }
+                        catch (SqlException ex)
+                        {
+                            tTransaction.Rollback();
+                            Log.Error(ex, "Could Not complete the create question transaction");
+                            throw;
+                        }
                     }
-                    catch
-                    {
-                        tTransaction.Rollback();
-                        throw;
-                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex, "Could Not connect to Database");
+                    throw;
                 }
             }
         }
@@ -73,9 +83,17 @@ namespace SurveyQuestionsConfigurator.Repositories
 
                 using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
                 {
-                    tConnection.Open();
-                    tCmd.Parameters.AddWithValue("@id", pId);
-                    tCmd.ExecuteNonQuery();
+                    try
+                    {
+                        tConnection.Open();
+                        tCmd.Parameters.AddWithValue("@id", pId);
+                        tCmd.ExecuteNonQuery();
+                    }
+                    catch (SqlException ex)
+                    {
+                        Log.Error(ex, "Error happened while trying to delete question with ID {QuestionId}", pId);
+                        throw;
+                    }
                 }
             }
         }
@@ -89,41 +107,48 @@ namespace SurveyQuestionsConfigurator.Repositories
             using (SqlConnection tConnection = new SqlConnection(mConnectionString))
             using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
             {
-                tConnection.Open();
-
-                using (SqlDataReader tReader = tCmd.ExecuteReader())
+                try
                 {
-                    while (tReader.Read())
+                    tConnection.Open();
+
+                    using (SqlDataReader tReader = tCmd.ExecuteReader())
                     {
-                        QuestionType tType = (QuestionType)tReader.GetInt32(3);
-
-                        Question tQuestion;
-
-                        switch (tType)
+                        while (tReader.Read())
                         {
-                            case QuestionType.Smiley:
-                                tQuestion = new SmileyFacesQuestion();
-                                break;
+                            QuestionType tType = (QuestionType)tReader.GetInt32(3);
 
-                            case QuestionType.Slider:
-                                tQuestion = new SliderQuestion();
-                                break;
+                            Question tQuestion;
 
-                            case QuestionType.Star:
-                                tQuestion = new StarQuestion();
-                                break;
+                            switch (tType)
+                            {
+                                case QuestionType.Smiley:
+                                    tQuestion = new SmileyFacesQuestion();
+                                    break;
 
-                            default:
-                                throw new NotSupportedException(
-                                    $"Unknown question type: {tType}");
+                                case QuestionType.Slider:
+                                    tQuestion = new SliderQuestion();
+                                    break;
+
+                                case QuestionType.Star:
+                                    tQuestion = new StarQuestion();
+                                    break;
+
+                                default:
+                                    throw new NotSupportedException($"Unknown question type '{tType}'");
+                            }
+
+                            tQuestion.Id = tReader.GetInt32(0);
+                            tQuestion.QuestionText = tReader.GetString(1);
+                            tQuestion.QuestionOrder = tReader.GetInt32(2);
+
+                            tQuestionsList.Add(tQuestion);
                         }
-
-                        tQuestion.Id = tReader.GetInt32(0);
-                        tQuestion.QuestionText = tReader.GetString(1);
-                        tQuestion.QuestionOrder = tReader.GetInt32(2);
-
-                        tQuestionsList.Add(tQuestion);
                     }
+                }
+                catch (SqlException ex)
+                {
+                    Log.Error(ex, "Error getting all questions from DB");
+                    throw;
                 }
             }
 
@@ -139,45 +164,54 @@ namespace SurveyQuestionsConfigurator.Repositories
             else if (pQuestion is SliderQuestion tSliderQuestion)
                 return GetSliderQuestion(tSliderQuestion);
 
-            return null;
+            throw new NotSupportedException($"Unsupported question type: {pQuestion?.GetType().Name ?? "null"}");
         }
 
         public void UpdateQuestion(Question pQuestion)
         {
             using (SqlConnection tConnection = new SqlConnection(mConnectionString))
             {
-                tConnection.Open();
-
-                using (SqlTransaction tTransaction = tConnection.BeginTransaction())
-
+                try
                 {
-                    try
-                    {
-                        string tSql = "UPDATE Questions SET question_text=@questionText,question_order=@questionOrder WHERE question_id=@questionId";
-                        using (SqlCommand tCmd = new SqlCommand(tSql, tConnection, tTransaction))
-                        {
-                            tCmd.Parameters.AddWithValue("@questionId", pQuestion.Id);
-                            tCmd.Parameters.AddWithValue("@questionText", pQuestion.QuestionText);
-                            tCmd.Parameters.AddWithValue("@questionOrder", pQuestion.QuestionOrder);
-                            tCmd.ExecuteNonQuery();
-                        }
+                    tConnection.Open();
 
-                        if (pQuestion is StarQuestion tStarQuestion)
-                            UpdateStarQuestion(tStarQuestion, tConnection, tTransaction);
-                        else if (pQuestion is SmileyFacesQuestion tSmileyFaceQuestion)
-                            UpdateSmileyQuestion(tSmileyFaceQuestion, tConnection, tTransaction);
-                        else if (pQuestion is SliderQuestion tSliderQuestion)
-                        {
-                            UpdateSliderQuestion(tSliderQuestion, tConnection, tTransaction);
-                        }
+                    using (SqlTransaction tTransaction = tConnection.BeginTransaction())
 
-                        tTransaction.Commit();
-                    }
-                    catch
                     {
-                        tTransaction.Rollback();
-                        throw;
+                        try
+                        {
+                            string tSql = "UPDATE Questions SET question_text=@questionText,question_order=@questionOrder WHERE question_id=@questionId";
+                            using (SqlCommand tCmd = new SqlCommand(tSql, tConnection, tTransaction))
+                            {
+                                tCmd.Parameters.AddWithValue("@questionId", pQuestion.Id);
+                                tCmd.Parameters.AddWithValue("@questionText", pQuestion.QuestionText);
+                                tCmd.Parameters.AddWithValue("@questionOrder", pQuestion.QuestionOrder);
+                                tCmd.ExecuteNonQuery();
+                            }
+
+                            if (pQuestion is StarQuestion tStarQuestion)
+                                UpdateStarQuestion(tStarQuestion, tConnection, tTransaction);
+                            else if (pQuestion is SmileyFacesQuestion tSmileyFaceQuestion)
+                                UpdateSmileyQuestion(tSmileyFaceQuestion, tConnection, tTransaction);
+                            else if (pQuestion is SliderQuestion tSliderQuestion)
+                            {
+                                UpdateSliderQuestion(tSliderQuestion, tConnection, tTransaction);
+                            }
+
+                            tTransaction.Commit();
+                        }
+                        catch (SqlException tEx)
+                        {
+                            tTransaction.Rollback();
+                            Log.Error(tEx, "Error while Updating question with ID {questionId} in database", pQuestion.Id);
+                            throw;
+                        }
                     }
+                }
+                catch (SqlException tEx)
+                {
+                    Log.Error(tEx, "Error couldnt connect to DB");
+                    throw;
                 }
             }
         }
@@ -262,21 +296,29 @@ namespace SurveyQuestionsConfigurator.Repositories
         {
             using (SqlConnection tConnection = new SqlConnection(mConnectionString))
             {
-                tConnection.Open();
-
-                string tSql = "SELECT number_of_stars FROM Star_Questions WHERE question_id = @id";
-
-                using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
+                try
                 {
-                    tCmd.Parameters.AddWithValue("@id", pQuestion.Id);
+                    tConnection.Open();
 
-                    using (SqlDataReader tReader = tCmd.ExecuteReader())
+                    string tSql = "SELECT number_of_stars FROM Star_Questions WHERE question_id = @id";
+
+                    using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
                     {
-                        if (tReader.Read())
+                        tCmd.Parameters.AddWithValue("@id", pQuestion.Id);
+
+                        using (SqlDataReader tReader = tCmd.ExecuteReader())
                         {
-                            pQuestion.NumberOfStars = tReader.GetInt32(0);
+                            if (tReader.Read())
+                            {
+                                pQuestion.NumberOfStars = tReader.GetInt32(0);
+                            }
                         }
                     }
+                }
+                catch (SqlException tEx)
+                {
+                    Log.Error(tEx, "Error while retrieving StarQuestion with id {QuestionId} from Database", pQuestion.Id);
+                    throw;
                 }
             }
 
@@ -288,21 +330,29 @@ namespace SurveyQuestionsConfigurator.Repositories
         {
             using (SqlConnection tConnection = new SqlConnection(mConnectionString))
             {
-                tConnection.Open();
-                String tSql = "SELECT number_of_smiley_faces FROM Smiley_Faces_Questions WHERE question_id=@id";
-
-                using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
+                try
                 {
-                    tCmd.Parameters.AddWithValue("@id", pQuestion.Id);
-                    using (SqlDataReader tReader = tCmd.ExecuteReader())
+                    tConnection.Open();
+                    String tSql = "SELECT number_of_smiley_faces FROM Smiley_Faces_Questions WHERE question_id=@id";
+
+                    using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
                     {
-                        if (tReader.Read())
+                        tCmd.Parameters.AddWithValue("@id", pQuestion.Id);
+                        using (SqlDataReader tReader = tCmd.ExecuteReader())
                         {
+                            if (tReader.Read())
                             {
-                                pQuestion.NumberOfSmileyFaces = tReader.GetInt32(0);
+                                {
+                                    pQuestion.NumberOfSmileyFaces = tReader.GetInt32(0);
+                                }
                             }
                         }
                     }
+                }
+                catch (SqlException tEx)
+                {
+                    Log.Error(tEx, "Error while retrieving Smiley question with id {QuestionId} from Database", pQuestion.Id);
+                    throw;
                 }
                 return pQuestion;
             }
@@ -312,24 +362,31 @@ namespace SurveyQuestionsConfigurator.Repositories
         {
             using (SqlConnection tConnection = new SqlConnection(mConnectionString))
             {
-                tConnection.Open();
-                String tSql = "SELECT start_value,end_value,start_value_caption,end_value_caption FROM Slider_Questions WHERE question_id=@id";
-
-                using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
+                try
                 {
-                    tCmd.Parameters.AddWithValue("@id", pQuestion.Id);
-                    using (SqlDataReader tReader = tCmd.ExecuteReader())
+                    tConnection.Open();
+                    String tSql = "SELECT start_value,end_value,start_value_caption,end_value_caption FROM Slider_Questions WHERE question_id=@id";
+
+                    using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
                     {
-                        if (tReader.Read())
+                        tCmd.Parameters.AddWithValue("@id", pQuestion.Id);
+                        using (SqlDataReader tReader = tCmd.ExecuteReader())
                         {
+                            if (tReader.Read())
                             {
-                                pQuestion.StartValue = tReader.GetInt32(0);
-                                pQuestion.EndValue = tReader.GetInt32(1);
-                                pQuestion.StartValueCaption = tReader.GetString(2);
-                                pQuestion.EndValueCaption = tReader.GetString(3);
+                                {
+                                    pQuestion.SetRange(tReader.GetInt32(0), tReader.GetInt32(1));
+                                    pQuestion.StartValueCaption = tReader.GetString(2);
+                                    pQuestion.EndValueCaption = tReader.GetString(3);
+                                }
                             }
                         }
                     }
+                }
+                catch (SqlException tEx)
+                {
+                    Log.Error(tEx, "Error while retrieving Slider Question with Id {QuestionId} from Database", pQuestion.Id);
+                    throw;
                 }
                 return pQuestion;
             }

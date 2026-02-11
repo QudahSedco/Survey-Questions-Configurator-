@@ -1,4 +1,5 @@
-﻿using SurveyQuestionsConfigurator.Models;
+﻿using Serilog;
+using SurveyQuestionsConfigurator.Models;
 using SurveyQuestionsConfigurator.Repositories;
 using System;
 using System.Collections.Generic;
@@ -81,20 +82,23 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this,
-                    $"An error occurred while deleting the question.{ex}",
-                    "Delete Failed",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
+                MessageBox.Show(this, $"An error occurred while deleting the question.{ex}", "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        //loads questions from database
         private void LoadQuestions()
         {
-            listBox1.DataSource = null;
-            listBox1.DataSource = questionRepository.GetAllQuestions();
-            listBox1.DisplayMember = "DisplayText";
+            try
+            {
+                listBox1.DataSource = null;
+                listBox1.DataSource = questionRepository.GetAllQuestions();
+                listBox1.DisplayMember = "DisplayText";
+            }
+            catch
+            {
+                MessageBox.Show(this, "An error occured while retriving questions from database", "database error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

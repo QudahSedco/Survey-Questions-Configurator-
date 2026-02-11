@@ -1,7 +1,10 @@
-﻿using SurveyQuestionsConfigurator.Models;
+﻿using Serilog;
+using Serilog.Formatting.Json;
+using SurveyQuestionsConfigurator.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,18 +16,26 @@ namespace SurveyQuestionsConfigurator
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
-          
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()
+                .WriteTo.File(new JsonFormatter(), "logs/SurveyQuestionsConfigurator-.json", rollingInterval: RollingInterval.Day).CreateLogger();
 
-            
-
-            
-
-
+            try
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new Form1());
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Application crashed");
+                throw;
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using SurveyQuestionsConfigurator.Models;
+﻿using Serilog;
+using SurveyQuestionsConfigurator.Models;
 using SurveyQuestionsConfigurator.Repositories;
 using System;
 using System.Collections.Generic;
@@ -176,6 +177,7 @@ namespace SurveyQuestionsConfigurator
         {
         }
 
+        //prints the stars according to the trackbar
         private void UpdateStars(int pValue)
         {
             label4.Text =
@@ -183,6 +185,7 @@ namespace SurveyQuestionsConfigurator
                 new string('☆', 10 - pValue);
         }
 
+        //prints smiley faces according to the trackbar
         private void UpdateSmileyFace(int pValue)
         {
             string str = "";
@@ -271,62 +274,82 @@ namespace SurveyQuestionsConfigurator
         //update button handles update logic
         private void button2_Click(object sender, EventArgs e)
         {
-            if (textBoxQuestionText.Text == String.Empty)
+            try
             {
-                errorProvider1.SetError(textBoxQuestionText, "Question text cant be empty");
-                return;
-            }
-
-            if (mEditingQuestion is StarQuestion tStarQuestion)
-            {
-                tStarQuestion.QuestionText = textBoxQuestionText.Text;
-                tStarQuestion.QuestionOrder = (int)numericUpDownQuestionOrder.Value;
-                tStarQuestion.NumberOfStars = trackBarStars.Value;
-
-                mQuestionRepository.UpdateQuestion(tStarQuestion);
-            }
-            else if (mEditingQuestion is SmileyFacesQuestion tSmileyQuestion)
-            {
-                tSmileyQuestion.QuestionText = textBoxQuestionText.Text;
-                tSmileyQuestion.QuestionOrder = (int)numericUpDownQuestionOrder.Value;
-                tSmileyQuestion.NumberOfSmileyFaces = trackBarSmileyFaces.Value;
-
-                mQuestionRepository.UpdateQuestion(tSmileyQuestion);
-            }
-            else if (mEditingQuestion is SliderQuestion tSliderQuestion)
-            {
-                if (numericUpDownStartValue.Value >= numericUpDownEndValue.Value)
+                if (textBoxQuestionText.Text == String.Empty)
                 {
-                    errorProvider1.SetError(numericUpDownStartValue, " slider start value cant be more than slider end value");
-                    return;
-                }
-                if (numericUpDownEndValue.Value <= numericUpDownStartValue.Value)
-                {
-                    errorProvider1.SetError(numericUpDownStartValue, " slider end value cant be less than slider start value");
-                    return;
-                }
-                if (textBoxStartCaption.Text == String.Empty)
-                {
-                    errorProvider1.SetError(textBoxStartCaption, "Start caption cant be empty");
-                    return;
-                }
-                if (textBoxEndCaption.Text == String.Empty)
-                {
-                    errorProvider1.SetError(textBoxEndCaption, "End caption cant be empty");
+                    errorProvider1.SetError(textBoxQuestionText, "Question text cant be empty");
                     return;
                 }
 
-                tSliderQuestion.QuestionText = textBoxQuestionText.Text;
-                tSliderQuestion.QuestionOrder = (int)numericUpDownQuestionOrder.Value;
-                tSliderQuestion.SetRange((int)numericUpDownStartValue.Value, (int)numericUpDownEndValue.Value);
-                tSliderQuestion.StartValueCaption = textBoxStartCaption.Text;
-                tSliderQuestion.EndValueCaption = textBoxEndCaption.Text;
+                if (mEditingQuestion is StarQuestion tStarQuestion)
+                {
+                    if (trackBarStars.Value < 1)
+                    {
+                        errorProvider1.SetError(trackBarStars, "Number of stars cannot be less than 1");
+                        return;
+                    }
 
-                mQuestionRepository.UpdateQuestion(tSliderQuestion);
+                    tStarQuestion.QuestionText = textBoxQuestionText.Text;
+                    tStarQuestion.QuestionOrder = (int)numericUpDownQuestionOrder.Value;
+                    tStarQuestion.NumberOfStars = trackBarStars.Value;
+
+                    mQuestionRepository.UpdateQuestion(tStarQuestion);
+                }
+                else if (mEditingQuestion is SmileyFacesQuestion tSmileyQuestion)
+                {
+                    tSmileyQuestion.QuestionText = textBoxQuestionText.Text;
+                    tSmileyQuestion.QuestionOrder = (int)numericUpDownQuestionOrder.Value;
+                    tSmileyQuestion.NumberOfSmileyFaces = trackBarSmileyFaces.Value;
+
+                    mQuestionRepository.UpdateQuestion(tSmileyQuestion);
+                }
+                else if (mEditingQuestion is SliderQuestion tSliderQuestion)
+                {
+                    if (numericUpDownStartValue.Value >= numericUpDownEndValue.Value)
+                    {
+                        errorProvider1.SetError(numericUpDownStartValue, " slider start value cant be more than slider end value");
+                        return;
+                    }
+                    if (numericUpDownEndValue.Value <= numericUpDownStartValue.Value)
+                    {
+                        errorProvider1.SetError(numericUpDownStartValue, " slider end value cant be less than slider start value");
+                        return;
+                    }
+                    if (textBoxStartCaption.Text == String.Empty)
+                    {
+                        errorProvider1.SetError(textBoxStartCaption, "Start caption cant be empty");
+                        return;
+                    }
+                    if (textBoxEndCaption.Text == String.Empty)
+                    {
+                        errorProvider1.SetError(textBoxEndCaption, "End caption cant be empty");
+                        return;
+                    }
+
+                    tSliderQuestion.QuestionText = textBoxQuestionText.Text;
+                    tSliderQuestion.QuestionOrder = (int)numericUpDownQuestionOrder.Value;
+                    tSliderQuestion.SetRange((int)numericUpDownStartValue.Value, (int)numericUpDownEndValue.Value);
+                    tSliderQuestion.StartValueCaption = textBoxStartCaption.Text;
+                    tSliderQuestion.EndValueCaption = textBoxEndCaption.Text;
+
+                    mQuestionRepository.UpdateQuestion(tSliderQuestion);
+                }
+
+                MessageBox.Show(this, $"{mEditingQuestion.QuestionType} question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
             }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Failed to update question");
 
-            MessageBox.Show(this, $"{mEditingQuestion.QuestionType} question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Close();
+                MessageBox.Show(
+                    this,
+                    "Could not update the question. Please try again.",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
