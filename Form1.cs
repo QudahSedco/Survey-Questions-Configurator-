@@ -71,11 +71,19 @@ namespace SurveyQuestionsConfigurator
                 btnDelete.Enabled = true;
                 btnUpdate.Enabled = true;
             }
+            else
+            {
+                btnDelete.Enabled = false;
+                btnUpdate.Enabled = false;
+            }
         }
 
         //deletes selected question
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            if (listBox1.SelectedItem == null)
+                return;
+
             Question tSelectedQuestion = (Question)listBox1.SelectedItem;
 
             // dont forget to put try  catch here
@@ -91,6 +99,7 @@ namespace SurveyQuestionsConfigurator
                 if (tAnswer == DialogResult.Yes)
                 {
                     mQestionRepository.DeleteQuestionById(tSelectedQuestion.Id);
+                    MessageBox.Show(this, "Question deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadQuestions();
                 }
             }
@@ -125,6 +134,8 @@ namespace SurveyQuestionsConfigurator
         //edit buttons sends the selected obj and opens form 2 as dialoge
         private void button1_Click(object sender, EventArgs e)
         {
+            if (listBox1.SelectedItem == null) return;
+
             Question tSelectedQuestion = (Question)listBox1.SelectedItem;
             try
             {

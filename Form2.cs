@@ -124,7 +124,7 @@ namespace SurveyQuestionsConfigurator
                 {
                     if (numericUpDownStartValue.Value >= numericUpDownEndValue.Value)
                     {
-                        errorProvider1.SetError(numericUpDownStartValue, " slider start value cant be more than slider end value");
+                        errorProvider1.SetError(numericUpDownStartValue, " slider start value cant be more or equal to slider end value");
                         return;
                     }
                     if (numericUpDownEndValue.Value <= numericUpDownStartValue.Value)
@@ -324,7 +324,7 @@ namespace SurveyQuestionsConfigurator
                     {
                         if (numericUpDownStartValue.Value >= numericUpDownEndValue.Value)
                         {
-                            errorProvider1.SetError(numericUpDownStartValue, " slider start value cant be more than slider end value");
+                            errorProvider1.SetError(numericUpDownStartValue, " slider start value cant be more or equal to slider end value");
                             return;
                         }
                         if (numericUpDownEndValue.Value <= numericUpDownStartValue.Value)
@@ -401,7 +401,7 @@ namespace SurveyQuestionsConfigurator
                     {
                         if (numericUpDownStartValue.Value >= numericUpDownEndValue.Value)
                         {
-                            errorProvider1.SetError(numericUpDownStartValue, "Slider start value must be less than slider end value");
+                            errorProvider1.SetError(numericUpDownStartValue, "slider start value cant be more or equal to slider end value");
                             return;
                         }
 
@@ -437,7 +437,7 @@ namespace SurveyQuestionsConfigurator
                 }
 
                 MessageBox.Show(this, $"{mEditingQuestion.QuestionType} Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
+                Close();
             }
             catch (Exception ex)
             {
