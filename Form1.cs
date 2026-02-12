@@ -78,16 +78,16 @@ namespace SurveyQuestionsConfigurator
         {
             Question tSelectedQuestion = (Question)listBox1.SelectedItem;
 
-            DialogResult tAnswer = MessageBox.Show(this,
+            // dont forget to put try  catch here
+            try
+            {
+                DialogResult tAnswer = MessageBox.Show(this,
             $"Are you sure you want to delete the following message?\n\n{tSelectedQuestion.QuestionText}",
             "Confirm Delete",
             MessageBoxButtons.YesNo,
             MessageBoxIcon.Question
 
 );
-            // dont forget to put try  catch here
-            try
-            {
                 if (tAnswer == DialogResult.Yes)
                 {
                     mQestionRepository.DeleteQuestionById(tSelectedQuestion.Id);
@@ -96,7 +96,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, $"An error occurred while deleting the question.{ex}", "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, $"An error occurred while deleting the question please try again", "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -112,6 +112,9 @@ namespace SurveyQuestionsConfigurator
                 listBox1.DataSource = mQuestionsList;
 
                 listBox1.DisplayMember = "DisplayText";
+
+                btnDelete.Enabled = false;
+                btnUpdate.Enabled = false;
             }
             catch
             {

@@ -30,7 +30,7 @@ namespace SurveyQuestionsConfigurator
             mQuestionRepository = new QuestionRepository();
             comboBox1.DataSource = Enum.GetValues(typeof(QuestionType));
 
-            if (pQuestion != null)
+            if (pQuestion != null) //means form is in edit mode
             {
                 mEditingQuestion = pQuestion;
                 comboBox1.SelectedItem = pQuestion.QuestionType;
