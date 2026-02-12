@@ -183,10 +183,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                             string tSql = "UPDATE Questions SET question_text=@questionText,question_order=@questionOrder WHERE question_id=@questionId";
                             using (SqlCommand tCmd = new SqlCommand(tSql, tConnection, tTransaction))
                             {
-                                tCmd.Parameters.AddWithValue("@questionId", pQuestion.Id);
-                                tCmd.Parameters.AddWithValue("@questionText", pQuestion.QuestionText);
-                                tCmd.Parameters.AddWithValue("@questionOrder", pQuestion.QuestionOrder);
-                                tCmd.ExecuteNonQuery();
+                                UpdateBaseQuesiton(pQuestion, tConnection, tTransaction);
                             }
 
                             if (pQuestion is StarQuestion tStarQuestion)
@@ -389,6 +386,84 @@ namespace SurveyQuestionsConfigurator.Repositories
                     throw;
                 }
                 return pQuestion;
+            }
+        }
+
+        //
+        public void UpdateChildTableType(Question pQuestion, QuestionType pOldQuestionType)
+        {
+            using (SqlConnection tConnection = new SqlConnection(mConnectionString))
+            {
+                tConnection.Open();
+
+                using (SqlTransaction tTransaction = tConnection.BeginTransaction())
+                {
+                    try
+                    {
+                        string tSql;
+
+                        switch (pOldQuestionType)
+                        {
+                            case QuestionType.Star:
+                                tSql = "DELETE FROM Star_Questions WHERE question_id = @id";
+                                break;
+
+                            case QuestionType.Smiley:
+                                tSql = "DELETE FROM Smiley_Faces_Questions WHERE question_id = @id";
+                                break;
+
+                            case QuestionType.Slider:
+                                tSql = "DELETE FROM Slider_Questions WHERE question_id = @id";
+                                break;
+
+                            default:
+                                throw new ArgumentOutOfRangeException(nameof(pOldQuestionType));
+                        }
+
+                        using (SqlCommand tCmd = new SqlCommand(tSql, tConnection, tTransaction))
+                        {
+                            tCmd.Parameters.AddWithValue("@id", pQuestion.Id);
+                            tCmd.ExecuteNonQuery();
+                        }
+
+                        UpdateBaseQuesiton(pQuestion, tConnection, tTransaction);
+
+                        if (pQuestion is StarQuestion starQuestion)
+                        {
+                            AddStarQuestion(starQuestion, tConnection, tTransaction);
+                        }
+                        else if (pQuestion is SmileyFacesQuestion smileyFacesQuestion)
+                        {
+                            AddSmileyFaceQuestion(smileyFacesQuestion, tConnection, tTransaction);
+                        }
+                        else if (pQuestion is SliderQuestion sliderQuestion)
+                        {
+                            AddSliderQuestion(sliderQuestion, tConnection, tTransaction);
+                        }
+
+                        tTransaction.Commit();
+                    }
+                    catch (SqlException ex)
+                    {
+                        tTransaction.Rollback();
+                        Log.Error(ex, "Error updating question {QuestionId}", pQuestion.Id);
+                        throw;
+                    }
+                }
+            }
+        }
+
+        public void UpdateBaseQuesiton(Question pQuestion, SqlConnection pConnection, SqlTransaction pTransaction)
+        {
+            string tSql = "UPDATE Questions SET question_text=@questionText,question_order=@questionOrder,question_type = @questionType WHERE question_id=@questionId";
+            using (SqlCommand tCmd = new SqlCommand(tSql, pConnection, pTransaction))
+            {
+                tCmd.Parameters.AddWithValue("@questionId", pQuestion.Id);
+                tCmd.Parameters.AddWithValue("@questionText", pQuestion.QuestionText);
+                tCmd.Parameters.AddWithValue("@questionOrder", pQuestion.QuestionOrder);
+                tCmd.Parameters.AddWithValue("@questionType", (int)pQuestion.QuestionType);
+
+                tCmd.ExecuteNonQuery();
             }
         }
     }
