@@ -34,7 +34,7 @@ namespace SurveyQuestionsConfigurator
             {
                 mEditingQuestion = pQuestion;
                 comboBox1.SelectedItem = pQuestion.QuestionType;
-                Updatemode(pQuestion);
+                PopulateFields(pQuestion);
                 btnUpdate.Visible = true;
                 button1.Visible = false;
             }
@@ -47,7 +47,8 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        private void Updatemode(Question pQuestion)
+        //fills the form with values from the question
+        private void PopulateFields(Question pQuestion)
         {
             textBoxQuestionText.Text = pQuestion.QuestionText;
             numericUpDownQuestionOrder.Value = pQuestion.QuestionOrder;
@@ -73,7 +74,7 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        //create button handles the create  new question logic
+        //create button creates a new question
         private void button1_Click(object sender, EventArgs e)
         {
             errorProvider1.Clear();
@@ -264,6 +265,7 @@ namespace SurveyQuestionsConfigurator
         {
         }
 
+        //shows the number of chars the user enterd for end caption text box
         private void textBoxEndCaption_TextChanged(object sender, EventArgs e)
         {
             lblCharNumberEndCaption.Text = textBoxEndCaption.Text.Length.ToString();
@@ -278,6 +280,9 @@ namespace SurveyQuestionsConfigurator
         }
 
         //update button handles update logic
+        //if type didnt change calls update method
+        //if type did change calls UpdateChildTableType
+        //that deletes the old type record and inserts a new record according to the new type chosen
         private void button2_Click(object sender, EventArgs e)
         {
             errorProvider1.Clear();
@@ -298,7 +303,7 @@ namespace SurveyQuestionsConfigurator
             var tNewType = (QuestionType)comboBox1.SelectedItem;
             try
             {
-                if (tOldType == tNewType)
+                if (tOldType == tNewType)//if type didnt change
                 {
                     if (mEditingQuestion is StarQuestion tStarQuestion)
                     {
@@ -332,9 +337,19 @@ namespace SurveyQuestionsConfigurator
                             errorProvider1.SetError(textBoxStartCaption, "Start caption cant be empty");
                             return;
                         }
+                        if (textBoxStartCaption.Text.Length > 100)
+                        {
+                            errorProvider1.SetError(textBoxStartCaption, "start caption cant be more than 100 characters");
+                            return;
+                        }
                         if (String.IsNullOrWhiteSpace(textBoxEndCaption.Text))
                         {
                             errorProvider1.SetError(textBoxEndCaption, "End caption cant be empty");
+                            return;
+                        }
+                        if (textBoxEndCaption.Text.Length > 100)
+                        {
+                            errorProvider1.SetError(textBoxEndCaption, "end caption cant be more than 100 characters");
                             return;
                         }
 
@@ -344,6 +359,8 @@ namespace SurveyQuestionsConfigurator
                         mQuestionRepository.UpdateQuestion(tSliderQuestion);
                     }
                 }
+                //if type changed call UpdateChildTableType that takes the new question and the old type
+                //deletes the old type record from database and inserts the new type in the correct table
                 else
                 {
                     if (tNewType == QuestionType.Star)
@@ -440,6 +457,7 @@ namespace SurveyQuestionsConfigurator
             this.Close();
         }
 
+        //shows the number of chars entered by the user into the question text textbox
         private void textBoxQuestionText_TextChanged(object sender, EventArgs e)
         {
             lblCharNumber.Text = textBoxQuestionText.Text.Length.ToString();
@@ -453,6 +471,7 @@ namespace SurveyQuestionsConfigurator
         {
         }
 
+        //shows the number of chars enterd by the user into the start caption text box
         private void textBoxStartCaption_TextChanged(object sender, EventArgs e)
         {
             lblCharNumberStartCaption.Text = textBoxStartCaption.Text.Length.ToString();

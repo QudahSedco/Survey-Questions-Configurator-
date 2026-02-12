@@ -67,6 +67,7 @@ namespace SurveyQuestionsConfigurator.Models
             }
         }
 
+        //makes sure that the start and end value are in a valid range before calling the setters
         public void SetRange(int pStartValue, int pEndValue)
         {
             if (pStartValue >= pEndValue)

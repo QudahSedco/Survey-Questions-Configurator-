@@ -9,7 +9,7 @@ namespace SurveyQuestionsConfigurator.Models
         private int mQuestionOrder;
         public QuestionType QuestionType { get; }
 
-        protected Question(QuestionType questionType)
+        public Question(QuestionType questionType)
         {
             QuestionType = questionType;
         }
@@ -24,7 +24,7 @@ namespace SurveyQuestionsConfigurator.Models
                     throw new ArgumentException(nameof(value), "Question text cannot be null or empty.");
 
                 if (value.Length > 1000)
-                    throw new ArgumentOutOfRangeException(nameof(value), "Question text cannot be more than 500");
+                    throw new ArgumentOutOfRangeException(nameof(value), "Question text cannot exceed 1000 characters");
 
                 mQuestionText = value;
             }

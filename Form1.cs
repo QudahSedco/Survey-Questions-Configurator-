@@ -17,7 +17,7 @@ namespace SurveyQuestionsConfigurator
 {
     public partial class Form1 : Form
     {
-        private QuestionRepository questionRepository;
+        private QuestionRepository mQestionRepository;
 
         private enum SortingMode
         {
@@ -36,7 +36,7 @@ namespace SurveyQuestionsConfigurator
             MaximizeBox = false;
             MinimizeBox = true;
             StartPosition = FormStartPosition.CenterScreen;
-            questionRepository = new QuestionRepository();
+            mQestionRepository = new QuestionRepository();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -48,6 +48,7 @@ namespace SurveyQuestionsConfigurator
             btnUpdate.Enabled = false;
         }
 
+        // passing null object to form 2 to make it in add new question instead of edit mode
         private void button2_Click(object sender, EventArgs e)
         {
             Question tQuestion = null;
@@ -62,6 +63,7 @@ namespace SurveyQuestionsConfigurator
         {
         }
 
+        //enables the edit and delete button if there is a selected question from the list
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBox1.SelectedItem != null)
@@ -71,22 +73,24 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
+        //deletes selected question
         private void btnDelete_Click(object sender, EventArgs e)
         {
             Question tSelectedQuestion = (Question)listBox1.SelectedItem;
 
-            DialogResult answer = MessageBox.Show(this,
+            DialogResult tAnswer = MessageBox.Show(this,
             $"Are you sure you want to delete the following message?\n\n{tSelectedQuestion.QuestionText}",
             "Confirm Delete",
             MessageBoxButtons.YesNo,
             MessageBoxIcon.Question
+
 );
             // dont forget to put try  catch here
             try
             {
-                if (answer == DialogResult.Yes)
+                if (tAnswer == DialogResult.Yes)
                 {
-                    questionRepository.DeleteQuestionById(tSelectedQuestion.Id);
+                    mQestionRepository.DeleteQuestionById(tSelectedQuestion.Id);
                     LoadQuestions();
                 }
             }
@@ -103,7 +107,7 @@ namespace SurveyQuestionsConfigurator
             {
                 listBox1.DataSource = null;
 
-                mQuestionsList = questionRepository.GetAllQuestions();
+                mQuestionsList = mQestionRepository.GetAllQuestions();
 
                 listBox1.DataSource = mQuestionsList;
 
@@ -115,11 +119,19 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
+        //edit buttons sends the selected obj and opens form 2 as dialoge
         private void button1_Click(object sender, EventArgs e)
         {
             Question tSelectedQuestion = (Question)listBox1.SelectedItem;
-
-            tSelectedQuestion = questionRepository.GetChildQuestion(tSelectedQuestion);
+            try
+            {
+                tSelectedQuestion = mQestionRepository.GetChildQuestion(tSelectedQuestion);
+            }
+            catch
+            {
+                MessageBox.Show(this, "An error occured while retriving question from database", "database error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             using (var tForm = new Form2(tSelectedQuestion))
             {
@@ -140,22 +152,25 @@ namespace SurveyQuestionsConfigurator
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             mSortingMode = SortingMode.Alphabetical;
-            FilterQuestions();
+            SortQuestions();
         }
 
+        //sorts by question order
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             mSortingMode = SortingMode.QuestionOrder;
-            FilterQuestions();
+            SortQuestions();
         }
 
+        //sorts by question type
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
             mSortingMode = SortingMode.QuestionType;
-            FilterQuestions();
+            SortQuestions();
         }
 
-        private void FilterQuestions()
+        //handels the sorting logic
+        private void SortQuestions()
         {
             if (mSortingMode == SortingMode.Alphabetical)
                 listBox1.DataSource = mQuestionsList.OrderBy(q => q.QuestionText).ToList();

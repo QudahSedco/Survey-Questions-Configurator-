@@ -48,6 +48,10 @@
             this.lblSmileyFaces = new System.Windows.Forms.Label();
             this.lblNumberofSmileyfaces = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.lblCharNumberEndCaption = new System.Windows.Forms.Label();
+            this.lblCharNumberStartCaption = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblMaxStart = new System.Windows.Forms.Label();
             this.lblEndCaption = new System.Windows.Forms.Label();
             this.textBoxEndCaption = new System.Windows.Forms.TextBox();
             this.textBoxStartCaption = new System.Windows.Forms.TextBox();
@@ -61,10 +65,6 @@
             this.lblNumberOfCharacters = new System.Windows.Forms.Label();
             this.lblCharNumber = new System.Windows.Forms.Label();
             this.lblMaxChar = new System.Windows.Forms.Label();
-            this.lblMaxStart = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblCharNumberStartCaption = new System.Windows.Forms.Label();
-            this.lblCharNumberEndCaption = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuestionOrder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarStars)).BeginInit();
             this.panel1.SuspendLayout();
@@ -79,7 +79,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(405, 391);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 28);
             this.button1.TabIndex = 0;
@@ -90,8 +90,8 @@
             // textBoxQuestionText
             // 
             this.textBoxQuestionText.Location = new System.Drawing.Point(241, 13);
-            this.textBoxQuestionText.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textBoxQuestionText.MaxLength = 1001;
+            this.textBoxQuestionText.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxQuestionText.MaxLength = 1000;
             this.textBoxQuestionText.Multiline = true;
             this.textBoxQuestionText.Name = "textBoxQuestionText";
             this.textBoxQuestionText.Size = new System.Drawing.Size(217, 85);
@@ -112,7 +112,7 @@
             // numericUpDownQuestionOrder
             // 
             this.numericUpDownQuestionOrder.Location = new System.Drawing.Point(244, 106);
-            this.numericUpDownQuestionOrder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDownQuestionOrder.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDownQuestionOrder.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -146,7 +146,7 @@
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(244, 159);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(217, 24);
             this.comboBox1.TabIndex = 5;
@@ -167,7 +167,7 @@
             // 
             this.trackBarStars.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.trackBarStars.Location = new System.Drawing.Point(133, 64);
-            this.trackBarStars.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.trackBarStars.Margin = new System.Windows.Forms.Padding(4);
             this.trackBarStars.Name = "trackBarStars";
             this.trackBarStars.Size = new System.Drawing.Size(161, 45);
             this.trackBarStars.TabIndex = 7;
@@ -202,7 +202,7 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Location = new System.Drawing.Point(125, 198);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(375, 123);
             this.panel1.TabIndex = 10;
@@ -230,7 +230,7 @@
             this.panel2.Controls.Add(this.lblSmileyFaces);
             this.panel2.Controls.Add(this.lblNumberofSmileyfaces);
             this.panel2.Location = new System.Drawing.Point(109, 190);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(412, 123);
             this.panel2.TabIndex = 11;
@@ -250,7 +250,7 @@
             // trackBarSmileyFaces
             // 
             this.trackBarSmileyFaces.Location = new System.Drawing.Point(153, 64);
-            this.trackBarSmileyFaces.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.trackBarSmileyFaces.Margin = new System.Windows.Forms.Padding(4);
             this.trackBarSmileyFaces.Maximum = 5;
             this.trackBarSmileyFaces.Minimum = 2;
             this.trackBarSmileyFaces.Name = "trackBarSmileyFaces";
@@ -297,10 +297,44 @@
             this.panel3.Controls.Add(this.numericUpDownStartValue);
             this.panel3.Controls.Add(this.lblStartValue);
             this.panel3.Location = new System.Drawing.Point(127, 192);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(474, 178);
             this.panel3.TabIndex = 12;
+            // 
+            // lblCharNumberEndCaption
+            // 
+            this.lblCharNumberEndCaption.AutoSize = true;
+            this.lblCharNumberEndCaption.Location = new System.Drawing.Point(343, 130);
+            this.lblCharNumberEndCaption.Name = "lblCharNumberEndCaption";
+            this.lblCharNumberEndCaption.Size = new System.Drawing.Size(0, 16);
+            this.lblCharNumberEndCaption.TabIndex = 22;
+            // 
+            // lblCharNumberStartCaption
+            // 
+            this.lblCharNumberStartCaption.AutoSize = true;
+            this.lblCharNumberStartCaption.Location = new System.Drawing.Point(343, 98);
+            this.lblCharNumberStartCaption.Name = "lblCharNumberStartCaption";
+            this.lblCharNumberStartCaption.Size = new System.Drawing.Size(0, 16);
+            this.lblCharNumberStartCaption.TabIndex = 21;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(401, 131);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 16);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "Max(100)";
+            // 
+            // lblMaxStart
+            // 
+            this.lblMaxStart.AutoSize = true;
+            this.lblMaxStart.Location = new System.Drawing.Point(401, 95);
+            this.lblMaxStart.Name = "lblMaxStart";
+            this.lblMaxStart.Size = new System.Drawing.Size(61, 16);
+            this.lblMaxStart.TabIndex = 19;
+            this.lblMaxStart.Text = "Max(100)";
             // 
             // lblEndCaption
             // 
@@ -315,7 +349,7 @@
             // textBoxEndCaption
             // 
             this.textBoxEndCaption.Location = new System.Drawing.Point(119, 128);
-            this.textBoxEndCaption.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxEndCaption.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxEndCaption.MaxLength = 100;
             this.textBoxEndCaption.Name = "textBoxEndCaption";
             this.textBoxEndCaption.Size = new System.Drawing.Size(217, 22);
@@ -325,7 +359,7 @@
             // textBoxStartCaption
             // 
             this.textBoxStartCaption.Location = new System.Drawing.Point(119, 92);
-            this.textBoxStartCaption.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxStartCaption.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxStartCaption.MaxLength = 100;
             this.textBoxStartCaption.Name = "textBoxStartCaption";
             this.textBoxStartCaption.Size = new System.Drawing.Size(217, 22);
@@ -356,7 +390,7 @@
             // numericUpDownEndValue
             // 
             this.numericUpDownEndValue.Location = new System.Drawing.Point(117, 54);
-            this.numericUpDownEndValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDownEndValue.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDownEndValue.Minimum = new decimal(new int[] {
             1,
             0,
@@ -374,7 +408,7 @@
             // numericUpDownStartValue
             // 
             this.numericUpDownStartValue.Location = new System.Drawing.Point(119, 12);
-            this.numericUpDownStartValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDownStartValue.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDownStartValue.Maximum = new decimal(new int[] {
             99,
             0,
@@ -404,7 +438,7 @@
             // btnUpdate
             // 
             this.btnUpdate.Location = new System.Drawing.Point(404, 390);
-            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(100, 28);
             this.btnUpdate.TabIndex = 13;
@@ -415,7 +449,7 @@
             // btnCancel
             // 
             this.btnCancel.Location = new System.Drawing.Point(125, 391);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 28);
             this.btnCancel.TabIndex = 14;
@@ -452,40 +486,6 @@
             this.lblMaxChar.Text = "Max(1000)";
             this.lblMaxChar.Click += new System.EventHandler(this.label1_Click_1);
             // 
-            // lblMaxStart
-            // 
-            this.lblMaxStart.AutoSize = true;
-            this.lblMaxStart.Location = new System.Drawing.Point(401, 95);
-            this.lblMaxStart.Name = "lblMaxStart";
-            this.lblMaxStart.Size = new System.Drawing.Size(61, 16);
-            this.lblMaxStart.TabIndex = 19;
-            this.lblMaxStart.Text = "Max(100)";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(401, 131);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 16);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "Max(100)";
-            // 
-            // lblCharNumberStartCaption
-            // 
-            this.lblCharNumberStartCaption.AutoSize = true;
-            this.lblCharNumberStartCaption.Location = new System.Drawing.Point(343, 98);
-            this.lblCharNumberStartCaption.Name = "lblCharNumberStartCaption";
-            this.lblCharNumberStartCaption.Size = new System.Drawing.Size(0, 16);
-            this.lblCharNumberStartCaption.TabIndex = 21;
-            // 
-            // lblCharNumberEndCaption
-            // 
-            this.lblCharNumberEndCaption.AutoSize = true;
-            this.lblCharNumberEndCaption.Location = new System.Drawing.Point(343, 130);
-            this.lblCharNumberEndCaption.Name = "lblCharNumberEndCaption";
-            this.lblCharNumberEndCaption.Size = new System.Drawing.Size(0, 16);
-            this.lblCharNumberEndCaption.TabIndex = 22;
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -506,7 +506,7 @@
             this.Controls.Add(this.lblQuestionText);
             this.Controls.Add(this.textBoxQuestionText);
             this.Controls.Add(this.button1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form2";
             this.Text = "Form2";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuestionOrder)).EndInit();

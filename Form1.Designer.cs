@@ -51,7 +51,7 @@
             this.listBox1.HorizontalScrollbar = true;
             this.listBox1.ItemHeight = 18;
             this.listBox1.Location = new System.Drawing.Point(196, 238);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(4);
             this.listBox1.Name = "listBox1";
             this.listBox1.ScrollAlwaysVisible = true;
             this.listBox1.Size = new System.Drawing.Size(708, 310);
@@ -61,10 +61,10 @@
             // btnAdd
             // 
             this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAdd.Location = new System.Drawing.Point(196, 571);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAdd.Location = new System.Drawing.Point(196, 560);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(100, 28);
+            this.btnAdd.Size = new System.Drawing.Size(100, 38);
             this.btnAdd.TabIndex = 7;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -86,11 +86,11 @@
             // 
             this.btnDelete.BackColor = System.Drawing.Color.White;
             this.btnDelete.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDelete.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnDelete.Location = new System.Drawing.Point(805, 571);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDelete.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnDelete.Location = new System.Drawing.Point(805, 560);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(100, 28);
+            this.btnDelete.Size = new System.Drawing.Size(100, 38);
             this.btnDelete.TabIndex = 9;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = false;
@@ -99,10 +99,10 @@
             // btnUpdate
             // 
             this.btnUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnUpdate.Location = new System.Drawing.Point(304, 571);
-            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnUpdate.Location = new System.Drawing.Point(304, 560);
+            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(100, 28);
+            this.btnUpdate.Size = new System.Drawing.Size(100, 38);
             this.btnUpdate.TabIndex = 10;
             this.btnUpdate.Text = "Edit";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -111,7 +111,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(736, 208);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 28);
             this.button1.TabIndex = 11;
@@ -123,7 +123,7 @@
             // 
             this.panel1.Controls.Add(this.toolStrip1);
             this.panel1.Location = new System.Drawing.Point(700, 187);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(205, 49);
             this.panel1.TabIndex = 12;
@@ -136,7 +136,7 @@
             this.toolStripButton1,
             this.toolStripButton2,
             this.toolStripButton3});
-            this.toolStrip1.Location = new System.Drawing.Point(36, 27);
+            this.toolStrip1.Location = new System.Drawing.Point(92, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(81, 25);
             this.toolStrip1.TabIndex = 0;
@@ -185,7 +185,7 @@
             this.Controls.Add(this.lblListOfQuestions);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.listBox1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Survey questions configurator ";
             this.Load += new System.EventHandler(this.Form1_Load);

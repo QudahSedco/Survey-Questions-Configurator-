@@ -18,6 +18,7 @@ namespace SurveyQuestionsConfigurator.Repositories
     {
         private String mConnectionString = ConfigurationManager.ConnectionStrings["SurveyDb"].ConnectionString;
 
+        //inserts into the base table then retirves the Id created by database and uses it to create a child record
         public void AddQuestion(Question pQuestion)
         {
             using (SqlConnection tConnection = new SqlConnection(mConnectionString))
@@ -31,9 +32,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                         try
                         {
                             string tSql =
-                                @"INSERT INTO Questions (question_text, question_order, question_type)
-                      VALUES (@text, @order, @type);
-                      SELECT CAST(SCOPE_IDENTITY() AS INT);";
+                                @"INSERT INTO Questions (question_text, question_order, question_type) VALUES (@text, @order, @type);SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
                             using (SqlCommand tCmd = new SqlCommand(tSql, tConnection, tTransaction))
                             {
@@ -89,9 +88,9 @@ namespace SurveyQuestionsConfigurator.Repositories
                         tCmd.Parameters.AddWithValue("@id", pId);
                         tCmd.ExecuteNonQuery();
                     }
-                    catch (SqlException ex)
+                    catch (SqlException tEx)
                     {
-                        Log.Error(ex, "Error happened while trying to delete question with ID {QuestionId}", pId);
+                        Log.Error(tEx, "Error happened while trying to delete question with ID {QuestionId}", pId);
                         throw;
                     }
                 }
@@ -145,9 +144,9 @@ namespace SurveyQuestionsConfigurator.Repositories
                         }
                     }
                 }
-                catch (SqlException ex)
+                catch (SqlException tEx)
                 {
-                    Log.Error(ex, "Error getting all questions from DB");
+                    Log.Error(tEx, "Error getting all questions from DB");
                     throw;
                 }
             }
@@ -164,7 +163,7 @@ namespace SurveyQuestionsConfigurator.Repositories
             else if (pQuestion is SliderQuestion tSliderQuestion)
                 return GetSliderQuestion(tSliderQuestion);
 
-            throw new NotSupportedException($"Unsupported question type: {pQuestion?.GetType().Name ?? "null"}");
+            throw new NotSupportedException("Unknown question type");
         }
 
         public void UpdateQuestion(Question pQuestion)
@@ -389,66 +388,74 @@ namespace SurveyQuestionsConfigurator.Repositories
             }
         }
 
-        //
+        //removes old child record updates the base record and inserts the new child type record
         public void UpdateChildTableType(Question pQuestion, QuestionType pOldQuestionType)
         {
             using (SqlConnection tConnection = new SqlConnection(mConnectionString))
             {
-                tConnection.Open();
-
-                using (SqlTransaction tTransaction = tConnection.BeginTransaction())
+                try
                 {
-                    try
+                    tConnection.Open();
+
+                    using (SqlTransaction tTransaction = tConnection.BeginTransaction())
                     {
-                        string tSql;
-
-                        switch (pOldQuestionType)
+                        try
                         {
-                            case QuestionType.Star:
-                                tSql = "DELETE FROM Star_Questions WHERE question_id = @id";
-                                break;
+                            string tSql;
 
-                            case QuestionType.Smiley:
-                                tSql = "DELETE FROM Smiley_Faces_Questions WHERE question_id = @id";
-                                break;
+                            switch (pOldQuestionType)
+                            {
+                                case QuestionType.Star:
+                                    tSql = "DELETE FROM Star_Questions WHERE question_id = @id";
+                                    break;
 
-                            case QuestionType.Slider:
-                                tSql = "DELETE FROM Slider_Questions WHERE question_id = @id";
-                                break;
+                                case QuestionType.Smiley:
+                                    tSql = "DELETE FROM Smiley_Faces_Questions WHERE question_id = @id";
+                                    break;
 
-                            default:
-                                throw new ArgumentOutOfRangeException(nameof(pOldQuestionType));
+                                case QuestionType.Slider:
+                                    tSql = "DELETE FROM Slider_Questions WHERE question_id = @id";
+                                    break;
+
+                                default:
+                                    throw new ArgumentOutOfRangeException(nameof(pOldQuestionType));
+                            }
+
+                            using (SqlCommand tCmd = new SqlCommand(tSql, tConnection, tTransaction))
+                            {
+                                tCmd.Parameters.AddWithValue("@id", pQuestion.Id);
+                                tCmd.ExecuteNonQuery();
+                            }
+
+                            UpdateBaseQuesiton(pQuestion, tConnection, tTransaction);
+
+                            if (pQuestion is StarQuestion starQuestion)
+                            {
+                                AddStarQuestion(starQuestion, tConnection, tTransaction);
+                            }
+                            else if (pQuestion is SmileyFacesQuestion smileyFacesQuestion)
+                            {
+                                AddSmileyFaceQuestion(smileyFacesQuestion, tConnection, tTransaction);
+                            }
+                            else if (pQuestion is SliderQuestion sliderQuestion)
+                            {
+                                AddSliderQuestion(sliderQuestion, tConnection, tTransaction);
+                            }
+
+                            tTransaction.Commit();
                         }
-
-                        using (SqlCommand tCmd = new SqlCommand(tSql, tConnection, tTransaction))
+                        catch (SqlException tEx)
                         {
-                            tCmd.Parameters.AddWithValue("@id", pQuestion.Id);
-                            tCmd.ExecuteNonQuery();
+                            tTransaction.Rollback();
+                            Log.Error(tEx, "Error updating question {QuestionId}", pQuestion.Id);
+                            throw;
                         }
-
-                        UpdateBaseQuesiton(pQuestion, tConnection, tTransaction);
-
-                        if (pQuestion is StarQuestion starQuestion)
-                        {
-                            AddStarQuestion(starQuestion, tConnection, tTransaction);
-                        }
-                        else if (pQuestion is SmileyFacesQuestion smileyFacesQuestion)
-                        {
-                            AddSmileyFaceQuestion(smileyFacesQuestion, tConnection, tTransaction);
-                        }
-                        else if (pQuestion is SliderQuestion sliderQuestion)
-                        {
-                            AddSliderQuestion(sliderQuestion, tConnection, tTransaction);
-                        }
-
-                        tTransaction.Commit();
                     }
-                    catch (SqlException ex)
-                    {
-                        tTransaction.Rollback();
-                        Log.Error(ex, "Error updating question {QuestionId}", pQuestion.Id);
-                        throw;
-                    }
+                }
+                catch (SqlException tEx)
+                {
+                    Log.Error(tEx, "Failed to connect to database");
+                    throw;
                 }
             }
         }
