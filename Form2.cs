@@ -78,9 +78,14 @@ namespace SurveyQuestionsConfigurator
         //create button handles the create  new question logic
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBoxQuestionText.Text == String.Empty)
+            if (String.IsNullOrWhiteSpace(textBoxQuestionText.Text))
             {
                 errorProvider1.SetError(textBoxQuestionText, "Question text cant be empty");
+                return;
+            }
+            if (textBoxQuestionText.Text.Length > 1000)
+            {
+                errorProvider1.SetError(textBoxQuestionText, "Question text cant be more than 1000 characters");
                 return;
             }
 
@@ -126,12 +131,12 @@ namespace SurveyQuestionsConfigurator
                         errorProvider1.SetError(numericUpDownStartValue, " slider end value cant be less than slider start value");
                         return;
                     }
-                    if (textBoxStartCaption.Text == String.Empty)
+                    if (String.IsNullOrWhiteSpace(textBoxStartCaption.Text))
                     {
                         errorProvider1.SetError(textBoxStartCaption, "Start caption cant be empty");
                         return;
                     }
-                    if (textBoxEndCaption.Text == String.Empty)
+                    if (String.IsNullOrWhiteSpace(textBoxEndCaption.Text))
                     {
                         errorProvider1.SetError(textBoxEndCaption, "End caption cant be empty");
                         return;
@@ -261,6 +266,7 @@ namespace SurveyQuestionsConfigurator
 
         private void textBoxEndCaption_TextChanged(object sender, EventArgs e)
         {
+            lblCharNumberEndCaption.Text = textBoxEndCaption.Text.Length.ToString();
         }
 
         private void lblFacesNumber_Click(object sender, EventArgs e)
@@ -276,9 +282,14 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                if (textBoxQuestionText.Text == String.Empty)
+                if (String.IsNullOrWhiteSpace(textBoxQuestionText.Text))
                 {
                     errorProvider1.SetError(textBoxQuestionText, "Question text cant be empty");
+                    return;
+                }
+                if (textBoxQuestionText.Text.Length > 1000)
+                {
+                    errorProvider1.SetError(textBoxQuestionText, "Question text cant be more than 1000 characters");
                     return;
                 }
 
@@ -316,12 +327,12 @@ namespace SurveyQuestionsConfigurator
                         errorProvider1.SetError(numericUpDownStartValue, " slider end value cant be less than slider start value");
                         return;
                     }
-                    if (textBoxStartCaption.Text == String.Empty)
+                    if (String.IsNullOrWhiteSpace(textBoxStartCaption.Text))
                     {
                         errorProvider1.SetError(textBoxStartCaption, "Start caption cant be empty");
                         return;
                     }
-                    if (textBoxEndCaption.Text == String.Empty)
+                    if (String.IsNullOrWhiteSpace(textBoxEndCaption.Text))
                     {
                         errorProvider1.SetError(textBoxEndCaption, "End caption cant be empty");
                         return;
@@ -355,6 +366,24 @@ namespace SurveyQuestionsConfigurator
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void textBoxQuestionText_TextChanged(object sender, EventArgs e)
+        {
+            lblCharNumber.Text = textBoxQuestionText.Text.Length.ToString();
+        }
+
+        private void lblNumberOfCharacters_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+        }
+
+        private void textBoxStartCaption_TextChanged(object sender, EventArgs e)
+        {
+            lblCharNumberStartCaption.Text = textBoxStartCaption.Text.Length.ToString();
         }
     }
 }

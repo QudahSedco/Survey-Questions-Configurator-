@@ -19,6 +19,16 @@ namespace SurveyQuestionsConfigurator
     {
         private QuestionRepository questionRepository;
 
+        private enum SortingMode
+        {
+            Alphabetical,
+            QuestionOrder,
+            QuestionType
+        }
+
+        private SortingMode mSortingMode;
+        private List<Question> mQuestionsList;
+
         public Form1()
         {
             InitializeComponent();
@@ -92,7 +102,11 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 listBox1.DataSource = null;
-                listBox1.DataSource = questionRepository.GetAllQuestions();
+
+                mQuestionsList = questionRepository.GetAllQuestions();
+
+                listBox1.DataSource = mQuestionsList;
+
                 listBox1.DisplayMember = "DisplayText";
             }
             catch
@@ -112,6 +126,43 @@ namespace SurveyQuestionsConfigurator
                 tForm.ShowDialog(this);
                 LoadQuestions();
             }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+        }
+
+        //sort alphabitcially
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            mSortingMode = SortingMode.Alphabetical;
+            FilterQuestions();
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            mSortingMode = SortingMode.QuestionOrder;
+            FilterQuestions();
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            mSortingMode = SortingMode.QuestionType;
+            FilterQuestions();
+        }
+
+        private void FilterQuestions()
+        {
+            if (mSortingMode == SortingMode.Alphabetical)
+                listBox1.DataSource = mQuestionsList.OrderBy(q => q.QuestionText).ToList();
+            if (mSortingMode == SortingMode.QuestionOrder)
+                listBox1.DataSource = mQuestionsList.OrderBy(q => q.QuestionOrder).ToList();
+            if (mSortingMode == SortingMode.QuestionType)
+                listBox1.DataSource = mQuestionsList.OrderBy(q => q.QuestionType).ToList();
         }
     }
 }
