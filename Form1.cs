@@ -33,7 +33,7 @@ namespace SurveyQuestionsConfigurator
         {
             InitializeComponent();
             FormBorderStyle = FormBorderStyle.FixedDialog;
-            MaximizeBox = false;
+
             MinimizeBox = true;
             StartPosition = FormStartPosition.CenterScreen;
             mQestionRepository = new QuestionRepository();
@@ -90,7 +90,7 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 DialogResult tAnswer = MessageBox.Show(this,
-            $"Are you sure you want to delete the following message?\n\n{tSelectedQuestion.QuestionText}",
+            $"Are you sure you want to delete the following Question?\n\n{tSelectedQuestion.QuestionText}",
             "Confirm Delete",
             MessageBoxButtons.YesNo,
             MessageBoxIcon.Question
@@ -192,6 +192,14 @@ namespace SurveyQuestionsConfigurator
                 listBox1.DataSource = mQuestionsList.OrderBy(q => q.QuestionOrder).ToList();
             if (mSortingMode == SortingMode.QuestionType)
                 listBox1.DataSource = mQuestionsList.OrderBy(q => q.QuestionType).ToList();
+        }
+
+        private void pnlMain_Paint(object sender, PaintEventArgs e)
+        {
+        }
+
+        private void pnlHeader_Paint(object sender, PaintEventArgs e)
+        {
         }
     }
 }

@@ -186,7 +186,7 @@ namespace SurveyQuestionsConfigurator
         //prints the stars according to the trackbar
         private void UpdateStars(int pValue)
         {
-            label4.Text =
+            lblStars.Text =
                 new string('★', pValue) +
                 new string('☆', 10 - pValue);
         }
