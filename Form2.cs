@@ -156,7 +156,7 @@ namespace SurveyQuestionsConfigurator
                 mQuestionRepository.AddQuestion(tQuestion);
 
                 MessageBox.Show(
-                    $"{tQuestion.QuestionType} question added successfully.",
+                    $"{tQuestion.QuestionType} Question added successfully.",
                     "Success",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information
@@ -167,7 +167,7 @@ namespace SurveyQuestionsConfigurator
             catch
             {
                 MessageBox.Show(
-                    "error happend while trying to save question please try again",
+                    "Error happend while trying to save question please try again",
                     "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
@@ -337,19 +337,10 @@ namespace SurveyQuestionsConfigurator
                             errorProvider1.SetError(textBoxStartCaption, "Start caption cant be empty");
                             return;
                         }
-                        if (textBoxStartCaption.Text.Length > 100)
-                        {
-                            errorProvider1.SetError(textBoxStartCaption, "start caption cant be more than 100 characters");
-                            return;
-                        }
+
                         if (String.IsNullOrWhiteSpace(textBoxEndCaption.Text))
                         {
                             errorProvider1.SetError(textBoxEndCaption, "End caption cant be empty");
-                            return;
-                        }
-                        if (textBoxEndCaption.Text.Length > 100)
-                        {
-                            errorProvider1.SetError(textBoxEndCaption, "end caption cant be more than 100 characters");
                             return;
                         }
 
@@ -402,6 +393,11 @@ namespace SurveyQuestionsConfigurator
                         if (numericUpDownStartValue.Value >= numericUpDownEndValue.Value)
                         {
                             errorProvider1.SetError(numericUpDownStartValue, "slider start value cant be more or equal to slider end value");
+                            return;
+                        }
+                        if (numericUpDownEndValue.Value <= numericUpDownStartValue.Value)
+                        {
+                            errorProvider1.SetError(numericUpDownStartValue, " slider end value cant be less than slider start value");
                             return;
                         }
 

@@ -46,7 +46,7 @@ namespace SurveyQuestionsConfigurator.Models
         //prop just to display the question text and question type in the list next to each other
         public string DisplayText
         {
-            get { return $"{mQuestionText} - {QuestionType}"; }
+            get { return $"{mQuestionText} - ({QuestionType})"; }
         }
 
         public int Id

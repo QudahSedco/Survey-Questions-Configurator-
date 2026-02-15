@@ -47,5 +47,4 @@ Thumbs.db
 # Secrets (IMPORTANT)
 # ================================
 appsettings.Development.json
-App.config
-app.config
+

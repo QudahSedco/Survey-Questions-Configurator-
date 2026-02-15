@@ -33,7 +33,6 @@ namespace SurveyQuestionsConfigurator
         {
             InitializeComponent();
             FormBorderStyle = FormBorderStyle.FixedDialog;
-
             MinimizeBox = true;
             StartPosition = FormStartPosition.CenterScreen;
             mQestionRepository = new QuestionRepository();
@@ -42,7 +41,7 @@ namespace SurveyQuestionsConfigurator
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadQuestions();
-            //DisplayText text here is the question obj property that combines question text and question type
+            //DisplayText text here is the question class property that combines question text and question type
             listBox1.DisplayMember = "DisplayText";
             btnDelete.Enabled = false;
             btnUpdate.Enabled = false;
@@ -127,7 +126,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch
             {
-                MessageBox.Show(this, "An error occured while retriving questions from database", "database error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "An error occured while retriving questions from database", "Database error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
