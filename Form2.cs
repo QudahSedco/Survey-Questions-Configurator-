@@ -456,7 +456,7 @@ namespace SurveyQuestionsConfigurator
         //shows the number of chars entered by the user into the question text textbox
         private void textBoxQuestionText_TextChanged(object sender, EventArgs e)
         {
-            lblCharNumber.Text = textBoxQuestionText.Text.Length.ToString();
+            lblCharNumber.Text = $"{textBoxQuestionText.Text.Length.ToString()}/1000";
         }
 
         private void lblNumberOfCharacters_Click(object sender, EventArgs e)
@@ -471,6 +471,11 @@ namespace SurveyQuestionsConfigurator
         private void textBoxStartCaption_TextChanged(object sender, EventArgs e)
         {
             lblCharNumberStartCaption.Text = textBoxStartCaption.Text.Length.ToString();
+        }
+
+        private void lblNumberofSmileyfaces_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
