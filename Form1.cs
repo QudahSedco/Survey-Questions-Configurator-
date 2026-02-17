@@ -39,6 +39,8 @@ namespace SurveyQuestionsConfigurator
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+            dataGridViewMain.Font = new Font("Segoe UI", 13, FontStyle.Regular);
+
             LoadQuestions();
             btnDelete.Enabled = false;
             btnUpdate.Enabled = false;
@@ -110,13 +112,13 @@ namespace SurveyQuestionsConfigurator
                 DataGridViewTextBoxColumn colOrder = new DataGridViewTextBoxColumn();
                 colOrder.HeaderText = "QuestionOrder";
                 colOrder.DataPropertyName = "QuestionOrder";
-                colOrder.Width = 130;
+                colOrder.Width = 170;
                 dataGridViewMain.Columns.Add(colOrder);
 
                 DataGridViewTextBoxColumn colType = new DataGridViewTextBoxColumn();
                 colType.HeaderText = "QuestionType";
                 colType.DataPropertyName = "QuestionType";
-                colType.Width = 90;
+                colType.Width = 160;
                 dataGridViewMain.Columns.Add(colType);
 
                 dataGridViewMain.DataSource = mQuestionsList;

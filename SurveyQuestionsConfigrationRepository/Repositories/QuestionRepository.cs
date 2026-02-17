@@ -11,6 +11,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SurveyQuestionsConfigurator.Repositories
 {
@@ -49,19 +50,20 @@ namespace SurveyQuestionsConfigurator.Repositories
                                 pQuestion.Id = (int)tCmd.ExecuteScalar();
                             }
 
-                            if (pQuestion is StarQuestion starQuestion)
+                            switch (pQuestion)
                             {
-                                AddStarQuestion(starQuestion, tConnection, tTransaction);
-                            }
-                            else if (pQuestion is SmileyFacesQuestion smileyFacesQuestion)
-                            {
-                                AddSmileyFaceQuestion(smileyFacesQuestion, tConnection, tTransaction);
-                            }
-                            else if (pQuestion is SliderQuestion sliderQuestion)
-                            {
-                                AddSliderQuestion(sliderQuestion, tConnection, tTransaction);
-                            }
+                                case StarQuestion tStarQuestion:
+                                    AddStarQuestion(tStarQuestion, tConnection, tTransaction);
+                                    break;
 
+                                case SmileyFacesQuestion tSmileyFacesQuestion:
+                                    AddSmileyFaceQuestion(tSmileyFacesQuestion, tConnection, tTransaction);
+                                    break;
+
+                                case SliderQuestion tSliderQuestion:
+                                    AddSliderQuestion(tSliderQuestion, tConnection, tTransaction);
+                                    break;
+                            }
                             tTransaction.Commit();
                         }
                         catch (SqlException ex)
@@ -162,14 +164,20 @@ namespace SurveyQuestionsConfigurator.Repositories
 
         public Question GetChildQuestion(Question pQuestion)
         {
-            if (pQuestion is StarQuestion tStarQuestion)
-                return GetStarQuestion(tStarQuestion);
-            else if (pQuestion is SmileyFacesQuestion tSmileyFaceQuestion)
-                return GetSmileyQuestion(tSmileyFaceQuestion);
-            else if (pQuestion is SliderQuestion tSliderQuestion)
-                return GetSliderQuestion(tSliderQuestion);
+            switch (pQuestion)
+            {
+                case StarQuestion tStarQuestion:
+                    return GetStarQuestion(tStarQuestion);
 
-            throw new NotSupportedException("Unknown question type");
+                case SmileyFacesQuestion tSmileyFacesQuestion:
+                    return GetSmileyQuestion(tSmileyFacesQuestion);
+
+                case SliderQuestion tSliderQuestion:
+                    return GetSliderQuestion(tSliderQuestion);
+
+                default:
+                    throw new NotSupportedException("Unknown question type");
+            }
         }
 
         public void UpdateQuestion(Question pQuestion)
@@ -191,18 +199,27 @@ namespace SurveyQuestionsConfigurator.Repositories
                                 UpdateBaseQuesiton(pQuestion, tConnection, tTransaction);
                             }
 
-                            if (pQuestion is StarQuestion tStarQuestion)
-                                UpdateStarQuestion(tStarQuestion, tConnection, tTransaction);
-                            else if (pQuestion is SmileyFacesQuestion tSmileyFaceQuestion)
-                                UpdateSmileyQuestion(tSmileyFaceQuestion, tConnection, tTransaction);
-                            else if (pQuestion is SliderQuestion tSliderQuestion)
+                            switch (pQuestion)
                             {
-                                UpdateSliderQuestion(tSliderQuestion, tConnection, tTransaction);
+                                case StarQuestion tStarQuestion:
+                                    UpdateStarQuestion(tStarQuestion, tConnection, tTransaction);
+                                    break;
+
+                                case SmileyFacesQuestion tSmileyFaceQuestion:
+                                    UpdateSmileyQuestion(tSmileyFaceQuestion, tConnection, tTransaction);
+                                    break;
+
+                                case SliderQuestion tSliderQuestion:
+                                    UpdateSliderQuestion(tSliderQuestion, tConnection, tTransaction);
+                                    break;
+
+                                default:
+                                    throw new NotSupportedException("Unknown question type");
                             }
 
                             tTransaction.Commit();
                         }
-                        catch (SqlException tEx)
+                        catch (Exception tEx)
                         {
                             tTransaction.Rollback();
                             Log.Error(tEx, "Error while Updating question with ID {questionId} in database", pQuestion.Id);
@@ -210,7 +227,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                         }
                     }
                 }
-                catch (SqlException tEx)
+                catch (Exception tEx)
                 {
                     Log.Error(tEx, "Error couldnt connect to DB");
                     throw;
@@ -435,17 +452,19 @@ namespace SurveyQuestionsConfigurator.Repositories
 
                             UpdateBaseQuesiton(pQuestion, tConnection, tTransaction);
 
-                            if (pQuestion is StarQuestion starQuestion)
+                            switch (pQuestion)
                             {
-                                AddStarQuestion(starQuestion, tConnection, tTransaction);
-                            }
-                            else if (pQuestion is SmileyFacesQuestion smileyFacesQuestion)
-                            {
-                                AddSmileyFaceQuestion(smileyFacesQuestion, tConnection, tTransaction);
-                            }
-                            else if (pQuestion is SliderQuestion sliderQuestion)
-                            {
-                                AddSliderQuestion(sliderQuestion, tConnection, tTransaction);
+                                case StarQuestion tStarQuestion:
+                                    AddStarQuestion(tStarQuestion, tConnection, tTransaction);
+                                    break;
+
+                                case SmileyFacesQuestion tSmileyFacesQuestion:
+                                    AddSmileyFaceQuestion(tSmileyFacesQuestion, tConnection, tTransaction);
+                                    break;
+
+                                case SliderQuestion tSliderQuestion:
+                                    AddSliderQuestion(tSliderQuestion, tConnection, tTransaction);
+                                    break;
                             }
 
                             tTransaction.Commit();

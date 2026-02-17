@@ -57,14 +57,13 @@
             // lblListOfQuestions
             // 
             this.lblListOfQuestions.AutoSize = true;
-            this.lblListOfQuestions.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblListOfQuestions.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblListOfQuestions.Location = new System.Drawing.Point(38, 23);
             this.lblListOfQuestions.Name = "lblListOfQuestions";
-            this.lblListOfQuestions.Size = new System.Drawing.Size(203, 29);
+            this.lblListOfQuestions.Size = new System.Drawing.Size(186, 25);
             this.lblListOfQuestions.TabIndex = 8;
             this.lblListOfQuestions.Text = "List of questions";
             this.lblListOfQuestions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-           
             // 
             // btnDelete
             // 
@@ -72,8 +71,8 @@
             this.btnDelete.BackColor = System.Drawing.Color.White;
             this.btnDelete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.ForeColor = System.Drawing.Color.Red;
-            this.btnDelete.Location = new System.Drawing.Point(938, 13);
+            this.btnDelete.ForeColor = System.Drawing.Color.Black;
+            this.btnDelete.Location = new System.Drawing.Point(947, 13);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 31);
             this.btnDelete.TabIndex = 9;
@@ -85,7 +84,7 @@
             // 
             this.btnUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.Location = new System.Drawing.Point(119, 13);
+            this.btnUpdate.Location = new System.Drawing.Point(112, 13);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 31);
             this.btnUpdate.TabIndex = 10;
@@ -101,7 +100,6 @@
             this.pnlHeader.Name = "pnlHeader";
             this.pnlHeader.Size = new System.Drawing.Size(1042, 61);
             this.pnlHeader.TabIndex = 12;
-           
             // 
             // pnlFooter
             // 
@@ -118,11 +116,11 @@
             // 
             this.pnlMain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pnlMain.Controls.Add(this.dataGridViewMain);
-            this.pnlMain.Location = new System.Drawing.Point(3, 67);
+            this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(1042, 438);
+            this.pnlMain.Size = new System.Drawing.Size(1042, 577);
             this.pnlMain.TabIndex = 14;
-            
             // 
             // dataGridViewMain
             // 
@@ -132,10 +130,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewMain.Location = new System.Drawing.Point(28, 8);
+            this.dataGridViewMain.Location = new System.Drawing.Point(28, 67);
             this.dataGridViewMain.Name = "dataGridViewMain";
             this.dataGridViewMain.ReadOnly = true;
-            this.dataGridViewMain.Size = new System.Drawing.Size(991, 405);
+            this.dataGridViewMain.Size = new System.Drawing.Size(991, 438);
             this.dataGridViewMain.TabIndex = 7;
             this.dataGridViewMain.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewMain_CellContentClick);
             this.dataGridViewMain.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewMain_ColumnHeaderMouseClick);

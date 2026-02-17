@@ -34,20 +34,20 @@
             this.lblQuestionText = new System.Windows.Forms.Label();
             this.numericUpDownQuestionOrder = new System.Windows.Forms.NumericUpDown();
             this.lblQuestionOrder = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxQuestionTypes = new System.Windows.Forms.ComboBox();
             this.lblNumberOfStarsText = new System.Windows.Forms.Label();
             this.trackBarStars = new System.Windows.Forms.TrackBar();
             this.lblStars = new System.Windows.Forms.Label();
             this.lblTypeOfQuestion = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlStars = new System.Windows.Forms.Panel();
             this.lblNumberOfStars = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.pnlSmileyFaces = new System.Windows.Forms.Panel();
             this.lblFacesNumber = new System.Windows.Forms.Label();
             this.trackBarSmileyFaces = new System.Windows.Forms.TrackBar();
             this.lblSmileyFaces = new System.Windows.Forms.Label();
             this.lblNumberofSmileyfaces = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.pblSlider = new System.Windows.Forms.Panel();
             this.lblCharNumberEndCaption = new System.Windows.Forms.Label();
             this.lblCharNumberStartCaption = new System.Windows.Forms.Label();
             this.lblEndCaption = new System.Windows.Forms.Label();
@@ -66,11 +66,11 @@
             this.panel4 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuestionOrder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarStars)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.pnlStars.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            this.panel2.SuspendLayout();
+            this.pnlSmileyFaces.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSmileyFaces)).BeginInit();
-            this.panel3.SuspendLayout();
+            this.pblSlider.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEndValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartValue)).BeginInit();
             this.pnlMain.SuspendLayout();
@@ -82,13 +82,13 @@
             // 
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(663, 389);
+            this.button1.Location = new System.Drawing.Point(517, 343);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 28);
             this.button1.TabIndex = 0;
             this.button1.Text = "Save";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // textBoxQuestionText
             // 
@@ -110,7 +110,6 @@
             this.lblQuestionText.Size = new System.Drawing.Size(103, 20);
             this.lblQuestionText.TabIndex = 2;
             this.lblQuestionText.Text = "Question text";
-            this.lblQuestionText.Click += new System.EventHandler(this.label1_Click);
             // 
             // numericUpDownQuestionOrder
             // 
@@ -146,46 +145,45 @@
             this.lblQuestionOrder.TabIndex = 4;
             this.lblQuestionOrder.Text = "Question order:";
             // 
-            // comboBox1
+            // comboBoxQuestionTypes
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.comboBox1.Location = new System.Drawing.Point(210, 158);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(303, 28);
-            this.comboBox1.TabIndex = 5;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBoxQuestionTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxQuestionTypes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxQuestionTypes.FormattingEnabled = true;
+            this.comboBoxQuestionTypes.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.comboBoxQuestionTypes.Location = new System.Drawing.Point(210, 158);
+            this.comboBoxQuestionTypes.Name = "comboBoxQuestionTypes";
+            this.comboBoxQuestionTypes.Size = new System.Drawing.Size(303, 28);
+            this.comboBoxQuestionTypes.TabIndex = 5;
+            this.comboBoxQuestionTypes.SelectedIndexChanged += new System.EventHandler(this.comboBoxQuestionType_SelectedIndexChanged);
             // 
             // lblNumberOfStarsText
             // 
             this.lblNumberOfStarsText.AutoSize = true;
             this.lblNumberOfStarsText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumberOfStarsText.Location = new System.Drawing.Point(27, 23);
+            this.lblNumberOfStarsText.Location = new System.Drawing.Point(27, 12);
             this.lblNumberOfStarsText.Name = "lblNumberOfStarsText";
             this.lblNumberOfStarsText.Size = new System.Drawing.Size(122, 20);
             this.lblNumberOfStarsText.TabIndex = 6;
             this.lblNumberOfStarsText.Text = "Number of stars";
-            this.lblNumberOfStarsText.Click += new System.EventHandler(this.label3_Click);
             // 
             // trackBarStars
             // 
             this.trackBarStars.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBarStars.Location = new System.Drawing.Point(214, 52);
+            this.trackBarStars.Location = new System.Drawing.Point(214, 39);
             this.trackBarStars.Name = "trackBarStars";
             this.trackBarStars.Size = new System.Drawing.Size(299, 45);
             this.trackBarStars.TabIndex = 7;
             this.trackBarStars.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
-            this.trackBarStars.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            this.trackBarStars.Scroll += new System.EventHandler(this.trackBarStars_Scroll);
             // 
             // lblStars
             // 
             this.lblStars.AutoSize = true;
-            this.lblStars.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStars.Location = new System.Drawing.Point(237, 7);
+            this.lblStars.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStars.Location = new System.Drawing.Point(258, 4);
             this.lblStars.Name = "lblStars";
-            this.lblStars.Size = new System.Drawing.Size(0, 42);
+            this.lblStars.Size = new System.Drawing.Size(0, 37);
             this.lblStars.TabIndex = 8;
             // 
             // lblTypeOfQuestion
@@ -197,62 +195,58 @@
             this.lblTypeOfQuestion.Size = new System.Drawing.Size(130, 20);
             this.lblTypeOfQuestion.TabIndex = 9;
             this.lblTypeOfQuestion.Text = "Type of question:";
-            this.lblTypeOfQuestion.Click += new System.EventHandler(this.label5_Click);
             // 
-            // panel1
+            // pnlStars
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.Controls.Add(this.lblNumberOfStars);
-            this.panel1.Controls.Add(this.trackBarStars);
-            this.panel1.Controls.Add(this.lblStars);
-            this.panel1.Controls.Add(this.lblNumberOfStarsText);
-            this.panel1.Location = new System.Drawing.Point(24, 200);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(711, 100);
-            this.panel1.TabIndex = 10;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.pnlStars.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlStars.Controls.Add(this.lblNumberOfStars);
+            this.pnlStars.Controls.Add(this.trackBarStars);
+            this.pnlStars.Controls.Add(this.lblStars);
+            this.pnlStars.Controls.Add(this.lblNumberOfStarsText);
+            this.pnlStars.Location = new System.Drawing.Point(-11, 188);
+            this.pnlStars.Name = "pnlStars";
+            this.pnlStars.Size = new System.Drawing.Size(711, 100);
+            this.pnlStars.TabIndex = 10;
             // 
             // lblNumberOfStars
             // 
             this.lblNumberOfStars.AutoSize = true;
             this.lblNumberOfStars.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumberOfStars.Location = new System.Drawing.Point(518, 17);
+            this.lblNumberOfStars.Location = new System.Drawing.Point(518, 6);
             this.lblNumberOfStars.Name = "lblNumberOfStars";
-            this.lblNumberOfStars.Size = new System.Drawing.Size(18, 20);
+            this.lblNumberOfStars.Size = new System.Drawing.Size(49, 20);
             this.lblNumberOfStars.TabIndex = 9;
-            this.lblNumberOfStars.Text = "0";
-            this.lblNumberOfStars.Click += new System.EventHandler(this.label6_Click_1);
+            this.lblNumberOfStars.Text = "0/100";
             // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // panel2
+            // pnlSmileyFaces
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.panel2.Controls.Add(this.lblFacesNumber);
-            this.panel2.Controls.Add(this.trackBarSmileyFaces);
-            this.panel2.Controls.Add(this.lblSmileyFaces);
-            this.panel2.Controls.Add(this.lblNumberofSmileyfaces);
-            this.panel2.Location = new System.Drawing.Point(13, 192);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(695, 100);
-            this.panel2.TabIndex = 11;
+            this.pnlSmileyFaces.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlSmileyFaces.Controls.Add(this.lblFacesNumber);
+            this.pnlSmileyFaces.Controls.Add(this.trackBarSmileyFaces);
+            this.pnlSmileyFaces.Controls.Add(this.lblSmileyFaces);
+            this.pnlSmileyFaces.Controls.Add(this.lblNumberofSmileyfaces);
+            this.pnlSmileyFaces.Location = new System.Drawing.Point(13, 192);
+            this.pnlSmileyFaces.Name = "pnlSmileyFaces";
+            this.pnlSmileyFaces.Size = new System.Drawing.Size(695, 100);
+            this.pnlSmileyFaces.TabIndex = 11;
             // 
             // lblFacesNumber
             // 
             this.lblFacesNumber.AutoSize = true;
             this.lblFacesNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFacesNumber.Location = new System.Drawing.Point(518, 14);
+            this.lblFacesNumber.Location = new System.Drawing.Point(518, 4);
             this.lblFacesNumber.Name = "lblFacesNumber";
             this.lblFacesNumber.Size = new System.Drawing.Size(18, 20);
             this.lblFacesNumber.TabIndex = 3;
             this.lblFacesNumber.Text = "2";
-            this.lblFacesNumber.Click += new System.EventHandler(this.lblFacesNumber_Click);
             // 
             // trackBarSmileyFaces
             // 
-            this.trackBarSmileyFaces.Location = new System.Drawing.Point(214, 52);
+            this.trackBarSmileyFaces.Location = new System.Drawing.Point(214, 39);
             this.trackBarSmileyFaces.Maximum = 5;
             this.trackBarSmileyFaces.Minimum = 2;
             this.trackBarSmileyFaces.Name = "trackBarSmileyFaces";
@@ -260,49 +254,48 @@
             this.trackBarSmileyFaces.TabIndex = 2;
             this.trackBarSmileyFaces.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
             this.trackBarSmileyFaces.Value = 2;
-            this.trackBarSmileyFaces.Scroll += new System.EventHandler(this.trackBar2_Scroll);
+            this.trackBarSmileyFaces.Scroll += new System.EventHandler(this.trackBarSmiley_Scroll);
             // 
             // lblSmileyFaces
             // 
             this.lblSmileyFaces.AutoSize = true;
             this.lblSmileyFaces.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSmileyFaces.Location = new System.Drawing.Point(299, 13);
+            this.lblSmileyFaces.Location = new System.Drawing.Point(307, 5);
             this.lblSmileyFaces.Name = "lblSmileyFaces";
             this.lblSmileyFaces.Size = new System.Drawing.Size(41, 29);
             this.lblSmileyFaces.TabIndex = 1;
             this.lblSmileyFaces.Text = ":):)";
-            this.lblSmileyFaces.Click += new System.EventHandler(this.lblSmileyFaces_Click);
             // 
             // lblNumberofSmileyfaces
             // 
             this.lblNumberofSmileyfaces.AutoSize = true;
             this.lblNumberofSmileyfaces.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumberofSmileyfaces.Location = new System.Drawing.Point(27, 20);
+            this.lblNumberofSmileyfaces.Location = new System.Drawing.Point(27, 9);
             this.lblNumberofSmileyfaces.Name = "lblNumberofSmileyfaces";
             this.lblNumberofSmileyfaces.Size = new System.Drawing.Size(176, 20);
             this.lblNumberofSmileyfaces.TabIndex = 0;
             this.lblNumberofSmileyfaces.Text = "Number of Smiley faces";
             this.lblNumberofSmileyfaces.Click += new System.EventHandler(this.lblNumberofSmileyfaces_Click);
             // 
-            // panel3
+            // pblSlider
             // 
-            this.panel3.BackColor = System.Drawing.SystemColors.Control;
-            this.panel3.Controls.Add(this.lblCharNumberEndCaption);
-            this.panel3.Controls.Add(this.lblCharNumberStartCaption);
-            this.panel3.Controls.Add(this.lblEndCaption);
-            this.panel3.Controls.Add(this.textBoxEndCaption);
-            this.panel3.Controls.Add(this.textBoxStartCaption);
-            this.panel3.Controls.Add(this.lblStartCaption);
-            this.panel3.Controls.Add(this.lblEndValue);
-            this.panel3.Controls.Add(this.numericUpDownEndValue);
-            this.panel3.Controls.Add(this.numericUpDownStartValue);
-            this.panel3.Controls.Add(this.lblStartValue);
-            this.panel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.panel3.Location = new System.Drawing.Point(24, 200);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(711, 146);
-            this.panel3.TabIndex = 12;
+            this.pblSlider.BackColor = System.Drawing.SystemColors.Control;
+            this.pblSlider.Controls.Add(this.lblCharNumberEndCaption);
+            this.pblSlider.Controls.Add(this.lblCharNumberStartCaption);
+            this.pblSlider.Controls.Add(this.lblEndCaption);
+            this.pblSlider.Controls.Add(this.textBoxEndCaption);
+            this.pblSlider.Controls.Add(this.textBoxStartCaption);
+            this.pblSlider.Controls.Add(this.lblStartCaption);
+            this.pblSlider.Controls.Add(this.lblEndValue);
+            this.pblSlider.Controls.Add(this.numericUpDownEndValue);
+            this.pblSlider.Controls.Add(this.numericUpDownStartValue);
+            this.pblSlider.Controls.Add(this.lblStartValue);
+            this.pblSlider.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pblSlider.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.pblSlider.Location = new System.Drawing.Point(-11, 188);
+            this.pblSlider.Name = "pblSlider";
+            this.pblSlider.Size = new System.Drawing.Size(711, 146);
+            this.pblSlider.TabIndex = 12;
             // 
             // lblCharNumberEndCaption
             // 
@@ -373,7 +366,6 @@
             this.lblEndValue.Size = new System.Drawing.Size(83, 20);
             this.lblEndValue.TabIndex = 16;
             this.lblEndValue.Text = "End value:";
-            this.lblEndValue.Click += new System.EventHandler(this.label7_Click);
             // 
             // numericUpDownEndValue
             // 
@@ -412,7 +404,6 @@
             0,
             0,
             0});
-            this.numericUpDownStartValue.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // lblStartValue
             // 
@@ -423,25 +414,24 @@
             this.lblStartValue.Size = new System.Drawing.Size(89, 20);
             this.lblStartValue.TabIndex = 13;
             this.lblStartValue.Text = "Start value:";
-            this.lblStartValue.Click += new System.EventHandler(this.label6_Click);
             // 
             // btnUpdate
             // 
             this.btnUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.Location = new System.Drawing.Point(663, 389);
+            this.btnUpdate.Location = new System.Drawing.Point(517, 343);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 28);
             this.btnUpdate.TabIndex = 13;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.button2_Click);
+            this.btnUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(571, 389);
+            this.btnCancel.Location = new System.Drawing.Point(436, 343);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 28);
             this.btnCancel.TabIndex = 14;
@@ -466,16 +456,16 @@
             this.pnlMain.BackColor = System.Drawing.SystemColors.ControlLight;
             this.pnlMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlMain.Controls.Add(this.pnlBaseFields);
-            this.pnlMain.Controls.Add(this.panel1);
-            this.pnlMain.Controls.Add(this.button1);
             this.pnlMain.Controls.Add(this.btnCancel);
+            this.pnlMain.Controls.Add(this.pnlStars);
+            this.pnlMain.Controls.Add(this.button1);
             this.pnlMain.Controls.Add(this.btnUpdate);
-            this.pnlMain.Controls.Add(this.panel3);
+            this.pnlMain.Controls.Add(this.pblSlider);
             this.pnlMain.Controls.Add(this.panel4);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(750, 430);
+            this.pnlMain.Size = new System.Drawing.Size(597, 382);
             this.pnlMain.TabIndex = 18;
             // 
             // pnlBaseFields
@@ -483,12 +473,12 @@
             this.pnlBaseFields.BackColor = System.Drawing.SystemColors.Control;
             this.pnlBaseFields.Controls.Add(this.lblQuestionText);
             this.pnlBaseFields.Controls.Add(this.lblTypeOfQuestion);
-            this.pnlBaseFields.Controls.Add(this.comboBox1);
+            this.pnlBaseFields.Controls.Add(this.comboBoxQuestionTypes);
             this.pnlBaseFields.Controls.Add(this.lblQuestionOrder);
             this.pnlBaseFields.Controls.Add(this.lblCharNumber);
             this.pnlBaseFields.Controls.Add(this.numericUpDownQuestionOrder);
             this.pnlBaseFields.Controls.Add(this.textBoxQuestionText);
-            this.pnlBaseFields.Location = new System.Drawing.Point(24, 12);
+            this.pnlBaseFields.Location = new System.Drawing.Point(-11, 0);
             this.pnlBaseFields.Name = "pnlBaseFields";
             this.pnlBaseFields.Size = new System.Drawing.Size(714, 189);
             this.pnlBaseFields.TabIndex = 18;
@@ -496,30 +486,30 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.SystemColors.Control;
-            this.panel4.Controls.Add(this.panel2);
-            this.panel4.Location = new System.Drawing.Point(11, 12);
+            this.panel4.Controls.Add(this.pnlSmileyFaces);
+            this.panel4.Location = new System.Drawing.Point(-24, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(727, 363);
+            this.panel4.Size = new System.Drawing.Size(727, 331);
             this.panel4.TabIndex = 19;
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(750, 430);
+            this.ClientSize = new System.Drawing.Size(597, 382);
             this.Controls.Add(this.pnlMain);
             this.Name = "Form2";
             this.Text = "Form2";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuestionOrder)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarStars)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnlStars.ResumeLayout(false);
+            this.pnlStars.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.pnlSmileyFaces.ResumeLayout(false);
+            this.pnlSmileyFaces.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSmileyFaces)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.pblSlider.ResumeLayout(false);
+            this.pblSlider.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEndValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartValue)).EndInit();
             this.pnlMain.ResumeLayout(false);
@@ -537,18 +527,18 @@
         private System.Windows.Forms.Label lblQuestionText;
         private System.Windows.Forms.NumericUpDown numericUpDownQuestionOrder;
         private System.Windows.Forms.Label lblQuestionOrder;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxQuestionTypes;
         private System.Windows.Forms.Label lblNumberOfStarsText;
         private System.Windows.Forms.TrackBar trackBarStars;
         private System.Windows.Forms.Label lblStars;
         private System.Windows.Forms.Label lblTypeOfQuestion;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlStars;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel pnlSmileyFaces;
         private System.Windows.Forms.Label lblNumberofSmileyfaces;
         private System.Windows.Forms.Label lblSmileyFaces;
         private System.Windows.Forms.TrackBar trackBarSmileyFaces;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel pblSlider;
         private System.Windows.Forms.Label lblStartValue;
         private System.Windows.Forms.NumericUpDown numericUpDownStartValue;
         private System.Windows.Forms.Label lblEndValue;
