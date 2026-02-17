@@ -1,6 +1,6 @@
 ﻿using Serilog;
 using SurveyQuestionsConfigurator.Models;
-using SurveyQuestionsConfigurator.Repositories;
+using SurveyQuestionsConfiguratorServices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +17,7 @@ namespace SurveyQuestionsConfigurator
 {
     public partial class Form1 : Form
     {
-        private QuestionRepository mQestionRepository;
+        private QuestionService mQuestionService;
 
         private enum SortingMode
         {
@@ -35,7 +35,7 @@ namespace SurveyQuestionsConfigurator
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MinimizeBox = true;
             StartPosition = FormStartPosition.CenterScreen;
-            mQestionRepository = new QuestionRepository();
+            mQuestionService = new QuestionService();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -97,7 +97,7 @@ namespace SurveyQuestionsConfigurator
 );
                 if (tAnswer == DialogResult.Yes)
                 {
-                    mQestionRepository.DeleteQuestionById(tSelectedQuestion.Id);
+                    mQuestionService.DeleteQuestionById(tSelectedQuestion.Id);
                     MessageBox.Show(this, "Question deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadQuestions();
                 }
@@ -115,7 +115,7 @@ namespace SurveyQuestionsConfigurator
             {
                 listBox1.DataSource = null;
 
-                mQuestionsList = mQestionRepository.GetAllQuestions();
+                mQuestionsList = mQuestionService.GetAllQuestions();
 
                 listBox1.DataSource = mQuestionsList;
 
@@ -138,7 +138,7 @@ namespace SurveyQuestionsConfigurator
             Question tSelectedQuestion = (Question)listBox1.SelectedItem;
             try
             {
-                tSelectedQuestion = mQestionRepository.GetChildQuestion(tSelectedQuestion);
+                tSelectedQuestion = mQuestionService.GetChildQuestion(tSelectedQuestion);
             }
             catch
             {

@@ -1,6 +1,6 @@
 ﻿using Serilog;
 using SurveyQuestionsConfigurator.Models;
-using SurveyQuestionsConfigurator.Repositories;
+using SurveyQuestionsConfiguratorServices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +16,7 @@ namespace SurveyQuestionsConfigurator
 {
     public partial class Form2 : Form
     {
-        private QuestionRepository mQuestionRepository;
+        private QuestionService mQuestionService;
         private Question mEditingQuestion;
 
         public Form2(Question pQuestion)
@@ -27,7 +27,7 @@ namespace SurveyQuestionsConfigurator
             MaximizeBox = false;
             MinimizeBox = false;
 
-            mQuestionRepository = new QuestionRepository();
+            mQuestionService = new QuestionService();
             comboBox1.DataSource = Enum.GetValues(typeof(QuestionType));
 
             if (pQuestion != null) //means form is in edit mode
@@ -124,12 +124,12 @@ namespace SurveyQuestionsConfigurator
                 {
                     if (numericUpDownStartValue.Value >= numericUpDownEndValue.Value)
                     {
-                        errorProvider1.SetError(numericUpDownStartValue, " slider start value cant be more or equal to slider end value");
+                        errorProvider1.SetError(numericUpDownStartValue, "Slider start value cant be more or equal to slider end value");
                         return;
                     }
                     if (numericUpDownEndValue.Value <= numericUpDownStartValue.Value)
                     {
-                        errorProvider1.SetError(numericUpDownStartValue, " slider end value cant be less than slider start value");
+                        errorProvider1.SetError(numericUpDownStartValue, "Slider end value cant be less than slider start value");
                         return;
                     }
                     if (String.IsNullOrWhiteSpace(textBoxStartCaption.Text))
@@ -153,7 +153,7 @@ namespace SurveyQuestionsConfigurator
                     ((SliderQuestion)tQuestion).SetRange((int)numericUpDownStartValue.Value, (int)numericUpDownEndValue.Value);
                 }
 
-                mQuestionRepository.AddQuestion(tQuestion);
+                mQuestionService.AddQuestion(tQuestion);
 
                 MessageBox.Show(
                     $"{tQuestion.QuestionType} Question added successfully.",
@@ -313,12 +313,12 @@ namespace SurveyQuestionsConfigurator
                             return;
                         }
                         tStarQuestion.NumberOfStars = trackBarStars.Value;
-                        mQuestionRepository.UpdateQuestion(tStarQuestion);
+                        mQuestionService.UpdateQuestion(tStarQuestion);
                     }
                     else if (mEditingQuestion is SmileyFacesQuestion tSmileyQuestion)
                     {
                         tSmileyQuestion.NumberOfSmileyFaces = trackBarSmileyFaces.Value;
-                        mQuestionRepository.UpdateQuestion(tSmileyQuestion);
+                        mQuestionService.UpdateQuestion(tSmileyQuestion);
                     }
                     else if (mEditingQuestion is SliderQuestion tSliderQuestion)
                     {
@@ -347,7 +347,7 @@ namespace SurveyQuestionsConfigurator
                         tSliderQuestion.SetRange((int)numericUpDownStartValue.Value, (int)numericUpDownEndValue.Value);
                         tSliderQuestion.StartValueCaption = textBoxStartCaption.Text;
                         tSliderQuestion.EndValueCaption = textBoxEndCaption.Text;
-                        mQuestionRepository.UpdateQuestion(tSliderQuestion);
+                        mQuestionService.UpdateQuestion(tSliderQuestion);
                     }
                 }
                 //if type changed call UpdateChildTableType that takes the new question and the old type
@@ -368,7 +368,7 @@ namespace SurveyQuestionsConfigurator
                             return;
                         }
                         tNewQuestion.NumberOfStars = trackBarStars.Value;
-                        mQuestionRepository.UpdateChildTableType(tNewQuestion, tOldType);
+                        mQuestionService.UpdateChildTableType(tNewQuestion, tOldType);
                         mEditingQuestion = tNewQuestion;
                     }
                     else if (tNewType == QuestionType.Smiley)
@@ -385,7 +385,7 @@ namespace SurveyQuestionsConfigurator
                             return;
                         }
                         tNewQuestion.NumberOfSmileyFaces = trackBarSmileyFaces.Value;
-                        mQuestionRepository.UpdateChildTableType(tNewQuestion, tOldType);
+                        mQuestionService.UpdateChildTableType(tNewQuestion, tOldType);
                         mEditingQuestion = tNewQuestion;
                     }
                     else if (tNewType == QuestionType.Slider)
@@ -427,7 +427,7 @@ namespace SurveyQuestionsConfigurator
                             (int)numericUpDownEndValue.Value
                         );
 
-                        mQuestionRepository.UpdateChildTableType(tNewQuestion, tOldType);
+                        mQuestionService.UpdateChildTableType(tNewQuestion, tOldType);
                         mEditingQuestion = tNewQuestion;
                     }
                 }
