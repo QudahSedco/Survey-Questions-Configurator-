@@ -15,40 +15,37 @@ using System.Windows.Forms;
 
 namespace SurveyQuestionsConfigurator
 {
-    public partial class Form1 : Form
+    public partial class FormMain : Form
     {
         private QuestionService mQuestionService;
+        private Dictionary<string, bool> mSortColumnsDictionary;
 
-        private enum SortingMode
-        {
-            Alphabetical,
-            QuestionOrder,
-            QuestionType
-        }
-
-        private SortingMode mSortingMode;
         private List<Question> mQuestionsList;
 
-        public Form1()
+        public FormMain()
         {
             InitializeComponent();
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MinimizeBox = true;
             StartPosition = FormStartPosition.CenterScreen;
             mQuestionService = new QuestionService();
+            mSortColumnsDictionary = new Dictionary<string, bool>()
+    {
+        { "QuestionText", true },
+        { "QuestionOrder", true },
+        { "QuestionType", true }
+    };
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void FormMain_Load(object sender, EventArgs e)
         {
             LoadQuestions();
-            //DisplayText text here is the question class property that combines question text and question type
-            listBox1.DisplayMember = "DisplayText";
             btnDelete.Enabled = false;
             btnUpdate.Enabled = false;
         }
 
         // passing null object to form 2 to make it in add new question instead of edit mode
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonAdd_Click(object sender, EventArgs e)
         {
             Question tQuestion = null;
             using (var tForm = new Form2(tQuestion))
@@ -58,32 +55,15 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-        }
-
         //enables the edit and delete button if there is a selected question from the list
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (listBox1.SelectedItem != null)
-            {
-                btnDelete.Enabled = true;
-                btnUpdate.Enabled = true;
-            }
-            else
-            {
-                btnDelete.Enabled = false;
-                btnUpdate.Enabled = false;
-            }
-        }
 
         //deletes selected question
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (listBox1.SelectedItem == null)
+            if (dataGridViewMain.CurrentRow == null)
                 return;
 
-            Question tSelectedQuestion = (Question)listBox1.SelectedItem;
+            Question tSelectedQuestion = (Question)dataGridViewMain.CurrentRow.DataBoundItem;
 
             // dont forget to put try  catch here
             try
@@ -98,7 +78,6 @@ namespace SurveyQuestionsConfigurator
                 if (tAnswer == DialogResult.Yes)
                 {
                     mQuestionService.DeleteQuestionById(tSelectedQuestion.Id);
-                    MessageBox.Show(this, "Question deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadQuestions();
                 }
             }
@@ -113,29 +92,50 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                listBox1.DataSource = null;
-
                 mQuestionsList = mQuestionService.GetAllQuestions();
 
-                listBox1.DataSource = mQuestionsList;
+                dataGridViewMain.Columns.Clear();
+                dataGridViewMain.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
-                listBox1.DisplayMember = "DisplayText";
+                dataGridViewMain.AutoGenerateColumns = false;
+                dataGridViewMain.MultiSelect = false;
+
+                DataGridViewTextBoxColumn colText = new DataGridViewTextBoxColumn();
+                colText.HeaderText = "QuestionText";
+                colText.DataPropertyName = "QuestionText";
+                colText.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                dataGridViewMain.Columns.Add(colText);
+
+                DataGridViewTextBoxColumn colOrder = new DataGridViewTextBoxColumn();
+                colOrder.HeaderText = "QuestionOrder";
+                colOrder.DataPropertyName = "QuestionOrder";
+                colOrder.Width = 130;
+                dataGridViewMain.Columns.Add(colOrder);
+
+                DataGridViewTextBoxColumn colType = new DataGridViewTextBoxColumn();
+                colType.HeaderText = "QuestionType";
+                colType.DataPropertyName = "QuestionType";
+                colType.Width = 90;
+                dataGridViewMain.Columns.Add(colType);
+
+                dataGridViewMain.DataSource = mQuestionsList;
 
                 btnDelete.Enabled = false;
                 btnUpdate.Enabled = false;
             }
             catch
             {
-                MessageBox.Show(this, "An error occured while retriving questions from database", "Database error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "An error occurred while retrieving questions from database", "Database error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         //edit buttons sends the selected obj and opens form 2 as dialoge
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonEdit_Click(object sender, EventArgs e)
         {
-            if (listBox1.SelectedItem == null) return;
+            if (dataGridViewMain.CurrentRow == null) return;
 
-            Question tSelectedQuestion = (Question)listBox1.SelectedItem;
+            Question tSelectedQuestion = (Question)dataGridViewMain.CurrentRow.DataBoundItem;
             try
             {
                 tSelectedQuestion = mQuestionService.GetChildQuestion(tSelectedQuestion);
@@ -153,52 +153,57 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        //sorts questions using the propertyname saved in a dictionary data structure<string,bool>
+        //if its true then its ascending if false its descending
+
+        private void SortQuestions(string pColumnName)
         {
+            bool tAsc = mSortColumnsDictionary[pColumnName];
+
+            switch (pColumnName)
+            {
+                case "QuestionText":
+                    dataGridViewMain.DataSource = tAsc
+                        ? mQuestionsList.OrderBy(q => q.QuestionText).ToList()
+                        : mQuestionsList.OrderByDescending(q => q.QuestionText).ToList();
+                    break;
+
+                case "QuestionOrder":
+                    dataGridViewMain.DataSource = tAsc
+                        ? mQuestionsList.OrderBy(q => q.QuestionOrder).ToList()
+                        : mQuestionsList.OrderByDescending(q => q.QuestionOrder).ToList();
+                    break;
+
+                case "QuestionType":
+                    dataGridViewMain.DataSource = tAsc
+                        ? mQuestionsList.OrderBy(q => q.QuestionType).ToList()
+                        : mQuestionsList.OrderByDescending(q => q.QuestionType).ToList();
+                    break;
+            }
+
+            mSortColumnsDictionary[pColumnName] = !tAsc;
         }
 
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void dataGridViewMain_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            string tPropertyName = dataGridViewMain.Columns[e.ColumnIndex].DataPropertyName;
+            bool tAscending = mSortColumnsDictionary[tPropertyName];
+            dataGridViewMain.Columns[e.ColumnIndex].HeaderText = tPropertyName + (tAscending ? " ↑" : " ↓");
+            SortQuestions(tPropertyName);
         }
 
-        //sort alphabitcially
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void dataGridViewMain_CellContentClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            mSortingMode = SortingMode.Alphabetical;
-            SortQuestions();
-        }
-
-        //sorts by question order
-        private void toolStripButton2_Click(object sender, EventArgs e)
-        {
-            mSortingMode = SortingMode.QuestionOrder;
-            SortQuestions();
-        }
-
-        //sorts by question type
-        private void toolStripButton3_Click(object sender, EventArgs e)
-        {
-            mSortingMode = SortingMode.QuestionType;
-            SortQuestions();
-        }
-
-        //handels the sorting logic
-        private void SortQuestions()
-        {
-            if (mSortingMode == SortingMode.Alphabetical)
-                listBox1.DataSource = mQuestionsList.OrderBy(q => q.QuestionText).ToList();
-            if (mSortingMode == SortingMode.QuestionOrder)
-                listBox1.DataSource = mQuestionsList.OrderBy(q => q.QuestionOrder).ToList();
-            if (mSortingMode == SortingMode.QuestionType)
-                listBox1.DataSource = mQuestionsList.OrderBy(q => q.QuestionType).ToList();
-        }
-
-        private void pnlMain_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
-        private void pnlHeader_Paint(object sender, PaintEventArgs e)
-        {
+            if (dataGridViewMain.CurrentRow.DataBoundItem != null)
+            {
+                btnDelete.Enabled = true;
+                btnUpdate.Enabled = true;
+            }
+            else
+            {
+                btnDelete.Enabled = false;
+                btnUpdate.Enabled = false;
+            }
         }
     }
 }
