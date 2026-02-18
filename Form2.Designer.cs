@@ -47,7 +47,7 @@
             this.trackBarSmileyFaces = new System.Windows.Forms.TrackBar();
             this.lblSmileyFaces = new System.Windows.Forms.Label();
             this.lblNumberofSmileyfaces = new System.Windows.Forms.Label();
-            this.pblSlider = new System.Windows.Forms.Panel();
+            this.pnlSlider = new System.Windows.Forms.Panel();
             this.lblCharNumberEndCaption = new System.Windows.Forms.Label();
             this.lblCharNumberStartCaption = new System.Windows.Forms.Label();
             this.lblEndCaption = new System.Windows.Forms.Label();
@@ -70,7 +70,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.pnlSmileyFaces.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSmileyFaces)).BeginInit();
-            this.pblSlider.SuspendLayout();
+            this.pnlSlider.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEndValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartValue)).BeginInit();
             this.pnlMain.SuspendLayout();
@@ -278,23 +278,23 @@
             // 
             // pblSlider
             // 
-            this.pblSlider.BackColor = System.Drawing.SystemColors.Control;
-            this.pblSlider.Controls.Add(this.lblCharNumberEndCaption);
-            this.pblSlider.Controls.Add(this.lblCharNumberStartCaption);
-            this.pblSlider.Controls.Add(this.lblEndCaption);
-            this.pblSlider.Controls.Add(this.textBoxEndCaption);
-            this.pblSlider.Controls.Add(this.textBoxStartCaption);
-            this.pblSlider.Controls.Add(this.lblStartCaption);
-            this.pblSlider.Controls.Add(this.lblEndValue);
-            this.pblSlider.Controls.Add(this.numericUpDownEndValue);
-            this.pblSlider.Controls.Add(this.numericUpDownStartValue);
-            this.pblSlider.Controls.Add(this.lblStartValue);
-            this.pblSlider.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pblSlider.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.pblSlider.Location = new System.Drawing.Point(-11, 188);
-            this.pblSlider.Name = "pblSlider";
-            this.pblSlider.Size = new System.Drawing.Size(711, 129);
-            this.pblSlider.TabIndex = 12;
+            this.pnlSlider.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlSlider.Controls.Add(this.lblCharNumberEndCaption);
+            this.pnlSlider.Controls.Add(this.lblCharNumberStartCaption);
+            this.pnlSlider.Controls.Add(this.lblEndCaption);
+            this.pnlSlider.Controls.Add(this.textBoxEndCaption);
+            this.pnlSlider.Controls.Add(this.textBoxStartCaption);
+            this.pnlSlider.Controls.Add(this.lblStartCaption);
+            this.pnlSlider.Controls.Add(this.lblEndValue);
+            this.pnlSlider.Controls.Add(this.numericUpDownEndValue);
+            this.pnlSlider.Controls.Add(this.numericUpDownStartValue);
+            this.pnlSlider.Controls.Add(this.lblStartValue);
+            this.pnlSlider.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pnlSlider.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.pnlSlider.Location = new System.Drawing.Point(-11, 188);
+            this.pnlSlider.Name = "pblSlider";
+            this.pnlSlider.Size = new System.Drawing.Size(711, 129);
+            this.pnlSlider.TabIndex = 12;
             // 
             // lblCharNumberEndCaption
             // 
@@ -459,7 +459,7 @@
             this.pnlMain.Controls.Add(this.pnlStars);
             this.pnlMain.Controls.Add(this.button1);
             this.pnlMain.Controls.Add(this.btnUpdate);
-            this.pnlMain.Controls.Add(this.pblSlider);
+            this.pnlMain.Controls.Add(this.pnlSlider);
             this.pnlMain.Controls.Add(this.panel4);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
@@ -507,8 +507,8 @@
             this.pnlSmileyFaces.ResumeLayout(false);
             this.pnlSmileyFaces.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSmileyFaces)).EndInit();
-            this.pblSlider.ResumeLayout(false);
-            this.pblSlider.PerformLayout();
+            this.pnlSlider.ResumeLayout(false);
+            this.pnlSlider.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEndValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartValue)).EndInit();
             this.pnlMain.ResumeLayout(false);
@@ -537,7 +537,7 @@
         private System.Windows.Forms.Label lblNumberofSmileyfaces;
         private System.Windows.Forms.Label lblSmileyFaces;
         private System.Windows.Forms.TrackBar trackBarSmileyFaces;
-        private System.Windows.Forms.Panel pblSlider;
+        private System.Windows.Forms.Panel pnlSlider;
         private System.Windows.Forms.Label lblStartValue;
         private System.Windows.Forms.NumericUpDown numericUpDownStartValue;
         private System.Windows.Forms.Label lblEndValue;

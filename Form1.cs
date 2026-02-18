@@ -132,7 +132,7 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        //edit buttons sends the selected obj and opens form 2 as dialoge
+        //edit button sends the selected obj and opens form 2 as dialoge
         private void buttonEdit_Click(object sender, EventArgs e)
         {
             if (dataGridViewMain.CurrentRow == null) return;
@@ -190,6 +190,10 @@ namespace SurveyQuestionsConfigurator
         {
             string tPropertyName = dataGridViewMain.Columns[e.ColumnIndex].DataPropertyName;
             bool tAscending = mSortColumnsDictionary[tPropertyName];
+            foreach (DataGridViewColumn column in dataGridViewMain.Columns)
+            {
+                column.HeaderText = column.DataPropertyName;
+            }
             dataGridViewMain.Columns[e.ColumnIndex].HeaderText = tPropertyName + (tAscending ? " ↑" : " ↓");
             SortQuestions(tPropertyName);
         }
