@@ -325,6 +325,11 @@ namespace SurveyQuestionsConfigurator
                     switch (tNewType)
                     {
                         case QuestionType.Star:
+                            if (trackBarStars.Value < 1)
+                            {
+                                errorProvider1.SetError(trackBarStars, "Number of stars cannot be less than 1");
+                                return;
+                            }
                             tNewQuestion = new StarQuestion
                             {
                                 Id = mEditingQuestion.Id,
@@ -332,13 +337,7 @@ namespace SurveyQuestionsConfigurator
                                 QuestionText = mEditingQuestion.QuestionText,
                                 NumberOfStars = trackBarStars.Value
                             };
-                            if (trackBarStars.Value < 1)
-                            {
-                                errorProvider1.SetError(trackBarStars, "Number of stars cannot be less than 1");
-                                return;
-                            }
-                            mQuestionService.UpdateChildTableType(tNewQuestion, tOldType);
-                            mEditingQuestion = tNewQuestion;
+
                             break;
 
                         case QuestionType.Smiley:
@@ -354,19 +353,10 @@ namespace SurveyQuestionsConfigurator
                                 errorProvider1.SetError(trackBarSmileyFaces, "Number of stars cannot be less than 2 or more than 5");
                                 return;
                             }
-                            mQuestionService.UpdateChildTableType(tNewQuestion, tOldType);
-                            mEditingQuestion = tNewQuestion;
+
                             break;
 
                         case QuestionType.Slider:
-                            tNewQuestion = new SliderQuestion
-                            {
-                                Id = mEditingQuestion.Id,
-                                QuestionOrder = mEditingQuestion.QuestionOrder,
-                                QuestionText = mEditingQuestion.QuestionText,
-                                StartValueCaption = textBoxStartCaption.Text,
-                                EndValueCaption = textBoxEndCaption.Text
-                            };
 
                             if (numericUpDownStartValue.Value >= numericUpDownEndValue.Value)
                             {
@@ -389,13 +379,20 @@ namespace SurveyQuestionsConfigurator
                                 return;
                             }
 
+                            tNewQuestion = new SliderQuestion
+                            {
+                                Id = mEditingQuestion.Id,
+                                QuestionOrder = mEditingQuestion.QuestionOrder,
+                                QuestionText = mEditingQuestion.QuestionText,
+                                StartValueCaption = textBoxStartCaption.Text,
+                                EndValueCaption = textBoxEndCaption.Text
+                            };
+
                             ((SliderQuestion)tNewQuestion).SetRange(
                                 (int)numericUpDownStartValue.Value,
                                 (int)numericUpDownEndValue.Value
                             );
 
-                            mQuestionService.UpdateChildTableType(tNewQuestion, tOldType);
-                            mEditingQuestion = tNewQuestion;
                             break;
                     }
 
@@ -420,7 +417,7 @@ namespace SurveyQuestionsConfigurator
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         //shows the number of chars entered by the user into the question text textbox
@@ -429,22 +426,10 @@ namespace SurveyQuestionsConfigurator
             lblCharNumber.Text = $"{textBoxQuestionText.Text.Length.ToString()}/1000";
         }
 
-        private void lblNumberOfCharacters_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-        }
-
         //shows the number of chars enterd by the user into the start caption text box
         private void textBoxStartCaption_TextChanged(object sender, EventArgs e)
         {
             lblCharNumberStartCaption.Text = $"{textBoxStartCaption.Text.Length.ToString()}/100";
-        }
-
-        private void lblNumberofSmileyfaces_Click(object sender, EventArgs e)
-        {
         }
     }
 }

@@ -82,7 +82,7 @@
             // 
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(517, 343);
+            this.button1.Location = new System.Drawing.Point(517, 323);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 28);
             this.button1.TabIndex = 0;
@@ -275,7 +275,6 @@
             this.lblNumberofSmileyfaces.Size = new System.Drawing.Size(176, 20);
             this.lblNumberofSmileyfaces.TabIndex = 0;
             this.lblNumberofSmileyfaces.Text = "Number of Smiley faces";
-            this.lblNumberofSmileyfaces.Click += new System.EventHandler(this.lblNumberofSmileyfaces_Click);
             // 
             // pblSlider
             // 
@@ -294,7 +293,7 @@
             this.pblSlider.ForeColor = System.Drawing.SystemColors.ControlText;
             this.pblSlider.Location = new System.Drawing.Point(-11, 188);
             this.pblSlider.Name = "pblSlider";
-            this.pblSlider.Size = new System.Drawing.Size(711, 146);
+            this.pblSlider.Size = new System.Drawing.Size(711, 129);
             this.pblSlider.TabIndex = 12;
             // 
             // lblCharNumberEndCaption
@@ -419,7 +418,7 @@
             // 
             this.btnUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.Location = new System.Drawing.Point(517, 343);
+            this.btnUpdate.Location = new System.Drawing.Point(517, 323);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 28);
             this.btnUpdate.TabIndex = 13;
@@ -431,7 +430,7 @@
             // 
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(436, 343);
+            this.btnCancel.Location = new System.Drawing.Point(436, 323);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 28);
             this.btnCancel.TabIndex = 14;
@@ -465,7 +464,7 @@
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(597, 382);
+            this.pnlMain.Size = new System.Drawing.Size(597, 362);
             this.pnlMain.TabIndex = 18;
             // 
             // pnlBaseFields
@@ -489,14 +488,14 @@
             this.panel4.Controls.Add(this.pnlSmileyFaces);
             this.panel4.Location = new System.Drawing.Point(-24, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(727, 331);
+            this.panel4.Size = new System.Drawing.Size(727, 317);
             this.panel4.TabIndex = 19;
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(597, 382);
+            this.ClientSize = new System.Drawing.Size(597, 362);
             this.Controls.Add(this.pnlMain);
             this.Name = "Form2";
             this.Text = "Form2";

@@ -17,7 +17,21 @@ namespace SurveyQuestionsConfigurator.Repositories
 {
     public class QuestionRepository : IQuestionRepository
     {
-        private String mConnectionString = ConfigurationManager.ConnectionStrings["SurveyDb"].ConnectionString;
+        private readonly string mConnectionString = ConfigurationManager.ConnectionStrings["SurveyDb"].ConnectionString;
+        private const string QUESTIONS_TABLE = "Questions";
+        private const string STAR_QUESTIONS_TABLE = "Star_Questions";
+        private const string SMILEY_FACES_QUESTIONS_TABLE = "Smiley_Faces_Questions";
+        private const string SLIDER_QUESTIONS_TABLE = "Slider_Questions";
+        private const string COLUMN_QUESTION_ID = "question_id";
+        private const string COLUMN_QUESTION_TEXT = "question_text";
+        private const string COLUMN_QUESTION_ORDER = "question_order";
+        private const string COLUMN_QUESTION_TYPE = "question_type";
+        private const string COLUMN_NUMBER_OF_STARS = "number_of_stars";
+        private const string COLUMN_NUMBER_OF_SMILEY_FACES = "number_of_smiley_faces";
+        private const string COLUMN_START_VALUE = "start_value";
+        private const string COLUMN_END_VALUE = "end_value";
+        private const string COLUMN_START_VALUE_CAPTION = "start_value_caption";
+        private const string COLUMN_END_VALUE_CAPTION = "end_value_caption";
 
         public QuestionRepository()
         {
@@ -39,7 +53,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                         try
                         {
                             string tSql =
-                                @"INSERT INTO Questions (question_text, question_order, question_type) VALUES (@text, @order, @type);SELECT CAST(SCOPE_IDENTITY() AS INT);";
+                                $@"INSERT INTO {QUESTIONS_TABLE} ({COLUMN_QUESTION_TEXT}, {COLUMN_QUESTION_ORDER}, {COLUMN_QUESTION_TYPE}) VALUES (@text, @order, @type);SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
                             using (SqlCommand tCmd = new SqlCommand(tSql, tConnection, tTransaction))
                             {
@@ -86,7 +100,7 @@ namespace SurveyQuestionsConfigurator.Repositories
         {
             using (SqlConnection tConnection = new SqlConnection(mConnectionString))
             {
-                String tSql = "DELETE FROM Questions WHERE question_id = @id";
+                String tSql = $"DELETE FROM {QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID} = @id";
 
                 using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
                 {
@@ -96,7 +110,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                         tCmd.Parameters.AddWithValue("@id", pId);
                         tCmd.ExecuteNonQuery();
                     }
-                    catch (SqlException tEx)
+                    catch (Exception tEx)
                     {
                         Log.Error(tEx, "Error happened while trying to delete question with ID {QuestionId}", pId);
                         throw;
@@ -109,7 +123,7 @@ namespace SurveyQuestionsConfigurator.Repositories
         {
             var tQuestionsList = new List<Question>();
 
-            string tSql = "SELECT question_id, question_text, question_order, question_type FROM Questions ORDER BY question_order";
+            string tSql = $"SELECT {COLUMN_QUESTION_ID}, {COLUMN_QUESTION_TEXT}, {COLUMN_QUESTION_ORDER}, {COLUMN_QUESTION_TYPE} FROM {QUESTIONS_TABLE} ORDER BY {COLUMN_QUESTION_ORDER}";
 
             using (SqlConnection tConnection = new SqlConnection(mConnectionString))
             using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
@@ -152,7 +166,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                         }
                     }
                 }
-                catch (SqlException tEx)
+                catch (Exception tEx)
                 {
                     Log.Error(tEx, "Error getting all questions from DB");
                     throw;
@@ -193,7 +207,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                     {
                         try
                         {
-                            string tSql = "UPDATE Questions SET question_text=@questionText,question_order=@questionOrder WHERE question_id=@questionId";
+                            string tSql = $"UPDATE {QUESTIONS_TABLE} SET {COLUMN_QUESTION_TEXT} = @questionText,{COLUMN_QUESTION_ORDER} = @questionOrder WHERE {COLUMN_QUESTION_ID}=@id";
                             using (SqlCommand tCmd = new SqlCommand(tSql, tConnection, tTransaction))
                             {
                                 UpdateBaseQuesiton(pQuestion, tConnection, tTransaction);
@@ -237,29 +251,45 @@ namespace SurveyQuestionsConfigurator.Repositories
 
         private void UpdateStarQuestion(StarQuestion pStarQuestion, SqlConnection pSqlConnection, SqlTransaction pSqlTransaction)
         {
-            string tSql = "UPDATE Star_Questions SET number_of_stars = @numberOfStars WHERE question_id=@id";
+            string tSql = $"UPDATE {STAR_QUESTIONS_TABLE} SET {COLUMN_NUMBER_OF_STARS} = @numberOfStars WHERE {COLUMN_QUESTION_ID}=@id";
             using (SqlCommand tCmd = new SqlCommand(tSql, pSqlConnection, pSqlTransaction))
             {
                 tCmd.Parameters.AddWithValue("@id", pStarQuestion.Id);
                 tCmd.Parameters.AddWithValue("@numberOfStars", pStarQuestion.NumberOfStars);
-                tCmd.ExecuteNonQuery();
+                try
+                {
+                    tCmd.ExecuteNonQuery();
+                }
+                catch (SqlException tEx)
+                {
+                    Log.Error(tEx, "Error  while updating star quesiton with id {id}", pStarQuestion.Id);
+                    throw;
+                }
             }
         }
 
         private void UpdateSmileyQuestion(SmileyFacesQuestion pSmileyQuestion, SqlConnection pSqlConnection, SqlTransaction pSqlTransaction)
         {
-            string tSql = "UPDATE Smiley_Faces_Questions SET number_of_smiley_faces=@numberOfSmileyFaces WHERE question_id=@id";
+            string tSql = $"UPDATE {SMILEY_FACES_QUESTIONS_TABLE} SET {COLUMN_NUMBER_OF_SMILEY_FACES}=@numberOfSmileyFaces WHERE {COLUMN_QUESTION_ID} = @id";
             using (SqlCommand tCmd = new SqlCommand(tSql, pSqlConnection, pSqlTransaction))
             {
                 tCmd.Parameters.AddWithValue("@id", pSmileyQuestion.Id);
                 tCmd.Parameters.AddWithValue("@numberOfSmileyFaces", pSmileyQuestion.NumberOfSmileyFaces);
-                tCmd.ExecuteNonQuery();
+                try
+                {
+                    tCmd.ExecuteNonQuery();
+                }
+                catch (SqlException tEx)
+                {
+                    Log.Error(tEx, "Error while updating Smiley face quesiton with id {id}", pSmileyQuestion.Id);
+                    throw;
+                }
             }
         }
 
         private void UpdateSliderQuestion(SliderQuestion pSliderQuestion, SqlConnection pSqlConnection, SqlTransaction pSqlTransaction)
         {
-            string tSql = "UPDATE Slider_Questions SET start_value=@startValue,end_value=@endValue,start_value_caption=@startCaption,end_value_caption=@endCaption WHERE question_id=@id";
+            string tSql = $"UPDATE {SLIDER_QUESTIONS_TABLE} SET {COLUMN_START_VALUE} = @startValue, {COLUMN_END_VALUE}=@endValue,{COLUMN_START_VALUE_CAPTION}=@startCaption,{COLUMN_END_VALUE_CAPTION}=@endCaption WHERE {COLUMN_QUESTION_ID}= @id";
             using (SqlCommand tCmd = new SqlCommand(tSql, pSqlConnection, pSqlTransaction))
             {
                 tCmd.Parameters.AddWithValue("@id", pSliderQuestion.Id);
@@ -267,38 +297,61 @@ namespace SurveyQuestionsConfigurator.Repositories
                 tCmd.Parameters.AddWithValue("@endValue", pSliderQuestion.EndValue);
                 tCmd.Parameters.AddWithValue("@startCaption", pSliderQuestion.StartValueCaption);
                 tCmd.Parameters.AddWithValue("@endCaption", pSliderQuestion.EndValueCaption);
-                tCmd.ExecuteNonQuery();
+                try
+                {
+                    tCmd.ExecuteNonQuery();
+                }
+                catch (SqlException tEx)
+                {
+                    Log.Error(tEx, "Error  while updating Slider quesiton with id {id}", pSliderQuestion.Id);
+                    throw;
+                }
             }
         }
 
         private void AddStarQuestion(StarQuestion pQuestion, SqlConnection pConnection, SqlTransaction pTransaction)
         {
-            string tSql = @"INSERT INTO Star_Questions (question_id, number_of_stars) VALUES (@id, @stars)";
+            string tSql = $@"INSERT INTO {STAR_QUESTIONS_TABLE} ({COLUMN_QUESTION_ID}, {COLUMN_NUMBER_OF_STARS}) VALUES (@id, @stars)";
 
             using (SqlCommand tCmd = new SqlCommand(tSql, pConnection, pTransaction))
             {
                 tCmd.Parameters.AddWithValue("@id", pQuestion.Id);
                 tCmd.Parameters.AddWithValue("@stars", pQuestion.NumberOfStars);
-
-                tCmd.ExecuteNonQuery();
+                try
+                {
+                    tCmd.ExecuteNonQuery();
+                }
+                catch (SqlException tEx)
+                {
+                    Log.Error(tEx, "Error  while adding star quesiton with id {id}", pQuestion.Id);
+                    throw;
+                }
             }
         }
 
         private void AddSmileyFaceQuestion(SmileyFacesQuestion pQuestion, SqlConnection pConnection, SqlTransaction pTransaction)
         {
-            string tSql = "INSERT INTO Smiley_Faces_Questions(question_id,number_of_smiley_faces) VALUES (@id,@NumberOfSmileyFaces)";
+            string tSql = $"INSERT INTO {SMILEY_FACES_QUESTIONS_TABLE} ({COLUMN_QUESTION_ID},{COLUMN_NUMBER_OF_SMILEY_FACES}) VALUES (@id,@NumberOfSmileyFaces)";
 
             using (SqlCommand tCmd = new SqlCommand(tSql, pConnection, pTransaction))
             {
                 tCmd.Parameters.AddWithValue("@id", pQuestion.Id);
                 tCmd.Parameters.AddWithValue("@NumberOfSmileyFaces", pQuestion.NumberOfSmileyFaces);
-                tCmd.ExecuteNonQuery();
+                try
+                {
+                    tCmd.ExecuteNonQuery();
+                }
+                catch (SqlException tEx)
+                {
+                    Log.Error(tEx, "Error  while adding smiley face quesiton with id {id}", pQuestion.Id);
+                    throw;
+                }
             }
         }
 
         private void AddSliderQuestion(SliderQuestion pQuestion, SqlConnection pConnection, SqlTransaction pTransaction)
         {
-            string tSql = @"INSERT INTO Slider_Questions(question_id,start_value,end_value,start_value_caption,end_value_caption)
+            string tSql = $@"INSERT INTO {SLIDER_QUESTIONS_TABLE}({COLUMN_QUESTION_ID},{COLUMN_START_VALUE},{COLUMN_END_VALUE},{COLUMN_START_VALUE_CAPTION},{COLUMN_END_VALUE_CAPTION})
                  VALUES (@id,@startValue,@endValue,@startCaption,@endCaption)";
             using (SqlCommand tCmd = new SqlCommand(tSql, pConnection, pTransaction))
             {
@@ -307,7 +360,15 @@ namespace SurveyQuestionsConfigurator.Repositories
                 tCmd.Parameters.AddWithValue("@endValue", pQuestion.EndValue);
                 tCmd.Parameters.AddWithValue("@startCaption", pQuestion.StartValueCaption);
                 tCmd.Parameters.AddWithValue("@endCaption", pQuestion.EndValueCaption);
-                tCmd.ExecuteNonQuery();
+                try
+                {
+                    tCmd.ExecuteNonQuery();
+                }
+                catch (SqlException tEx)
+                {
+                    Log.Error(tEx, "Error  while adding slider quesiton with id {id}", pQuestion.Id);
+                    throw;
+                }
             }
         }
 
@@ -319,7 +380,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                 {
                     tConnection.Open();
 
-                    string tSql = "SELECT number_of_stars FROM Star_Questions WHERE question_id = @id";
+                    string tSql = $"SELECT {COLUMN_NUMBER_OF_STARS} FROM {STAR_QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID} = @id";
 
                     using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
                     {
@@ -352,7 +413,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                 try
                 {
                     tConnection.Open();
-                    String tSql = "SELECT number_of_smiley_faces FROM Smiley_Faces_Questions WHERE question_id=@id";
+                    String tSql = $"SELECT {COLUMN_NUMBER_OF_SMILEY_FACES} FROM {SMILEY_FACES_QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID}=@id";
 
                     using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
                     {
@@ -384,7 +445,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                 try
                 {
                     tConnection.Open();
-                    String tSql = "SELECT start_value,end_value,start_value_caption,end_value_caption FROM Slider_Questions WHERE question_id=@id";
+                    String tSql = $"SELECT {COLUMN_START_VALUE},{COLUMN_END_VALUE},{COLUMN_START_VALUE_CAPTION},{COLUMN_END_VALUE_CAPTION} FROM {SLIDER_QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID}=@id";
 
                     using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
                     {
@@ -429,15 +490,15 @@ namespace SurveyQuestionsConfigurator.Repositories
                             switch (pOldQuestionType)
                             {
                                 case QuestionType.Star:
-                                    tSql = "DELETE FROM Star_Questions WHERE question_id = @id";
+                                    tSql = $"DELETE FROM {STAR_QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID} = @id";
                                     break;
 
                                 case QuestionType.Smiley:
-                                    tSql = "DELETE FROM Smiley_Faces_Questions WHERE question_id = @id";
+                                    tSql = $"DELETE FROM {SMILEY_FACES_QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID} = @id";
                                     break;
 
                                 case QuestionType.Slider:
-                                    tSql = "DELETE FROM Slider_Questions WHERE question_id = @id";
+                                    tSql = $"DELETE FROM {SLIDER_QUESTIONS_TABLE} WHERE  {COLUMN_QUESTION_ID}  = @id";
                                     break;
 
                                 default:
@@ -487,15 +548,22 @@ namespace SurveyQuestionsConfigurator.Repositories
 
         public void UpdateBaseQuesiton(Question pQuestion, SqlConnection pConnection, SqlTransaction pTransaction)
         {
-            string tSql = "UPDATE Questions SET question_text=@questionText,question_order=@questionOrder,question_type = @questionType WHERE question_id=@questionId";
+            string tSql = $"UPDATE {QUESTIONS_TABLE} SET {COLUMN_QUESTION_TEXT} = @questionText,{COLUMN_QUESTION_ORDER} = @questionOrder,{COLUMN_QUESTION_TYPE} = @questionType WHERE {COLUMN_QUESTION_ID}=@id";
             using (SqlCommand tCmd = new SqlCommand(tSql, pConnection, pTransaction))
             {
-                tCmd.Parameters.AddWithValue("@questionId", pQuestion.Id);
+                tCmd.Parameters.AddWithValue("@id", pQuestion.Id);
                 tCmd.Parameters.AddWithValue("@questionText", pQuestion.QuestionText);
                 tCmd.Parameters.AddWithValue("@questionOrder", pQuestion.QuestionOrder);
                 tCmd.Parameters.AddWithValue("@questionType", (int)pQuestion.QuestionType);
-
-                tCmd.ExecuteNonQuery();
+                try
+                {
+                    tCmd.ExecuteNonQuery();
+                }
+                catch (SqlException tEx)
+                {
+                    Log.Error(tEx, "Error happend while updating  quesiton with id {id}", pQuestion.Id);
+                    throw;
+                }
             }
         }
     }
