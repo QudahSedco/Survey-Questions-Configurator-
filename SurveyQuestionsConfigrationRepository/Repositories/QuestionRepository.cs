@@ -11,12 +11,29 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+using TableDependency.SqlClient;
+using TableDependency.SqlClient.Base.Enums;
+using TableDependency.SqlClient.Base.EventArgs;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace SurveyQuestionsConfigurator.Repositories
 {
+    //sqldependency requiers a class that is not abstract and has propierties names that match the columns in databse
+    //this class is created just so it can use it to notfiy of any changes to Question table in database
+    public class QuestionRow
+    {
+        public int question_id { get; set; }
+        public string question_text { get; set; }
+        public int question_type { get; set; }
+        public int question_order { get; set; }
+    }
+
     public class QuestionRepository : IQuestionRepository
     {
+        private SqlTableDependency<QuestionRow> mSqlTableDependency;
+
+        public event Action EventOnQuestionsTableChanged;
+
         private readonly string mConnectionString = ConfigurationManager.ConnectionStrings["SurveyDb"].ConnectionString;
         private const string QUESTIONS_TABLE = "Questions";
         private const string STAR_QUESTIONS_TABLE = "Star_Questions";
@@ -39,7 +56,25 @@ namespace SurveyQuestionsConfigurator.Repositories
                     .WriteTo.File(new JsonFormatter(), "logs/SurveyQuestionsConfigurator-.json", rollingInterval: RollingInterval.Day).CreateLogger();
         }
 
-        //inserts into the base table then retirves the Id created by database and uses it to create a child record
+        //if any changes in database happens trigger the event
+        private void TableDependencyChanged(Object sender, EventArgs e)
+        {
+            EventOnQuestionsTableChanged?.Invoke();
+        }
+
+        public void StartListening()
+        {
+            mSqlTableDependency = new SqlTableDependency<QuestionRow>(mConnectionString, QUESTIONS_TABLE);
+            mSqlTableDependency.OnChanged += TableDependencyChanged;
+            mSqlTableDependency.Start();
+        }
+
+        public void StopListening()
+        {
+            mSqlTableDependency?.Stop();
+        }
+
+        //Inserts into the base table then retrieves the Id created by the database and uses it to create a child record
         public void AddQuestion(Question pQuestion)
         {
             using (SqlConnection tConnection = new SqlConnection(mConnectionString))
@@ -210,7 +245,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                             string tSql = $"UPDATE {QUESTIONS_TABLE} SET {COLUMN_QUESTION_TEXT} = @questionText,{COLUMN_QUESTION_ORDER} = @questionOrder WHERE {COLUMN_QUESTION_ID}=@id";
                             using (SqlCommand tCmd = new SqlCommand(tSql, tConnection, tTransaction))
                             {
-                                UpdateBaseQuesiton(pQuestion, tConnection, tTransaction);
+                                UpdateBasequestion(pQuestion, tConnection, tTransaction);
                             }
 
                             switch (pQuestion)
@@ -243,7 +278,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                 }
                 catch (Exception tEx)
                 {
-                    Log.Error(tEx, "Error couldnt connect to DB");
+                    Log.Error(tEx, "Error couldn't connect to DB");
                     throw;
                 }
             }
@@ -262,7 +297,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                 }
                 catch (SqlException tEx)
                 {
-                    Log.Error(tEx, "Error  while updating star quesiton with id {id}", pStarQuestion.Id);
+                    Log.Error(tEx, "Error  while updating star question with id {id}", pStarQuestion.Id);
                     throw;
                 }
             }
@@ -281,7 +316,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                 }
                 catch (SqlException tEx)
                 {
-                    Log.Error(tEx, "Error while updating Smiley face quesiton with id {id}", pSmileyQuestion.Id);
+                    Log.Error(tEx, "Error while updating Smiley face question with id {id}", pSmileyQuestion.Id);
                     throw;
                 }
             }
@@ -303,7 +338,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                 }
                 catch (SqlException tEx)
                 {
-                    Log.Error(tEx, "Error  while updating Slider quesiton with id {id}", pSliderQuestion.Id);
+                    Log.Error(tEx, "Error  while updating Slider question with id {id}", pSliderQuestion.Id);
                     throw;
                 }
             }
@@ -323,7 +358,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                 }
                 catch (SqlException tEx)
                 {
-                    Log.Error(tEx, "Error  while adding star quesiton with id {id}", pQuestion.Id);
+                    Log.Error(tEx, "Error  while adding star question with id {id}", pQuestion.Id);
                     throw;
                 }
             }
@@ -343,7 +378,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                 }
                 catch (SqlException tEx)
                 {
-                    Log.Error(tEx, "Error  while adding smiley face quesiton with id {id}", pQuestion.Id);
+                    Log.Error(tEx, "Error  while adding smiley face question with id {id}", pQuestion.Id);
                     throw;
                 }
             }
@@ -366,7 +401,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                 }
                 catch (SqlException tEx)
                 {
-                    Log.Error(tEx, "Error  while adding slider quesiton with id {id}", pQuestion.Id);
+                    Log.Error(tEx, "Error  while adding slider question with id {id}", pQuestion.Id);
                     throw;
                 }
             }
@@ -511,7 +546,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                                 tCmd.ExecuteNonQuery();
                             }
 
-                            UpdateBaseQuesiton(pQuestion, tConnection, tTransaction);
+                            UpdateBasequestion(pQuestion, tConnection, tTransaction);
 
                             switch (pQuestion)
                             {
@@ -546,7 +581,7 @@ namespace SurveyQuestionsConfigurator.Repositories
             }
         }
 
-        public void UpdateBaseQuesiton(Question pQuestion, SqlConnection pConnection, SqlTransaction pTransaction)
+        public void UpdateBasequestion(Question pQuestion, SqlConnection pConnection, SqlTransaction pTransaction)
         {
             string tSql = $"UPDATE {QUESTIONS_TABLE} SET {COLUMN_QUESTION_TEXT} = @questionText,{COLUMN_QUESTION_ORDER} = @questionOrder,{COLUMN_QUESTION_TYPE} = @questionType WHERE {COLUMN_QUESTION_ID}=@id";
             using (SqlCommand tCmd = new SqlCommand(tSql, pConnection, pTransaction))
@@ -561,7 +596,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                 }
                 catch (SqlException tEx)
                 {
-                    Log.Error(tEx, "Error happend while updating  quesiton with id {id}", pQuestion.Id);
+                    Log.Error(tEx, "Error happened while updating  question with id {id}", pQuestion.Id);
                     throw;
                 }
             }

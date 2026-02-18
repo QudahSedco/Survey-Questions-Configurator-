@@ -29,6 +29,9 @@ namespace SurveyQuestionsConfigurator
             MinimizeBox = true;
             StartPosition = FormStartPosition.CenterScreen;
             mQuestionService = new QuestionService();
+
+            mQuestionService.OnQuestionsChanged += OnQuestionsChanged;
+
             mSortColumnsDictionary = new Dictionary<string, bool>()
     {
         { "QuestionText", true },
@@ -39,11 +42,62 @@ namespace SurveyQuestionsConfigurator
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+            try
+            {
+                mQuestionService.StartListenting();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Failed to start question listener");
+
+                MessageBox.Show(
+                    this,
+                    "Live updates are unavailable.\nThe application will continue to work normally.",
+                    "Warning",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+            }
+
             dataGridViewMain.Font = new Font("Segoe UI", 13, FontStyle.Regular);
+            dataGridViewMain.Columns.Clear();
+            dataGridViewMain.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
+            dataGridViewMain.AutoGenerateColumns = false;
+            dataGridViewMain.MultiSelect = false;
+
+            DataGridViewTextBoxColumn colText = new DataGridViewTextBoxColumn();
+            colText.HeaderText = "QuestionText";
+            colText.DataPropertyName = "QuestionText";
+            colText.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            dataGridViewMain.Columns.Add(colText);
+
+            DataGridViewTextBoxColumn colOrder = new DataGridViewTextBoxColumn();
+            colOrder.HeaderText = "QuestionOrder";
+            colOrder.DataPropertyName = "QuestionOrder";
+            colOrder.Width = 170;
+            dataGridViewMain.Columns.Add(colOrder);
+
+            DataGridViewTextBoxColumn colType = new DataGridViewTextBoxColumn();
+            colType.HeaderText = "QuestionType";
+            colType.DataPropertyName = "QuestionType";
+            colType.Width = 160;
+            dataGridViewMain.Columns.Add(colType);
 
             LoadQuestions();
             btnDelete.Enabled = false;
             btnUpdate.Enabled = false;
+        }
+
+        private void OnQuestionsChanged()
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(OnQuestionsChanged));
+                return;
+            }
+            LoadQuestions();
         }
 
         // passing null object to form 2 to make it in add new question instead of edit mode
@@ -67,7 +121,6 @@ namespace SurveyQuestionsConfigurator
 
             Question tSelectedQuestion = (Question)dataGridViewMain.CurrentRow.DataBoundItem;
 
-            // dont forget to put try  catch here
             try
             {
                 DialogResult tAnswer = MessageBox.Show(this,
@@ -96,31 +149,6 @@ namespace SurveyQuestionsConfigurator
             {
                 mQuestionsList = mQuestionService.GetAllQuestions();
 
-                dataGridViewMain.Columns.Clear();
-                dataGridViewMain.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-
-                dataGridViewMain.AutoGenerateColumns = false;
-                dataGridViewMain.MultiSelect = false;
-
-                DataGridViewTextBoxColumn colText = new DataGridViewTextBoxColumn();
-                colText.HeaderText = "QuestionText";
-                colText.DataPropertyName = "QuestionText";
-                colText.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
-                dataGridViewMain.Columns.Add(colText);
-
-                DataGridViewTextBoxColumn colOrder = new DataGridViewTextBoxColumn();
-                colOrder.HeaderText = "QuestionOrder";
-                colOrder.DataPropertyName = "QuestionOrder";
-                colOrder.Width = 170;
-                dataGridViewMain.Columns.Add(colOrder);
-
-                DataGridViewTextBoxColumn colType = new DataGridViewTextBoxColumn();
-                colType.HeaderText = "QuestionType";
-                colType.DataPropertyName = "QuestionType";
-                colType.Width = 160;
-                dataGridViewMain.Columns.Add(colType);
-
                 dataGridViewMain.DataSource = mQuestionsList;
 
                 btnDelete.Enabled = false;
@@ -128,11 +156,11 @@ namespace SurveyQuestionsConfigurator
             }
             catch
             {
-                MessageBox.Show(this, "An error occurred while retrieving questions from database", "Database error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "An error occurred while retrieving questions from database", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        //edit button sends the selected obj and opens form 2 as dialoge
+        //edit button sends the selected obj and opens form 2 as dialog
         private void buttonEdit_Click(object sender, EventArgs e)
         {
             if (dataGridViewMain.CurrentRow == null) return;
@@ -144,7 +172,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch
             {
-                MessageBox.Show(this, "An error occured while retriving question from database", "database error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "An error occurred while retrieving question from database", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

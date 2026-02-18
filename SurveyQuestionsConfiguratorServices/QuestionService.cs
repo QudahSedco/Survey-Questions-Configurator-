@@ -12,9 +12,22 @@ namespace SurveyQuestionsConfiguratorServices
     {
         private QuestionRepository mDataRepository;
 
+        public event Action OnQuestionsChanged;
+
         public QuestionService()
         {
             mDataRepository = new QuestionRepository();
+            mDataRepository.EventOnQuestionsTableChanged += () => OnQuestionsChanged?.Invoke();
+        }
+
+        public void StartListenting()
+        {
+            mDataRepository.StartListening();
+        }
+
+        public void StopListenting()
+        {
+            mDataRepository.StopListening();
         }
 
         public List<Question> GetAllQuestions()

@@ -3,6 +3,7 @@ using Serilog.Formatting.Json;
 
 using System;
 using System.Collections.Generic;
+using System.Drawing.Text;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Threading.Tasks;
