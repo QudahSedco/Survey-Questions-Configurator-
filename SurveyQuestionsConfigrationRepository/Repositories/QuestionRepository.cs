@@ -1,6 +1,7 @@
 ﻿using Serilog;
 using Serilog.Formatting.Json;
 using SurveyQuestionsConfigurator.Models;
+using SurveyQuestionsConfiguratorModels;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -75,7 +76,7 @@ namespace SurveyQuestionsConfigurator.Repositories
         }
 
         //Inserts into the base table then retrieves the Id created by the database and uses it to create a child record
-        public void AddQuestion(Question pQuestion)
+        public Result<bool> AddQuestion(Question pQuestion)
         {
             using (SqlConnection tConnection = new SqlConnection(mConnectionString))
             {
@@ -112,27 +113,36 @@ namespace SurveyQuestionsConfigurator.Repositories
                                 case SliderQuestion tSliderQuestion:
                                     AddSliderQuestion(tSliderQuestion, tConnection, tTransaction);
                                     break;
+
+                                default:
+                                    tTransaction.Rollback();
+                                    return Result<bool>.Failure(" Trying to Add an unkown question type");
                             }
+
                             tTransaction.Commit();
+                            return Result<bool>.Success(true);
                         }
                         catch (SqlException ex)
                         {
                             tTransaction.Rollback();
                             Log.Error(ex, "Could Not complete the create question transaction");
-                            throw;
+                            return Result<bool>.Failure("Failed to save question in database");
                         }
                     }
                 }
-                catch (Exception ex)
+                catch (SqlException ex)
                 {
                     Log.Error(ex, "Could Not connect to Database");
-                    throw;
+                    return Result<bool>.Failure("Failed to connect to the database");
                 }
             }
         }
 
-        public void DeleteQuestionById(int pId)
+        public Result<bool> DeleteQuestionById(int pId)
         {
+            if (pId <= 0)
+                return Result<bool>.Failure("Invalid Question ID");
+
             using (SqlConnection tConnection = new SqlConnection(mConnectionString))
             {
                 String tSql = $"DELETE FROM {QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID} = @id";
@@ -144,17 +154,18 @@ namespace SurveyQuestionsConfigurator.Repositories
                         tConnection.Open();
                         tCmd.Parameters.AddWithValue("@id", pId);
                         tCmd.ExecuteNonQuery();
+                        return Result<bool>.Success(true);
                     }
-                    catch (Exception tEx)
+                    catch (SqlException tEx)
                     {
                         Log.Error(tEx, "Error happened while trying to delete question with ID {QuestionId}", pId);
-                        throw;
+                        return Result<bool>.Failure($"Error while deleting the question with ID {pId}");
                     }
                 }
             }
         }
 
-        public List<Question> GetAllQuestions()
+        public Result<List<Question>> GetAllQuestions()
         {
             var tQuestionsList = new List<Question>();
 
@@ -166,52 +177,59 @@ namespace SurveyQuestionsConfigurator.Repositories
                 try
                 {
                     tConnection.Open();
-
-                    using (SqlDataReader tReader = tCmd.ExecuteReader())
+                    try
                     {
-                        while (tReader.Read())
+                        using (SqlDataReader tReader = tCmd.ExecuteReader())
                         {
-                            QuestionType tType = (QuestionType)tReader.GetInt32(3);
-
-                            Question tQuestion;
-
-                            switch (tType)
+                            while (tReader.Read())
                             {
-                                case QuestionType.Smiley:
-                                    tQuestion = new SmileyFacesQuestion();
-                                    break;
+                                QuestionType tType = (QuestionType)tReader.GetInt32(3);
 
-                                case QuestionType.Slider:
-                                    tQuestion = new SliderQuestion();
-                                    break;
+                                Question tQuestion;
 
-                                case QuestionType.Star:
-                                    tQuestion = new StarQuestion();
-                                    break;
+                                switch (tType)
+                                {
+                                    case QuestionType.Smiley:
+                                        tQuestion = new SmileyFacesQuestion();
+                                        break;
 
-                                default:
-                                    throw new NotSupportedException($"Unknown question type '{tType}'");
+                                    case QuestionType.Slider:
+                                        tQuestion = new SliderQuestion();
+                                        break;
+
+                                    case QuestionType.Star:
+                                        tQuestion = new StarQuestion();
+                                        break;
+
+                                    default:
+                                        return Result<List<Question>>.Failure("Unknown question type");
+                                }
+
+                                tQuestion.Id = tReader.GetInt32(0);
+                                tQuestion.QuestionText = tReader.GetString(1);
+                                tQuestion.QuestionOrder = tReader.GetInt32(2);
+
+                                tQuestionsList.Add(tQuestion);
                             }
-
-                            tQuestion.Id = tReader.GetInt32(0);
-                            tQuestion.QuestionText = tReader.GetString(1);
-                            tQuestion.QuestionOrder = tReader.GetInt32(2);
-
-                            tQuestionsList.Add(tQuestion);
                         }
+
+                        return Result<List<Question>>.Success(tQuestionsList);
+                    }
+                    catch (Exception tEx)
+                    {
+                        Log.Error(tEx, "Error getting all questions from the DataBase");
+                        return Result<List<Question>>.Failure("Failure in getting all questions from the DataBase");
                     }
                 }
-                catch (Exception tEx)
+                catch (SqlException tEx)
                 {
-                    Log.Error(tEx, "Error getting all questions from DB");
-                    throw;
+                    Log.Error(tEx, "Error Connecting to the DataBase");
+                    return Result<List<Question>>.Failure("Error Connecting to the DataBase");
                 }
             }
-
-            return tQuestionsList;
         }
 
-        public Question GetChildQuestion(Question pQuestion)
+        public Result<Question> GetChildQuestion(Question pQuestion)
         {
             switch (pQuestion)
             {
@@ -225,11 +243,11 @@ namespace SurveyQuestionsConfigurator.Repositories
                     return GetSliderQuestion(tSliderQuestion);
 
                 default:
-                    throw new NotSupportedException("Unknown question type");
+                    return Result<Question>.Failure("Unknown question type");
             }
         }
 
-        public void UpdateQuestion(Question pQuestion)
+        public Result<bool> UpdateQuestion(Question pQuestion)
         {
             using (SqlConnection tConnection = new SqlConnection(mConnectionString))
             {
@@ -242,11 +260,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                     {
                         try
                         {
-                            string tSql = $"UPDATE {QUESTIONS_TABLE} SET {COLUMN_QUESTION_TEXT} = @questionText,{COLUMN_QUESTION_ORDER} = @questionOrder WHERE {COLUMN_QUESTION_ID}=@id";
-                            using (SqlCommand tCmd = new SqlCommand(tSql, tConnection, tTransaction))
-                            {
-                                UpdateBasequestion(pQuestion, tConnection, tTransaction);
-                            }
+                            UpdateBaseQuestion(pQuestion, tConnection, tTransaction);
 
                             switch (pQuestion)
                             {
@@ -263,23 +277,25 @@ namespace SurveyQuestionsConfigurator.Repositories
                                     break;
 
                                 default:
-                                    throw new NotSupportedException("Unknown question type");
+                                    tTransaction.Rollback();
+                                    return Result<bool>.Failure("Unknown question type");
                             }
 
                             tTransaction.Commit();
+                            return Result<bool>.Success(true);
                         }
-                        catch (Exception tEx)
+                        catch (SqlException tEx)
                         {
                             tTransaction.Rollback();
                             Log.Error(tEx, "Error while Updating question with ID {questionId} in database", pQuestion.Id);
-                            throw;
+                            return Result<bool>.Failure($"Error while updating question with ID {pQuestion.Id}");
                         }
                     }
                 }
-                catch (Exception tEx)
+                catch (SqlException tEx)
                 {
-                    Log.Error(tEx, "Error couldn't connect to DB");
-                    throw;
+                    Log.Error(tEx, "Error couldn't connect to DataBase");
+                    return Result<bool>.Failure("Couldnt connect to DataBase");
                 }
             }
         }
@@ -407,7 +423,7 @@ namespace SurveyQuestionsConfigurator.Repositories
             }
         }
 
-        private StarQuestion GetStarQuestion(StarQuestion pQuestion)
+        private Result<Question> GetStarQuestion(StarQuestion pQuestion)
         {
             using (SqlConnection tConnection = new SqlConnection(mConnectionString))
             {
@@ -429,18 +445,17 @@ namespace SurveyQuestionsConfigurator.Repositories
                             }
                         }
                     }
+                    return Result<Question>.Success(pQuestion);
                 }
                 catch (SqlException tEx)
                 {
                     Log.Error(tEx, "Error while retrieving StarQuestion with id {QuestionId} from Database", pQuestion.Id);
-                    throw;
+                    return Result<Question>.Failure($"Error while retrieving star question with ID {pQuestion.Id}");
                 }
             }
-
-            return pQuestion;
         }
 
-        private SmileyFacesQuestion GetSmileyQuestion(SmileyFacesQuestion pQuestion)
+        private Result<Question> GetSmileyQuestion(SmileyFacesQuestion pQuestion)
 
         {
             using (SqlConnection tConnection = new SqlConnection(mConnectionString))
@@ -463,17 +478,17 @@ namespace SurveyQuestionsConfigurator.Repositories
                             }
                         }
                     }
+                    return Result<Question>.Success(pQuestion);
                 }
                 catch (SqlException tEx)
                 {
                     Log.Error(tEx, "Error while retrieving Smiley question with id {QuestionId} from Database", pQuestion.Id);
-                    throw;
+                    return Result<Question>.Failure($"Error while retrieving smiley question with ID {pQuestion.Id}");
                 }
-                return pQuestion;
             }
         }
 
-        private SliderQuestion GetSliderQuestion(SliderQuestion pQuestion)
+        private Result<Question> GetSliderQuestion(SliderQuestion pQuestion)
         {
             using (SqlConnection tConnection = new SqlConnection(mConnectionString))
             {
@@ -497,13 +512,13 @@ namespace SurveyQuestionsConfigurator.Repositories
                             }
                         }
                     }
+                    return Result<Question>.Success(pQuestion);
                 }
                 catch (SqlException tEx)
                 {
                     Log.Error(tEx, "Error while retrieving Slider Question with Id {QuestionId} from Database", pQuestion.Id);
-                    throw;
+                    return Result<Question>.Failure($"Error while retrieving Slider question with ID {pQuestion.Id}");
                 }
-                return pQuestion;
             }
         }
 
@@ -546,7 +561,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                                 tCmd.ExecuteNonQuery();
                             }
 
-                            UpdateBasequestion(pQuestion, tConnection, tTransaction);
+                            UpdateBaseQuestion(pQuestion, tConnection, tTransaction);
 
                             switch (pQuestion)
                             {
@@ -581,7 +596,7 @@ namespace SurveyQuestionsConfigurator.Repositories
             }
         }
 
-        public void UpdateBasequestion(Question pQuestion, SqlConnection pConnection, SqlTransaction pTransaction)
+        private void UpdateBaseQuestion(Question pQuestion, SqlConnection pConnection, SqlTransaction pTransaction)
         {
             string tSql = $"UPDATE {QUESTIONS_TABLE} SET {COLUMN_QUESTION_TEXT} = @questionText,{COLUMN_QUESTION_ORDER} = @questionOrder,{COLUMN_QUESTION_TYPE} = @questionType WHERE {COLUMN_QUESTION_ID}=@id";
             using (SqlCommand tCmd = new SqlCommand(tSql, pConnection, pTransaction))

@@ -62,6 +62,7 @@ namespace SurveyQuestionsConfigurator
             colText.HeaderText = "QuestionText";
             colText.DataPropertyName = "QuestionText";
             colText.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colText.SortMode = DataGridViewColumnSortMode.Automatic;
 
             dataGridViewMain.Columns.Add(colText);
 
@@ -69,12 +70,14 @@ namespace SurveyQuestionsConfigurator
             colOrder.HeaderText = "QuestionOrder";
             colOrder.DataPropertyName = "QuestionOrder";
             colOrder.Width = 170;
+            colOrder.SortMode = DataGridViewColumnSortMode.Automatic;
             dataGridViewMain.Columns.Add(colOrder);
 
             DataGridViewTextBoxColumn colType = new DataGridViewTextBoxColumn();
             colType.HeaderText = "QuestionType";
             colType.DataPropertyName = "QuestionType";
             colType.Width = 160;
+            colType.SortMode = DataGridViewColumnSortMode.Automatic;
             dataGridViewMain.Columns.Add(colType);
 
             LoadQuestions();
@@ -126,6 +129,7 @@ namespace SurveyQuestionsConfigurator
                 if (tAnswer == DialogResult.Yes)
                 {
                     mQuestionService.DeleteQuestionById(tSelectedQuestion.Id);
+
                     LoadQuestions();
                 }
             }
@@ -138,18 +142,19 @@ namespace SurveyQuestionsConfigurator
         //loads questions from database
         private void LoadQuestions()
         {
-            try
+            var tResult = mQuestionService.GetAllQuestions();
+            if (tResult.IsSuccess)
             {
-                mQuestionsList = mQuestionService.GetAllQuestions();
-
+                mQuestionsList = tResult.Value;
                 dataGridViewMain.DataSource = mQuestionsList;
 
                 btnDelete.Enabled = false;
                 btnUpdate.Enabled = false;
             }
-            catch
+            else
             {
-                MessageBox.Show(this, "An error occurred while retrieving questions from database", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, tResult.Error, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
         }
 
@@ -159,13 +164,14 @@ namespace SurveyQuestionsConfigurator
             if (dataGridViewMain.CurrentRow == null) return;
 
             Question tSelectedQuestion = (Question)dataGridViewMain.CurrentRow.DataBoundItem;
-            try
+
+            var tResult = mQuestionService.GetChildQuestion(tSelectedQuestion);
+            if (tResult.IsSuccess)
+
+                tSelectedQuestion = tResult.Value;
+            else
             {
-                tSelectedQuestion = mQuestionService.GetChildQuestion(tSelectedQuestion);
-            }
-            catch
-            {
-                MessageBox.Show(this, "An error occurred while retrieving question from database", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, tResult.Error, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -181,6 +187,8 @@ namespace SurveyQuestionsConfigurator
 
         private void SortQuestions(string pColumnName)
         {
+            if (mQuestionsList == null || mQuestionsList.Count < 1)
+                return;
             bool tAsc = mSortColumnsDictionary[pColumnName];
 
             switch (pColumnName)
@@ -209,6 +217,9 @@ namespace SurveyQuestionsConfigurator
 
         private void dataGridViewMain_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            if (mQuestionsList == null || mQuestionsList.Count < 1)
+                return;
+
             string tPropertyName = dataGridViewMain.Columns[e.ColumnIndex].DataPropertyName;
             bool tAscending = mSortColumnsDictionary[tPropertyName];
             foreach (DataGridViewColumn column in dataGridViewMain.Columns)
@@ -221,7 +232,7 @@ namespace SurveyQuestionsConfigurator
 
         private void dataGridViewMain_CellContentClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (dataGridViewMain.CurrentRow.DataBoundItem != null)
+            if (dataGridViewMain.CurrentRow != null && dataGridViewMain.CurrentRow.DataBoundItem != null)
             {
                 btnDelete.Enabled = true;
                 btnUpdate.Enabled = true;

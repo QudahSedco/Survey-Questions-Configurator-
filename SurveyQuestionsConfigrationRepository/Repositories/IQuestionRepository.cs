@@ -1,4 +1,5 @@
 ﻿using SurveyQuestionsConfigurator.Models;
+using SurveyQuestionsConfiguratorModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,14 @@ namespace SurveyQuestionsConfigurator.Repositories
 {
     internal interface IQuestionRepository
     {
-        List<Question> GetAllQuestions();
+        Result<List<Question>> GetAllQuestions();
 
-        void AddQuestion(Question pQuestion);
+        Result<bool> AddQuestion(Question pQuestion);
 
-        void DeleteQuestionById(int pId);
+        Result<bool> DeleteQuestionById(int pId);
 
-        void UpdateQuestion(Question pQuestion);
+        Result<bool> UpdateQuestion(Question pQuestion);
 
-        Question GetChildQuestion(Question pQuestion);
+        Result<Question> GetChildQuestion(Question pQuestion);
     }
 }
