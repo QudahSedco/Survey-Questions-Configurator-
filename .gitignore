@@ -48,3 +48,10 @@ Thumbs.db
 # ================================
 appsettings.Development.json
 
+# ================================
+# NuGet
+# ================================
+packages/
+*.nupkg
+project.lock.json
+

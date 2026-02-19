@@ -49,14 +49,6 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 Log.Error(ex, "Failed to start question listener");
-
-                MessageBox.Show(
-                    this,
-                    "Live updates are unavailable.\nThe application will continue to work normally.",
-                    "Warning",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
             }
 
             dataGridViewMain.Font = new Font("Segoe UI", 13, FontStyle.Regular);
@@ -90,6 +82,7 @@ namespace SurveyQuestionsConfigurator
             btnUpdate.Enabled = false;
         }
 
+        //makes sure the method is runnign on UI thread as it can only be updated if it was on the UI thread
         private void OnQuestionsChanged()
         {
             if (InvokeRequired)
