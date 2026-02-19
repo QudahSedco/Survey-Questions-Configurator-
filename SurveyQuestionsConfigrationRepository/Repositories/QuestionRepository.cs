@@ -19,8 +19,8 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace SurveyQuestionsConfigurator.Repositories
 {
-    //sqldependency requiers a class that is not abstract and has propierties names that match the columns in databse
-    //this class is created just so it can use it to notfiy of any changes to Question table in database
+    // SqlTableDependency requires a class that is not abstract and has property names matching the columns in the database
+    // This class is created only to notify of any changes in the Questions table in the database
     public class QuestionRow
     {
         public int question_id { get; set; }
@@ -63,11 +63,20 @@ namespace SurveyQuestionsConfigurator.Repositories
             EventOnQuestionsTableChanged?.Invoke();
         }
 
-        public void StartListening()
+        public Result<bool> StartListening()
         {
-            mSqlTableDependency = new SqlTableDependency<QuestionRow>(mConnectionString, QUESTIONS_TABLE);
-            mSqlTableDependency.OnChanged += TableDependencyChanged;
-            mSqlTableDependency.Start();
+            try
+            {
+                mSqlTableDependency = new SqlTableDependency<QuestionRow>(mConnectionString, QUESTIONS_TABLE);
+                mSqlTableDependency.OnChanged += TableDependencyChanged;
+                mSqlTableDependency.Start();
+                return Result<bool>.Success(true);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error starting SqlTableDependency");
+                return Result<bool>.Failure("Failed to start SqlTableDependency");
+            }
         }
 
         public void StopListening()
@@ -116,7 +125,7 @@ namespace SurveyQuestionsConfigurator.Repositories
 
                                 default:
                                     tTransaction.Rollback();
-                                    return Result<bool>.Failure(" Trying to Add an unkown question type");
+                                    return Result<bool>.Failure("Failed to add an unknown question type");
                             }
 
                             tTransaction.Commit();
@@ -141,7 +150,7 @@ namespace SurveyQuestionsConfigurator.Repositories
         public Result<bool> DeleteQuestionById(int pId)
         {
             if (pId <= 0)
-                return Result<bool>.Failure("Invalid Question ID");
+                return Result<bool>.Failure("Failed  to delete Invalid Question ID");
 
             using (SqlConnection tConnection = new SqlConnection(mConnectionString))
             {
@@ -159,7 +168,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                     catch (SqlException tEx)
                     {
                         Log.Error(tEx, "Error happened while trying to delete question with ID {QuestionId}", pId);
-                        return Result<bool>.Failure($"Error while deleting the question with ID {pId}");
+                        return Result<bool>.Failure($"Failed to delete the question with ID {pId}");
                     }
                 }
             }
@@ -202,7 +211,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                                         break;
 
                                     default:
-                                        return Result<List<Question>>.Failure("Unknown question type");
+                                        return Result<List<Question>>.Failure("Failed to get question Unknown question type");
                                 }
 
                                 tQuestion.Id = tReader.GetInt32(0);
@@ -218,13 +227,13 @@ namespace SurveyQuestionsConfigurator.Repositories
                     catch (Exception tEx)
                     {
                         Log.Error(tEx, "Error getting all questions from the DataBase");
-                        return Result<List<Question>>.Failure("Failure in getting all questions from the DataBase");
+                        return Result<List<Question>>.Failure("Failed to get all questions from the DataBase");
                     }
                 }
                 catch (SqlException tEx)
                 {
                     Log.Error(tEx, "Error Connecting to the DataBase");
-                    return Result<List<Question>>.Failure("Error Connecting to the DataBase");
+                    return Result<List<Question>>.Failure("Failed to connect to the DataBase");
                 }
             }
         }
@@ -243,7 +252,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                     return GetSliderQuestion(tSliderQuestion);
 
                 default:
-                    return Result<Question>.Failure("Unknown question type");
+                    return Result<Question>.Failure("Failed to get child question Unknown question type");
             }
         }
 
@@ -278,7 +287,7 @@ namespace SurveyQuestionsConfigurator.Repositories
 
                                 default:
                                     tTransaction.Rollback();
-                                    return Result<bool>.Failure("Unknown question type");
+                                    return Result<bool>.Failure("Failed to update question unknown question type");
                             }
 
                             tTransaction.Commit();
@@ -288,14 +297,14 @@ namespace SurveyQuestionsConfigurator.Repositories
                         {
                             tTransaction.Rollback();
                             Log.Error(tEx, "Error while Updating question with ID {questionId} in database", pQuestion.Id);
-                            return Result<bool>.Failure($"Error while updating question with ID {pQuestion.Id}");
+                            return Result<bool>.Failure($"Failed to update question with ID {pQuestion.Id}");
                         }
                     }
                 }
                 catch (SqlException tEx)
                 {
                     Log.Error(tEx, "Error couldn't connect to DataBase");
-                    return Result<bool>.Failure("Couldnt connect to DataBase");
+                    return Result<bool>.Failure("Failed to connect to database");
                 }
             }
         }
@@ -450,7 +459,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                 catch (SqlException tEx)
                 {
                     Log.Error(tEx, "Error while retrieving StarQuestion with id {QuestionId} from Database", pQuestion.Id);
-                    return Result<Question>.Failure($"Error while retrieving star question with ID {pQuestion.Id}");
+                    return Result<Question>.Failure($"Failed to retrieve star question with ID {pQuestion.Id}");
                 }
             }
         }
@@ -472,9 +481,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                         {
                             if (tReader.Read())
                             {
-                                {
-                                    pQuestion.NumberOfSmileyFaces = tReader.GetInt32(0);
-                                }
+                                pQuestion.NumberOfSmileyFaces = tReader.GetInt32(0);
                             }
                         }
                     }
@@ -483,7 +490,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                 catch (SqlException tEx)
                 {
                     Log.Error(tEx, "Error while retrieving Smiley question with id {QuestionId} from Database", pQuestion.Id);
-                    return Result<Question>.Failure($"Error while retrieving smiley question with ID {pQuestion.Id}");
+                    return Result<Question>.Failure($"Fai to retrieve smiley question with ID {pQuestion.Id}");
                 }
             }
         }
@@ -517,13 +524,13 @@ namespace SurveyQuestionsConfigurator.Repositories
                 catch (SqlException tEx)
                 {
                     Log.Error(tEx, "Error while retrieving Slider Question with Id {QuestionId} from Database", pQuestion.Id);
-                    return Result<Question>.Failure($"Error while retrieving Slider question with ID {pQuestion.Id}");
+                    return Result<Question>.Failure($"Failed to retrieve Slider question with ID {pQuestion.Id}");
                 }
             }
         }
 
         //removes old child record updates the base record and inserts the new child type record
-        public void UpdateChildTableType(Question pQuestion, QuestionType pOldQuestionType)
+        public Result<bool> UpdateChildTableType(Question pQuestion, QuestionType pOldQuestionType)
         {
             using (SqlConnection tConnection = new SqlConnection(mConnectionString))
             {
@@ -552,7 +559,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                                     break;
 
                                 default:
-                                    throw new ArgumentOutOfRangeException(nameof(pOldQuestionType));
+                                    return Result<bool>.Failure("Faild to delete question with unknown type");
                             }
 
                             using (SqlCommand tCmd = new SqlCommand(tSql, tConnection, tTransaction))
@@ -579,19 +586,20 @@ namespace SurveyQuestionsConfigurator.Repositories
                             }
 
                             tTransaction.Commit();
+                            return Result<bool>.Success(true);
                         }
                         catch (SqlException tEx)
                         {
                             tTransaction.Rollback();
                             Log.Error(tEx, "Error updating question {QuestionId}", pQuestion.Id);
-                            throw;
+                            return Result<bool>.Failure($"Failed to update question with id {pQuestion.Id}");
                         }
                     }
                 }
                 catch (SqlException tEx)
                 {
-                    Log.Error(tEx, "Failed to connect to database");
-                    throw;
+                    Log.Error(tEx, "Failed to connect to the DataBase");
+                    return Result<bool>.Failure("Failed to connect to the DataBase");
                 }
             }
         }

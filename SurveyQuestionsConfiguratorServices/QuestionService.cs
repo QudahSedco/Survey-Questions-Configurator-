@@ -27,9 +27,9 @@ namespace SurveyQuestionsConfiguratorServices
             OnQuestionsChanged?.Invoke();
         }
 
-        public void StartListenting()
+        public Result<bool> StartListening()
         {
-            mDataRepository.StartListening();
+            return mDataRepository.StartListening();
         }
 
         public void StopListenting()
@@ -47,24 +47,24 @@ namespace SurveyQuestionsConfiguratorServices
             return mDataRepository.GetChildQuestion(pChildQuestion);
         }
 
-        public void DeleteQuestionById(int pId)
+        public Result<bool> DeleteQuestionById(int pId)
         {
-            mDataRepository.DeleteQuestionById(pId);
+            return mDataRepository.DeleteQuestionById(pId);
         }
 
-        public void AddQuestion(Question pQuestion)
+        public Result<bool> AddQuestion(Question pQuestion)
         {
-            mDataRepository.AddQuestion(pQuestion);
+            return mDataRepository.AddQuestion(pQuestion);
         }
 
-        public void UpdateQuestion(Question pQuestion)
+        public Result<bool> UpdateQuestion(Question pQuestion)
         {
-            mDataRepository.UpdateQuestion(pQuestion);
+            return mDataRepository.UpdateQuestion(pQuestion);
         }
 
-        public void UpdateChildTableType(Question pQuestion, QuestionType pQuestionOldType)
+        public Result<bool> UpdateChildTableType(Question pQuestion, QuestionType pQuestionOldType)
         {
-            mDataRepository.UpdateChildTableType(pQuestion, pQuestionOldType);
+            return mDataRepository.UpdateChildTableType(pQuestion, pQuestionOldType);
         }
     }
 }

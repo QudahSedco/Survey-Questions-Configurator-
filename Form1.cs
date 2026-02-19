@@ -1,5 +1,6 @@
 ﻿using Serilog;
 using SurveyQuestionsConfigurator.Models;
+using SurveyQuestionsConfiguratorModels;
 using SurveyQuestionsConfiguratorServices;
 using System;
 using System.Collections.Generic;
@@ -18,8 +19,8 @@ namespace SurveyQuestionsConfigurator
     public partial class FormMain : Form
     {
         private QuestionService mQuestionService;
-        private Dictionary<string, bool> mSortColumnsDictionary;
 
+        private Dictionary<string, bool> mSortColumnsDictionary;
         private List<Question> mQuestionsList;
 
         public FormMain()
@@ -42,13 +43,11 @@ namespace SurveyQuestionsConfigurator
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            try
+            var result = mQuestionService.StartListening();
+
+            if (!result.IsSuccess)
             {
-                mQuestionService.StartListenting();
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex, "Failed to start question listener");
+                Log.Error("Failed to start question listener: {Error}", result.Error);
             }
 
             dataGridViewMain.Font = new Font("Segoe UI", 13, FontStyle.Regular);
@@ -117,25 +116,21 @@ namespace SurveyQuestionsConfigurator
 
             Question tSelectedQuestion = (Question)dataGridViewMain.CurrentRow.DataBoundItem;
 
-            try
-            {
-                DialogResult tAnswer = MessageBox.Show(this,
-            $"Are you sure you want to delete the following Question?\n\n{tSelectedQuestion.QuestionText}",
-            "Confirm Delete",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Question
+            DialogResult tAnswer = MessageBox.Show(this,
+        $"Are you sure you want to delete the following Question?\n\n{tSelectedQuestion.QuestionText}",
+        "Confirm Delete",
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Question
 
 );
-                if (tAnswer == DialogResult.Yes)
-                {
-                    mQuestionService.DeleteQuestionById(tSelectedQuestion.Id);
-
-                    LoadQuestions();
-                }
-            }
-            catch (Exception ex)
+            if (tAnswer == DialogResult.Yes)
             {
-                MessageBox.Show(this, $"An error occurred while deleting the question please try again", "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                var tResult = mQuestionService.DeleteQuestionById(tSelectedQuestion.Id);
+
+                if (tResult.IsSuccess)
+                    LoadQuestions();
+                else
+                    MessageBox.Show(this, tResult.Error, "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -242,6 +237,11 @@ namespace SurveyQuestionsConfigurator
                 btnDelete.Enabled = false;
                 btnUpdate.Enabled = false;
             }
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            mQuestionService.StopListenting();
         }
     }
 }

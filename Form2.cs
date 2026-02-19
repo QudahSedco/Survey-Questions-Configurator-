@@ -1,5 +1,6 @@
 ﻿using Serilog;
 using SurveyQuestionsConfigurator.Models;
+using SurveyQuestionsConfiguratorModels;
 using SurveyQuestionsConfiguratorServices;
 using System;
 using System.Collections.Generic;
@@ -98,79 +99,76 @@ namespace SurveyQuestionsConfigurator
 
             Question tQuestion = null;
 
-            try
+            switch (tSelectedType)
             {
-                switch (tSelectedType)
-                {
-                    case QuestionType.Star:
-                        if (trackBarStars.Value < 1)
-                        {
-                            errorProvider1.SetError(trackBarStars, "Number of stars cannot be less than 1");
-                            return;
-                        }
+                case QuestionType.Star:
+                    if (trackBarStars.Value < 1)
+                    {
+                        errorProvider1.SetError(trackBarStars, "Number of stars cannot be less than 1");
+                        return;
+                    }
 
-                        tQuestion = new StarQuestion
-                        {
-                            QuestionText = textBoxQuestionText.Text,
-                            QuestionOrder = (int)numericUpDownQuestionOrder.Value,
-                            NumberOfStars = trackBarStars.Value
-                        };
-                        break;
+                    tQuestion = new StarQuestion
+                    {
+                        QuestionText = textBoxQuestionText.Text,
+                        QuestionOrder = (int)numericUpDownQuestionOrder.Value,
+                        NumberOfStars = trackBarStars.Value
+                    };
+                    break;
 
-                    case QuestionType.Smiley:
+                case QuestionType.Smiley:
 
-                        tQuestion = new SmileyFacesQuestion
-                        {
-                            QuestionText = textBoxQuestionText.Text,
-                            QuestionOrder = (int)numericUpDownQuestionOrder.Value,
-                            NumberOfSmileyFaces = trackBarSmileyFaces.Value
-                        };
-                        break;
+                    tQuestion = new SmileyFacesQuestion
+                    {
+                        QuestionText = textBoxQuestionText.Text,
+                        QuestionOrder = (int)numericUpDownQuestionOrder.Value,
+                        NumberOfSmileyFaces = trackBarSmileyFaces.Value
+                    };
+                    break;
 
-                    case QuestionType.Slider:
-                        if (numericUpDownStartValue.Value >= numericUpDownEndValue.Value)
-                        {
-                            errorProvider1.SetError(numericUpDownStartValue, "Slider start value can't be more or equal to slider end value");
-                            return;
-                        }
-                        if (numericUpDownEndValue.Value <= numericUpDownStartValue.Value)
-                        {
-                            errorProvider1.SetError(numericUpDownStartValue, "Slider end value can't be less than slider start value");
-                            return;
-                        }
-                        if (string.IsNullOrWhiteSpace(textBoxStartCaption.Text))
-                        {
-                            errorProvider1.SetError(textBoxStartCaption, "Start caption can't be empty");
-                            return;
-                        }
-                        if (string.IsNullOrWhiteSpace(textBoxEndCaption.Text))
-                        {
-                            errorProvider1.SetError(textBoxEndCaption, "End caption can't be empty");
-                            return;
-                        }
+                case QuestionType.Slider:
+                    if (numericUpDownStartValue.Value >= numericUpDownEndValue.Value)
+                    {
+                        errorProvider1.SetError(numericUpDownStartValue, "Slider start value can't be more or equal to slider end value");
+                        return;
+                    }
+                    if (numericUpDownEndValue.Value <= numericUpDownStartValue.Value)
+                    {
+                        errorProvider1.SetError(numericUpDownStartValue, "Slider end value can't be less than slider start value");
+                        return;
+                    }
+                    if (string.IsNullOrWhiteSpace(textBoxStartCaption.Text))
+                    {
+                        errorProvider1.SetError(textBoxStartCaption, "Start caption can't be empty");
+                        return;
+                    }
+                    if (string.IsNullOrWhiteSpace(textBoxEndCaption.Text))
+                    {
+                        errorProvider1.SetError(textBoxEndCaption, "End caption can't be empty");
+                        return;
+                    }
 
-                        tQuestion = new SliderQuestion
-                        {
-                            QuestionText = textBoxQuestionText.Text,
-                            QuestionOrder = (int)numericUpDownQuestionOrder.Value,
-                            StartValueCaption = textBoxStartCaption.Text,
-                            EndValueCaption = textBoxEndCaption.Text
-                        };
-                        ((SliderQuestion)tQuestion).SetRange(
-                            (int)numericUpDownStartValue.Value,
-                            (int)numericUpDownEndValue.Value
-                        );
-                        break;
-                }
-
-                mQuestionService.AddQuestion(tQuestion);
-
-                Close();
+                    tQuestion = new SliderQuestion
+                    {
+                        QuestionText = textBoxQuestionText.Text,
+                        QuestionOrder = (int)numericUpDownQuestionOrder.Value,
+                        StartValueCaption = textBoxStartCaption.Text,
+                        EndValueCaption = textBoxEndCaption.Text
+                    };
+                    ((SliderQuestion)tQuestion).SetRange(
+                        (int)numericUpDownStartValue.Value,
+                        (int)numericUpDownEndValue.Value
+                    );
+                    break;
             }
-            catch
+
+            var tResult = mQuestionService.AddQuestion(tQuestion);
+            if (tResult.IsSuccess)
+                Close();
+            else
             {
                 MessageBox.Show(
-                    "Error happened while trying to save question please try again",
+                    tResult.Error,
                     "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
@@ -266,158 +264,155 @@ namespace SurveyQuestionsConfigurator
 
             var tOldType = mEditingQuestion.QuestionType;
             var tNewType = (QuestionType)comboBoxQuestionTypes.SelectedItem;
-            try
+            Result<bool> tResult = Result<bool>.Failure("Unknown question type");
+
+            if (tOldType == tNewType)//if type didnt change
             {
-                if (tOldType == tNewType)//if type didnt change
+                switch (mEditingQuestion)
                 {
-                    switch (mEditingQuestion)
-                    {
-                        case StarQuestion tStarQuestion:
-                            if (trackBarStars.Value < 1)
-                            {
-                                errorProvider1.SetError(trackBarStars, "Number of stars cannot be less than 1");
-                                return;
-                            }
-                            tStarQuestion.NumberOfStars = trackBarStars.Value;
-                            mQuestionService.UpdateQuestion(tStarQuestion);
-                            break;
+                    case StarQuestion tStarQuestion:
+                        if (trackBarStars.Value < 1)
+                        {
+                            errorProvider1.SetError(trackBarStars, "Number of stars cannot be less than 1");
+                            return;
+                        }
+                        tStarQuestion.NumberOfStars = trackBarStars.Value;
+                        tResult = mQuestionService.UpdateQuestion(tStarQuestion);
+                        break;
 
-                        case SmileyFacesQuestion tSmileyQuestion:
-                            if (trackBarSmileyFaces.Value < 2 || trackBarSmileyFaces.Value > 5)
-                            {
-                                errorProvider1.SetError(trackBarSmileyFaces, "Number of smiley faces cannot be less than 2 or more than 5");
-                                return;
-                            }
-                            tSmileyQuestion.NumberOfSmileyFaces = trackBarSmileyFaces.Value;
-                            mQuestionService.UpdateQuestion(tSmileyQuestion);
-                            break;
+                    case SmileyFacesQuestion tSmileyQuestion:
+                        if (trackBarSmileyFaces.Value < 2 || trackBarSmileyFaces.Value > 5)
+                        {
+                            errorProvider1.SetError(trackBarSmileyFaces, "Number of smiley faces cannot be less than 2 or more than 5");
+                            return;
+                        }
+                        tSmileyQuestion.NumberOfSmileyFaces = trackBarSmileyFaces.Value;
+                        tResult = mQuestionService.UpdateQuestion(tSmileyQuestion);
+                        break;
 
-                        case SliderQuestion tSliderQuestion:
-                            if (numericUpDownStartValue.Value >= numericUpDownEndValue.Value)
-                            {
-                                errorProvider1.SetError(numericUpDownStartValue, " slider start value can't be more or equal to slider end value");
-                                return;
-                            }
-                            if (numericUpDownEndValue.Value <= numericUpDownStartValue.Value)
-                            {
-                                errorProvider1.SetError(numericUpDownStartValue, " slider end value can't be less than slider start value");
-                                return;
-                            }
-                            if (String.IsNullOrWhiteSpace(textBoxStartCaption.Text))
-                            {
-                                errorProvider1.SetError(textBoxStartCaption, "Start caption can't be empty");
-                                return;
-                            }
-                            if (String.IsNullOrWhiteSpace(textBoxEndCaption.Text))
-                            {
-                                errorProvider1.SetError(textBoxEndCaption, "End caption can't be empty");
-                                return;
-                            }
+                    case SliderQuestion tSliderQuestion:
+                        if (numericUpDownStartValue.Value >= numericUpDownEndValue.Value)
+                        {
+                            errorProvider1.SetError(numericUpDownStartValue, " slider start value can't be more or equal to slider end value");
+                            return;
+                        }
+                        if (numericUpDownEndValue.Value <= numericUpDownStartValue.Value)
+                        {
+                            errorProvider1.SetError(numericUpDownStartValue, " slider end value can't be less than slider start value");
+                            return;
+                        }
+                        if (String.IsNullOrWhiteSpace(textBoxStartCaption.Text))
+                        {
+                            errorProvider1.SetError(textBoxStartCaption, "Start caption can't be empty");
+                            return;
+                        }
+                        if (String.IsNullOrWhiteSpace(textBoxEndCaption.Text))
+                        {
+                            errorProvider1.SetError(textBoxEndCaption, "End caption can't be empty");
+                            return;
+                        }
 
-                            tSliderQuestion.SetRange((int)numericUpDownStartValue.Value, (int)numericUpDownEndValue.Value);
-                            tSliderQuestion.StartValueCaption = textBoxStartCaption.Text;
-                            tSliderQuestion.EndValueCaption = textBoxEndCaption.Text;
-                            mQuestionService.UpdateQuestion(tSliderQuestion);
-                            break;
-                    }
+                        tSliderQuestion.SetRange((int)numericUpDownStartValue.Value, (int)numericUpDownEndValue.Value);
+                        tSliderQuestion.StartValueCaption = textBoxStartCaption.Text;
+                        tSliderQuestion.EndValueCaption = textBoxEndCaption.Text;
+                        tResult = mQuestionService.UpdateQuestion(tSliderQuestion);
+                        break;
                 }
-                //if type changed call UpdateChildTableType that takes the new question and the old type
-                //deletes the old type record from database and inserts the new type in the correct table
-                else
-                {
-                    Question tNewQuestion = null;
-
-                    switch (tNewType)
-                    {
-                        case QuestionType.Star:
-                            if (trackBarStars.Value < 1)
-                            {
-                                errorProvider1.SetError(trackBarStars, "Number of stars cannot be less than 1");
-                                return;
-                            }
-                            tNewQuestion = new StarQuestion
-                            {
-                                Id = mEditingQuestion.Id,
-                                QuestionOrder = mEditingQuestion.QuestionOrder,
-                                QuestionText = mEditingQuestion.QuestionText,
-                                NumberOfStars = trackBarStars.Value
-                            };
-
-                            break;
-
-                        case QuestionType.Smiley:
-                            tNewQuestion = new SmileyFacesQuestion
-                            {
-                                Id = mEditingQuestion.Id,
-                                QuestionOrder = mEditingQuestion.QuestionOrder,
-                                QuestionText = mEditingQuestion.QuestionText,
-                                NumberOfSmileyFaces = trackBarSmileyFaces.Value
-                            };
-                            if (trackBarSmileyFaces.Value < 2 || trackBarSmileyFaces.Value > 5)
-                            {
-                                errorProvider1.SetError(trackBarSmileyFaces, "Number of smiley faces cannot be less than 2 or more than 5");
-                                return;
-                            }
-
-                            break;
-
-                        case QuestionType.Slider:
-
-                            if (numericUpDownStartValue.Value >= numericUpDownEndValue.Value)
-                            {
-                                errorProvider1.SetError(numericUpDownStartValue, "slider start value can't be more or equal to slider end value");
-                                return;
-                            }
-                            if (numericUpDownEndValue.Value <= numericUpDownStartValue.Value)
-                            {
-                                errorProvider1.SetError(numericUpDownStartValue, " slider end value can't be less than slider start value");
-                                return;
-                            }
-                            if (string.IsNullOrWhiteSpace(textBoxStartCaption.Text))
-                            {
-                                errorProvider1.SetError(textBoxStartCaption, "Start caption can't be empty");
-                                return;
-                            }
-                            if (string.IsNullOrWhiteSpace(textBoxEndCaption.Text))
-                            {
-                                errorProvider1.SetError(textBoxEndCaption, "End caption can't be empty");
-                                return;
-                            }
-
-                            tNewQuestion = new SliderQuestion
-                            {
-                                Id = mEditingQuestion.Id,
-                                QuestionOrder = mEditingQuestion.QuestionOrder,
-                                QuestionText = mEditingQuestion.QuestionText,
-                                StartValueCaption = textBoxStartCaption.Text,
-                                EndValueCaption = textBoxEndCaption.Text
-                            };
-
-                            ((SliderQuestion)tNewQuestion).SetRange(
-                                (int)numericUpDownStartValue.Value,
-                                (int)numericUpDownEndValue.Value
-                            );
-
-                            break;
-                    }
-
-                    mQuestionService.UpdateChildTableType(tNewQuestion, tOldType);
-                    mEditingQuestion = tNewQuestion;
-                }
-
-                Close();
             }
-            catch (Exception ex)
+            //if type changed call UpdateChildTableType that takes the new question and the old type
+            //deletes the old type record from database and inserts the new type in the correct table
+            else
             {
-                Log.Error(ex, "Failed to update question");
+                Question tNewQuestion = null;
 
+                switch (tNewType)
+                {
+                    case QuestionType.Star:
+                        if (trackBarStars.Value < 1)
+                        {
+                            errorProvider1.SetError(trackBarStars, "Number of stars cannot be less than 1");
+                            return;
+                        }
+                        tNewQuestion = new StarQuestion
+                        {
+                            Id = mEditingQuestion.Id,
+                            QuestionOrder = mEditingQuestion.QuestionOrder,
+                            QuestionText = mEditingQuestion.QuestionText,
+                            NumberOfStars = trackBarStars.Value
+                        };
+
+                        break;
+
+                    case QuestionType.Smiley:
+                        if (trackBarSmileyFaces.Value < 2 || trackBarSmileyFaces.Value > 5)
+                        {
+                            errorProvider1.SetError(trackBarSmileyFaces, "Number of smiley faces cannot be less than 2 or more than 5");
+                            return;
+                        }
+                        tNewQuestion = new SmileyFacesQuestion
+                        {
+                            Id = mEditingQuestion.Id,
+                            QuestionOrder = mEditingQuestion.QuestionOrder,
+                            QuestionText = mEditingQuestion.QuestionText,
+                            NumberOfSmileyFaces = trackBarSmileyFaces.Value
+                        };
+
+                        break;
+
+                    case QuestionType.Slider:
+
+                        if (numericUpDownStartValue.Value >= numericUpDownEndValue.Value)
+                        {
+                            errorProvider1.SetError(numericUpDownStartValue, "slider start value can't be more or equal to slider end value");
+                            return;
+                        }
+                        if (numericUpDownEndValue.Value <= numericUpDownStartValue.Value)
+                        {
+                            errorProvider1.SetError(numericUpDownStartValue, " slider end value can't be less than slider start value");
+                            return;
+                        }
+                        if (string.IsNullOrWhiteSpace(textBoxStartCaption.Text))
+                        {
+                            errorProvider1.SetError(textBoxStartCaption, "Start caption can't be empty");
+                            return;
+                        }
+                        if (string.IsNullOrWhiteSpace(textBoxEndCaption.Text))
+                        {
+                            errorProvider1.SetError(textBoxEndCaption, "End caption can't be empty");
+                            return;
+                        }
+
+                        tNewQuestion = new SliderQuestion
+                        {
+                            Id = mEditingQuestion.Id,
+                            QuestionOrder = mEditingQuestion.QuestionOrder,
+                            QuestionText = mEditingQuestion.QuestionText,
+                            StartValueCaption = textBoxStartCaption.Text,
+                            EndValueCaption = textBoxEndCaption.Text
+                        };
+
+                        ((SliderQuestion)tNewQuestion).SetRange(
+                            (int)numericUpDownStartValue.Value,
+                            (int)numericUpDownEndValue.Value
+                        );
+
+                        break;
+                }
+
+                tResult = mQuestionService.UpdateChildTableType(tNewQuestion, tOldType);
+                if (tResult.IsSuccess)
+                    mEditingQuestion = tNewQuestion;
+            }
+
+            if (tResult.IsSuccess)
+                Close();
+            else
                 MessageBox.Show(
                     this,
-                    "Could not update the question. Please try again.",
+                    tResult.Error,
                     "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
-            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

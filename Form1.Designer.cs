@@ -150,6 +150,7 @@
             this.Controls.Add(this.pnlMain);
             this.Name = "FormMain";
             this.Text = "Survey questions configurator ";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
