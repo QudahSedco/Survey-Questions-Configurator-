@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.textBoxQuestionText = new System.Windows.Forms.TextBox();
             this.lblQuestionText = new System.Windows.Forms.Label();
             this.numericUpDownQuestionOrder = new System.Windows.Forms.NumericUpDown();
@@ -41,7 +41,7 @@
             this.lblTypeOfQuestion = new System.Windows.Forms.Label();
             this.pnlStars = new System.Windows.Forms.Panel();
             this.lblNumberOfStars = new System.Windows.Forms.Label();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlSlider = new System.Windows.Forms.Panel();
             this.lblCharNumberEndCaption = new System.Windows.Forms.Label();
             this.lblCharNumberStartCaption = new System.Windows.Forms.Label();
@@ -66,7 +66,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuestionOrder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarStars)).BeginInit();
             this.pnlStars.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.pnlSlider.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEndValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartValue)).BeginInit();
@@ -78,15 +78,15 @@
             // 
             // button1
             // 
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(508, 323);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 28);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.buttonSave_Click);
+            this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.Location = new System.Drawing.Point(508, 323);
+            this.btnAdd.Name = "button1";
+            this.btnAdd.Size = new System.Drawing.Size(75, 28);
+            this.btnAdd.TabIndex = 0;
+            this.btnAdd.Text = "Save";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // textBoxQuestionText
             // 
@@ -219,7 +219,7 @@
             // 
             // errorProvider1
             // 
-            this.errorProvider1.ContainerControl = this;
+            this.errorProvider.ContainerControl = this;
             // 
             // pnlSlider
             // 
@@ -369,7 +369,7 @@
             this.btnUpdate.TabIndex = 13;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnCancel
             // 
@@ -403,7 +403,7 @@
             this.pnlMain.Controls.Add(this.pnlStars);
             this.pnlMain.Controls.Add(this.pnlBaseFields);
             this.pnlMain.Controls.Add(this.btnCancel);
-            this.pnlMain.Controls.Add(this.button1);
+            this.pnlMain.Controls.Add(this.btnAdd);
             this.pnlMain.Controls.Add(this.btnUpdate);
             this.pnlMain.Controls.Add(this.pnlSmileyFaces);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -493,7 +493,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarStars)).EndInit();
             this.pnlStars.ResumeLayout(false);
             this.pnlStars.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.pnlSlider.ResumeLayout(false);
             this.pnlSlider.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEndValue)).EndInit();
@@ -510,7 +510,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.TextBox textBoxQuestionText;
         private System.Windows.Forms.Label lblQuestionText;
         private System.Windows.Forms.NumericUpDown numericUpDownQuestionOrder;
@@ -521,7 +521,7 @@
         private System.Windows.Forms.Label lblStars;
         private System.Windows.Forms.Label lblTypeOfQuestion;
         private System.Windows.Forms.Panel pnlStars;
-        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Panel pnlSlider;
         private System.Windows.Forms.Label lblStartValue;
         private System.Windows.Forms.NumericUpDown numericUpDownStartValue;

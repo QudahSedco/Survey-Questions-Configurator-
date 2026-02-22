@@ -37,20 +37,20 @@ namespace SurveyQuestionsConfigurator
                 comboBoxQuestionTypes.SelectedItem = pQuestion.QuestionType;
                 PopulateFields(pQuestion);
                 btnUpdate.Visible = true;
-                button1.Visible = false;
+                btnAdd.Visible = false;
                 Text = "Edit";
             }
             else
             {
                 btnUpdate.Visible = false;
-                button1.Visible = true;
+                btnAdd.Visible = true;
                 comboBoxQuestionTypes.SelectedIndex = 0;
                 UpdateStars(trackBarStars.Value);
                 Text = "Create";
             }
         }
 
-        //fills the form with values from the question
+        //Fills the form with values from the question passed from the main form
         private void PopulateFields(Question pQuestion)
         {
             textBoxQuestionText.Text = pQuestion.QuestionText;
@@ -80,18 +80,18 @@ namespace SurveyQuestionsConfigurator
         }
 
         //create button creates a new question
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-            errorProvider1.Clear();
+            errorProvider.Clear();
 
             if (String.IsNullOrWhiteSpace(textBoxQuestionText.Text))
             {
-                errorProvider1.SetError(textBoxQuestionText, "Question text can't be empty");
+                errorProvider.SetError(textBoxQuestionText, "Question text cannot be empty or white space");
                 return;
             }
             if (textBoxQuestionText.Text.Length > 1000)
             {
-                errorProvider1.SetError(textBoxQuestionText, "Question text can't be more than 1000 characters");
+                errorProvider.SetError(textBoxQuestionText, "Question text cannot be more than 1000 characters");
                 return;
             }
 
@@ -104,7 +104,7 @@ namespace SurveyQuestionsConfigurator
                 case QuestionType.Star:
                     if (trackBarStars.Value < 1)
                     {
-                        errorProvider1.SetError(trackBarStars, "Number of stars cannot be less than 1");
+                        errorProvider.SetError(trackBarStars, "Number of stars cannot be less than 1");
                         return;
                     }
 
@@ -129,22 +129,22 @@ namespace SurveyQuestionsConfigurator
                 case QuestionType.Slider:
                     if (numericUpDownStartValue.Value >= numericUpDownEndValue.Value)
                     {
-                        errorProvider1.SetError(numericUpDownStartValue, "Slider start value can't be more or equal to slider end value");
+                        errorProvider.SetError(numericUpDownStartValue, "Slider start value cannot be more or equal to slider end value");
                         return;
                     }
                     if (numericUpDownEndValue.Value <= numericUpDownStartValue.Value)
                     {
-                        errorProvider1.SetError(numericUpDownStartValue, "Slider end value can't be less than slider start value");
+                        errorProvider.SetError(numericUpDownStartValue, "Slider end value cannot be less than slider start value");
                         return;
                     }
                     if (string.IsNullOrWhiteSpace(textBoxStartCaption.Text))
                     {
-                        errorProvider1.SetError(textBoxStartCaption, "Start caption can't be empty");
+                        errorProvider.SetError(textBoxStartCaption, "Start caption cannot be empty or white space");
                         return;
                     }
                     if (string.IsNullOrWhiteSpace(textBoxEndCaption.Text))
                     {
-                        errorProvider1.SetError(textBoxEndCaption, "End caption can't be empty");
+                        errorProvider.SetError(textBoxEndCaption, "End caption cannot be empty or white space");
                         return;
                     }
 
@@ -163,6 +163,7 @@ namespace SurveyQuestionsConfigurator
             }
 
             var tResult = mQuestionService.AddQuestion(tQuestion);
+
             if (tResult.IsSuccess)
                 Close();
             else
@@ -187,14 +188,14 @@ namespace SurveyQuestionsConfigurator
         //prints smiley faces according to the trackbar
         private void UpdateSmileyFace(int pValue)
         {
-            string str = "";
+            string tStr = "";
 
             for (int i = 0; i < pValue; i++)
             {
-                str += ":) ";
+                tStr += ":) ";
             }
 
-            lblSmileyFaces.Text = str;
+            lblSmileyFaces.Text = tStr;
         }
 
         private void trackBarStars_Scroll(object sender, EventArgs e)
@@ -209,9 +210,9 @@ namespace SurveyQuestionsConfigurator
             pnlSmileyFaces.Visible = false;
             pnlSlider.Visible = false;
 
-            QuestionType selected = (QuestionType)comboBoxQuestionTypes.SelectedItem;
+            QuestionType tSelected = (QuestionType)comboBoxQuestionTypes.SelectedItem;
 
-            switch (selected)
+            switch (tSelected)
             {
                 case QuestionType.Star:
                     pnlStars.Visible = true;
@@ -246,17 +247,17 @@ namespace SurveyQuestionsConfigurator
         //if type didn't change calls update method
         //if type did change calls UpdateChildTableType
         //that deletes the old type record and inserts a new record according to the new type chosen
-        private void buttonUpdate_Click(object sender, EventArgs e)
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
-            errorProvider1.Clear();
+            errorProvider.Clear();
             if (String.IsNullOrWhiteSpace(textBoxQuestionText.Text))
             {
-                errorProvider1.SetError(textBoxQuestionText, "Question text can't be empty");
+                errorProvider.SetError(textBoxQuestionText, "Question text cannot be empty or white space");
                 return;
             }
             if (textBoxQuestionText.Text.Length > 1000)
             {
-                errorProvider1.SetError(textBoxQuestionText, "Question text can't be more than 1000 characters");
+                errorProvider.SetError(textBoxQuestionText, "Question text cannot be more than 1000 characters");
                 return;
             }
             mEditingQuestion.QuestionText = textBoxQuestionText.Text;
@@ -264,16 +265,17 @@ namespace SurveyQuestionsConfigurator
 
             var tOldType = mEditingQuestion.QuestionType;
             var tNewType = (QuestionType)comboBoxQuestionTypes.SelectedItem;
+
             Result<bool> tResult = Result<bool>.Failure("Unknown question type");
 
-            if (tOldType == tNewType)//if type didnt change
+            if (tOldType == tNewType)//if type didn't change
             {
                 switch (mEditingQuestion)
                 {
                     case StarQuestion tStarQuestion:
                         if (trackBarStars.Value < 1)
                         {
-                            errorProvider1.SetError(trackBarStars, "Number of stars cannot be less than 1");
+                            errorProvider.SetError(trackBarStars, "Number of stars cannot be less than 1");
                             return;
                         }
                         tStarQuestion.NumberOfStars = trackBarStars.Value;
@@ -283,7 +285,7 @@ namespace SurveyQuestionsConfigurator
                     case SmileyFacesQuestion tSmileyQuestion:
                         if (trackBarSmileyFaces.Value < 2 || trackBarSmileyFaces.Value > 5)
                         {
-                            errorProvider1.SetError(trackBarSmileyFaces, "Number of smiley faces cannot be less than 2 or more than 5");
+                            errorProvider.SetError(trackBarSmileyFaces, "Number of smiley faces cannot be less than 2 or more than 5");
                             return;
                         }
                         tSmileyQuestion.NumberOfSmileyFaces = trackBarSmileyFaces.Value;
@@ -293,22 +295,22 @@ namespace SurveyQuestionsConfigurator
                     case SliderQuestion tSliderQuestion:
                         if (numericUpDownStartValue.Value >= numericUpDownEndValue.Value)
                         {
-                            errorProvider1.SetError(numericUpDownStartValue, " slider start value can't be more or equal to slider end value");
+                            errorProvider.SetError(numericUpDownStartValue, " slider start value cannot be more or equal to slider end value");
                             return;
                         }
                         if (numericUpDownEndValue.Value <= numericUpDownStartValue.Value)
                         {
-                            errorProvider1.SetError(numericUpDownStartValue, " slider end value can't be less than slider start value");
+                            errorProvider.SetError(numericUpDownStartValue, " slider end value cannot be less than slider start value");
                             return;
                         }
                         if (String.IsNullOrWhiteSpace(textBoxStartCaption.Text))
                         {
-                            errorProvider1.SetError(textBoxStartCaption, "Start caption can't be empty");
+                            errorProvider.SetError(textBoxStartCaption, "Start caption cannot be empty or white space");
                             return;
                         }
                         if (String.IsNullOrWhiteSpace(textBoxEndCaption.Text))
                         {
-                            errorProvider1.SetError(textBoxEndCaption, "End caption can't be empty");
+                            errorProvider.SetError(textBoxEndCaption, "End caption cannot be empty or white space");
                             return;
                         }
 
@@ -330,7 +332,7 @@ namespace SurveyQuestionsConfigurator
                     case QuestionType.Star:
                         if (trackBarStars.Value < 1)
                         {
-                            errorProvider1.SetError(trackBarStars, "Number of stars cannot be less than 1");
+                            errorProvider.SetError(trackBarStars, "Number of stars cannot be less than 1");
                             return;
                         }
                         tNewQuestion = new StarQuestion
@@ -346,7 +348,7 @@ namespace SurveyQuestionsConfigurator
                     case QuestionType.Smiley:
                         if (trackBarSmileyFaces.Value < 2 || trackBarSmileyFaces.Value > 5)
                         {
-                            errorProvider1.SetError(trackBarSmileyFaces, "Number of smiley faces cannot be less than 2 or more than 5");
+                            errorProvider.SetError(trackBarSmileyFaces, "Number of smiley faces cannot be less than 2 or more than 5");
                             return;
                         }
                         tNewQuestion = new SmileyFacesQuestion
@@ -363,22 +365,22 @@ namespace SurveyQuestionsConfigurator
 
                         if (numericUpDownStartValue.Value >= numericUpDownEndValue.Value)
                         {
-                            errorProvider1.SetError(numericUpDownStartValue, "slider start value can't be more or equal to slider end value");
+                            errorProvider.SetError(numericUpDownStartValue, "Slider start value cannot be more or equal to slider end value");
                             return;
                         }
                         if (numericUpDownEndValue.Value <= numericUpDownStartValue.Value)
                         {
-                            errorProvider1.SetError(numericUpDownStartValue, " slider end value can't be less than slider start value");
+                            errorProvider.SetError(numericUpDownStartValue, "Slider end value cannot be less than slider start value");
                             return;
                         }
                         if (string.IsNullOrWhiteSpace(textBoxStartCaption.Text))
                         {
-                            errorProvider1.SetError(textBoxStartCaption, "Start caption can't be empty");
+                            errorProvider.SetError(textBoxStartCaption, "Start caption cannot be empty or white space");
                             return;
                         }
                         if (string.IsNullOrWhiteSpace(textBoxEndCaption.Text))
                         {
-                            errorProvider1.SetError(textBoxEndCaption, "End caption can't be empty");
+                            errorProvider.SetError(textBoxEndCaption, "End caption cannot be empty or white space");
                             return;
                         }
 
@@ -400,6 +402,7 @@ namespace SurveyQuestionsConfigurator
                 }
 
                 tResult = mQuestionService.UpdateChildTableType(tNewQuestion, tOldType);
+
                 if (tResult.IsSuccess)
                     mEditingQuestion = tNewQuestion;
             }

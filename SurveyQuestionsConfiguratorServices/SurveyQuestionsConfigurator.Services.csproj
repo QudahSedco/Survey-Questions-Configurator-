@@ -45,13 +45,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SurveyQuestionsConfigrationRepository\SurveyQuestionsConfigrationRepository.csproj">
+    <ProjectReference Include="..\SurveyQuestionsConfigrationRepository\SurveyQuestionsConfigration.Repository.csproj">
       <Project>{0c0ea309-d0dd-4a2c-97dc-9da79c8d6e4e}</Project>
-      <Name>SurveyQuestionsConfigrationRepository</Name>
+      <Name>SurveyQuestionsConfigration.Repository</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SurveyQuestionsConfiguratorModels\SurveyQuestionsConfiguratorModels.csproj">
+    <ProjectReference Include="..\SurveyQuestionsConfiguratorModels\SurveyQuestionsConfigurator.Models.csproj">
       <Project>{e33ced91-4f7e-4d2b-a2fd-7972e7cc9c08}</Project>
-      <Name>SurveyQuestionsConfiguratorModels</Name>
+      <Name>SurveyQuestionsConfigurator.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
