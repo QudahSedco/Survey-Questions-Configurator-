@@ -1,6 +1,6 @@
 ﻿namespace SurveyQuestionsConfigurator
 {
-    partial class Form2
+    partial class DialogForm
     {
         /// <summary>
         /// Required designer variable.
@@ -168,9 +168,9 @@
             // trackBarStars
             // 
             this.trackBarStars.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBarStars.Location = new System.Drawing.Point(200, 32);
+            this.trackBarStars.Location = new System.Drawing.Point(210, 32);
             this.trackBarStars.Name = "trackBarStars";
-            this.trackBarStars.Size = new System.Drawing.Size(299, 45);
+            this.trackBarStars.Size = new System.Drawing.Size(303, 45);
             this.trackBarStars.TabIndex = 7;
             this.trackBarStars.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
             this.trackBarStars.Scroll += new System.EventHandler(this.trackBarStars_Scroll);
@@ -179,7 +179,7 @@
             // 
             this.lblStars.AutoSize = true;
             this.lblStars.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStars.Location = new System.Drawing.Point(258, 4);
+            this.lblStars.Location = new System.Drawing.Point(254, 4);
             this.lblStars.Name = "lblStars";
             this.lblStars.Size = new System.Drawing.Size(217, 37);
             this.lblStars.TabIndex = 8;
@@ -204,7 +204,7 @@
             this.pnlStars.Controls.Add(this.lblNumberOfStarsText);
             this.pnlStars.Location = new System.Drawing.Point(-11, 187);
             this.pnlStars.Name = "pnlStars";
-            this.pnlStars.Size = new System.Drawing.Size(603, 100);
+            this.pnlStars.Size = new System.Drawing.Size(612, 100);
             this.pnlStars.TabIndex = 10;
             // 
             // lblNumberOfStars
@@ -238,13 +238,13 @@
             this.pnlSlider.ForeColor = System.Drawing.SystemColors.ControlText;
             this.pnlSlider.Location = new System.Drawing.Point(-11, 188);
             this.pnlSlider.Name = "pnlSlider";
-            this.pnlSlider.Size = new System.Drawing.Size(603, 129);
+            this.pnlSlider.Size = new System.Drawing.Size(612, 129);
             this.pnlSlider.TabIndex = 12;
             // 
             // lblCharNumberEndCaption
             // 
             this.lblCharNumberEndCaption.AutoSize = true;
-            this.lblCharNumberEndCaption.Location = new System.Drawing.Point(518, 100);
+            this.lblCharNumberEndCaption.Location = new System.Drawing.Point(527, 100);
             this.lblCharNumberEndCaption.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCharNumberEndCaption.Name = "lblCharNumberEndCaption";
             this.lblCharNumberEndCaption.Size = new System.Drawing.Size(44, 18);
@@ -254,7 +254,7 @@
             // lblCharNumberStartCaption
             // 
             this.lblCharNumberStartCaption.AutoSize = true;
-            this.lblCharNumberStartCaption.Location = new System.Drawing.Point(518, 70);
+            this.lblCharNumberStartCaption.Location = new System.Drawing.Point(527, 70);
             this.lblCharNumberStartCaption.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCharNumberStartCaption.Name = "lblCharNumberStartCaption";
             this.lblCharNumberStartCaption.Size = new System.Drawing.Size(44, 18);
@@ -387,7 +387,7 @@
             // 
             this.lblCharNumber.AutoSize = true;
             this.lblCharNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCharNumber.Location = new System.Drawing.Point(518, 8);
+            this.lblCharNumber.Location = new System.Drawing.Point(527, 8);
             this.lblCharNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCharNumber.Name = "lblCharNumber";
             this.lblCharNumber.Size = new System.Drawing.Size(58, 20);
@@ -399,17 +399,17 @@
             this.pnlMain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pnlMain.BackColor = System.Drawing.SystemColors.ControlLight;
             this.pnlMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlMain.Controls.Add(this.pnlSlider);
+            this.pnlMain.Controls.Add(this.pnlStars);
             this.pnlMain.Controls.Add(this.pnlBaseFields);
             this.pnlMain.Controls.Add(this.btnCancel);
-            this.pnlMain.Controls.Add(this.pnlStars);
             this.pnlMain.Controls.Add(this.button1);
             this.pnlMain.Controls.Add(this.btnUpdate);
-            this.pnlMain.Controls.Add(this.pnlSlider);
             this.pnlMain.Controls.Add(this.pnlSmileyFaces);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(595, 362);
+            this.pnlMain.Size = new System.Drawing.Size(602, 362);
             this.pnlMain.TabIndex = 18;
             // 
             // pnlBaseFields
@@ -424,7 +424,7 @@
             this.pnlBaseFields.Controls.Add(this.textBoxQuestionText);
             this.pnlBaseFields.Location = new System.Drawing.Point(-11, 0);
             this.pnlBaseFields.Name = "pnlBaseFields";
-            this.pnlBaseFields.Size = new System.Drawing.Size(603, 189);
+            this.pnlBaseFields.Size = new System.Drawing.Size(612, 189);
             this.pnlBaseFields.TabIndex = 18;
             // 
             // pnlSmileyFaces
@@ -451,11 +451,11 @@
             // 
             // trackBarSmileyFaces
             // 
-            this.trackBarSmileyFaces.Location = new System.Drawing.Point(214, 39);
+            this.trackBarSmileyFaces.Location = new System.Drawing.Point(210, 39);
             this.trackBarSmileyFaces.Maximum = 5;
             this.trackBarSmileyFaces.Minimum = 2;
             this.trackBarSmileyFaces.Name = "trackBarSmileyFaces";
-            this.trackBarSmileyFaces.Size = new System.Drawing.Size(299, 45);
+            this.trackBarSmileyFaces.Size = new System.Drawing.Size(303, 45);
             this.trackBarSmileyFaces.TabIndex = 2;
             this.trackBarSmileyFaces.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
             this.trackBarSmileyFaces.Value = 2;
@@ -485,7 +485,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(595, 362);
+            this.ClientSize = new System.Drawing.Size(602, 362);
             this.Controls.Add(this.pnlMain);
             this.Name = "Form2";
             this.Text = "Form2";

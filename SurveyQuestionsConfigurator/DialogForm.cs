@@ -15,12 +15,12 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SurveyQuestionsConfigurator
 {
-    public partial class Form2 : Form
+    public partial class DialogForm : Form
     {
         private QuestionService mQuestionService;
         private Question mEditingQuestion;
 
-        public Form2(Question pQuestion)
+        public DialogForm(Question pQuestion)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;

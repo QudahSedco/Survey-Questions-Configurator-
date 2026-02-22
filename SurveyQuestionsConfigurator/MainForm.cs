@@ -16,14 +16,13 @@ using System.Windows.Forms;
 
 namespace SurveyQuestionsConfigurator
 {
-    public partial class FormMain : Form
+    public partial class MainForm : Form
     {
         private QuestionService mQuestionService;
-
         private Dictionary<string, bool> mSortColumnsDictionary;
         private List<Question> mQuestionsList;
 
-        public FormMain()
+        public MainForm()
         {
             InitializeComponent();
             FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -33,6 +32,7 @@ namespace SurveyQuestionsConfigurator
 
             mQuestionService.QuestionsTableChanged += OnQuestionsChanged;
 
+            //keeps track of how each column is sorted (true = ascending, false = descending)
             mSortColumnsDictionary = new Dictionary<string, bool>()
     {
         { "QuestionText", true },
@@ -47,16 +47,16 @@ namespace SurveyQuestionsConfigurator
 
             if (!result.IsSuccess)
             {
-                Log.Error("Failed to start question listener: {Error}", result.Error);
+                Log.Error("Failed to start question listener using SqlTableDependency: {Error}", result.Error);
             }
 
             dataGridViewMain.Font = new Font("Segoe UI", 13, FontStyle.Regular);
             dataGridViewMain.Columns.Clear();
             dataGridViewMain.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-
             dataGridViewMain.AutoGenerateColumns = false;
             dataGridViewMain.MultiSelect = false;
 
+            //creating the columns for the data grid view
             DataGridViewTextBoxColumn colText = new DataGridViewTextBoxColumn();
             colText.HeaderText = "QuestionText";
             colText.DataPropertyName = "QuestionText";
@@ -78,13 +78,12 @@ namespace SurveyQuestionsConfigurator
             colType.Width = 160;
             colType.SortMode = DataGridViewColumnSortMode.Automatic;
             dataGridViewMain.Columns.Add(colType);
-
             LoadQuestions();
             btnDelete.Enabled = false;
             btnUpdate.Enabled = false;
         }
 
-        //makes sure the method is runnign on UI thread as it can only be updated if it was on the UI thread
+        //Ensures this method runs on the UI thread since UI updates must happen there
         private void OnQuestionsChanged()
         {
             if (InvokeRequired)
@@ -95,20 +94,18 @@ namespace SurveyQuestionsConfigurator
             LoadQuestions();
         }
 
-        // passing null object to form 2 to make it in add new question instead of edit mode
-        private void buttonAdd_Click(object sender, EventArgs e)
+        //Passing null to Form2 to open it in "Add New Question" mode instead of edit mode
+        private void btnAdd_Click(object sender, EventArgs e)
         {
             Question tQuestion = null;
-            using (var tForm = new Form2(tQuestion))
+            using (var tForm = new DialogForm(tQuestion))
             {
                 tForm.ShowDialog(this);
                 LoadQuestions();
             }
         }
 
-        //enables the edit and delete button if there is a selected question from the list
-
-        //deletes selected question
+        //Deletes selected question
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (dataGridViewMain.CurrentRow == null)
@@ -134,10 +131,11 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        //loads questions from database
+        //Loads questions from database
         private void LoadQuestions()
         {
             var tResult = mQuestionService.GetAllQuestions();
+
             if (tResult.IsSuccess)
             {
                 mQuestionsList = tResult.Value;
@@ -153,8 +151,8 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        //edit button sends the selected obj and opens form 2 as dialog
-        private void buttonEdit_Click(object sender, EventArgs e)
+        //Edit button sends the selected object and opens dialog form
+        private void btnEdit_Click(object sender, EventArgs e)
         {
             if (dataGridViewMain.CurrentRow == null) return;
 
@@ -170,7 +168,7 @@ namespace SurveyQuestionsConfigurator
                 return;
             }
 
-            using (var tForm = new Form2(tSelectedQuestion))
+            using (var tForm = new DialogForm(tSelectedQuestion))
             {
                 tForm.ShowDialog(this);
                 LoadQuestions();
@@ -184,7 +182,8 @@ namespace SurveyQuestionsConfigurator
         {
             if (mQuestionsList == null || mQuestionsList.Count < 1)
                 return;
-            bool tAsc = mSortColumnsDictionary[pColumnName];
+
+            bool tAsc = mSortColumnsDictionary[pColumnName];// Gets the current sort direction for the given column from the dictionary
 
             switch (pColumnName)
             {
@@ -210,22 +209,25 @@ namespace SurveyQuestionsConfigurator
             mSortColumnsDictionary[pColumnName] = !tAsc;
         }
 
-        private void dataGridViewMain_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void DataGridViewMain_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (mQuestionsList == null || mQuestionsList.Count < 1)
                 return;
 
             string tPropertyName = dataGridViewMain.Columns[e.ColumnIndex].DataPropertyName;
             bool tAscending = mSortColumnsDictionary[tPropertyName];
+
             foreach (DataGridViewColumn column in dataGridViewMain.Columns)
             {
                 column.HeaderText = column.DataPropertyName;
             }
+
             dataGridViewMain.Columns[e.ColumnIndex].HeaderText = tPropertyName + (tAscending ? " ↑" : " ↓");
+
             SortQuestions(tPropertyName);
         }
 
-        private void dataGridViewMain_CellContentClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void DataGridViewMain_CellContentClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (dataGridViewMain.CurrentRow != null && dataGridViewMain.CurrentRow.DataBoundItem != null)
             {

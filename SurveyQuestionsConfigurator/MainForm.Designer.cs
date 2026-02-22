@@ -1,6 +1,6 @@
 ﻿namespace SurveyQuestionsConfigurator
 {
-    partial class FormMain
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -53,7 +53,7 @@
             this.btnAdd.TabIndex = 7;
             this.btnAdd.Text = "New...";
             this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // lblListOfQuestions
             // 
@@ -92,7 +92,7 @@
             this.btnUpdate.TabIndex = 10;
             this.btnUpdate.Text = "Edit...";
             this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.buttonEdit_Click);
+            this.btnUpdate.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // pnlHeader
             // 
@@ -137,8 +137,8 @@
             this.dataGridViewMain.ReadOnly = true;
             this.dataGridViewMain.Size = new System.Drawing.Size(991, 438);
             this.dataGridViewMain.TabIndex = 7;
-            this.dataGridViewMain.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewMain_CellContentClick);
-            this.dataGridViewMain.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewMain_ColumnHeaderMouseClick);
+            this.dataGridViewMain.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewMain_CellContentClick);
+            this.dataGridViewMain.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewMain_ColumnHeaderMouseClick);
             // 
             // FormMain
             // 
