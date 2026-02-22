@@ -243,7 +243,7 @@ namespace SurveyQuestionsConfigurator
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            mQuestionService.StopListenting();
+            mQuestionService.StopListening();
         }
     }
 }
