@@ -31,7 +31,7 @@ namespace SurveyQuestionsConfigurator
             StartPosition = FormStartPosition.CenterScreen;
             mQuestionService = new QuestionService();
 
-            mQuestionService.OnQuestionsChanged += OnQuestionsChanged;
+            mQuestionService.QuestionsTableChanged += OnQuestionsChanged;
 
             mSortColumnsDictionary = new Dictionary<string, bool>()
     {

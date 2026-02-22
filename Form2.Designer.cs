@@ -59,10 +59,10 @@
             this.pnlMain = new System.Windows.Forms.Panel();
             this.pnlBaseFields = new System.Windows.Forms.Panel();
             this.pnlSmileyFaces = new System.Windows.Forms.Panel();
-            this.lblNumberofSmileyfaces = new System.Windows.Forms.Label();
-            this.lblSmileyFaces = new System.Windows.Forms.Label();
-            this.trackBarSmileyFaces = new System.Windows.Forms.TrackBar();
             this.lblFacesNumber = new System.Windows.Forms.Label();
+            this.trackBarSmileyFaces = new System.Windows.Forms.TrackBar();
+            this.lblSmileyFaces = new System.Windows.Forms.Label();
+            this.lblNumberofSmileyfaces = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuestionOrder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarStars)).BeginInit();
             this.pnlStars.SuspendLayout();
@@ -189,7 +189,7 @@
             // 
             this.lblTypeOfQuestion.AutoSize = true;
             this.lblTypeOfQuestion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTypeOfQuestion.Location = new System.Drawing.Point(27, 160);
+            this.lblTypeOfQuestion.Location = new System.Drawing.Point(27, 161);
             this.lblTypeOfQuestion.Name = "lblTypeOfQuestion";
             this.lblTypeOfQuestion.Size = new System.Drawing.Size(130, 20);
             this.lblTypeOfQuestion.TabIndex = 9;
@@ -439,25 +439,15 @@
             this.pnlSmileyFaces.Size = new System.Drawing.Size(603, 100);
             this.pnlSmileyFaces.TabIndex = 11;
             // 
-            // lblNumberofSmileyfaces
+            // lblFacesNumber
             // 
-            this.lblNumberofSmileyfaces.AutoSize = true;
-            this.lblNumberofSmileyfaces.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumberofSmileyfaces.Location = new System.Drawing.Point(27, 9);
-            this.lblNumberofSmileyfaces.Name = "lblNumberofSmileyfaces";
-            this.lblNumberofSmileyfaces.Size = new System.Drawing.Size(176, 20);
-            this.lblNumberofSmileyfaces.TabIndex = 0;
-            this.lblNumberofSmileyfaces.Text = "Number of Smiley faces";
-            // 
-            // lblSmileyFaces
-            // 
-            this.lblSmileyFaces.AutoSize = true;
-            this.lblSmileyFaces.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSmileyFaces.Location = new System.Drawing.Point(307, 5);
-            this.lblSmileyFaces.Name = "lblSmileyFaces";
-            this.lblSmileyFaces.Size = new System.Drawing.Size(41, 29);
-            this.lblSmileyFaces.TabIndex = 1;
-            this.lblSmileyFaces.Text = ":):)";
+            this.lblFacesNumber.AutoSize = true;
+            this.lblFacesNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFacesNumber.Location = new System.Drawing.Point(518, 4);
+            this.lblFacesNumber.Name = "lblFacesNumber";
+            this.lblFacesNumber.Size = new System.Drawing.Size(18, 20);
+            this.lblFacesNumber.TabIndex = 3;
+            this.lblFacesNumber.Text = "2";
             // 
             // trackBarSmileyFaces
             // 
@@ -471,15 +461,25 @@
             this.trackBarSmileyFaces.Value = 2;
             this.trackBarSmileyFaces.Scroll += new System.EventHandler(this.trackBarSmiley_Scroll);
             // 
-            // lblFacesNumber
+            // lblSmileyFaces
             // 
-            this.lblFacesNumber.AutoSize = true;
-            this.lblFacesNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFacesNumber.Location = new System.Drawing.Point(518, 4);
-            this.lblFacesNumber.Name = "lblFacesNumber";
-            this.lblFacesNumber.Size = new System.Drawing.Size(18, 20);
-            this.lblFacesNumber.TabIndex = 3;
-            this.lblFacesNumber.Text = "2";
+            this.lblSmileyFaces.AutoSize = true;
+            this.lblSmileyFaces.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSmileyFaces.Location = new System.Drawing.Point(307, 5);
+            this.lblSmileyFaces.Name = "lblSmileyFaces";
+            this.lblSmileyFaces.Size = new System.Drawing.Size(41, 29);
+            this.lblSmileyFaces.TabIndex = 1;
+            this.lblSmileyFaces.Text = ":):)";
+            // 
+            // lblNumberofSmileyfaces
+            // 
+            this.lblNumberofSmileyfaces.AutoSize = true;
+            this.lblNumberofSmileyfaces.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNumberofSmileyfaces.Location = new System.Drawing.Point(27, 9);
+            this.lblNumberofSmileyfaces.Name = "lblNumberofSmileyfaces";
+            this.lblNumberofSmileyfaces.Size = new System.Drawing.Size(176, 20);
+            this.lblNumberofSmileyfaces.TabIndex = 0;
+            this.lblNumberofSmileyfaces.Text = "Number of Smiley faces";
             // 
             // Form2
             // 

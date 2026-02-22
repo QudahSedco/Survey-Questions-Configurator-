@@ -33,7 +33,7 @@ namespace SurveyQuestionsConfigurator.Repositories
     {
         private SqlTableDependency<QuestionRow> mSqlTableDependency;
 
-        public event Action EventOnQuestionsTableChanged;
+        public event Action QuestionsTableChanged;
 
         private readonly string mConnectionString = ConfigurationManager.ConnectionStrings["SurveyDb"].ConnectionString;
         private const string QUESTIONS_TABLE = "Questions";
@@ -58,9 +58,9 @@ namespace SurveyQuestionsConfigurator.Repositories
         }
 
         //if any changes in database happens trigger the event
-        private void TableDependencyChanged(Object sender, EventArgs e)
+        private void OnQuestionsTableChanged(Object sender, EventArgs e)
         {
-            EventOnQuestionsTableChanged?.Invoke();
+            QuestionsTableChanged?.Invoke();
         }
 
         public Result<bool> StartListening()
@@ -68,7 +68,7 @@ namespace SurveyQuestionsConfigurator.Repositories
             try
             {
                 mSqlTableDependency = new SqlTableDependency<QuestionRow>(mConnectionString, QUESTIONS_TABLE);
-                mSqlTableDependency.OnChanged += TableDependencyChanged;
+                mSqlTableDependency.OnChanged += OnQuestionsTableChanged;
                 mSqlTableDependency.Start();
                 return Result<bool>.Success(true);
             }

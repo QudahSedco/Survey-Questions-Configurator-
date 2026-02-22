@@ -14,17 +14,17 @@ namespace SurveyQuestionsConfiguratorServices
     {
         private QuestionRepository mDataRepository;
 
-        public event Action OnQuestionsChanged;
+        public event Action QuestionsTableChanged;
 
         public QuestionService()
         {
             mDataRepository = new QuestionRepository();
-            mDataRepository.EventOnQuestionsTableChanged += QuesitonTableChanged;
+            mDataRepository.QuestionsTableChanged += OnQuesitonTableChanged;
         }
 
-        private void QuesitonTableChanged()
+        private void OnQuesitonTableChanged()
         {
-            OnQuestionsChanged?.Invoke();
+            QuestionsTableChanged?.Invoke();
         }
 
         public Result<bool> StartListening()

@@ -1,6 +1,6 @@
 <Solution>
   <Project Path="SurveyQuestionsConfigrationRepository/SurveyQuestionsConfigrationRepository.csproj" Id="0c0ea309-d0dd-4a2c-97dc-9da79c8d6e4e" />
-  <Project Path="SurveyQuestionsConfigurator.csproj" Id="35a63a8a-921d-4be3-8061-988742e219de" />
   <Project Path="SurveyQuestionsConfiguratorModels/SurveyQuestionsConfiguratorModels.csproj" Id="e33ced91-4f7e-4d2b-a2fd-7972e7cc9c08" />
   <Project Path="SurveyQuestionsConfiguratorServices/SurveyQuestionsConfiguratorServices.csproj" Id="8708abef-40b7-401a-99f1-e90ec7423cb7" />
+  <Project Path="SurveyQuestionsConfiguratorUI.csproj" Id="35a63a8a-921d-4be3-8061-988742e219de" />
 </Solution>
