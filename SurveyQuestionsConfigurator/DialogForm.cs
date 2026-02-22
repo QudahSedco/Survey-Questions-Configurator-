@@ -322,7 +322,7 @@ namespace SurveyQuestionsConfigurator
                 }
             }
             //if type changed call UpdateChildTableType that takes the new question and the old type
-            //deletes the old type record from database and inserts the new type in the correct table
+            //deletes the old type record from Database and inserts the new type in the correct table
             else
             {
                 Question tNewQuestion = null;

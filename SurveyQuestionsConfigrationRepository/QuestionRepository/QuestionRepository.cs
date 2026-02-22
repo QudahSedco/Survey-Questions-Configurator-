@@ -19,9 +19,9 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace SurveyQuestionsConfigurator.Repositories
 {
-    // SqlTableDependency requires a class that is not abstract and has property names matching the columns in the database
-    // This class is created only to notify of any changes in the Questions table in the database
-    public class QuestionRow
+    // SqlTableDependency requires a class that is not abstract and has property names matching the columns in the Database
+    // This class is created only to notify of any changes in the Questions table in the Database
+    public class QuestionTableColumns
     {
         public int question_id { get; set; }
         public string question_text { get; set; }
@@ -31,7 +31,7 @@ namespace SurveyQuestionsConfigurator.Repositories
 
     public class QuestionRepository : IQuestionRepository
     {
-        private SqlTableDependency<QuestionRow> mSqlTableDependency;
+        private SqlTableDependency<QuestionTableColumns> mSqlTableDependency;
 
         public event Action QuestionsTableChanged;
 
@@ -54,10 +54,11 @@ namespace SurveyQuestionsConfigurator.Repositories
         public QuestionRepository()
         {
             Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()
-                    .WriteTo.File(new JsonFormatter(), "logs/SurveyQuestionsConfigurator-.json", rollingInterval: RollingInterval.Day).CreateLogger();
+                    .WriteTo.File(new JsonFormatter(), "logs/SurveyQuestionsConfigurator-.json", rollingInterval: RollingInterval.Day)
+                    .CreateLogger();
         }
 
-        //if any changes in database happens trigger the event
+        //if any changes in Database happens trigger the event
         private void OnQuestionsTableChanged(Object sender, EventArgs e)
         {
             QuestionsTableChanged?.Invoke();
@@ -67,24 +68,31 @@ namespace SurveyQuestionsConfigurator.Repositories
         {
             try
             {
-                mSqlTableDependency = new SqlTableDependency<QuestionRow>(mConnectionString, QUESTIONS_TABLE);
+                mSqlTableDependency = new SqlTableDependency<QuestionTableColumns>(mConnectionString, QUESTIONS_TABLE);
                 mSqlTableDependency.OnChanged += OnQuestionsTableChanged;
                 mSqlTableDependency.Start();
                 return Result<bool>.Success(true);
             }
-            catch (Exception ex)
+            catch (Exception tEx)
             {
-                Log.Error(ex, "Error starting SqlTableDependency");
+                Log.Error(tEx, "Error starting SqlTableDependency");
                 return Result<bool>.Failure("Failed to start SqlTableDependency");
             }
         }
 
         public void StopListening()
         {
-            mSqlTableDependency?.Stop();
+            try
+            {
+                mSqlTableDependency?.Stop();
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, "Error stopping sqlTableDependency");
+            }
         }
 
-        //Inserts into the base table then retrieves the Id created by the database and uses it to create a child record
+        //Inserts into the base table then retrieves the Id created by the Database and uses it to create a child record
         public Result<bool> AddQuestion(Question pQuestion)
         {
             using (SqlConnection tConnection = new SqlConnection(mConnectionString))
@@ -135,14 +143,14 @@ namespace SurveyQuestionsConfigurator.Repositories
                         {
                             tTransaction.Rollback();
                             Log.Error(ex, "Could Not complete the create question transaction");
-                            return Result<bool>.Failure("Failed to save question in database");
+                            return Result<bool>.Failure("Failed to save new question in Database");
                         }
                     }
                 }
                 catch (SqlException ex)
                 {
                     Log.Error(ex, "Could Not connect to Database");
-                    return Result<bool>.Failure("Failed to connect to the database");
+                    return Result<bool>.Failure("Failed to connect to the Database");
                 }
             }
         }
@@ -150,7 +158,7 @@ namespace SurveyQuestionsConfigurator.Repositories
         public Result<bool> DeleteQuestionById(int pId)
         {
             if (pId <= 0)
-                return Result<bool>.Failure("Failed  to delete Invalid Question ID");
+                return Result<bool>.Failure("Failed  to delete invalid question ID");
 
             using (SqlConnection tConnection = new SqlConnection(mConnectionString))
             {
@@ -161,6 +169,15 @@ namespace SurveyQuestionsConfigurator.Repositories
                     try
                     {
                         tConnection.Open();
+                    }
+                    catch (Exception tEx)
+                    {
+                        Log.Error(tEx, "Error happened while trying to connect to the Database with");
+                        return Result<bool>.Failure($"Failed to connect to the Database");
+                    }
+
+                    try
+                    {
                         tCmd.Parameters.AddWithValue("@id", pId);
                         tCmd.ExecuteNonQuery();
                         return Result<bool>.Success(true);
@@ -211,7 +228,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                                         break;
 
                                     default:
-                                        return Result<List<Question>>.Failure("Failed to get question Unknown question type");
+                                        return Result<List<Question>>.Failure("Failed to get question unknown question type");
                                 }
 
                                 tQuestion.Id = tReader.GetInt32(0);
@@ -296,7 +313,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                         catch (SqlException tEx)
                         {
                             tTransaction.Rollback();
-                            Log.Error(tEx, "Error while Updating question with ID {questionId} in database", pQuestion.Id);
+                            Log.Error(tEx, "Error while Updating question with ID {questionId} in Database", pQuestion.Id);
                             return Result<bool>.Failure($"Failed to update question with ID {pQuestion.Id}");
                         }
                     }
@@ -304,7 +321,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                 catch (SqlException tEx)
                 {
                     Log.Error(tEx, "Error couldn't connect to DataBase");
-                    return Result<bool>.Failure("Failed to connect to database");
+                    return Result<bool>.Failure("Failed to connect to Database");
                 }
             }
         }
@@ -438,7 +455,15 @@ namespace SurveyQuestionsConfigurator.Repositories
             {
                 try
                 {
-                    tConnection.Open();
+                    try
+                    {
+                        tConnection.Open();
+                    }
+                    catch (Exception tEx)
+                    {
+                        Log.Error(tEx, "Error happened while trying to connect to the Database with");
+                        return Result<Question>.Failure($"Failed to connect to the Database");
+                    }
 
                     string tSql = $"SELECT {COLUMN_NUMBER_OF_STARS} FROM {STAR_QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID} = @id";
 
@@ -471,7 +496,16 @@ namespace SurveyQuestionsConfigurator.Repositories
             {
                 try
                 {
-                    tConnection.Open();
+                    try
+                    {
+                        tConnection.Open();
+                    }
+                    catch (Exception tEx)
+                    {
+                        Log.Error(tEx, "Error happened while trying to connect to the Database with");
+                        return Result<Question>.Failure($"Failed to connect to the Database");
+                    }
+
                     String tSql = $"SELECT {COLUMN_NUMBER_OF_SMILEY_FACES} FROM {SMILEY_FACES_QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID}=@id";
 
                     using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
@@ -501,7 +535,15 @@ namespace SurveyQuestionsConfigurator.Repositories
             {
                 try
                 {
-                    tConnection.Open();
+                    try
+                    {
+                        tConnection.Open();
+                    }
+                    catch (Exception tEx)
+                    {
+                        Log.Error(tEx, "Error happened while trying to connect to the Database with");
+                        return Result<Question>.Failure($"Failed to connect to the Database");
+                    }
                     String tSql = $"SELECT {COLUMN_START_VALUE},{COLUMN_END_VALUE},{COLUMN_START_VALUE_CAPTION},{COLUMN_END_VALUE_CAPTION} FROM {SLIDER_QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID}=@id";
 
                     using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))

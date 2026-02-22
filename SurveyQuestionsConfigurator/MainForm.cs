@@ -131,7 +131,7 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        //Loads questions from database
+        //Loads questions from Database
         private void LoadQuestions()
         {
             var tResult = mQuestionService.GetAllQuestions();
