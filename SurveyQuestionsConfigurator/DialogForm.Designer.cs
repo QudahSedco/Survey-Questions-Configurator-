@@ -76,12 +76,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSmileyFaces)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // btnAdd
             // 
             this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(508, 323);
-            this.btnAdd.Name = "button1";
+            this.btnAdd.Location = new System.Drawing.Point(433, 323);
+            this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 28);
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "Save";
@@ -153,7 +153,7 @@
             this.comboBoxQuestionTypes.Name = "comboBoxQuestionTypes";
             this.comboBoxQuestionTypes.Size = new System.Drawing.Size(303, 28);
             this.comboBoxQuestionTypes.TabIndex = 5;
-            this.comboBoxQuestionTypes.SelectedIndexChanged += new System.EventHandler(this.comboBoxQuestionType_SelectedIndexChanged);
+            this.comboBoxQuestionTypes.SelectedIndexChanged += new System.EventHandler(this.ComboBoxQuestionType_SelectedIndexChanged);
             // 
             // lblNumberOfStarsText
             // 
@@ -173,7 +173,7 @@
             this.trackBarStars.Size = new System.Drawing.Size(303, 45);
             this.trackBarStars.TabIndex = 7;
             this.trackBarStars.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
-            this.trackBarStars.Scroll += new System.EventHandler(this.trackBarStars_Scroll);
+            this.trackBarStars.Scroll += new System.EventHandler(this.TrackBarStars_Scroll);
             // 
             // lblStars
             // 
@@ -217,7 +217,7 @@
             this.lblNumberOfStars.TabIndex = 9;
             this.lblNumberOfStars.Text = "0";
             // 
-            // errorProvider1
+            // errorProvider
             // 
             this.errorProvider.ContainerControl = this;
             // 
@@ -363,7 +363,7 @@
             // 
             this.btnUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.Location = new System.Drawing.Point(507, 323);
+            this.btnUpdate.Location = new System.Drawing.Point(433, 323);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 28);
             this.btnUpdate.TabIndex = 13;
@@ -375,7 +375,7 @@
             // 
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(427, 323);
+            this.btnCancel.Location = new System.Drawing.Point(514, 323);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 28);
             this.btnCancel.TabIndex = 14;
@@ -397,7 +397,7 @@
             // pnlMain
             // 
             this.pnlMain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pnlMain.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pnlMain.BackColor = System.Drawing.SystemColors.Control;
             this.pnlMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlMain.Controls.Add(this.pnlSlider);
             this.pnlMain.Controls.Add(this.pnlStars);
@@ -481,13 +481,13 @@
             this.lblNumberofSmileyfaces.TabIndex = 0;
             this.lblNumberofSmileyfaces.Text = "Number of Smiley faces";
             // 
-            // Form2
+            // DialogForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(602, 362);
             this.Controls.Add(this.pnlMain);
-            this.Name = "Form2";
+            this.Name = "DialogForm";
             this.Text = "Form2";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuestionOrder)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarStars)).EndInit();

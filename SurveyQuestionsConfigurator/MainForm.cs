@@ -41,13 +41,13 @@ namespace SurveyQuestionsConfigurator
     };
         }
 
-        private void FormMain_Load(object sender, EventArgs e)
+        private void FormMain_Load(object pSender, EventArgs pE)
         {
-            var result = mQuestionService.StartListening();
+            var tResult = mQuestionService.StartListening();
 
-            if (!result.IsSuccess)
+            if (!tResult.IsSuccess)
             {
-                Log.Error("Failed to start question listener using SqlTableDependency: {Error}", result.Error);
+                Log.Error("Failed to start question listener using SqlTableDependency: {Error}", tResult.Error);
             }
 
             dataGridViewMain.Font = new Font("Segoe UI", 13, FontStyle.Regular);
@@ -57,27 +57,27 @@ namespace SurveyQuestionsConfigurator
             dataGridViewMain.MultiSelect = false;
 
             //creating the columns for the data grid view
-            DataGridViewTextBoxColumn colText = new DataGridViewTextBoxColumn();
-            colText.HeaderText = "QuestionText";
-            colText.DataPropertyName = "QuestionText";
-            colText.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            colText.SortMode = DataGridViewColumnSortMode.Automatic;
+            DataGridViewTextBoxColumn tColText = new DataGridViewTextBoxColumn();
+            tColText.HeaderText = "QuestionText";
+            tColText.DataPropertyName = "QuestionText";
+            tColText.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            tColText.SortMode = DataGridViewColumnSortMode.Automatic;
 
-            dataGridViewMain.Columns.Add(colText);
+            dataGridViewMain.Columns.Add(tColText);
 
-            DataGridViewTextBoxColumn colOrder = new DataGridViewTextBoxColumn();
-            colOrder.HeaderText = "QuestionOrder";
-            colOrder.DataPropertyName = "QuestionOrder";
-            colOrder.Width = 170;
-            colOrder.SortMode = DataGridViewColumnSortMode.Automatic;
-            dataGridViewMain.Columns.Add(colOrder);
+            DataGridViewTextBoxColumn tColOrder = new DataGridViewTextBoxColumn();
+            tColOrder.HeaderText = "QuestionOrder";
+            tColOrder.DataPropertyName = "QuestionOrder";
+            tColOrder.Width = 170;
+            tColOrder.SortMode = DataGridViewColumnSortMode.Automatic;
+            dataGridViewMain.Columns.Add(tColOrder);
 
-            DataGridViewTextBoxColumn colType = new DataGridViewTextBoxColumn();
-            colType.HeaderText = "QuestionType";
-            colType.DataPropertyName = "QuestionType";
-            colType.Width = 160;
-            colType.SortMode = DataGridViewColumnSortMode.Automatic;
-            dataGridViewMain.Columns.Add(colType);
+            DataGridViewTextBoxColumn tColType = new DataGridViewTextBoxColumn();
+            tColType.HeaderText = "QuestionType";
+            tColType.DataPropertyName = "QuestionType";
+            tColType.Width = 160;
+            tColType.SortMode = DataGridViewColumnSortMode.Automatic;
+            dataGridViewMain.Columns.Add(tColType);
             LoadQuestions();
             btnDelete.Enabled = false;
             btnUpdate.Enabled = false;
@@ -95,7 +95,7 @@ namespace SurveyQuestionsConfigurator
         }
 
         //Passing null to Form2 to open it in "Add New Question" mode instead of edit mode
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object pSender, EventArgs pE)
         {
             Question tQuestion = null;
             using (var tForm = new DialogForm(tQuestion))
@@ -106,7 +106,7 @@ namespace SurveyQuestionsConfigurator
         }
 
         //Deletes selected question
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void btnDelete_Click(object pSender, EventArgs pE)
         {
             if (dataGridViewMain.CurrentRow == null)
                 return;
@@ -151,8 +151,8 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        //Edit button sends the selected object and opens dialog form
-        private void btnEdit_Click(object sender, EventArgs e)
+        //Edit button passes the selected object and opens dialog form
+        private void btnEdit_Click(object pSender, EventArgs pE)
         {
             if (dataGridViewMain.CurrentRow == null) return;
 
@@ -209,25 +209,25 @@ namespace SurveyQuestionsConfigurator
             mSortColumnsDictionary[pColumnName] = !tAsc;
         }
 
-        private void DataGridViewMain_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void DataGridViewMain_ColumnHeaderMouseClick(object pSender, DataGridViewCellMouseEventArgs pE)
         {
             if (mQuestionsList == null || mQuestionsList.Count < 1)
                 return;
 
-            string tPropertyName = dataGridViewMain.Columns[e.ColumnIndex].DataPropertyName;
+            string tPropertyName = dataGridViewMain.Columns[pE.ColumnIndex].DataPropertyName;
             bool tAscending = mSortColumnsDictionary[tPropertyName];
 
-            foreach (DataGridViewColumn column in dataGridViewMain.Columns)
+            foreach (DataGridViewColumn tColumn in dataGridViewMain.Columns)
             {
-                column.HeaderText = column.DataPropertyName;
+                tColumn.HeaderText = tColumn.DataPropertyName;
             }
 
-            dataGridViewMain.Columns[e.ColumnIndex].HeaderText = tPropertyName + (tAscending ? " ↑" : " ↓");
+            dataGridViewMain.Columns[pE.ColumnIndex].HeaderText = tPropertyName + (tAscending ? " ↑" : " ↓");
 
             SortQuestions(tPropertyName);
         }
 
-        private void DataGridViewMain_CellContentClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void DataGridViewMain_CellContentClick(object pSender, DataGridViewCellMouseEventArgs pE)
         {
             if (dataGridViewMain.CurrentRow != null && dataGridViewMain.CurrentRow.DataBoundItem != null)
             {
@@ -241,7 +241,7 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        private void FormMain_FormClosing(object pSender, FormClosingEventArgs pE)
         {
             mQuestionService.StopListening();
         }

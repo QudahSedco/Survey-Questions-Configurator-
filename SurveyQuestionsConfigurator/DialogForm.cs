@@ -80,7 +80,7 @@ namespace SurveyQuestionsConfigurator
         }
 
         //create button creates a new question
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object pSender, EventArgs pE)
         {
             errorProvider.Clear();
 
@@ -198,13 +198,13 @@ namespace SurveyQuestionsConfigurator
             lblSmileyFaces.Text = tStr;
         }
 
-        private void trackBarStars_Scroll(object sender, EventArgs e)
+        private void TrackBarStars_Scroll(object pSender, EventArgs pE)
         {
             UpdateStars(trackBarStars.Value);
             lblNumberOfStars.Text = trackBarStars.Value.ToString();
         }
 
-        private void comboBoxQuestionType_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBoxQuestionType_SelectedIndexChanged(object pSender, EventArgs pE)
         {
             pnlStars.Visible = false;
             pnlSmileyFaces.Visible = false;
@@ -231,14 +231,14 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        private void trackBarSmiley_Scroll(object sender, EventArgs e)
+        private void trackBarSmiley_Scroll(object pSender, EventArgs pE)
         {
             UpdateSmileyFace(trackBarSmileyFaces.Value);
             lblFacesNumber.Text = trackBarSmileyFaces.Value.ToString();
         }
 
         //shows the number of chars the user entered for end caption text box
-        private void textBoxEndCaption_TextChanged(object sender, EventArgs e)
+        private void textBoxEndCaption_TextChanged(object pSender, EventArgs pE)
         {
             lblCharNumberEndCaption.Text = ($"{textBoxEndCaption.Text.Length.ToString()}/100");
         }
@@ -247,7 +247,7 @@ namespace SurveyQuestionsConfigurator
         //if type didn't change calls update method
         //if type did change calls UpdateChildTableType
         //that deletes the old type record and inserts a new record according to the new type chosen
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private void btnUpdate_Click(object pSender, EventArgs pE)
         {
             errorProvider.Clear();
             if (String.IsNullOrWhiteSpace(textBoxQuestionText.Text))
@@ -418,19 +418,19 @@ namespace SurveyQuestionsConfigurator
                     MessageBoxIcon.Error);
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object pSender, EventArgs pE)
         {
             Close();
         }
 
         //shows the number of chars entered by the user into the question text textbox
-        private void textBoxQuestionText_TextChanged(object sender, EventArgs e)
+        private void textBoxQuestionText_TextChanged(object pSender, EventArgs pE)
         {
             lblCharNumber.Text = $"{textBoxQuestionText.Text.Length.ToString()}/1000";
         }
 
         //shows the number of chars entered by the user into the start caption text box
-        private void textBoxStartCaption_TextChanged(object sender, EventArgs e)
+        private void textBoxStartCaption_TextChanged(object pSender, EventArgs pE)
         {
             lblCharNumberStartCaption.Text = $"{textBoxStartCaption.Text.Length.ToString()}/100";
         }

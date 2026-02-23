@@ -84,6 +84,8 @@ namespace SurveyQuestionsConfiguratorServices
             return mDataRepository.UpdateChildTableType(pQuestion, pQuestionOldType);
         }
 
+        //method used to validate the question
+        //made this isntead of copy pasting the code every time i want to validate
         private Result<bool> ValidateQuestion(Question pQuestion)
         {
             if (pQuestion == null)
@@ -97,6 +99,11 @@ namespace SurveyQuestionsConfiguratorServices
             {
                 return Result<bool>.Failure("Question text cannot be more than 1000 characters");
             }
+            if (pQuestion.QuestionOrder < 1)
+                return Result<bool>.Failure("Question order must be 1 or greater");
+
+            if (!Enum.IsDefined(typeof(QuestionType), pQuestion.QuestionType))
+                return Result<bool>.Failure("Question type is invalid");
 
             switch (pQuestion)
             {
@@ -111,12 +118,21 @@ namespace SurveyQuestionsConfiguratorServices
                     break;
 
                 case SliderQuestion tSliderQuestion:
+
+                    if (tSliderQuestion.StartValue < 0 || tSliderQuestion.StartValue > 99)
+                        return Result<bool>.Failure("Start value must be between 0 and 99");
+                    if (tSliderQuestion.EndValue < 1 || tSliderQuestion.EndValue > 100)
+                        return Result<bool>.Failure("End value must be between 1 and 100");
                     if (tSliderQuestion.StartValue >= tSliderQuestion.EndValue)
                         return Result<bool>.Failure("Slider start value cannot be more or equal to slider end value");
                     if (string.IsNullOrWhiteSpace(tSliderQuestion.StartValueCaption))
                         return Result<bool>.Failure("Start caption cannot be empty or white space");
+                    if (tSliderQuestion.StartValueCaption.Length > 100)
+                        return Result<bool>.Failure("Start caption cannot exceed 100 characters");
                     if (string.IsNullOrWhiteSpace(tSliderQuestion.EndValueCaption))
                         return Result<bool>.Failure("End caption cannot be empty or white space");
+                    if (tSliderQuestion.EndValueCaption.Length > 100)
+                        return Result<bool>.Failure("End caption cannot exceed 100 characters");
                     break;
             }
             return Result<bool>.Success(true);

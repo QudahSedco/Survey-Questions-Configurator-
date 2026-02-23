@@ -59,7 +59,7 @@ namespace SurveyQuestionsConfigurator.Repositories
         }
 
         //if any changes in Database happens trigger the event
-        private void OnQuestionsTableChanged(Object sender, EventArgs e)
+        private void OnQuestionsTableChanged(Object pSender, EventArgs pE)
         {
             QuestionsTableChanged?.Invoke();
         }
@@ -157,9 +157,6 @@ namespace SurveyQuestionsConfigurator.Repositories
 
         public Result<bool> DeleteQuestionById(int pId)
         {
-            if (pId <= 0)
-                return Result<bool>.Failure("Failed  to delete invalid question ID");
-
             using (SqlConnection tConnection = new SqlConnection(mConnectionString))
             {
                 String tSql = $"DELETE FROM {QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID} = @id";
@@ -524,7 +521,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                 catch (SqlException tEx)
                 {
                     Log.Error(tEx, "Error while retrieving Smiley question with id {QuestionId} from Database", pQuestion.Id);
-                    return Result<Question>.Failure($"Fai to retrieve smiley question with ID {pQuestion.Id}");
+                    return Result<Question>.Failure($"Failed to retrieve smiley question with ID {pQuestion.Id}");
                 }
             }
         }
@@ -661,7 +658,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                 }
                 catch (SqlException tEx)
                 {
-                    Log.Error(tEx, "Error happened while updating  question with id {id}", pQuestion.Id);
+                    Log.Error(tEx, "Error happened while updating question with id {id}", pQuestion.Id);
                     throw;
                 }
             }
