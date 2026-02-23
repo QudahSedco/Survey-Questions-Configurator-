@@ -85,7 +85,7 @@ namespace SurveyQuestionsConfiguratorServices
         }
 
         //method used to validate the question
-        //made this isntead of copy pasting the code every time i want to validate
+        //made this instead of copy pasting the code every time i want to validate
         private Result<bool> ValidateQuestion(Question pQuestion)
         {
             if (pQuestion == null)
