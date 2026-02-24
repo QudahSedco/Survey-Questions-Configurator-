@@ -405,24 +405,6 @@
   <data name="&gt;&gt;lblTypeOfQuestion.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="lblNumberOfStars.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblNumberOfStars.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 12pt</value>
-  </data>
-  <data name="lblNumberOfStars.Location" type="System.Drawing.Point, System.Drawing">
-    <value>518, 6</value>
-  </data>
-  <data name="lblNumberOfStars.Size" type="System.Drawing.Size, System.Drawing">
-    <value>18, 20</value>
-  </data>
-  <data name="lblNumberOfStars.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="lblNumberOfStars.Text" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="&gt;&gt;lblNumberOfStars.Name" xml:space="preserve">
     <value>lblNumberOfStars</value>
   </data>
@@ -456,6 +438,36 @@
   <data name="&gt;&gt;pnlStars.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="lblNumberOfStars.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNumberOfStars.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
+  </data>
+  <data name="lblNumberOfStars.Location" type="System.Drawing.Point, System.Drawing">
+    <value>518, 6</value>
+  </data>
+  <data name="lblNumberOfStars.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 20</value>
+  </data>
+  <data name="lblNumberOfStars.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblNumberOfStars.Text" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblNumberOfStars.Name" xml:space="preserve">
+    <value>lblNumberOfStars</value>
+  </data>
+  <data name="&gt;&gt;lblNumberOfStars.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNumberOfStars.Parent" xml:space="preserve">
+    <value>pnlStars</value>
+  </data>
+  <data name="&gt;&gt;lblNumberOfStars.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <metadata name="errorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -470,6 +482,390 @@
   </data>
   <data name="pnlMain.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
+  </data>
+  <data name="&gt;&gt;lblCharNumberEndCaption.Name" xml:space="preserve">
+    <value>lblCharNumberEndCaption</value>
+  </data>
+  <data name="&gt;&gt;lblCharNumberEndCaption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCharNumberEndCaption.Parent" xml:space="preserve">
+    <value>pnlSlider</value>
+  </data>
+  <data name="&gt;&gt;lblCharNumberEndCaption.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblCharNumberStartCaption.Name" xml:space="preserve">
+    <value>lblCharNumberStartCaption</value>
+  </data>
+  <data name="&gt;&gt;lblCharNumberStartCaption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCharNumberStartCaption.Parent" xml:space="preserve">
+    <value>pnlSlider</value>
+  </data>
+  <data name="&gt;&gt;lblCharNumberStartCaption.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblEndCaption.Name" xml:space="preserve">
+    <value>lblEndCaption</value>
+  </data>
+  <data name="&gt;&gt;lblEndCaption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblEndCaption.Parent" xml:space="preserve">
+    <value>pnlSlider</value>
+  </data>
+  <data name="&gt;&gt;lblEndCaption.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;textBoxEndCaption.Name" xml:space="preserve">
+    <value>textBoxEndCaption</value>
+  </data>
+  <data name="&gt;&gt;textBoxEndCaption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxEndCaption.Parent" xml:space="preserve">
+    <value>pnlSlider</value>
+  </data>
+  <data name="&gt;&gt;textBoxEndCaption.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;textBoxStartCaption.Name" xml:space="preserve">
+    <value>textBoxStartCaption</value>
+  </data>
+  <data name="&gt;&gt;textBoxStartCaption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxStartCaption.Parent" xml:space="preserve">
+    <value>pnlSlider</value>
+  </data>
+  <data name="&gt;&gt;textBoxStartCaption.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lblStartCaption.Name" xml:space="preserve">
+    <value>lblStartCaption</value>
+  </data>
+  <data name="&gt;&gt;lblStartCaption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblStartCaption.Parent" xml:space="preserve">
+    <value>pnlSlider</value>
+  </data>
+  <data name="&gt;&gt;lblStartCaption.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;lblEndValue.Name" xml:space="preserve">
+    <value>lblEndValue</value>
+  </data>
+  <data name="&gt;&gt;lblEndValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblEndValue.Parent" xml:space="preserve">
+    <value>pnlSlider</value>
+  </data>
+  <data name="&gt;&gt;lblEndValue.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownEndValue.Name" xml:space="preserve">
+    <value>numericUpDownEndValue</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownEndValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownEndValue.Parent" xml:space="preserve">
+    <value>pnlSlider</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownEndValue.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownStartValue.Name" xml:space="preserve">
+    <value>numericUpDownStartValue</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownStartValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownStartValue.Parent" xml:space="preserve">
+    <value>pnlSlider</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownStartValue.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;lblStartValue.Name" xml:space="preserve">
+    <value>lblStartValue</value>
+  </data>
+  <data name="&gt;&gt;lblStartValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblStartValue.Parent" xml:space="preserve">
+    <value>pnlSlider</value>
+  </data>
+  <data name="&gt;&gt;lblStartValue.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="pnlSlider.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 11.25pt</value>
+  </data>
+  <data name="pnlSlider.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-11, 188</value>
+  </data>
+  <data name="pnlSlider.Size" type="System.Drawing.Size, System.Drawing">
+    <value>612, 129</value>
+  </data>
+  <data name="pnlSlider.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;pnlSlider.Name" xml:space="preserve">
+    <value>pnlSlider</value>
+  </data>
+  <data name="&gt;&gt;pnlSlider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlSlider.Parent" xml:space="preserve">
+    <value>pnlMain</value>
+  </data>
+  <data name="&gt;&gt;pnlSlider.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblCharNumber.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblCharNumber.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
+  </data>
+  <data name="lblCharNumber.Location" type="System.Drawing.Point, System.Drawing">
+    <value>527, 8</value>
+  </data>
+  <data name="lblCharNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="lblCharNumber.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 20</value>
+  </data>
+  <data name="lblCharNumber.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="lblCharNumber.Text" xml:space="preserve">
+    <value>0/1000</value>
+  </data>
+  <data name="&gt;&gt;lblCharNumber.Name" xml:space="preserve">
+    <value>lblCharNumber</value>
+  </data>
+  <data name="&gt;&gt;lblCharNumber.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCharNumber.Parent" xml:space="preserve">
+    <value>pnlBaseFields</value>
+  </data>
+  <data name="&gt;&gt;lblCharNumber.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>26, 8</value>
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>574, 180</value>
+  </data>
+  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Base question</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+    <value>pnlBaseFields</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="pnlBaseFields.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-11, 0</value>
+  </data>
+  <data name="pnlBaseFields.Size" type="System.Drawing.Size, System.Drawing">
+    <value>612, 189</value>
+  </data>
+  <data name="pnlBaseFields.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;pnlBaseFields.Name" xml:space="preserve">
+    <value>pnlBaseFields</value>
+  </data>
+  <data name="&gt;&gt;pnlBaseFields.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlBaseFields.Parent" xml:space="preserve">
+    <value>pnlMain</value>
+  </data>
+  <data name="&gt;&gt;pnlBaseFields.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnCancel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 11.25pt</value>
+  </data>
+  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>514, 323</value>
+  </data>
+  <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 28</value>
+  </data>
+  <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="btnCancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
+    <value>btnCancel</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+    <value>pnlMain</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="btnUpdate.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 11.25pt</value>
+  </data>
+  <data name="btnUpdate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>433, 323</value>
+  </data>
+  <data name="btnUpdate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 28</value>
+  </data>
+  <data name="btnUpdate.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="btnUpdate.Text" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="&gt;&gt;btnUpdate.Name" xml:space="preserve">
+    <value>btnUpdate</value>
+  </data>
+  <data name="&gt;&gt;btnUpdate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnUpdate.Parent" xml:space="preserve">
+    <value>pnlMain</value>
+  </data>
+  <data name="&gt;&gt;btnUpdate.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;lblFacesNumber.Name" xml:space="preserve">
+    <value>lblFacesNumber</value>
+  </data>
+  <data name="&gt;&gt;lblFacesNumber.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFacesNumber.Parent" xml:space="preserve">
+    <value>pnlSmileyFaces</value>
+  </data>
+  <data name="&gt;&gt;lblFacesNumber.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;trackBarSmileyFaces.Name" xml:space="preserve">
+    <value>trackBarSmileyFaces</value>
+  </data>
+  <data name="&gt;&gt;trackBarSmileyFaces.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;trackBarSmileyFaces.Parent" xml:space="preserve">
+    <value>pnlSmileyFaces</value>
+  </data>
+  <data name="&gt;&gt;trackBarSmileyFaces.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblSmileyFaces.Name" xml:space="preserve">
+    <value>lblSmileyFaces</value>
+  </data>
+  <data name="&gt;&gt;lblSmileyFaces.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSmileyFaces.Parent" xml:space="preserve">
+    <value>pnlSmileyFaces</value>
+  </data>
+  <data name="&gt;&gt;lblSmileyFaces.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lblNumberofSmileyfaces.Name" xml:space="preserve">
+    <value>lblNumberofSmileyfaces</value>
+  </data>
+  <data name="&gt;&gt;lblNumberofSmileyfaces.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNumberofSmileyfaces.Parent" xml:space="preserve">
+    <value>pnlSmileyFaces</value>
+  </data>
+  <data name="&gt;&gt;lblNumberofSmileyfaces.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="pnlSmileyFaces.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-11, 187</value>
+  </data>
+  <data name="pnlSmileyFaces.Size" type="System.Drawing.Size, System.Drawing">
+    <value>603, 100</value>
+  </data>
+  <data name="pnlSmileyFaces.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;pnlSmileyFaces.Name" xml:space="preserve">
+    <value>pnlSmileyFaces</value>
+  </data>
+  <data name="&gt;&gt;pnlSmileyFaces.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlSmileyFaces.Parent" xml:space="preserve">
+    <value>pnlMain</value>
+  </data>
+  <data name="&gt;&gt;pnlSmileyFaces.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="pnlMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="pnlMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="pnlMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>602, 362</value>
+  </data>
+  <data name="pnlMain.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;pnlMain.Name" xml:space="preserve">
+    <value>pnlMain</value>
+  </data>
+  <data name="&gt;&gt;pnlMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlMain.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pnlMain.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Form2</value>
+  </data>
+  <data name="&gt;&gt;errorProvider.Name" xml:space="preserve">
+    <value>errorProvider</value>
+  </data>
+  <data name="&gt;&gt;errorProvider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>DialogForm</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lblCharNumberEndCaption.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -759,162 +1155,6 @@
   <data name="&gt;&gt;lblStartValue.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="pnlSlider.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11.25pt</value>
-  </data>
-  <data name="pnlSlider.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-11, 188</value>
-  </data>
-  <data name="pnlSlider.Size" type="System.Drawing.Size, System.Drawing">
-    <value>612, 129</value>
-  </data>
-  <data name="pnlSlider.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;pnlSlider.Name" xml:space="preserve">
-    <value>pnlSlider</value>
-  </data>
-  <data name="&gt;&gt;pnlSlider.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pnlSlider.Parent" xml:space="preserve">
-    <value>pnlMain</value>
-  </data>
-  <data name="&gt;&gt;pnlSlider.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblCharNumber.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblCharNumber.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 12pt</value>
-  </data>
-  <data name="lblCharNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>527, 8</value>
-  </data>
-  <data name="lblCharNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="lblCharNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 20</value>
-  </data>
-  <data name="lblCharNumber.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="lblCharNumber.Text" xml:space="preserve">
-    <value>0/1000</value>
-  </data>
-  <data name="&gt;&gt;lblCharNumber.Name" xml:space="preserve">
-    <value>lblCharNumber</value>
-  </data>
-  <data name="&gt;&gt;lblCharNumber.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblCharNumber.Parent" xml:space="preserve">
-    <value>pnlBaseFields</value>
-  </data>
-  <data name="&gt;&gt;lblCharNumber.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 8</value>
-  </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>574, 180</value>
-  </data>
-  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
-    <value>pnlBaseFields</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="pnlBaseFields.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-11, 0</value>
-  </data>
-  <data name="pnlBaseFields.Size" type="System.Drawing.Size, System.Drawing">
-    <value>612, 189</value>
-  </data>
-  <data name="pnlBaseFields.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;pnlBaseFields.Name" xml:space="preserve">
-    <value>pnlBaseFields</value>
-  </data>
-  <data name="&gt;&gt;pnlBaseFields.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pnlBaseFields.Parent" xml:space="preserve">
-    <value>pnlMain</value>
-  </data>
-  <data name="&gt;&gt;pnlBaseFields.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="btnCancel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11.25pt</value>
-  </data>
-  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>514, 323</value>
-  </data>
-  <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 28</value>
-  </data>
-  <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="btnCancel.Text" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
-    <value>btnCancel</value>
-  </data>
-  <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
-    <value>pnlMain</value>
-  </data>
-  <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="btnUpdate.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11.25pt</value>
-  </data>
-  <data name="btnUpdate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>433, 323</value>
-  </data>
-  <data name="btnUpdate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 28</value>
-  </data>
-  <data name="btnUpdate.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="btnUpdate.Text" xml:space="preserve">
-    <value>Update</value>
-  </data>
-  <data name="&gt;&gt;btnUpdate.Name" xml:space="preserve">
-    <value>btnUpdate</value>
-  </data>
-  <data name="&gt;&gt;btnUpdate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnUpdate.Parent" xml:space="preserve">
-    <value>pnlMain</value>
-  </data>
-  <data name="&gt;&gt;btnUpdate.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
   <data name="lblFacesNumber.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1025,65 +1265,5 @@
   </data>
   <data name="&gt;&gt;lblNumberofSmileyfaces.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="pnlSmileyFaces.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-11, 187</value>
-  </data>
-  <data name="pnlSmileyFaces.Size" type="System.Drawing.Size, System.Drawing">
-    <value>603, 100</value>
-  </data>
-  <data name="pnlSmileyFaces.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;pnlSmileyFaces.Name" xml:space="preserve">
-    <value>pnlSmileyFaces</value>
-  </data>
-  <data name="&gt;&gt;pnlSmileyFaces.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pnlSmileyFaces.Parent" xml:space="preserve">
-    <value>pnlMain</value>
-  </data>
-  <data name="&gt;&gt;pnlSmileyFaces.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="pnlMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="pnlMain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="pnlMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>602, 362</value>
-  </data>
-  <data name="pnlMain.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;pnlMain.Name" xml:space="preserve">
-    <value>pnlMain</value>
-  </data>
-  <data name="&gt;&gt;pnlMain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pnlMain.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;pnlMain.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Form2</value>
-  </data>
-  <data name="&gt;&gt;errorProvider.Name" xml:space="preserve">
-    <value>errorProvider</value>
-  </data>
-  <data name="&gt;&gt;errorProvider.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>DialogForm</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

@@ -188,6 +188,7 @@ namespace SurveyQuestionsConfigurator.Repositories
             {
                 using (SqlConnection tConnection = new SqlConnection(mConnectionString))
                 {
+                    tConnection.Open();
                     String tSql = $"DELETE FROM {QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID} = {PARAM_ID}";
 
                     using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
@@ -518,7 +519,9 @@ namespace SurveyQuestionsConfigurator.Repositories
             try
             {
                 using (SqlConnection tConnection = new SqlConnection(mConnectionString))
+
                 {
+                    tConnection.Open();
                     string tSql = $"SELECT {COLUMN_NUMBER_OF_STARS} FROM {STAR_QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID} = {PARAM_ID}";
 
                     using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
@@ -555,6 +558,7 @@ namespace SurveyQuestionsConfigurator.Repositories
             {
                 using (SqlConnection tConnection = new SqlConnection(mConnectionString))
                 {
+                    tConnection.Open();
                     String tSql = $"SELECT {COLUMN_NUMBER_OF_SMILEY_FACES} FROM {SMILEY_FACES_QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID}={PARAM_ID}";
 
                     using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
@@ -590,6 +594,7 @@ namespace SurveyQuestionsConfigurator.Repositories
             {
                 using (SqlConnection tConnection = new SqlConnection(mConnectionString))
                 {
+                    tConnection.Open();
                     String tSql = $"SELECT {COLUMN_START_VALUE},{COLUMN_END_VALUE},{COLUMN_START_VALUE_CAPTION},{COLUMN_END_VALUE_CAPTION} FROM {SLIDER_QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID}={PARAM_ID}";
 
                     using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))

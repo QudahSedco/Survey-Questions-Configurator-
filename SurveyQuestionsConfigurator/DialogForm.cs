@@ -28,7 +28,7 @@ namespace SurveyQuestionsConfigurator
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
-            this.RightToLeft = RightToLeft.Yes;
+            // this.RightToLeft = RightToLeft.Yes;
             mQuestionService = new QuestionService();
             comboBoxQuestionTypes.DataSource = Enum.GetValues(typeof(QuestionType));
 
