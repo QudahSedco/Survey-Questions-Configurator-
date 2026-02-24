@@ -2,13 +2,16 @@
 using Serilog.Formatting.Json;
 using SurveyQuestionsConfigurator.Models;
 using SurveyQuestionsConfiguratorModels;
+using SurveyQuestionsConfiguratorModels.Result;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,18 +53,37 @@ namespace SurveyQuestionsConfigurator.Repositories
         private const string COLUMN_END_VALUE = "end_value";
         private const string COLUMN_START_VALUE_CAPTION = "start_value_caption";
         private const string COLUMN_END_VALUE_CAPTION = "end_value_caption";
+        private const string UNEXPECTED_ERROR_MESSAGE = "Unexpected error happend";
+
+        //Paramaters
+        private const string PARAM_ID = "@id";
+
+        private const string PARAM_QUESTION_TEXT = "@QuestionText";
+        private const string PARAM_QUESTION_ORDER = "@QuestionOrder";
+        private const string PARAM_QUESTION_TYPE = "@QuestionType";
+        private const string PARAM_NUMBER_OF_STARS = "@numberOfStars";
+        private const string PARAM_NUMBER_OF_SMILEY_FACES = "@numberOfSmileyFaces";
+        private const string PARAM_START_VALUE = "@startValue";
+        private const string PARAM_END_VALUE = "@endValue";
+        private const string PARAM_START_CAPTION = "@startCaption";
+        private const string PARAM_END_CAPTION = "@endCaption";
 
         public QuestionRepository()
         {
-            Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()
-                    .WriteTo.File(new JsonFormatter(), "logs/SurveyQuestionsConfigurator-.json", rollingInterval: RollingInterval.Day)
-                    .CreateLogger();
         }
 
         //if any changes in Database happens trigger the event
         private void OnQuestionsTableChanged(Object pSender, EventArgs pE)
         {
-            QuestionsTableChanged?.Invoke();
+            try
+            {
+                QuestionsTableChanged?.Invoke();
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, "Error Invoking Questions Table changed");
+                throw;
+            }
         }
 
         public Result<bool> StartListening()
@@ -76,10 +98,11 @@ namespace SurveyQuestionsConfigurator.Repositories
             catch (Exception tEx)
             {
                 Log.Error(tEx, "Error starting SqlTableDependency");
-                return Result<bool>.Failure("Failed to start SqlTableDependency");
+                return Result<bool>.Failure(ResultStatus.SqlTableDependencyError);
             }
         }
 
+        //Called once the application closes
         public void StopListening()
         {
             try
@@ -95,9 +118,9 @@ namespace SurveyQuestionsConfigurator.Repositories
         //Inserts into the base table then retrieves the Id created by the Database and uses it to create a child record
         public Result<bool> AddQuestion(Question pQuestion)
         {
-            using (SqlConnection tConnection = new SqlConnection(mConnectionString))
+            try
             {
-                try
+                using (SqlConnection tConnection = new SqlConnection(mConnectionString))
                 {
                     tConnection.Open();
 
@@ -106,13 +129,13 @@ namespace SurveyQuestionsConfigurator.Repositories
                         try
                         {
                             string tSql =
-                                $@"INSERT INTO {QUESTIONS_TABLE} ({COLUMN_QUESTION_TEXT}, {COLUMN_QUESTION_ORDER}, {COLUMN_QUESTION_TYPE}) VALUES (@text, @order, @type);SELECT CAST(SCOPE_IDENTITY() AS INT);";
+                                $@"INSERT INTO {QUESTIONS_TABLE} ({COLUMN_QUESTION_TEXT}, {COLUMN_QUESTION_ORDER}, {COLUMN_QUESTION_TYPE}) VALUES ({PARAM_QUESTION_TEXT}, {PARAM_QUESTION_ORDER}, {PARAM_QUESTION_TYPE});SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
                             using (SqlCommand tCmd = new SqlCommand(tSql, tConnection, tTransaction))
                             {
-                                tCmd.Parameters.AddWithValue("@text", pQuestion.QuestionText);
-                                tCmd.Parameters.AddWithValue("@order", pQuestion.QuestionOrder);
-                                tCmd.Parameters.AddWithValue("@type", (int)pQuestion.QuestionType);
+                                tCmd.Parameters.AddWithValue(PARAM_QUESTION_TEXT, pQuestion.QuestionText);
+                                tCmd.Parameters.AddWithValue(PARAM_QUESTION_ORDER, pQuestion.QuestionOrder);
+                                tCmd.Parameters.AddWithValue(PARAM_QUESTION_TYPE, (int)pQuestion.QuestionType);
 
                                 pQuestion.Id = (int)tCmd.ExecuteScalar();
                             }
@@ -133,148 +156,155 @@ namespace SurveyQuestionsConfigurator.Repositories
 
                                 default:
                                     tTransaction.Rollback();
-                                    return Result<bool>.Failure("Failed to add an unknown question type");
+                                    return Result<bool>.Failure(ResultStatus.UnknownType);
                             }
 
                             tTransaction.Commit();
                             return Result<bool>.Success(true);
                         }
-                        catch (SqlException ex)
+                        catch
                         {
                             tTransaction.Rollback();
-                            Log.Error(ex, "Could Not complete the create question transaction");
-                            return Result<bool>.Failure("Failed to save new question in Database");
+                            throw;
                         }
                     }
                 }
-                catch (SqlException ex)
-                {
-                    Log.Error(ex, "Could Not connect to Database");
-                    return Result<bool>.Failure("Failed to connect to the Database");
-                }
+            }
+            catch (SqlException ex)
+            {
+                Log.Error(ex, "Error adding a question to the Database");
+                return Result<bool>.Failure(ResultStatus.DatabaseError);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, UNEXPECTED_ERROR_MESSAGE);
+                return Result<bool>.Failure(ResultStatus.UnexpectedError);
             }
         }
 
         public Result<bool> DeleteQuestionById(int pId)
         {
-            using (SqlConnection tConnection = new SqlConnection(mConnectionString))
+            try
             {
-                String tSql = $"DELETE FROM {QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID} = @id";
-
-                using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
+                using (SqlConnection tConnection = new SqlConnection(mConnectionString))
                 {
-                    try
-                    {
-                        tConnection.Open();
-                    }
-                    catch (Exception tEx)
-                    {
-                        Log.Error(tEx, "Error happened while trying to connect to the Database with");
-                        return Result<bool>.Failure($"Failed to connect to the Database");
-                    }
+                    String tSql = $"DELETE FROM {QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID} = {PARAM_ID}";
 
-                    try
+                    using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
                     {
-                        tCmd.Parameters.AddWithValue("@id", pId);
+                        tCmd.Parameters.AddWithValue(PARAM_ID, pId);
                         tCmd.ExecuteNonQuery();
                         return Result<bool>.Success(true);
                     }
-                    catch (SqlException tEx)
-                    {
-                        Log.Error(tEx, "Error happened while trying to delete question with ID {QuestionId}", pId);
-                        return Result<bool>.Failure($"Failed to delete the question with ID {pId}");
-                    }
                 }
+            }
+            catch (SqlException tEx)
+            {
+                Log.Error(tEx, "Error happened while trying to delete question with ID {QuestionId}", pId);
+                return Result<bool>.Failure(ResultStatus.DatabaseError);
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                return Result<bool>.Failure(ResultStatus.UnexpectedError);
             }
         }
 
         public Result<List<Question>> GetAllQuestions()
         {
-            var tQuestionsList = new List<Question>();
-
-            string tSql = $"SELECT {COLUMN_QUESTION_ID}, {COLUMN_QUESTION_TEXT}, {COLUMN_QUESTION_ORDER}, {COLUMN_QUESTION_TYPE} FROM {QUESTIONS_TABLE} ORDER BY {COLUMN_QUESTION_ORDER}";
-
-            using (SqlConnection tConnection = new SqlConnection(mConnectionString))
-            using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
+            try
             {
-                try
+                var tQuestionsList = new List<Question>();
+
+                string tSql = $"SELECT {COLUMN_QUESTION_ID}, {COLUMN_QUESTION_TEXT}, {COLUMN_QUESTION_ORDER}, {COLUMN_QUESTION_TYPE} FROM {QUESTIONS_TABLE} ORDER BY {COLUMN_QUESTION_ORDER}";
+
+                using (SqlConnection tConnection = new SqlConnection(mConnectionString))
+                using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
                 {
                     tConnection.Open();
-                    try
+
+                    using (SqlDataReader tReader = tCmd.ExecuteReader())
                     {
-                        using (SqlDataReader tReader = tCmd.ExecuteReader())
+                        while (tReader.Read())
                         {
-                            while (tReader.Read())
+                            QuestionType tType = (QuestionType)tReader.GetInt32(3);
+
+                            Question tQuestion;
+
+                            switch (tType)
                             {
-                                QuestionType tType = (QuestionType)tReader.GetInt32(3);
+                                case QuestionType.Smiley:
+                                    tQuestion = new SmileyFacesQuestion();
+                                    break;
 
-                                Question tQuestion;
+                                case QuestionType.Slider:
+                                    tQuestion = new SliderQuestion();
+                                    break;
 
-                                switch (tType)
-                                {
-                                    case QuestionType.Smiley:
-                                        tQuestion = new SmileyFacesQuestion();
-                                        break;
+                                case QuestionType.Star:
+                                    tQuestion = new StarQuestion();
+                                    break;
 
-                                    case QuestionType.Slider:
-                                        tQuestion = new SliderQuestion();
-                                        break;
-
-                                    case QuestionType.Star:
-                                        tQuestion = new StarQuestion();
-                                        break;
-
-                                    default:
-                                        return Result<List<Question>>.Failure("Failed to get question unknown question type");
-                                }
-
-                                tQuestion.Id = tReader.GetInt32(0);
-                                tQuestion.QuestionText = tReader.GetString(1);
-                                tQuestion.QuestionOrder = tReader.GetInt32(2);
-
-                                tQuestionsList.Add(tQuestion);
+                                default:
+                                    return Result<List<Question>>.Failure(ResultStatus.UnknownType);
                             }
-                        }
 
-                        return Result<List<Question>>.Success(tQuestionsList);
+                            tQuestion.Id = tReader.GetInt32(0);
+                            tQuestion.QuestionText = tReader.GetString(1);
+                            tQuestion.QuestionOrder = tReader.GetInt32(2);
+
+                            tQuestionsList.Add(tQuestion);
+                        }
                     }
-                    catch (Exception tEx)
-                    {
-                        Log.Error(tEx, "Error getting all questions from the DataBase");
-                        return Result<List<Question>>.Failure("Failed to get all questions from the DataBase");
-                    }
+
+                    return Result<List<Question>>.Success(tQuestionsList);
                 }
-                catch (SqlException tEx)
-                {
-                    Log.Error(tEx, "Error Connecting to the DataBase");
-                    return Result<List<Question>>.Failure("Failed to connect to the DataBase");
-                }
+            }
+            catch (SqlException tEx)
+            {
+                Log.Error(tEx, "Error getting all questions");
+                return Result<List<Question>>.Failure(ResultStatus.DatabaseError);
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                return Result<List<Question>>.Failure(ResultStatus.UnexpectedError);
             }
         }
 
         public Result<Question> GetChildQuestion(Question pQuestion)
         {
-            switch (pQuestion)
+            try
             {
-                case StarQuestion tStarQuestion:
-                    return GetStarQuestion(tStarQuestion);
+                switch (pQuestion)
+                {
+                    case StarQuestion tStarQuestion:
+                        return GetStarQuestion(tStarQuestion);
 
-                case SmileyFacesQuestion tSmileyFacesQuestion:
-                    return GetSmileyQuestion(tSmileyFacesQuestion);
+                    case SmileyFacesQuestion tSmileyFacesQuestion:
+                        return GetSmileyQuestion(tSmileyFacesQuestion);
 
-                case SliderQuestion tSliderQuestion:
-                    return GetSliderQuestion(tSliderQuestion);
+                    case SliderQuestion tSliderQuestion:
+                        return GetSliderQuestion(tSliderQuestion);
 
-                default:
-                    return Result<Question>.Failure("Failed to get child question Unknown question type");
+                    default:
+                        return Result<Question>.Failure(ResultStatus.UnknownType);
+                }
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                return Result<Question>.Failure(ResultStatus.UnexpectedError);
             }
         }
 
+        //two try statments are used here the nested one is to rollback the database
+        //and to make sure the variabletTrsansdacitpon is sdtill iun the scopr becuase the word Using
         public Result<bool> UpdateQuestion(Question pQuestion)
         {
-            using (SqlConnection tConnection = new SqlConnection(mConnectionString))
+            try
             {
-                try
+                using (SqlConnection tConnection = new SqlConnection(mConnectionString))
                 {
                     tConnection.Open();
 
@@ -300,173 +330,200 @@ namespace SurveyQuestionsConfigurator.Repositories
                                     break;
 
                                 default:
-                                    tTransaction.Rollback();
-                                    return Result<bool>.Failure("Failed to update question unknown question type");
+                                    return Result<bool>.Failure(ResultStatus.UnknownType);
                             }
 
                             tTransaction.Commit();
                             return Result<bool>.Success(true);
                         }
-                        catch (SqlException tEx)
+                        catch
                         {
                             tTransaction.Rollback();
-                            Log.Error(tEx, "Error while Updating question with ID {questionId} in Database", pQuestion.Id);
-                            return Result<bool>.Failure($"Failed to update question with ID {pQuestion.Id}");
+                            throw;
                         }
                     }
                 }
-                catch (SqlException tEx)
-                {
-                    Log.Error(tEx, "Error couldn't connect to DataBase");
-                    return Result<bool>.Failure("Failed to connect to Database");
-                }
+            }
+            catch (SqlException tEx)
+            {
+                Log.Error(tEx, "Error while Updating question with ID {questionId} in Database", pQuestion.Id);
+                return Result<bool>.Failure(ResultStatus.DatabaseError);
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                return Result<bool>.Failure(ResultStatus.UnexpectedError);
             }
         }
 
         private void UpdateStarQuestion(StarQuestion pStarQuestion, SqlConnection pSqlConnection, SqlTransaction pSqlTransaction)
         {
-            string tSql = $"UPDATE {STAR_QUESTIONS_TABLE} SET {COLUMN_NUMBER_OF_STARS} = @numberOfStars WHERE {COLUMN_QUESTION_ID}=@id";
-            using (SqlCommand tCmd = new SqlCommand(tSql, pSqlConnection, pSqlTransaction))
+            string tSql = $"UPDATE {STAR_QUESTIONS_TABLE} SET {COLUMN_NUMBER_OF_STARS} = {PARAM_NUMBER_OF_STARS} WHERE {COLUMN_QUESTION_ID}={PARAM_ID}";
+            try
             {
-                tCmd.Parameters.AddWithValue("@id", pStarQuestion.Id);
-                tCmd.Parameters.AddWithValue("@numberOfStars", pStarQuestion.NumberOfStars);
-                try
+                using (SqlCommand tCmd = new SqlCommand(tSql, pSqlConnection, pSqlTransaction))
                 {
+                    tCmd.Parameters.AddWithValue(PARAM_ID, pStarQuestion.Id);
+                    tCmd.Parameters.AddWithValue(PARAM_NUMBER_OF_STARS, pStarQuestion.NumberOfStars);
+
                     tCmd.ExecuteNonQuery();
                 }
-                catch (SqlException tEx)
-                {
-                    Log.Error(tEx, "Error  while updating star question with id {id}", pStarQuestion.Id);
-                    throw;
-                }
+            }
+            catch (SqlException tEx)
+            {
+                Log.Error(tEx, "Error  while updating star question with id {id}", pStarQuestion.Id);
+                throw;
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                throw;
             }
         }
 
         private void UpdateSmileyQuestion(SmileyFacesQuestion pSmileyQuestion, SqlConnection pSqlConnection, SqlTransaction pSqlTransaction)
         {
-            string tSql = $"UPDATE {SMILEY_FACES_QUESTIONS_TABLE} SET {COLUMN_NUMBER_OF_SMILEY_FACES}=@numberOfSmileyFaces WHERE {COLUMN_QUESTION_ID} = @id";
-            using (SqlCommand tCmd = new SqlCommand(tSql, pSqlConnection, pSqlTransaction))
+            string tSql = $"UPDATE {SMILEY_FACES_QUESTIONS_TABLE} SET {COLUMN_NUMBER_OF_SMILEY_FACES}={PARAM_NUMBER_OF_SMILEY_FACES} WHERE {COLUMN_QUESTION_ID} = {PARAM_ID}";
+            try
             {
-                tCmd.Parameters.AddWithValue("@id", pSmileyQuestion.Id);
-                tCmd.Parameters.AddWithValue("@numberOfSmileyFaces", pSmileyQuestion.NumberOfSmileyFaces);
-                try
+                using (SqlCommand tCmd = new SqlCommand(tSql, pSqlConnection, pSqlTransaction))
                 {
+                    tCmd.Parameters.AddWithValue(PARAM_ID, pSmileyQuestion.Id);
+                    tCmd.Parameters.AddWithValue(PARAM_NUMBER_OF_SMILEY_FACES, pSmileyQuestion.NumberOfSmileyFaces);
+
                     tCmd.ExecuteNonQuery();
                 }
-                catch (SqlException tEx)
-                {
-                    Log.Error(tEx, "Error while updating Smiley face question with id {id}", pSmileyQuestion.Id);
-                    throw;
-                }
+            }
+            catch (SqlException tEx)
+            {
+                Log.Error(tEx, "Error while updating Smiley face question with id {id}", pSmileyQuestion.Id);
+                throw;
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                throw;
             }
         }
 
         private void UpdateSliderQuestion(SliderQuestion pSliderQuestion, SqlConnection pSqlConnection, SqlTransaction pSqlTransaction)
         {
-            string tSql = $"UPDATE {SLIDER_QUESTIONS_TABLE} SET {COLUMN_START_VALUE} = @startValue, {COLUMN_END_VALUE}=@endValue,{COLUMN_START_VALUE_CAPTION}=@startCaption,{COLUMN_END_VALUE_CAPTION}=@endCaption WHERE {COLUMN_QUESTION_ID}= @id";
-            using (SqlCommand tCmd = new SqlCommand(tSql, pSqlConnection, pSqlTransaction))
+            string tSql = $"UPDATE {SLIDER_QUESTIONS_TABLE} SET {COLUMN_START_VALUE} = {PARAM_START_VALUE}, {COLUMN_END_VALUE}={PARAM_END_VALUE},{COLUMN_START_VALUE_CAPTION}={PARAM_START_CAPTION},{COLUMN_END_VALUE_CAPTION}={PARAM_END_CAPTION} WHERE {COLUMN_QUESTION_ID}= {PARAM_ID}";
+            try
             {
-                tCmd.Parameters.AddWithValue("@id", pSliderQuestion.Id);
-                tCmd.Parameters.AddWithValue("@startValue", pSliderQuestion.StartValue);
-                tCmd.Parameters.AddWithValue("@endValue", pSliderQuestion.EndValue);
-                tCmd.Parameters.AddWithValue("@startCaption", pSliderQuestion.StartValueCaption);
-                tCmd.Parameters.AddWithValue("@endCaption", pSliderQuestion.EndValueCaption);
-                try
+                using (SqlCommand tCmd = new SqlCommand(tSql, pSqlConnection, pSqlTransaction))
                 {
+                    tCmd.Parameters.AddWithValue(PARAM_ID, pSliderQuestion.Id);
+                    tCmd.Parameters.AddWithValue(PARAM_START_VALUE, pSliderQuestion.StartValue);
+                    tCmd.Parameters.AddWithValue(PARAM_END_VALUE, pSliderQuestion.EndValue);
+                    tCmd.Parameters.AddWithValue(PARAM_START_CAPTION, pSliderQuestion.StartValueCaption);
+                    tCmd.Parameters.AddWithValue(PARAM_END_CAPTION, pSliderQuestion.EndValueCaption);
+
                     tCmd.ExecuteNonQuery();
                 }
-                catch (SqlException tEx)
-                {
-                    Log.Error(tEx, "Error  while updating Slider question with id {id}", pSliderQuestion.Id);
-                    throw;
-                }
+            }
+            catch (SqlException tEx)
+            {
+                Log.Error(tEx, "Error  while updating Slider question with id {id}", pSliderQuestion.Id);
+                throw;
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                throw;
             }
         }
 
         private void AddStarQuestion(StarQuestion pQuestion, SqlConnection pConnection, SqlTransaction pTransaction)
         {
-            string tSql = $@"INSERT INTO {STAR_QUESTIONS_TABLE} ({COLUMN_QUESTION_ID}, {COLUMN_NUMBER_OF_STARS}) VALUES (@id, @stars)";
-
-            using (SqlCommand tCmd = new SqlCommand(tSql, pConnection, pTransaction))
+            string tSql = $@"INSERT INTO {STAR_QUESTIONS_TABLE} ({COLUMN_QUESTION_ID}, {COLUMN_NUMBER_OF_STARS}) VALUES ({PARAM_ID}, {PARAM_NUMBER_OF_STARS})";
+            try
             {
-                tCmd.Parameters.AddWithValue("@id", pQuestion.Id);
-                tCmd.Parameters.AddWithValue("@stars", pQuestion.NumberOfStars);
-                try
+                using (SqlCommand tCmd = new SqlCommand(tSql, pConnection, pTransaction))
                 {
+                    tCmd.Parameters.AddWithValue(PARAM_ID, pQuestion.Id);
+                    tCmd.Parameters.AddWithValue(PARAM_NUMBER_OF_STARS, pQuestion.NumberOfStars);
+
                     tCmd.ExecuteNonQuery();
                 }
-                catch (SqlException tEx)
-                {
-                    Log.Error(tEx, "Error  while adding star question with id {id}", pQuestion.Id);
-                    throw;
-                }
+            }
+            catch (SqlException tEx)
+            {
+                Log.Error(tEx, "Error  while adding star question with id {id}", pQuestion.Id);
+                throw;
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                throw;
             }
         }
 
         private void AddSmileyFaceQuestion(SmileyFacesQuestion pQuestion, SqlConnection pConnection, SqlTransaction pTransaction)
         {
-            string tSql = $"INSERT INTO {SMILEY_FACES_QUESTIONS_TABLE} ({COLUMN_QUESTION_ID},{COLUMN_NUMBER_OF_SMILEY_FACES}) VALUES (@id,@NumberOfSmileyFaces)";
-
-            using (SqlCommand tCmd = new SqlCommand(tSql, pConnection, pTransaction))
+            string tSql = $"INSERT INTO {SMILEY_FACES_QUESTIONS_TABLE} ({COLUMN_QUESTION_ID},{COLUMN_NUMBER_OF_SMILEY_FACES}) VALUES ({PARAM_ID},{PARAM_NUMBER_OF_SMILEY_FACES})";
+            try
             {
-                tCmd.Parameters.AddWithValue("@id", pQuestion.Id);
-                tCmd.Parameters.AddWithValue("@NumberOfSmileyFaces", pQuestion.NumberOfSmileyFaces);
-                try
+                using (SqlCommand tCmd = new SqlCommand(tSql, pConnection, pTransaction))
                 {
+                    tCmd.Parameters.AddWithValue(PARAM_ID, pQuestion.Id);
+                    tCmd.Parameters.AddWithValue(PARAM_NUMBER_OF_SMILEY_FACES, pQuestion.NumberOfSmileyFaces);
+
                     tCmd.ExecuteNonQuery();
                 }
-                catch (SqlException tEx)
-                {
-                    Log.Error(tEx, "Error  while adding smiley face question with id {id}", pQuestion.Id);
-                    throw;
-                }
+            }
+            catch (SqlException tEx)
+            {
+                Log.Error(tEx, "Error  while adding smiley face question with id {id}", pQuestion.Id);
+                throw;
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                throw;
             }
         }
 
         private void AddSliderQuestion(SliderQuestion pQuestion, SqlConnection pConnection, SqlTransaction pTransaction)
         {
             string tSql = $@"INSERT INTO {SLIDER_QUESTIONS_TABLE}({COLUMN_QUESTION_ID},{COLUMN_START_VALUE},{COLUMN_END_VALUE},{COLUMN_START_VALUE_CAPTION},{COLUMN_END_VALUE_CAPTION})
-                 VALUES (@id,@startValue,@endValue,@startCaption,@endCaption)";
-            using (SqlCommand tCmd = new SqlCommand(tSql, pConnection, pTransaction))
+                 VALUES ({PARAM_ID},{PARAM_START_VALUE},{PARAM_END_VALUE},{PARAM_START_CAPTION},{PARAM_END_CAPTION})";
+            try
             {
-                tCmd.Parameters.AddWithValue("@id", pQuestion.Id);
-                tCmd.Parameters.AddWithValue("@startValue", pQuestion.StartValue);
-                tCmd.Parameters.AddWithValue("@endValue", pQuestion.EndValue);
-                tCmd.Parameters.AddWithValue("@startCaption", pQuestion.StartValueCaption);
-                tCmd.Parameters.AddWithValue("@endCaption", pQuestion.EndValueCaption);
-                try
+                using (SqlCommand tCmd = new SqlCommand(tSql, pConnection, pTransaction))
                 {
+                    tCmd.Parameters.AddWithValue(PARAM_ID, pQuestion.Id);
+                    tCmd.Parameters.AddWithValue(PARAM_START_VALUE, pQuestion.StartValue);
+                    tCmd.Parameters.AddWithValue(PARAM_END_VALUE, pQuestion.EndValue);
+                    tCmd.Parameters.AddWithValue(PARAM_START_CAPTION, pQuestion.StartValueCaption);
+                    tCmd.Parameters.AddWithValue(PARAM_END_CAPTION, pQuestion.EndValueCaption);
+
                     tCmd.ExecuteNonQuery();
                 }
-                catch (SqlException tEx)
-                {
-                    Log.Error(tEx, "Error  while adding slider question with id {id}", pQuestion.Id);
-                    throw;
-                }
+            }
+            catch (SqlException tEx)
+            {
+                Log.Error(tEx, "Error  while adding slider question with id {id}", pQuestion.Id);
+                throw;
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                throw;
             }
         }
 
         private Result<Question> GetStarQuestion(StarQuestion pQuestion)
         {
-            using (SqlConnection tConnection = new SqlConnection(mConnectionString))
+            try
             {
-                try
+                using (SqlConnection tConnection = new SqlConnection(mConnectionString))
                 {
-                    try
-                    {
-                        tConnection.Open();
-                    }
-                    catch (Exception tEx)
-                    {
-                        Log.Error(tEx, "Error happened while trying to connect to the Database with");
-                        return Result<Question>.Failure($"Failed to connect to the Database");
-                    }
-
-                    string tSql = $"SELECT {COLUMN_NUMBER_OF_STARS} FROM {STAR_QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID} = @id";
+                    string tSql = $"SELECT {COLUMN_NUMBER_OF_STARS} FROM {STAR_QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID} = {PARAM_ID}";
 
                     using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
                     {
-                        tCmd.Parameters.AddWithValue("@id", pQuestion.Id);
+                        tCmd.Parameters.AddWithValue(PARAM_ID, pQuestion.Id);
 
                         using (SqlDataReader tReader = tCmd.ExecuteReader())
                         {
@@ -478,36 +535,31 @@ namespace SurveyQuestionsConfigurator.Repositories
                     }
                     return Result<Question>.Success(pQuestion);
                 }
-                catch (SqlException tEx)
-                {
-                    Log.Error(tEx, "Error while retrieving StarQuestion with id {QuestionId} from Database", pQuestion.Id);
-                    return Result<Question>.Failure($"Failed to retrieve star question with ID {pQuestion.Id}");
-                }
+            }
+            catch (SqlException tEx)
+            {
+                Log.Error(tEx, "Error while retrieving StarQuestion with id {QuestionId} from Database", pQuestion.Id);
+                return Result<Question>.Failure(ResultStatus.DatabaseError);
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                return Result<Question>.Failure(ResultStatus.UnexpectedError);
             }
         }
 
         private Result<Question> GetSmileyQuestion(SmileyFacesQuestion pQuestion)
 
         {
-            using (SqlConnection tConnection = new SqlConnection(mConnectionString))
+            try
             {
-                try
+                using (SqlConnection tConnection = new SqlConnection(mConnectionString))
                 {
-                    try
-                    {
-                        tConnection.Open();
-                    }
-                    catch (Exception tEx)
-                    {
-                        Log.Error(tEx, "Error happened while trying to connect to the Database with");
-                        return Result<Question>.Failure($"Failed to connect to the Database");
-                    }
-
-                    String tSql = $"SELECT {COLUMN_NUMBER_OF_SMILEY_FACES} FROM {SMILEY_FACES_QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID}=@id";
+                    String tSql = $"SELECT {COLUMN_NUMBER_OF_SMILEY_FACES} FROM {SMILEY_FACES_QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID}={PARAM_ID}";
 
                     using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
                     {
-                        tCmd.Parameters.AddWithValue("@id", pQuestion.Id);
+                        tCmd.Parameters.AddWithValue(PARAM_ID, pQuestion.Id);
                         using (SqlDataReader tReader = tCmd.ExecuteReader())
                         {
                             if (tReader.Read())
@@ -516,36 +568,33 @@ namespace SurveyQuestionsConfigurator.Repositories
                             }
                         }
                     }
-                    return Result<Question>.Success(pQuestion);
                 }
-                catch (SqlException tEx)
-                {
-                    Log.Error(tEx, "Error while retrieving Smiley question with id {QuestionId} from Database", pQuestion.Id);
-                    return Result<Question>.Failure($"Failed to retrieve smiley question with ID {pQuestion.Id}");
-                }
+
+                return Result<Question>.Success(pQuestion);
+            }
+            catch (SqlException tEx)
+            {
+                Log.Error(tEx, "Error while retrieving Smiley question with id {QuestionId} from Database", pQuestion.Id);
+                return Result<Question>.Failure(ResultStatus.DatabaseError);
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                return Result<Question>.Failure(ResultStatus.UnexpectedError);
             }
         }
 
         private Result<Question> GetSliderQuestion(SliderQuestion pQuestion)
         {
-            using (SqlConnection tConnection = new SqlConnection(mConnectionString))
+            try
             {
-                try
+                using (SqlConnection tConnection = new SqlConnection(mConnectionString))
                 {
-                    try
-                    {
-                        tConnection.Open();
-                    }
-                    catch (Exception tEx)
-                    {
-                        Log.Error(tEx, "Error happened while trying to connect to the Database with");
-                        return Result<Question>.Failure($"Failed to connect to the Database");
-                    }
-                    String tSql = $"SELECT {COLUMN_START_VALUE},{COLUMN_END_VALUE},{COLUMN_START_VALUE_CAPTION},{COLUMN_END_VALUE_CAPTION} FROM {SLIDER_QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID}=@id";
+                    String tSql = $"SELECT {COLUMN_START_VALUE},{COLUMN_END_VALUE},{COLUMN_START_VALUE_CAPTION},{COLUMN_END_VALUE_CAPTION} FROM {SLIDER_QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID}={PARAM_ID}";
 
                     using (SqlCommand tCmd = new SqlCommand(tSql, tConnection))
                     {
-                        tCmd.Parameters.AddWithValue("@id", pQuestion.Id);
+                        tCmd.Parameters.AddWithValue(PARAM_ID, pQuestion.Id);
                         using (SqlDataReader tReader = tCmd.ExecuteReader())
                         {
                             if (tReader.Read())
@@ -560,11 +609,16 @@ namespace SurveyQuestionsConfigurator.Repositories
                     }
                     return Result<Question>.Success(pQuestion);
                 }
-                catch (SqlException tEx)
-                {
-                    Log.Error(tEx, "Error while retrieving Slider Question with Id {QuestionId} from Database", pQuestion.Id);
-                    return Result<Question>.Failure($"Failed to retrieve Slider question with ID {pQuestion.Id}");
-                }
+            }
+            catch (SqlException tEx)
+            {
+                Log.Error(tEx, "Error while retrieving Slider Question with Id {QuestionId} from Database", pQuestion.Id);
+                return Result<Question>.Failure(ResultStatus.DatabaseError);
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                return Result<Question>.Failure(ResultStatus.UnexpectedError);
             }
         }
 
@@ -586,24 +640,24 @@ namespace SurveyQuestionsConfigurator.Repositories
                             switch (pOldQuestionType)
                             {
                                 case QuestionType.Star:
-                                    tSql = $"DELETE FROM {STAR_QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID} = @id";
+                                    tSql = $"DELETE FROM {STAR_QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID} = {PARAM_ID}";
                                     break;
 
                                 case QuestionType.Smiley:
-                                    tSql = $"DELETE FROM {SMILEY_FACES_QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID} = @id";
+                                    tSql = $"DELETE FROM {SMILEY_FACES_QUESTIONS_TABLE} WHERE {COLUMN_QUESTION_ID} = {PARAM_ID}";
                                     break;
 
                                 case QuestionType.Slider:
-                                    tSql = $"DELETE FROM {SLIDER_QUESTIONS_TABLE} WHERE  {COLUMN_QUESTION_ID}  = @id";
+                                    tSql = $"DELETE FROM {SLIDER_QUESTIONS_TABLE} WHERE  {COLUMN_QUESTION_ID}  = {PARAM_ID}";
                                     break;
 
                                 default:
-                                    return Result<bool>.Failure("Faild to delete question with unknown type");
+                                    return Result<bool>.Failure(ResultStatus.UnknownType);
                             }
 
                             using (SqlCommand tCmd = new SqlCommand(tSql, tConnection, tTransaction))
                             {
-                                tCmd.Parameters.AddWithValue("@id", pQuestion.Id);
+                                tCmd.Parameters.AddWithValue(PARAM_ID, pQuestion.Id);
                                 tCmd.ExecuteNonQuery();
                             }
 
@@ -627,40 +681,49 @@ namespace SurveyQuestionsConfigurator.Repositories
                             tTransaction.Commit();
                             return Result<bool>.Success(true);
                         }
-                        catch (SqlException tEx)
+                        catch
                         {
                             tTransaction.Rollback();
-                            Log.Error(tEx, "Error updating question {QuestionId}", pQuestion.Id);
-                            return Result<bool>.Failure($"Failed to update question with id {pQuestion.Id}");
+                            throw;
                         }
                     }
                 }
                 catch (SqlException tEx)
                 {
-                    Log.Error(tEx, "Failed to connect to the DataBase");
-                    return Result<bool>.Failure("Failed to connect to the DataBase");
+                    Log.Error(tEx, "Error updating child table");
+                    return Result<bool>.Failure(ResultStatus.DatabaseError);
+                }
+                catch (Exception tEx)
+                {
+                    Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                    return Result<bool>.Failure(ResultStatus.UnexpectedError);
                 }
             }
         }
 
         private void UpdateBaseQuestion(Question pQuestion, SqlConnection pConnection, SqlTransaction pTransaction)
         {
-            string tSql = $"UPDATE {QUESTIONS_TABLE} SET {COLUMN_QUESTION_TEXT} = @questionText,{COLUMN_QUESTION_ORDER} = @questionOrder,{COLUMN_QUESTION_TYPE} = @questionType WHERE {COLUMN_QUESTION_ID}=@id";
-            using (SqlCommand tCmd = new SqlCommand(tSql, pConnection, pTransaction))
+            string tSql = $"UPDATE {QUESTIONS_TABLE} SET {COLUMN_QUESTION_TEXT} = {PARAM_QUESTION_TEXT},{COLUMN_QUESTION_ORDER} = {PARAM_QUESTION_ORDER},{COLUMN_QUESTION_TYPE} = {PARAM_QUESTION_TYPE} WHERE {COLUMN_QUESTION_ID}={PARAM_ID}";
+            try
             {
-                tCmd.Parameters.AddWithValue("@id", pQuestion.Id);
-                tCmd.Parameters.AddWithValue("@questionText", pQuestion.QuestionText);
-                tCmd.Parameters.AddWithValue("@questionOrder", pQuestion.QuestionOrder);
-                tCmd.Parameters.AddWithValue("@questionType", (int)pQuestion.QuestionType);
-                try
+                using (SqlCommand tCmd = new SqlCommand(tSql, pConnection, pTransaction))
                 {
+                    tCmd.Parameters.AddWithValue(PARAM_ID, pQuestion.Id);
+                    tCmd.Parameters.AddWithValue(PARAM_QUESTION_TEXT, pQuestion.QuestionText);
+                    tCmd.Parameters.AddWithValue(PARAM_QUESTION_ORDER, pQuestion.QuestionOrder);
+                    tCmd.Parameters.AddWithValue(PARAM_QUESTION_TYPE, (int)pQuestion.QuestionType);
+
                     tCmd.ExecuteNonQuery();
                 }
-                catch (SqlException tEx)
-                {
-                    Log.Error(tEx, "Error happened while updating question with id {id}", pQuestion.Id);
-                    throw;
-                }
+            }
+            catch (SqlException tEx)
+            {
+                Log.Error(tEx, "Error happened while updating base question with id {id}", pQuestion.Id);
+                throw;
+            }
+            catch
+            {
+                throw;
             }
         }
     }

@@ -9,8 +9,10 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -47,7 +49,7 @@ namespace SurveyQuestionsConfigurator
 
             if (!tResult.IsSuccess)
             {
-                Log.Error("Failed to start question listener using SqlTableDependency: {Error}", tResult.Error);
+                Log.Error("Failed to start question listener using SqlTableDependency: {Error}", tResult.MessageKey);//temp
             }
 
             dataGridViewMain.Font = new Font("Segoe UI", 13, FontStyle.Regular);
@@ -127,7 +129,7 @@ namespace SurveyQuestionsConfigurator
                 if (tResult.IsSuccess)
                     LoadQuestions();
                 else
-                    MessageBox.Show(this, tResult.Error, "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, tResult.MessageKey, "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Error); // temp
             }
         }
 
@@ -146,7 +148,7 @@ namespace SurveyQuestionsConfigurator
             }
             else
             {
-                MessageBox.Show(this, tResult.Error, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, tResult.MessageKey, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error); // temp
                 return;
             }
         }
@@ -164,7 +166,7 @@ namespace SurveyQuestionsConfigurator
                 tSelectedQuestion = tResult.Value;
             else
             {
-                MessageBox.Show(this, tResult.Error, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, tResult.MessageKey, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error); // temp
                 return;
             }
 
@@ -244,6 +246,72 @@ namespace SurveyQuestionsConfigurator
         private void FormMain_FormClosing(object pSender, FormClosingEventArgs pE)
         {
             mQuestionService.StopListening();
+        }
+
+        private void button1_click(object sender, EventArgs e)
+        {
+            if (Thread.CurrentThread.CurrentUICulture.Name.StartsWith("en"))
+            {
+                SwitchLanguage("ar");
+            }
+            else
+            {
+                SwitchLanguage("en");
+            }
+        }
+
+        private void SwitchLanguage(string culture)
+        {
+            bool isArabic = culture.StartsWith("ar");
+            foreach (DataGridViewColumn col in dataGridViewMain.Columns)
+            {
+                col.DefaultCellStyle.Alignment = isArabic
+                    ? DataGridViewContentAlignment.MiddleRight
+                    : DataGridViewContentAlignment.MiddleLeft;
+
+                col.HeaderCell.Style.Alignment = isArabic
+                    ? DataGridViewContentAlignment.MiddleRight
+                    : DataGridViewContentAlignment.MiddleLeft;
+            }
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
+
+            ApplyGridHeaders();
+
+            foreach (DataGridViewColumn col in dataGridViewMain.Columns)
+                col.DefaultCellStyle.Alignment = isArabic ? DataGridViewContentAlignment.MiddleRight : DataGridViewContentAlignment.MiddleLeft;
+
+            var resources = new ComponentResourceManager(typeof(MainForm));
+            ApplyResources(resources, this);
+        }
+
+        private void ApplyResources(ComponentResourceManager res, Control control)
+        {
+            res.ApplyResources(control, control.Name);
+
+            foreach (Control child in control.Controls)
+            {
+                ApplyResources(res, child);
+            }
+        }
+
+        private void ApplyGridHeaders()
+        {
+            if (Thread.CurrentThread.CurrentUICulture.Name.StartsWith("ar"))
+            {
+                dataGridViewMain.Columns[0].HeaderText = "نص السؤال";
+                dataGridViewMain.Columns[1].HeaderText = "الترتيب";
+                dataGridViewMain.Columns[2].HeaderText = "النوع";
+                dataGridViewMain.Columns[0].DisplayIndex = 2;
+                dataGridViewMain.Columns[1].DisplayIndex = 1;
+                dataGridViewMain.Columns[2].DisplayIndex = 0;
+            }
+            else
+            {
+                dataGridViewMain.Columns[0].HeaderText = "Question Text";
+                dataGridViewMain.Columns[1].HeaderText = "Order";
+                dataGridViewMain.Columns[2].HeaderText = "Type";
+            }
         }
     }
 }

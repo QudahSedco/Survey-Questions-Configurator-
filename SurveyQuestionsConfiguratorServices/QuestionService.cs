@@ -1,12 +1,15 @@
 ﻿using SurveyQuestionsConfigurator.Models;
 using SurveyQuestionsConfigurator.Repositories;
 using SurveyQuestionsConfiguratorModels;
+using SurveyQuestionsConfiguratorModels.Result;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
+using Serilog;
 
 namespace SurveyQuestionsConfiguratorServices
 {
@@ -16,126 +19,212 @@ namespace SurveyQuestionsConfiguratorServices
 
         public event Action QuestionsTableChanged;
 
+        private const string UNEXPECTED_ERROR_MESSAGE = "Unexpected error happend";
+
         public QuestionService()
         {
-            mDataRepository = new QuestionRepository();
-            mDataRepository.QuestionsTableChanged += OnQuestionTableChanged;
+            try
+            {
+                mDataRepository = new QuestionRepository();
+                mDataRepository.QuestionsTableChanged += OnQuestionTableChanged;
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         private void OnQuestionTableChanged()
         {
-            QuestionsTableChanged?.Invoke();
+            try
+            {
+                QuestionsTableChanged?.Invoke();
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         public Result<bool> StartListening()
         {
-            return mDataRepository.StartListening();
+            try
+            {
+                return mDataRepository.StartListening();
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                return Result<bool>.Failure(ResultStatus.UnexpectedError);
+            }
         }
 
         public void StopListening()
         {
-            mDataRepository.StopListening();
+            try
+            {
+                mDataRepository.StopListening();
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         public Result<List<Question>> GetAllQuestions()
         {
-            return mDataRepository.GetAllQuestions();
+            try
+            {
+                return mDataRepository.GetAllQuestions();
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                return Result<List<Question>>.Failure(ResultStatus.UnexpectedError);
+            }
         }
 
         public Result<Question> GetChildQuestion(Question pChildQuestion)
         {
-            return mDataRepository.GetChildQuestion(pChildQuestion);
+            try
+            {
+                return mDataRepository.GetChildQuestion(pChildQuestion);
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                return Result<Question>.Failure(ResultStatus.UnexpectedError);
+            }
         }
 
         public Result<bool> DeleteQuestionById(int pId)
         {
-            if (pId < 1)
-                return Result<bool>.Failure($"Failed to delete question with invalid Id {pId}");
-            return mDataRepository.DeleteQuestionById(pId);
+            try
+            {
+                return mDataRepository.DeleteQuestionById(pId);
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                return Result<bool>.Failure(ResultStatus.UnexpectedError);
+            }
         }
 
         public Result<bool> AddQuestion(Question pQuestion)
         {
-            var tResult = ValidateQuestion(pQuestion);
+            try
+            {
+                var tResult = ValidateQuestion(pQuestion);
 
-            if (!tResult.IsSuccess)
-                return tResult;
+                if (tResult.Status != ResultStatus.Success)
+                    return tResult;
 
-            return mDataRepository.AddQuestion(pQuestion);
+                return mDataRepository.AddQuestion(pQuestion);
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                return Result<bool>.Failure(ResultStatus.UnexpectedError);
+            }
         }
 
         public Result<bool> UpdateQuestion(Question pQuestion)
         {
-            var tResult = ValidateQuestion(pQuestion);
+            try
+            {
+                var tResult = ValidateQuestion(pQuestion);
 
-            if (!tResult.IsSuccess)
-                return tResult;
+                if (!tResult.IsSuccess)
+                    return tResult;
 
-            return mDataRepository.UpdateQuestion(pQuestion);
+                return mDataRepository.UpdateQuestion(pQuestion);
+            }
+            catch
+            {
+                return Result<bool>.Failure(ResultStatus.UnexpectedError);
+            }
         }
 
         public Result<bool> UpdateChildTableType(Question pQuestion, QuestionType pQuestionOldType)
         {
-            var tResult = ValidateQuestion(pQuestion);
+            try
+            {
+                var tResult = ValidateQuestion(pQuestion);
 
-            if (!tResult.IsSuccess)
-                return tResult;
+                if (!tResult.IsSuccess)
+                    return tResult;
 
-            return mDataRepository.UpdateChildTableType(pQuestion, pQuestionOldType);
+                return mDataRepository.UpdateChildTableType(pQuestion, pQuestionOldType);
+            }
+            catch (Exception tE)
+            {
+                Log.Error(tE, UNEXPECTED_ERROR_MESSAGE);
+                return Result<bool>.Failure(ResultStatus.UnexpectedError);
+            }
         }
 
         //method used to validate the question
         //made this instead of copy pasting the code every time i want to validate
         private Result<bool> ValidateQuestion(Question pQuestion)
         {
-            if (pQuestion == null)
-                return Result<bool>.Failure("Question cannot be null");
-
-            if (String.IsNullOrWhiteSpace(pQuestion.QuestionText))
+            try
             {
-                return Result<bool>.Failure("Question text cannot be empty or white space");
+                if (pQuestion == null)
+                    return Result<bool>.Failure(ResultStatus.ValidationError);
+
+                if (String.IsNullOrWhiteSpace(pQuestion.QuestionText))
+                {
+                    return Result<bool>.Failure(ResultStatus.ValidationError);
+                }
+                if (pQuestion.QuestionText.Length > 1000)
+                {
+                    return Result<bool>.Failure(ResultStatus.ValidationError);
+                }
+                if (pQuestion.QuestionOrder < 1)
+                    return Result<bool>.Failure(ResultStatus.ValidationError);
+
+                if (!Enum.IsDefined(typeof(QuestionType), pQuestion.QuestionType))
+                    return Result<bool>.Failure(ResultStatus.ValidationError);
+
+                switch (pQuestion)
+                {
+                    case StarQuestion tStarQuestion:
+                        if (tStarQuestion.NumberOfStars < 1 || tStarQuestion.NumberOfStars > 10)
+                            return Result<bool>.Failure(ResultStatus.ValidationError);
+                        break;
+
+                    case SmileyFacesQuestion tSmileyFacesQuestion:
+
+                        if (tSmileyFacesQuestion.NumberOfSmileyFaces < 2 || tSmileyFacesQuestion.NumberOfSmileyFaces > 5)
+                            return Result<bool>.Failure(ResultStatus.ValidationError);
+
+                        break;
+
+                    case SliderQuestion tSliderQuestion:
+
+                        if (tSliderQuestion.StartValue < 0 || tSliderQuestion.StartValue > 99)
+                            return Result<bool>.Failure(ResultStatus.ValidationError);
+                        if (tSliderQuestion.EndValue < 1 || tSliderQuestion.EndValue > 100)
+                            return Result<bool>.Failure(ResultStatus.ValidationError);
+                        if (tSliderQuestion.StartValue >= tSliderQuestion.EndValue)
+                            return Result<bool>.Failure(ResultStatus.ValidationError);
+                        if (string.IsNullOrWhiteSpace(tSliderQuestion.StartValueCaption))
+                            return Result<bool>.Failure(ResultStatus.ValidationError);
+                        if (tSliderQuestion.StartValueCaption.Length > 100)
+                            return Result<bool>.Failure(ResultStatus.ValidationError);
+                        if (string.IsNullOrWhiteSpace(tSliderQuestion.EndValueCaption))
+                            return Result<bool>.Failure(ResultStatus.ValidationError);
+                        if (tSliderQuestion.EndValueCaption.Length > 100)
+                            return Result<bool>.Failure(ResultStatus.ValidationError);
+                        break;
+                }
+
+                return Result<bool>.Success(true);
             }
-            if (pQuestion.QuestionText.Length > 1000)
+            catch
             {
-                return Result<bool>.Failure("Question text cannot be more than 1000 characters");
+                throw;
             }
-            if (pQuestion.QuestionOrder < 1)
-                return Result<bool>.Failure("Question order must be 1 or greater");
-
-            if (!Enum.IsDefined(typeof(QuestionType), pQuestion.QuestionType))
-                return Result<bool>.Failure("Question type is invalid");
-
-            switch (pQuestion)
-            {
-                case StarQuestion tStarQuestion:
-                    if (tStarQuestion.NumberOfStars < 1 || tStarQuestion.NumberOfStars > 10)
-                        return Result<bool>.Failure("Number of stars cannot be less than 1 or more than 10");
-                    break;
-
-                case SmileyFacesQuestion tSmileyFacesQuestion:
-                    if (tSmileyFacesQuestion.NumberOfSmileyFaces < 2 || tSmileyFacesQuestion.NumberOfSmileyFaces > 5)
-                        return Result<bool>.Failure("Number of smiley faces cannot be less than 2 or more than 5");
-                    break;
-
-                case SliderQuestion tSliderQuestion:
-
-                    if (tSliderQuestion.StartValue < 0 || tSliderQuestion.StartValue > 99)
-                        return Result<bool>.Failure("Start value must be between 0 and 99");
-                    if (tSliderQuestion.EndValue < 1 || tSliderQuestion.EndValue > 100)
-                        return Result<bool>.Failure("End value must be between 1 and 100");
-                    if (tSliderQuestion.StartValue >= tSliderQuestion.EndValue)
-                        return Result<bool>.Failure("Slider start value cannot be more or equal to slider end value");
-                    if (string.IsNullOrWhiteSpace(tSliderQuestion.StartValueCaption))
-                        return Result<bool>.Failure("Start caption cannot be empty or white space");
-                    if (tSliderQuestion.StartValueCaption.Length > 100)
-                        return Result<bool>.Failure("Start caption cannot exceed 100 characters");
-                    if (string.IsNullOrWhiteSpace(tSliderQuestion.EndValueCaption))
-                        return Result<bool>.Failure("End caption cannot be empty or white space");
-                    if (tSliderQuestion.EndValueCaption.Length > 100)
-                        return Result<bool>.Failure("End caption cannot exceed 100 characters");
-                    break;
-            }
-            return Result<bool>.Success(true);
         }
     }
 }

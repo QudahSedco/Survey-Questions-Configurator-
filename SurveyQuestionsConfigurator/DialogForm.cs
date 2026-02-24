@@ -1,6 +1,7 @@
 ﻿using Serilog;
 using SurveyQuestionsConfigurator.Models;
 using SurveyQuestionsConfiguratorModels;
+using SurveyQuestionsConfiguratorModels.Result;
 using SurveyQuestionsConfiguratorServices;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace SurveyQuestionsConfigurator
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
-
+            this.RightToLeft = RightToLeft.Yes;
             mQuestionService = new QuestionService();
             comboBoxQuestionTypes.DataSource = Enum.GetValues(typeof(QuestionType));
 
@@ -169,7 +170,7 @@ namespace SurveyQuestionsConfigurator
             else
             {
                 MessageBox.Show(
-                    tResult.Error,
+                    tResult.MessageKey, //temporary,
                     "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
@@ -266,7 +267,7 @@ namespace SurveyQuestionsConfigurator
             var tOldType = mEditingQuestion.QuestionType;
             var tNewType = (QuestionType)comboBoxQuestionTypes.SelectedItem;
 
-            Result<bool> tResult = Result<bool>.Failure("Unknown question type");
+            Result<bool> tResult = Result<bool>.Failure(ResultStatus.UnknownType); // temp
 
             if (tOldType == tNewType)//if type didn't change
             {
@@ -412,7 +413,7 @@ namespace SurveyQuestionsConfigurator
             else
                 MessageBox.Show(
                     this,
-                    tResult.Error,
+                    tResult.MessageKey, // temp
                     "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
