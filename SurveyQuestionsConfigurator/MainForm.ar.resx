@@ -162,4 +162,13 @@
   <data name="Grid_QuestionOrder.HeaderText" xml:space="preserve">
     <value>الترتيب</value>
   </data>
+  <data name="QuestionType_Smiley" xml:space="preserve">
+    <value>وجوه مبتسمة</value>
+  </data>
+  <data name="QuestionType_Slider" xml:space="preserve">
+    <value>شريط تمرير</value>
+  </data>
+  <data name="QuestionType_Star" xml:space="preserve">
+    <value>نجوم</value>
+  </data>
 </root>

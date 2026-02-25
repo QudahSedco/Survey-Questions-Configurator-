@@ -399,4 +399,13 @@
   <data name="Grid_QuestionOrder.HeaderText" xml:space="preserve">
     <value>Order</value>
   </data>
+  <data name="QuestionType_Smiley" xml:space="preserve">
+    <value>Smiley</value>
+  </data>
+  <data name="QuestionType_Slider" xml:space="preserve">
+    <value>Slider</value>
+  </data>
+  <data name="QuestionType_Star" xml:space="preserve">
+    <value>Star</value>
+  </data>
 </root>

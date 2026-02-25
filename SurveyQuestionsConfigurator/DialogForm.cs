@@ -1,5 +1,6 @@
 ﻿using Serilog;
 using SurveyQuestionsConfigurator.Models;
+using SurveyQuestionsConfigurator.Properties;
 using SurveyQuestionsConfiguratorModels;
 using SurveyQuestionsConfiguratorModels.Result;
 using SurveyQuestionsConfiguratorServices;
@@ -8,7 +9,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -37,18 +41,31 @@ namespace SurveyQuestionsConfigurator
                 pnlStars.RightToLeft = RightToLeft.Yes;
                 pnlSmileyFaces.RightToLeft = RightToLeft.Yes;
                 pnlSlider.RightToLeft = RightToLeft.Yes;
-                pnlBaseFields.RightToLeft = RightToLeft.Yes;
 
                 this.RightToLeftLayout = true;
             }
 
             mQuestionService = new QuestionService();
-            comboBoxQuestionTypes.DataSource = Enum.GetValues(typeof(QuestionType));
+
+            // comboBoxQuestionTypes.DataSource = Enum.GetValues(typeof(QuestionType));
+
+            comboBoxQuestionTypes.DataSource = Enum.GetValues(typeof(QuestionType))
+      .Cast<QuestionType>()
+      .Select(q => new
+      {
+          Value = q,
+          Text = GetLocalizedDescription(q)  // now picks Arabic from Resources.ar.resx
+      })
+      .ToList();
+
+            comboBoxQuestionTypes.DisplayMember = "Text";
+            comboBoxQuestionTypes.ValueMember = "Value";
+            pnlSmileyFaces.Visible = true;
 
             if (pQuestion != null) //means form is in edit mode
             {
                 mEditingQuestion = pQuestion;
-                comboBoxQuestionTypes.SelectedItem = pQuestion.QuestionType;
+                comboBoxQuestionTypes.SelectedValue = pQuestion.QuestionType;
                 PopulateFields(pQuestion);
                 btnUpdate.Visible = true;
                 btnAdd.Visible = false;
@@ -62,6 +79,18 @@ namespace SurveyQuestionsConfigurator
                 UpdateStars(trackBarStars.Value);
                 Text = "Create";
             }
+        }
+
+        public static string GetLocalizedDescription(Enum value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+
+            string resourceKey = $"{value.GetType().Name}_{value}";
+
+            var res = new ComponentResourceManager(typeof(MainForm));
+            string localizedValue = res.GetString(resourceKey);
+
+            return string.IsNullOrEmpty(localizedValue) ? value.ToString() : localizedValue;
         }
 
         //Fills the form with values from the question passed from the main form
@@ -109,7 +138,7 @@ namespace SurveyQuestionsConfigurator
                 return;
             }
 
-            QuestionType tSelectedType = (QuestionType)comboBoxQuestionTypes.SelectedItem;
+            QuestionType tSelectedType = (QuestionType)comboBoxQuestionTypes.SelectedValue;
 
             Question tQuestion = null;
 
@@ -224,7 +253,7 @@ namespace SurveyQuestionsConfigurator
             pnlSmileyFaces.Visible = false;
             pnlSlider.Visible = false;
 
-            QuestionType tSelected = (QuestionType)comboBoxQuestionTypes.SelectedItem;
+            QuestionType tSelected = (QuestionType)comboBoxQuestionTypes.SelectedValue;
 
             switch (tSelected)
             {
@@ -278,7 +307,7 @@ namespace SurveyQuestionsConfigurator
             mEditingQuestion.QuestionOrder = (int)numericUpDownQuestionOrder.Value;
 
             var tOldType = mEditingQuestion.QuestionType;
-            var tNewType = (QuestionType)comboBoxQuestionTypes.SelectedItem;
+            var tNewType = (QuestionType)comboBoxQuestionTypes.SelectedValue;
 
             Result<bool> tResult = Result<bool>.Failure(ResultStatus.UnknownType); // temp
 
@@ -440,13 +469,19 @@ namespace SurveyQuestionsConfigurator
         //shows the number of chars entered by the user into the question text textbox
         private void textBoxQuestionText_TextChanged(object pSender, EventArgs pE)
         {
-            lblCharNumber.Text = $"{textBoxQuestionText.Text.Length.ToString()}/1000";
+            if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ar")
+                lblCharNumber.Text = $"1000/{textBoxQuestionText.Text.Length.ToString()}";
+            else
+                lblCharNumber.Text = $"{textBoxQuestionText.Text.Length.ToString()}/1000";
         }
 
         //shows the number of chars entered by the user into the start caption text box
         private void textBoxStartCaption_TextChanged(object pSender, EventArgs pE)
         {
-            lblCharNumberStartCaption.Text = $"{textBoxStartCaption.Text.Length.ToString()}/100";
+            if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ar")
+                lblCharNumberStartCaption.Text = $"100/{textBoxStartCaption.Text.Length.ToString()}";
+            else
+                lblCharNumberStartCaption.Text = $"{textBoxStartCaption.Text.Length.ToString()}/100";
         }
     }
 }
