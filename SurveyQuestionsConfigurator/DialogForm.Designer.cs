@@ -59,12 +59,12 @@
             this.lblCharNumber = new System.Windows.Forms.Label();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.pnlBaseFields = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pnlSmileyFaces = new System.Windows.Forms.Panel();
             this.lblFacesNumber = new System.Windows.Forms.Label();
             this.trackBarSmileyFaces = new System.Windows.Forms.TrackBar();
             this.lblSmileyFaces = new System.Windows.Forms.Label();
             this.lblNumberofSmileyfaces = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuestionOrder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarStars)).BeginInit();
             this.pnlStars.SuspendLayout();
@@ -74,6 +74,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartValue)).BeginInit();
             this.pnlMain.SuspendLayout();
             this.pnlBaseFields.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.pnlSmileyFaces.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSmileyFaces)).BeginInit();
             this.SuspendLayout();
@@ -298,16 +299,22 @@
             // pnlBaseFields
             // 
             this.pnlBaseFields.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlBaseFields.Controls.Add(this.lblQuestionText);
-            this.pnlBaseFields.Controls.Add(this.lblTypeOfQuestion);
-            this.pnlBaseFields.Controls.Add(this.comboBoxQuestionTypes);
-            this.pnlBaseFields.Controls.Add(this.lblQuestionOrder);
-            this.pnlBaseFields.Controls.Add(this.lblCharNumber);
-            this.pnlBaseFields.Controls.Add(this.numericUpDownQuestionOrder);
             this.pnlBaseFields.Controls.Add(this.textBoxQuestionText);
             this.pnlBaseFields.Controls.Add(this.groupBox1);
             resources.ApplyResources(this.pnlBaseFields, "pnlBaseFields");
             this.pnlBaseFields.Name = "pnlBaseFields";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lblCharNumber);
+            this.groupBox1.Controls.Add(this.comboBoxQuestionTypes);
+            this.groupBox1.Controls.Add(this.lblTypeOfQuestion);
+            this.groupBox1.Controls.Add(this.lblQuestionText);
+            this.groupBox1.Controls.Add(this.numericUpDownQuestionOrder);
+            this.groupBox1.Controls.Add(this.lblQuestionOrder);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.TabStop = false;
             // 
             // pnlSmileyFaces
             // 
@@ -344,12 +351,6 @@
             resources.ApplyResources(this.lblNumberofSmileyfaces, "lblNumberofSmileyfaces");
             this.lblNumberofSmileyfaces.Name = "lblNumberofSmileyfaces";
             // 
-            // groupBox1
-            // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.TabStop = false;
-            // 
             // DialogForm
             // 
             resources.ApplyResources(this, "$this");
@@ -368,6 +369,8 @@
             this.pnlMain.ResumeLayout(false);
             this.pnlBaseFields.ResumeLayout(false);
             this.pnlBaseFields.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.pnlSmileyFaces.ResumeLayout(false);
             this.pnlSmileyFaces.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSmileyFaces)).EndInit();

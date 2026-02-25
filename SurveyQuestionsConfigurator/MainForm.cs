@@ -58,9 +58,12 @@ namespace SurveyQuestionsConfigurator
             dataGridViewMain.AutoGenerateColumns = false;
             dataGridViewMain.MultiSelect = false;
 
+            // this is what shows in the grid
+
             //creating the columns for the data grid view
             DataGridViewTextBoxColumn tColText = new DataGridViewTextBoxColumn();
-            tColText.HeaderText = "QuestionText";
+            tColText.Name = "Grid_QuestionText";
+            tColText.HeaderText = "Question Text";
             tColText.DataPropertyName = "QuestionText";
             tColText.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             tColText.SortMode = DataGridViewColumnSortMode.Automatic;
@@ -68,14 +71,18 @@ namespace SurveyQuestionsConfigurator
             dataGridViewMain.Columns.Add(tColText);
 
             DataGridViewTextBoxColumn tColOrder = new DataGridViewTextBoxColumn();
-            tColOrder.HeaderText = "QuestionOrder";
+            tColOrder.Name = "Grid_QuestionOrder";
+            tColOrder.HeaderText = "Order";
+
             tColOrder.DataPropertyName = "QuestionOrder";
             tColOrder.Width = 170;
             tColOrder.SortMode = DataGridViewColumnSortMode.Automatic;
             dataGridViewMain.Columns.Add(tColOrder);
 
             DataGridViewTextBoxColumn tColType = new DataGridViewTextBoxColumn();
-            tColType.HeaderText = "QuestionType";
+
+            tColType.Name = "Grid_QuestionType";
+            tColType.HeaderText = "Type";
             tColType.DataPropertyName = "QuestionType";
             tColType.Width = 160;
             tColType.SortMode = DataGridViewColumnSortMode.Automatic;
@@ -219,13 +226,6 @@ namespace SurveyQuestionsConfigurator
             string tPropertyName = dataGridViewMain.Columns[pE.ColumnIndex].DataPropertyName;
             bool tAscending = mSortColumnsDictionary[tPropertyName];
 
-            foreach (DataGridViewColumn tColumn in dataGridViewMain.Columns)
-            {
-                tColumn.HeaderText = tColumn.DataPropertyName;
-            }
-
-            dataGridViewMain.Columns[pE.ColumnIndex].HeaderText = tPropertyName + (tAscending ? " ↑" : " ↓");
-
             SortQuestions(tPropertyName);
         }
 
@@ -262,56 +262,25 @@ namespace SurveyQuestionsConfigurator
 
         private void SwitchLanguage(string culture)
         {
-            bool isArabic = culture.StartsWith("ar");
-            foreach (DataGridViewColumn col in dataGridViewMain.Columns)
-            {
-                col.DefaultCellStyle.Alignment = isArabic
-                    ? DataGridViewContentAlignment.MiddleRight
-                    : DataGridViewContentAlignment.MiddleLeft;
-
-                col.HeaderCell.Style.Alignment = isArabic
-                    ? DataGridViewContentAlignment.MiddleRight
-                    : DataGridViewContentAlignment.MiddleLeft;
-            }
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
             Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
 
-            ApplyGridHeaders();
+            var res = new ComponentResourceManager(typeof(MainForm));
+            res.ApplyResources(this, "$this");
+
+            foreach (Control c in Controls)
+                ApplyResourcesRecursive(res, c);
 
             foreach (DataGridViewColumn col in dataGridViewMain.Columns)
-                col.DefaultCellStyle.Alignment = isArabic ? DataGridViewContentAlignment.MiddleRight : DataGridViewContentAlignment.MiddleLeft;
-
-            var resources = new ComponentResourceManager(typeof(MainForm));
-            ApplyResources(resources, this);
+                res.ApplyResources(col, col.Name);
         }
 
-        private void ApplyResources(ComponentResourceManager res, Control control)
+        private void ApplyResourcesRecursive(ComponentResourceManager res, Control control)
         {
             res.ApplyResources(control, control.Name);
 
             foreach (Control child in control.Controls)
-            {
-                ApplyResources(res, child);
-            }
-        }
-
-        private void ApplyGridHeaders()
-        {
-            if (Thread.CurrentThread.CurrentUICulture.Name.StartsWith("ar"))
-            {
-                dataGridViewMain.Columns[0].HeaderText = "نص السؤال";
-                dataGridViewMain.Columns[1].HeaderText = "الترتيب";
-                dataGridViewMain.Columns[2].HeaderText = "النوع";
-                dataGridViewMain.Columns[0].DisplayIndex = 2;
-                dataGridViewMain.Columns[1].DisplayIndex = 1;
-                dataGridViewMain.Columns[2].DisplayIndex = 0;
-            }
-            else
-            {
-                dataGridViewMain.Columns[0].HeaderText = "Question Text";
-                dataGridViewMain.Columns[1].HeaderText = "Order";
-                dataGridViewMain.Columns[2].HeaderText = "Type";
-            }
+                ApplyResourcesRecursive(res, child);
         }
     }
 }

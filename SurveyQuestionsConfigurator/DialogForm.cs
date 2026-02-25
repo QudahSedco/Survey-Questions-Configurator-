@@ -10,6 +10,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -28,7 +29,19 @@ namespace SurveyQuestionsConfigurator
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
-            // this.RightToLeft = RightToLeft.Yes;
+
+            if (Thread.CurrentThread.CurrentUICulture.Name.StartsWith("ar"))
+            {
+                this.RightToLeft = RightToLeft.Yes;
+                this.RightToLeft = RightToLeft.Yes;
+                pnlStars.RightToLeft = RightToLeft.Yes;
+                pnlSmileyFaces.RightToLeft = RightToLeft.Yes;
+                pnlSlider.RightToLeft = RightToLeft.Yes;
+                pnlBaseFields.RightToLeft = RightToLeft.Yes;
+
+                this.RightToLeftLayout = true;
+            }
+
             mQuestionService = new QuestionService();
             comboBoxQuestionTypes.DataSource = Enum.GetValues(typeof(QuestionType));
 

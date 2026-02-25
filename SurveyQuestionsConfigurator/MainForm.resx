@@ -384,10 +384,19 @@
   <data name="&gt;&gt;lblListOfQuestions.Name" xml:space="preserve">
     <value>lblListOfQuestions</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.Language" type="System.Globalization.CultureInfo, mscorlib">
     <value>ar</value>
-  </metadata>
+  </data>
+  <data name="Grid_QuestionType.HeaderText" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Grid_QuestionText.HeaderText" xml:space="preserve">
+    <value>Question Text</value>
+  </data>
+  <data name="Grid_QuestionOrder.HeaderText" xml:space="preserve">
+    <value>Order</value>
+  </data>
 </root>

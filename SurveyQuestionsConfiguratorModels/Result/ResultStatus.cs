@@ -15,6 +15,10 @@ namespace SurveyQuestionsConfiguratorModels.Result
         DatabaseError = -4,
         UnknownType = -5,
         ValidationError = -6,
-        SqlTableDependencyError = -7
+        SqlTableDependencyError = -7,
+        OutOfRangeError = -8,
+        NullError = -9,
+        NullOrWhiteSpaceError = -10,
+        LengthTooLong = -11
     }
 }

@@ -170,11 +170,11 @@ namespace SurveyQuestionsConfiguratorServices
             try
             {
                 if (pQuestion == null)
-                    return Result<bool>.Failure(ResultStatus.ValidationError);
+                    return Result<bool>.Failure(ResultStatus.NullError);
 
                 if (String.IsNullOrWhiteSpace(pQuestion.QuestionText))
                 {
-                    return Result<bool>.Failure(ResultStatus.ValidationError);
+                    return Result<bool>.Failure(ResultStatus.NullOrWhiteSpaceError);
                 }
                 if (pQuestion.QuestionText.Length > 1000)
                 {
@@ -190,22 +190,22 @@ namespace SurveyQuestionsConfiguratorServices
                 {
                     case StarQuestion tStarQuestion:
                         if (tStarQuestion.NumberOfStars < 1 || tStarQuestion.NumberOfStars > 10)
-                            return Result<bool>.Failure(ResultStatus.ValidationError);
+                            return Result<bool>.Failure(ResultStatus.OutOfRangeError);
                         break;
 
                     case SmileyFacesQuestion tSmileyFacesQuestion:
 
                         if (tSmileyFacesQuestion.NumberOfSmileyFaces < 2 || tSmileyFacesQuestion.NumberOfSmileyFaces > 5)
-                            return Result<bool>.Failure(ResultStatus.ValidationError);
+                            return Result<bool>.Failure(ResultStatus.OutOfRangeError);
 
                         break;
 
                     case SliderQuestion tSliderQuestion:
 
                         if (tSliderQuestion.StartValue < 0 || tSliderQuestion.StartValue > 99)
-                            return Result<bool>.Failure(ResultStatus.ValidationError);
+                            return Result<bool>.Failure(ResultStatus.OutOfRangeError);
                         if (tSliderQuestion.EndValue < 1 || tSliderQuestion.EndValue > 100)
-                            return Result<bool>.Failure(ResultStatus.ValidationError);
+                            return Result<bool>.Failure(ResultStatus.OutOfRangeError);
                         if (tSliderQuestion.StartValue >= tSliderQuestion.EndValue)
                             return Result<bool>.Failure(ResultStatus.ValidationError);
                         if (string.IsNullOrWhiteSpace(tSliderQuestion.StartValueCaption))
