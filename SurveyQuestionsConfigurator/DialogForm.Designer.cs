@@ -393,8 +393,8 @@
             // 
             resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.BackColor = System.Drawing.SystemColors.Window;
-            this.groupBox2.Controls.Add(this.pnlSlider);
             this.groupBox2.Controls.Add(this.pnlSmileyFaces);
+            this.groupBox2.Controls.Add(this.pnlSlider);
             this.groupBox2.Controls.Add(this.pnlStars);
             this.errorProvider.SetError(this.groupBox2, resources.GetString("groupBox2.Error"));
             this.errorProvider.SetIconAlignment(this.groupBox2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("groupBox2.IconAlignment"))));

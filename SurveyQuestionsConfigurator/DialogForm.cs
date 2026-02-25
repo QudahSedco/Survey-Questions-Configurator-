@@ -25,6 +25,7 @@ namespace SurveyQuestionsConfigurator
     {
         private QuestionService mQuestionService;
         private Question mEditingQuestion;
+        private ComponentResourceManager mRes = new ComponentResourceManager(typeof(MainForm));
 
         public DialogForm(Question pQuestion)
         {
@@ -50,13 +51,16 @@ namespace SurveyQuestionsConfigurator
             // comboBoxQuestionTypes.DataSource = Enum.GetValues(typeof(QuestionType));
 
             comboBoxQuestionTypes.DataSource = Enum.GetValues(typeof(QuestionType))
-      .Cast<QuestionType>()
-      .Select(q => new
-      {
-          Value = q,
-          Text = GetLocalizedDescription(q)  // now picks Arabic from Resources.ar.resx
-      })
-      .ToList();
+         .Cast<QuestionType>()
+         .Select(q => new
+         {
+             Value = q,
+             Text = GetLocalizedDescription(q)  // now uses global Resources
+         })
+         .ToList();
+
+            comboBoxQuestionTypes.DisplayMember = "Text";
+            comboBoxQuestionTypes.ValueMember = "Value";
 
             comboBoxQuestionTypes.DisplayMember = "Text";
             comboBoxQuestionTypes.ValueMember = "Value";
@@ -81,15 +85,17 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        public static string GetLocalizedDescription(Enum value)
+        private static string GetLocalizedDescription(Enum value)
         {
             if (value == null) throw new ArgumentNullException(nameof(value));
 
+            // Build the resource key: EnumTypeName_EnumValue
             string resourceKey = $"{value.GetType().Name}_{value}";
 
-            var res = new ComponentResourceManager(typeof(MainForm));
-            string localizedValue = res.GetString(resourceKey);
+            // Look up in global Properties.Resources
+            string localizedValue = Resources.ResourceManager.GetString(resourceKey, Thread.CurrentThread.CurrentUICulture);
 
+            // Fallback to enum name if not found
             return string.IsNullOrEmpty(localizedValue) ? value.ToString() : localizedValue;
         }
 
@@ -129,7 +135,7 @@ namespace SurveyQuestionsConfigurator
 
             if (String.IsNullOrWhiteSpace(textBoxQuestionText.Text))
             {
-                errorProvider.SetError(textBoxQuestionText, "Question text cannot be empty or white space");
+                errorProvider.SetError(textBoxQuestionText, mRes.GetString("SliderStartValueLessThanEnd"));
                 return;
             }
             if (textBoxQuestionText.Text.Length > 1000)

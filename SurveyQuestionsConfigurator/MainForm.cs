@@ -11,10 +11,12 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SurveyQuestionsConfigurator
 {
@@ -27,6 +29,10 @@ namespace SurveyQuestionsConfigurator
         public MainForm()
         {
             InitializeComponent();
+            LanguagesComboBox.Items.Add("English");
+            LanguagesComboBox.Items.Add("Arabic");
+            LanguagesComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            LanguagesComboBox.SelectedIndex = 0;
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MinimizeBox = true;
             StartPosition = FormStartPosition.CenterScreen;
@@ -281,6 +287,22 @@ namespace SurveyQuestionsConfigurator
 
             foreach (Control child in control.Controls)
                 ApplyResourcesRecursive(res, child);
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string tSelectedLang = LanguagesComboBox.SelectedItem.ToString();
+
+            switch (tSelectedLang)
+            {
+                case "English":
+                    SwitchLanguage("en");
+                    break;
+
+                case "Arabic":
+                    SwitchLanguage("ar");
+                    break;
+            }
         }
     }
 }
