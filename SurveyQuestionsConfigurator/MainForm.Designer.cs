@@ -31,16 +31,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.pnlFooter = new System.Windows.Forms.Panel();
             this.btnDelete = new System.Windows.Forms.Button();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.LanguagesComboBox = new System.Windows.Forms.ComboBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.QuestionsListGroupBox = new System.Windows.Forms.GroupBox();
             this.dataGridViewMain = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             this.pnlFooter.SuspendLayout();
             this.pnlMain.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.QuestionsListGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMain)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,20 +60,13 @@
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnEdit_Click);
             // 
-            // button1
-            // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_click);
-            // 
             // pnlFooter
             // 
-            resources.ApplyResources(this.pnlFooter, "pnlFooter");
-            this.pnlFooter.Controls.Add(this.btnDelete);
             this.pnlFooter.Controls.Add(this.button1);
+            this.pnlFooter.Controls.Add(this.btnDelete);
             this.pnlFooter.Controls.Add(this.btnUpdate);
             this.pnlFooter.Controls.Add(this.btnAdd);
+            resources.ApplyResources(this.pnlFooter, "pnlFooter");
             this.pnlFooter.Name = "pnlFooter";
             // 
             // btnDelete
@@ -87,34 +80,41 @@
             // 
             resources.ApplyResources(this.pnlMain, "pnlMain");
             this.pnlMain.Controls.Add(this.LanguagesComboBox);
-            this.pnlMain.Controls.Add(this.groupBox1);
+            this.pnlMain.Controls.Add(this.QuestionsListGroupBox);
             this.pnlMain.Name = "pnlMain";
             // 
             // LanguagesComboBox
             // 
-            resources.ApplyResources(this.LanguagesComboBox, "LanguagesComboBox");
             this.LanguagesComboBox.FormattingEnabled = true;
+            resources.ApplyResources(this.LanguagesComboBox, "LanguagesComboBox");
             this.LanguagesComboBox.Name = "LanguagesComboBox";
-            this.LanguagesComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.LanguagesComboBox.SelectedIndexChanged += new System.EventHandler(this.LanguagesComboBox_SelectedIndexChanged);
             // 
-            // groupBox1
+            // QuestionsListGroupBox
             // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.BackColor = System.Drawing.SystemColors.Menu;
-            this.groupBox1.Controls.Add(this.dataGridViewMain);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.TabStop = false;
+            this.QuestionsListGroupBox.BackColor = System.Drawing.SystemColors.Menu;
+            this.QuestionsListGroupBox.Controls.Add(this.dataGridViewMain);
+            resources.ApplyResources(this.QuestionsListGroupBox, "QuestionsListGroupBox");
+            this.QuestionsListGroupBox.Name = "QuestionsListGroupBox";
+            this.QuestionsListGroupBox.TabStop = false;
             // 
             // dataGridViewMain
             // 
-            resources.ApplyResources(this.dataGridViewMain, "dataGridViewMain");
             this.dataGridViewMain.AllowUserToAddRows = false;
             this.dataGridViewMain.AllowUserToDeleteRows = false;
             this.dataGridViewMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resources.ApplyResources(this.dataGridViewMain, "dataGridViewMain");
             this.dataGridViewMain.Name = "dataGridViewMain";
             this.dataGridViewMain.ReadOnly = true;
             this.dataGridViewMain.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewMain_CellContentClick);
             this.dataGridViewMain.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewMain_ColumnHeaderMouseClick);
+            // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // MainForm
             // 
@@ -127,7 +127,7 @@
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.pnlFooter.ResumeLayout(false);
             this.pnlMain.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
+            this.QuestionsListGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMain)).EndInit();
             this.ResumeLayout(false);
 
@@ -139,10 +139,10 @@
         private System.Windows.Forms.Panel pnlFooter;
         private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.DataGridView dataGridViewMain;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox QuestionsListGroupBox;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.ComboBox LanguagesComboBox;
+        private System.Windows.Forms.Button button1;
     }
 }
 

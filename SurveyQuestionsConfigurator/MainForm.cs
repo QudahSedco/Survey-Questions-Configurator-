@@ -1,6 +1,7 @@
 ﻿using Serilog;
 using SurveyQuestionsConfigurator.Models;
 using SurveyQuestionsConfiguratorModels;
+using SurveyQuestionsConfiguratorModels.Result;
 using SurveyQuestionsConfiguratorServices;
 using System;
 using System.Collections.Generic;
@@ -26,124 +27,156 @@ namespace SurveyQuestionsConfigurator
         private QuestionService mQuestionService;
         private Dictionary<string, bool> mSortColumnsDictionary;
         private List<Question> mQuestionsList;
+        private const string UNEXPECTED_ERROR_MESSAGE = "An unexpected error occurred";
 
         public MainForm()
         {
-            InitializeComponent();
-            LanguagesComboBox.Items.Add("English");
-            LanguagesComboBox.Items.Add("Arabic");
-            LanguagesComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            LanguagesComboBox.SelectedIndex = 0;
-            FormBorderStyle = FormBorderStyle.FixedDialog;
-            MinimizeBox = true;
-            StartPosition = FormStartPosition.CenterScreen;
-            mQuestionService = new QuestionService();
+            try
+            {
+                InitializeComponent();
+                LanguagesComboBox.Items.Add("English");
+                LanguagesComboBox.Items.Add("Arabic");
+                LanguagesComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+                LanguagesComboBox.SelectedIndex = 0;
+                FormBorderStyle = FormBorderStyle.FixedDialog;
+                MinimizeBox = true;
+                StartPosition = FormStartPosition.CenterScreen;
+                mQuestionService = new QuestionService();
 
-            mQuestionService.QuestionsTableChanged += OnQuestionsChanged;
+                mQuestionService.QuestionsTableChanged += OnQuestionsChanged;
 
-            //keeps track of how each column is sorted (true = ascending, false = descending)
-            mSortColumnsDictionary = new Dictionary<string, bool>()
+                //keeps track of how each column is sorted (true = ascending, false = descending)
+                mSortColumnsDictionary = new Dictionary<string, bool>()
     {
         { "QuestionText", true },
         { "QuestionOrder", true },
         { "QuestionType", true }
     };
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                ShowErrorBox(ResultStatus.UnexpectedError);
+            }
         }
 
         private void FormMain_Load(object pSender, EventArgs pE)
         {
-            var tResult = mQuestionService.StartListening();
-
-            if (!tResult.IsSuccess)
+            try
             {
-                Log.Error("Failed to start question listener using SqlTableDependency: {Error}", tResult.MessageKey);//temp
+                var tResult = mQuestionService.StartListening();
+
+                dataGridViewMain.Font = new Font("Segoe UI", 13, FontStyle.Regular);
+                dataGridViewMain.Columns.Clear();
+                dataGridViewMain.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                dataGridViewMain.AutoGenerateColumns = false;
+                dataGridViewMain.MultiSelect = false;
+
+                // this is what shows in the grid
+
+                //creating the columns for the data grid view
+                DataGridViewTextBoxColumn tColText = new DataGridViewTextBoxColumn();
+                tColText.Name = "Grid_QuestionText";
+                tColText.HeaderText = Resources.QuestionText;
+                tColText.DataPropertyName = "QuestionText";
+                tColText.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                tColText.SortMode = DataGridViewColumnSortMode.Automatic;
+
+                dataGridViewMain.Columns.Add(tColText);
+
+                DataGridViewTextBoxColumn tColOrder = new DataGridViewTextBoxColumn();
+                tColOrder.Name = "Grid_QuestionOrder";
+                tColOrder.HeaderText = "Order";
+
+                tColOrder.DataPropertyName = "QuestionOrder";
+                tColOrder.Width = 170;
+                tColOrder.SortMode = DataGridViewColumnSortMode.Automatic;
+                dataGridViewMain.Columns.Add(tColOrder);
+
+                DataGridViewTextBoxColumn tColType = new DataGridViewTextBoxColumn();
+
+                tColType.Name = "Grid_QuestionType";
+                tColType.HeaderText = "Type";
+                tColType.DataPropertyName = "QuestionType";
+                tColType.Width = 160;
+                tColType.SortMode = DataGridViewColumnSortMode.Automatic;
+                dataGridViewMain.Columns.Add(tColType);
+                LoadQuestions();
+                btnDelete.Enabled = false;
+                btnUpdate.Enabled = false;
             }
-
-            dataGridViewMain.Font = new Font("Segoe UI", 13, FontStyle.Regular);
-            dataGridViewMain.Columns.Clear();
-            dataGridViewMain.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewMain.AutoGenerateColumns = false;
-            dataGridViewMain.MultiSelect = false;
-
-            // this is what shows in the grid
-
-            //creating the columns for the data grid view
-            DataGridViewTextBoxColumn tColText = new DataGridViewTextBoxColumn();
-            tColText.Name = "Grid_QuestionText";
-            tColText.HeaderText = Resources.QuestionText;
-            tColText.DataPropertyName = "QuestionText";
-            tColText.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            tColText.SortMode = DataGridViewColumnSortMode.Automatic;
-
-            dataGridViewMain.Columns.Add(tColText);
-
-            DataGridViewTextBoxColumn tColOrder = new DataGridViewTextBoxColumn();
-            tColOrder.Name = "Grid_QuestionOrder";
-            tColOrder.HeaderText = "Order";
-
-            tColOrder.DataPropertyName = "QuestionOrder";
-            tColOrder.Width = 170;
-            tColOrder.SortMode = DataGridViewColumnSortMode.Automatic;
-            dataGridViewMain.Columns.Add(tColOrder);
-
-            DataGridViewTextBoxColumn tColType = new DataGridViewTextBoxColumn();
-
-            tColType.Name = "Grid_QuestionType";
-            tColType.HeaderText = "Type";
-            tColType.DataPropertyName = "QuestionType";
-            tColType.Width = 160;
-            tColType.SortMode = DataGridViewColumnSortMode.Automatic;
-            dataGridViewMain.Columns.Add(tColType);
-            LoadQuestions();
-            btnDelete.Enabled = false;
-            btnUpdate.Enabled = false;
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                ShowErrorBox(ResultStatus.UnexpectedError);
+            }
         }
 
         //Ensures this method runs on the UI thread since UI updates must happen there
         private void OnQuestionsChanged()
         {
-            if (InvokeRequired)
+            try
             {
-                Invoke(new Action(OnQuestionsChanged));
-                return;
+                if (InvokeRequired)
+                {
+                    Invoke(new Action(OnQuestionsChanged));
+                    return;
+                }
+                LoadQuestions();
             }
-            LoadQuestions();
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                ShowErrorBox(ResultStatus.UnexpectedError);
+            }
         }
 
         //Passing null to Form2 to open it in "Add New Question" mode instead of edit mode
         private void btnAdd_Click(object pSender, EventArgs pE)
         {
-            Question tQuestion = null;
-            using (var tForm = new DialogForm(tQuestion))
+            try
             {
-                tForm.ShowDialog(this);
-                LoadQuestions();
+                Question tQuestion = null;
+                using (var tForm = new DialogForm(tQuestion))
+                {
+                    tForm.ShowDialog(this);
+                    LoadQuestions();
+                }
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE + "while adding a question");
+                ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
 
         //Deletes selected question
         private void btnDelete_Click(object pSender, EventArgs pE)
         {
-            if (dataGridViewMain.CurrentRow == null)
-                return;
-
-            Question tSelectedQuestion = (Question)dataGridViewMain.CurrentRow.DataBoundItem;
-
-            DialogResult tAnswer = MessageBox.Show(this,
-        $"Are you sure you want to delete the following Question?\n\n{tSelectedQuestion.QuestionText}",
-        "Confirm Delete",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Question
-
-);
-            if (tAnswer == DialogResult.Yes)
+            try
             {
-                var tResult = mQuestionService.DeleteQuestionById(tSelectedQuestion.Id);
+                if (dataGridViewMain.CurrentRow == null)
+                    return;
 
-                if (tResult.IsSuccess)
-                    LoadQuestions();
-                else
-                    MessageBox.Show(this, tResult.MessageKey, "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Error); // temp
+                Question tSelectedQuestion = (Question)dataGridViewMain.CurrentRow.DataBoundItem;
+
+                DialogResult tAnswer = CustomMessageBox.Show($"{Resources.ConfirmDelete}\n\n{tSelectedQuestion.QuestionText}",
+     "", ButtonTypes.YesNo, IconTypes.Question);
+
+                if (tAnswer == DialogResult.Yes)
+                {
+                    var tResult = mQuestionService.DeleteQuestionById(tSelectedQuestion.Id);
+
+                    if (tResult.IsSuccess)
+                        LoadQuestions();
+                    else
+                        ShowErrorBox(tResult.Status);
+                }
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
 
@@ -162,7 +195,7 @@ namespace SurveyQuestionsConfigurator
             }
             else
             {
-                MessageBox.Show(this, tResult.MessageKey, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error); // temp
+                MessageBox.Show(this, tResult.MessageKey, Resources.ErrorCaption, MessageBoxButtons.OK, MessageBoxIcon.Error); // temp
                 return;
             }
         }
@@ -180,7 +213,7 @@ namespace SurveyQuestionsConfigurator
                 tSelectedQuestion = tResult.Value;
             else
             {
-                MessageBox.Show(this, tResult.MessageKey, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error); // temp
+                MessageBox.Show(this, tResult.MessageKey, Resources.ErrorCaption, MessageBoxButtons.OK, MessageBoxIcon.Error); // temp
                 return;
             }
 
@@ -252,18 +285,13 @@ namespace SurveyQuestionsConfigurator
 
         private void FormMain_FormClosing(object pSender, FormClosingEventArgs pE)
         {
-            mQuestionService.StopListening();
-        }
-
-        private void button1_click(object sender, EventArgs e)
-        {
-            if (Thread.CurrentThread.CurrentUICulture.Name.StartsWith("en"))
+            try
             {
-                SwitchLanguage("ar");
+                mQuestionService.StopListening();
             }
-            else
+            catch (Exception tEx)
             {
-                SwitchLanguage("en");
+                Log.Error(tEx, "Error while trying to stop sqldependency");
             }
         }
 
@@ -274,17 +302,21 @@ namespace SurveyQuestionsConfigurator
 
             var res = new ComponentResourceManager(typeof(MainForm));
 
-            res.ApplyResources(this, "$this");
+            res.ApplyResources(this, "$this");//applies to form level properties only
 
             foreach (Control c in Controls)
                 ApplyResourcesRecursive(res, c);
 
+            // DataGridView columns are not controls (they do not inherit from Control),
+            // so they are not localized by ApplyResources / ApplyResourcesRecursive.
+            // Column headers must therefore be localized manually using the Resources file.
             foreach (DataGridViewColumn col in dataGridViewMain.Columns)
             {
                 col.HeaderText = Resources.ResourceManager.GetString(col.DataPropertyName);
             }
         }
 
+        // Recursively applies localization resources to all child controls.
         private void ApplyResourcesRecursive(ComponentResourceManager res, Control control)
         {
             res.ApplyResources(control, control.Name);
@@ -293,7 +325,13 @@ namespace SurveyQuestionsConfigurator
                 ApplyResourcesRecursive(res, child);
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void ShowErrorBox(ResultStatus pStatus)
+        {
+            CustomMessageBox.Show(Resources.ResourceManager.GetString(pStatus.ToString()), "Error", ButtonTypes.Ok, IconTypes.Error);
+        }
+
+        //changes languge based on the option that the user chooses
+        private void LanguagesComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             string tSelectedLang = LanguagesComboBox.SelectedItem.ToString();
 
@@ -307,6 +345,13 @@ namespace SurveyQuestionsConfigurator
                     SwitchLanguage("ar");
                     break;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CustomMessageBox.Show("هل أنت متأكد أنك تريد حذف السؤال؟ \n\n This is just a test question",
+                "حذف", ButtonTypes.YesNo, IconTypes.Question
+                );
         }
     }
 }

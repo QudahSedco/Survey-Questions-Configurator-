@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Are you sure you want to delete the following Question?</value>
+  </data>
+  <data name="DatabaseError" xml:space="preserve">
+    <value>Database error</value>
+  </data>
+  <data name="ErrorCaption" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="QuestionOrder" xml:space="preserve">
     <value>Order</value>
   </data>
@@ -134,5 +143,8 @@
   </data>
   <data name="QuestionType_Star" xml:space="preserve">
     <value>Star</value>
+  </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>Unexpected Error please try again</value>
   </data>
 </root>
