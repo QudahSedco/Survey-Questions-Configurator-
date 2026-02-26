@@ -37,7 +37,6 @@
             this.LanguagesComboBox = new System.Windows.Forms.ComboBox();
             this.QuestionsListGroupBox = new System.Windows.Forms.GroupBox();
             this.dataGridViewMain = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
             this.pnlFooter.SuspendLayout();
             this.pnlMain.SuspendLayout();
             this.QuestionsListGroupBox.SuspendLayout();
@@ -62,7 +61,6 @@
             // 
             // pnlFooter
             // 
-            this.pnlFooter.Controls.Add(this.button1);
             this.pnlFooter.Controls.Add(this.btnDelete);
             this.pnlFooter.Controls.Add(this.btnUpdate);
             this.pnlFooter.Controls.Add(this.btnAdd);
@@ -109,13 +107,6 @@
             this.dataGridViewMain.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewMain_CellContentClick);
             this.dataGridViewMain.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewMain_ColumnHeaderMouseClick);
             // 
-            // button1
-            // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -142,7 +133,6 @@
         private System.Windows.Forms.GroupBox QuestionsListGroupBox;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.ComboBox LanguagesComboBox;
-        private System.Windows.Forms.Button button1;
     }
 }
 

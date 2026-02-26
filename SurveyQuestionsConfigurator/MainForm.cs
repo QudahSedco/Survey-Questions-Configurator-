@@ -137,10 +137,9 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 Question tQuestion = null;
-                using (var tForm = new DialogForm(tQuestion))
+                using (var tForm = new AddOrEditForm(tQuestion))
                 {
                     tForm.ShowDialog(this);
-                    LoadQuestions();
                 }
             }
             catch (Exception tEx)
@@ -227,10 +226,9 @@ namespace SurveyQuestionsConfigurator
                     return;
                 }
 
-                using (var tForm = new DialogForm(tSelectedQuestion))
+                using (var tForm = new AddOrEditForm(tSelectedQuestion))
                 {
                     tForm.ShowDialog(this);
-                    LoadQuestions();
                 }
             }
             catch (Exception tEx)

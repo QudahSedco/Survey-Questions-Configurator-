@@ -21,19 +21,29 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SurveyQuestionsConfigurator
 {
-    public partial class DialogForm : Form
+    public partial class AddOrEditForm : Form
     {
         private QuestionService mQuestionService;
         private Question mEditingQuestion;
         private ComponentResourceManager mRes = new ComponentResourceManager(typeof(MainForm));
 
-        public DialogForm(Question pQuestion)
+        public AddOrEditForm(Question pQuestion)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
+
+            textBoxQuestionText.TabIndex = 0;
+            textBoxQuestionText.Focus();
+
+            numericUpDownQuestionOrder.TabIndex = 1;
+            comboBoxQuestionTypes.TabIndex = 2;
+            numericUpDownStartValue.TabIndex = 3;
+            numericUpDownEndValue.TabIndex = 4;
+            textBoxStartCaption.TabIndex = 5;
+            textBoxEndCaption.TabIndex = 6;
 
             if (Thread.CurrentThread.CurrentUICulture.Name.StartsWith("ar"))
             {
