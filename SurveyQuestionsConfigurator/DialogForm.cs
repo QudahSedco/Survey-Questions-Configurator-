@@ -48,22 +48,18 @@ namespace SurveyQuestionsConfigurator
 
             mQuestionService = new QuestionService();
 
-            // comboBoxQuestionTypes.DataSource = Enum.GetValues(typeof(QuestionType));
-
             comboBoxQuestionTypes.DataSource = Enum.GetValues(typeof(QuestionType))
-         .Cast<QuestionType>()
+         .Cast<QuestionType>()//returns an array of enum values so we cast it
          .Select(q => new
          {
              Value = q,
-             Text = GetLocalizedDescription(q)  // now uses global Resources
+             Text = GetLocalizedDescription(q)
          })
          .ToList();
 
             comboBoxQuestionTypes.DisplayMember = "Text";
             comboBoxQuestionTypes.ValueMember = "Value";
 
-            comboBoxQuestionTypes.DisplayMember = "Text";
-            comboBoxQuestionTypes.ValueMember = "Value";
             pnlSmileyFaces.Visible = true;
 
             if (pQuestion != null) //means form is in edit mode
@@ -87,13 +83,11 @@ namespace SurveyQuestionsConfigurator
 
         private static string GetLocalizedDescription(Enum value)
         {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-
             // Build the resource key: EnumTypeName_EnumValue
             string resourceKey = $"{value.GetType().Name}_{value}";
 
             // Look up in global Properties.Resources
-            string localizedValue = Resources.ResourceManager.GetString(resourceKey, Thread.CurrentThread.CurrentUICulture);
+            string localizedValue = Resources.ResourceManager.GetString(resourceKey);
 
             // Fallback to enum name if not found
             return string.IsNullOrEmpty(localizedValue) ? value.ToString() : localizedValue;

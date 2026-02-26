@@ -12,6 +12,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Resources;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -69,7 +70,7 @@ namespace SurveyQuestionsConfigurator
             //creating the columns for the data grid view
             DataGridViewTextBoxColumn tColText = new DataGridViewTextBoxColumn();
             tColText.Name = "Grid_QuestionText";
-            tColText.HeaderText = "Question Text";
+            tColText.HeaderText = Resources.QuestionText;
             tColText.DataPropertyName = "QuestionText";
             tColText.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             tColText.SortMode = DataGridViewColumnSortMode.Automatic;
@@ -272,13 +273,16 @@ namespace SurveyQuestionsConfigurator
             Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
 
             var res = new ComponentResourceManager(typeof(MainForm));
+
             res.ApplyResources(this, "$this");
 
             foreach (Control c in Controls)
                 ApplyResourcesRecursive(res, c);
 
             foreach (DataGridViewColumn col in dataGridViewMain.Columns)
-                res.ApplyResources(col, col.Name);
+            {
+                col.HeaderText = Resources.ResourceManager.GetString(col.DataPropertyName);
+            }
         }
 
         private void ApplyResourcesRecursive(ComponentResourceManager res, Control control)
