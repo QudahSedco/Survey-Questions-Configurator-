@@ -88,6 +88,15 @@ namespace SurveyQuestionsConfigurator {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to End caption cannot be empty or white space.
+        /// </summary>
+        internal static string EndCaptionEmptyError {
+            get {
+                return ResourceManager.GetString("EndCaptionEmptyError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string ErrorCaption {
@@ -129,6 +138,15 @@ namespace SurveyQuestionsConfigurator {
         internal static string OutOfRangeError {
             get {
                 return ResourceManager.GetString("OutOfRangeError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Question text cannot be more than 1000 characters.
+        /// </summary>
+        internal static string QuestionLengthError {
+            get {
+                return ResourceManager.GetString("QuestionLengthError", resourceCulture);
             }
         }
         
@@ -187,11 +205,56 @@ namespace SurveyQuestionsConfigurator {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Slider end value cannot be less than slider start value.
+        /// </summary>
+        internal static string SliderEndValueError {
+            get {
+                return ResourceManager.GetString("SliderEndValueError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Slider start value cannot be more or equal to slider end value.
+        /// </summary>
+        internal static string SliderStartValueError {
+            get {
+                return ResourceManager.GetString("SliderStartValueError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of smiley faces cannot be less than 2 or more than 5.
+        /// </summary>
+        internal static string SmileyFacesNumberError {
+            get {
+                return ResourceManager.GetString("SmileyFacesNumberError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error occurred while accessing the database table using sql table dependency.
         /// </summary>
         internal static string SqlTableDependencyError {
             get {
                 return ResourceManager.GetString("SqlTableDependencyError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of stars cannot be less than 1.
+        /// </summary>
+        internal static string StarsNumberError {
+            get {
+                return ResourceManager.GetString("StarsNumberError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start caption cannot be empty or white space.
+        /// </summary>
+        internal static string StartCaptionEmptyError {
+            get {
+                return ResourceManager.GetString("StartCaptionEmptyError", resourceCulture);
             }
         }
         

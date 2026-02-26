@@ -126,6 +126,9 @@
   <data name="DeleteCaption" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="EndCaptionEmptyError" xml:space="preserve">
+    <value>End caption cannot be empty or white space</value>
+  </data>
   <data name="ErrorCaption" xml:space="preserve">
     <value>Error</value>
   </data>
@@ -140,6 +143,9 @@
   </data>
   <data name="OutOfRangeError" xml:space="preserve">
     <value>The value is out of the allowed range.</value>
+  </data>
+  <data name="QuestionLengthError" xml:space="preserve">
+    <value>Question text cannot be more than 1000 characters</value>
   </data>
   <data name="QuestionOrder" xml:space="preserve">
     <value>Order</value>
@@ -159,8 +165,23 @@
   <data name="QuestionType_Star" xml:space="preserve">
     <value>Star</value>
   </data>
+  <data name="SliderEndValueError" xml:space="preserve">
+    <value>Slider end value cannot be less than slider start value</value>
+  </data>
+  <data name="SliderStartValueError" xml:space="preserve">
+    <value>Slider start value cannot be more or equal to slider end value</value>
+  </data>
+  <data name="SmileyFacesNumberError" xml:space="preserve">
+    <value>Number of smiley faces cannot be less than 2 or more than 5</value>
+  </data>
   <data name="SqlTableDependencyError" xml:space="preserve">
     <value>Error occurred while accessing the database table using sql table dependency</value>
+  </data>
+  <data name="StarsNumberError" xml:space="preserve">
+    <value>Number of stars cannot be less than 1</value>
+  </data>
+  <data name="StartCaptionEmptyError" xml:space="preserve">
+    <value>Start caption cannot be empty or white space</value>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>Unexpected Error please try again</value>

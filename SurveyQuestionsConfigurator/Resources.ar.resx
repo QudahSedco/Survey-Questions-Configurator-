@@ -126,6 +126,9 @@
   <data name="DeleteCaption" xml:space="preserve">
     <value>حذف</value>
   </data>
+  <data name="EndCaptionEmptyError" xml:space="preserve">
+    <value>لا يمكن أن يكون التسمية النهائية فارغة أو تحتوي على مسافات فقط</value>
+  </data>
   <data name="ErrorCaption" xml:space="preserve">
     <value>خطأ</value>
   </data>
@@ -140,6 +143,9 @@
   </data>
   <data name="OutOfRangeError" xml:space="preserve">
     <value>القيمة خارج النطاق المسموح به.</value>
+  </data>
+  <data name="QuestionLengthError" xml:space="preserve">
+    <value>لا يمكن أن يكون نص السؤال أكثر من 1000 حرف</value>
   </data>
   <data name="QuestionOrder" xml:space="preserve">
     <value>الترتيب</value>
@@ -159,8 +165,23 @@
   <data name="QuestionType_Star" xml:space="preserve">
     <value>نجمة</value>
   </data>
+  <data name="SliderEndValueError" xml:space="preserve">
+    <value>لا يمكن أن تكون قيمة نهاية شريط تمرير أقل من قيمة البداية</value>
+  </data>
+  <data name="SliderStartValueError" xml:space="preserve">
+    <value>لا يمكن أن تكون قيمة بداية شريط تمرير أكبر من أو تساوي قيمة النهاية</value>
+  </data>
+  <data name="SmileyFacesNumberError" xml:space="preserve">
+    <value>لا يمكن أن يكون عدد الرموز التعبيرية أقل من 2 أو أكثر من 5</value>
+  </data>
   <data name="SqlTableDependencyError" xml:space="preserve">
     <value>(SQL table Dependency)حدث خطأ أثناء الوصول إلى جدول قاعدة البيانات باستخدام </value>
+  </data>
+  <data name="StarsNumberError" xml:space="preserve">
+    <value>لا يمكن أن يكون عدد النجوم أقل من 1</value>
+  </data>
+  <data name="StartCaptionEmptyError" xml:space="preserve">
+    <value>لا يمكن أن يكون التسمية الابتدائية فارغة أو تحتوي على مسافات فقط</value>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى</value>
