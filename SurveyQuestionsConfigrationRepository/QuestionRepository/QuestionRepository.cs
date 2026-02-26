@@ -156,7 +156,7 @@ namespace SurveyQuestionsConfigurator.Repositories
 
                                 default:
                                     tTransaction.Rollback();
-                                    return Result<bool>.Failure(ResultStatus.UnknownType);
+                                    return Result<bool>.Failure(ResultStatus.UnknownTypeError);
                             }
 
                             tTransaction.Commit();
@@ -247,7 +247,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                                     break;
 
                                 default:
-                                    return Result<List<Question>>.Failure(ResultStatus.UnknownType);
+                                    return Result<List<Question>>.Failure(ResultStatus.UnknownTypeError);
                             }
 
                             tQuestion.Id = tReader.GetInt32(0);
@@ -289,7 +289,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                         return GetSliderQuestion(tSliderQuestion);
 
                     default:
-                        return Result<Question>.Failure(ResultStatus.UnknownType);
+                        return Result<Question>.Failure(ResultStatus.UnknownTypeError);
                 }
             }
             catch (Exception tEx)
@@ -331,7 +331,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                                     break;
 
                                 default:
-                                    return Result<bool>.Failure(ResultStatus.UnknownType);
+                                    return Result<bool>.Failure(ResultStatus.UnknownTypeError);
                             }
 
                             tTransaction.Commit();
@@ -657,7 +657,7 @@ namespace SurveyQuestionsConfigurator.Repositories
                                     break;
 
                                 default:
-                                    return Result<bool>.Failure(ResultStatus.UnknownType);
+                                    return Result<bool>.Failure(ResultStatus.UnknownTypeError);
                             }
 
                             using (SqlCommand tCmd = new SqlCommand(tSql, tConnection, tTransaction))

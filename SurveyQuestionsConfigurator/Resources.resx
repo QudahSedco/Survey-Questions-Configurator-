@@ -121,10 +121,25 @@
     <value>Are you sure you want to delete the following Question?</value>
   </data>
   <data name="DatabaseError" xml:space="preserve">
-    <value>Database error</value>
+    <value>A database error occurred. Please check your connection.</value>
+  </data>
+  <data name="DeleteCaption" xml:space="preserve">
+    <value>Delete</value>
   </data>
   <data name="ErrorCaption" xml:space="preserve">
     <value>Error</value>
+  </data>
+  <data name="LengthTooLongError" xml:space="preserve">
+    <value>The entered value is too long.</value>
+  </data>
+  <data name="NullError" xml:space="preserve">
+    <value>A required value is missing (null).</value>
+  </data>
+  <data name="NullOrWhiteSpaceError" xml:space="preserve">
+    <value>A required field cannot be empty or whitespace.</value>
+  </data>
+  <data name="OutOfRangeError" xml:space="preserve">
+    <value>The value is out of the allowed range.</value>
   </data>
   <data name="QuestionOrder" xml:space="preserve">
     <value>Order</value>
@@ -144,7 +159,16 @@
   <data name="QuestionType_Star" xml:space="preserve">
     <value>Star</value>
   </data>
+  <data name="SqlTableDependencyError" xml:space="preserve">
+    <value>Error occurred while accessing the database table using sql table dependency</value>
+  </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>Unexpected Error please try again</value>
+  </data>
+  <data name="UnknownTypeError" xml:space="preserve">
+    <value>Unknown data type encountered.</value>
+  </data>
+  <data name="ValidationError" xml:space="preserve">
+    <value>Validation failed. Please check your input.</value>
   </data>
 </root>

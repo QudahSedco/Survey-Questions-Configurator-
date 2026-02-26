@@ -309,7 +309,7 @@ namespace SurveyQuestionsConfigurator
             var tOldType = mEditingQuestion.QuestionType;
             var tNewType = (QuestionType)comboBoxQuestionTypes.SelectedValue;
 
-            Result<bool> tResult = Result<bool>.Failure(ResultStatus.UnknownType); // temp
+            Result<bool> tResult = Result<bool>.Failure(ResultStatus.UnknownTypeError); // temp
 
             if (tOldType == tNewType)//if type didn't change
             {

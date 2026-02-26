@@ -70,11 +70,20 @@ namespace SurveyQuestionsConfigurator {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Database error.
+        ///   Looks up a localized string similar to A database error occurred. Please check your connection..
         /// </summary>
         internal static string DatabaseError {
             get {
                 return ResourceManager.GetString("DatabaseError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string DeleteCaption {
+            get {
+                return ResourceManager.GetString("DeleteCaption", resourceCulture);
             }
         }
         
@@ -84,6 +93,42 @@ namespace SurveyQuestionsConfigurator {
         internal static string ErrorCaption {
             get {
                 return ResourceManager.GetString("ErrorCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The entered value is too long..
+        /// </summary>
+        internal static string LengthTooLongError {
+            get {
+                return ResourceManager.GetString("LengthTooLongError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A required value is missing (null)..
+        /// </summary>
+        internal static string NullError {
+            get {
+                return ResourceManager.GetString("NullError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A required field cannot be empty or whitespace..
+        /// </summary>
+        internal static string NullOrWhiteSpaceError {
+            get {
+                return ResourceManager.GetString("NullOrWhiteSpaceError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value is out of the allowed range..
+        /// </summary>
+        internal static string OutOfRangeError {
+            get {
+                return ResourceManager.GetString("OutOfRangeError", resourceCulture);
             }
         }
         
@@ -142,11 +187,38 @@ namespace SurveyQuestionsConfigurator {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occurred while accessing the database table using sql table dependency.
+        /// </summary>
+        internal static string SqlTableDependencyError {
+            get {
+                return ResourceManager.GetString("SqlTableDependencyError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unexpected Error please try again.
         /// </summary>
         internal static string UnexpectedError {
             get {
                 return ResourceManager.GetString("UnexpectedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown data type encountered..
+        /// </summary>
+        internal static string UnknownTypeError {
+            get {
+                return ResourceManager.GetString("UnknownTypeError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validation failed. Please check your input..
+        /// </summary>
+        internal static string ValidationError {
+            get {
+                return ResourceManager.GetString("ValidationError", resourceCulture);
             }
         }
     }

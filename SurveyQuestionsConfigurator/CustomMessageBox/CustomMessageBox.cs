@@ -67,10 +67,12 @@ namespace SurveyQuestionsConfigurator
                 box.btnOK.Visible = false;
                 box.BtnYes.Visible = false;
                 box.btnNo.Visible = false;
+
                 box.MessageText = message;
                 box.TitleText = title;
                 box.IconImage = HandleIcon(iconTypes);
                 box.pictureBox1.RightToLeft = RightToLeft.No;
+
                 switch (buttonTypes)
                 {
                     case ButtonTypes.Ok:

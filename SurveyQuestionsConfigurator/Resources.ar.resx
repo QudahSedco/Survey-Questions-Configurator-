@@ -121,10 +121,25 @@
     <value>هل أنت متأكد أنك تريد حذف السؤال التالي؟</value>
   </data>
   <data name="DatabaseError" xml:space="preserve">
-    <value>خطأ في قاعدة البيانات</value>
+    <value>حدث خطأ في قاعدة البيانات. يرجى التحقق من الاتصال.</value>
+  </data>
+  <data name="DeleteCaption" xml:space="preserve">
+    <value>حذف</value>
   </data>
   <data name="ErrorCaption" xml:space="preserve">
     <value>خطأ</value>
+  </data>
+  <data name="LengthTooLongError" xml:space="preserve">
+    <value>القيمة المدخلة طويلة جدًا.</value>
+  </data>
+  <data name="NullError" xml:space="preserve">
+    <value>قيمة مطلوبة مفقودة (فارغة).</value>
+  </data>
+  <data name="NullOrWhiteSpaceError" xml:space="preserve">
+    <value>لا يمكن أن يكون الحقل المطلوب فارغًا أو يحتوي على مسافات فقط.</value>
+  </data>
+  <data name="OutOfRangeError" xml:space="preserve">
+    <value>القيمة خارج النطاق المسموح به.</value>
   </data>
   <data name="QuestionOrder" xml:space="preserve">
     <value>الترتيب</value>
@@ -144,7 +159,16 @@
   <data name="QuestionType_Star" xml:space="preserve">
     <value>نجمة</value>
   </data>
+  <data name="SqlTableDependencyError" xml:space="preserve">
+    <value>(SQL table Dependency)حدث خطأ أثناء الوصول إلى جدول قاعدة البيانات باستخدام </value>
+  </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى</value>
+  </data>
+  <data name="UnknownTypeError" xml:space="preserve">
+    <value>تم اكتشاف نوع بيانات غير معروف.</value>
+  </data>
+  <data name="ValidationError" xml:space="preserve">
+    <value>فشل التحقق من البيانات. يرجى التحقق من مدخلاتك.</value>
   </data>
 </root>

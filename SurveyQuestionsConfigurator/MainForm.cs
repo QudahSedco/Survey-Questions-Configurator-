@@ -161,7 +161,7 @@ namespace SurveyQuestionsConfigurator
                 Question tSelectedQuestion = (Question)dataGridViewMain.CurrentRow.DataBoundItem;
 
                 DialogResult tAnswer = CustomMessageBox.Show($"{Resources.ConfirmDelete}\n\n{tSelectedQuestion.QuestionText}",
-     "", ButtonTypes.YesNo, IconTypes.Question);
+     Resources.DeleteCaption, ButtonTypes.YesNo, IconTypes.Question);
 
                 if (tAnswer == DialogResult.Yes)
                 {
@@ -183,44 +183,60 @@ namespace SurveyQuestionsConfigurator
         //Loads questions from Database
         private void LoadQuestions()
         {
-            var tResult = mQuestionService.GetAllQuestions();
-
-            if (tResult.IsSuccess)
+            try
             {
-                mQuestionsList = tResult.Value;
-                dataGridViewMain.DataSource = mQuestionsList;
+                var tResult = mQuestionService.GetAllQuestions();
 
-                btnDelete.Enabled = false;
-                btnUpdate.Enabled = false;
+                if (tResult.IsSuccess)
+                {
+                    mQuestionsList = tResult.Value;
+                    dataGridViewMain.DataSource = mQuestionsList;
+
+                    btnDelete.Enabled = false;
+                    btnUpdate.Enabled = false;
+                }
+                else
+                {
+                    ShowErrorBox(tResult.Status);
+                    return;
+                }
             }
-            else
+            catch (Exception tEx)
             {
-                MessageBox.Show(this, tResult.MessageKey, Resources.ErrorCaption, MessageBoxButtons.OK, MessageBoxIcon.Error); // temp
-                return;
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
 
         //Edit button passes the selected object and opens dialog form
         private void btnEdit_Click(object pSender, EventArgs pE)
         {
-            if (dataGridViewMain.CurrentRow == null) return;
-
-            Question tSelectedQuestion = (Question)dataGridViewMain.CurrentRow.DataBoundItem;
-
-            var tResult = mQuestionService.GetChildQuestion(tSelectedQuestion);
-            if (tResult.IsSuccess)
-
-                tSelectedQuestion = tResult.Value;
-            else
+            try
             {
-                MessageBox.Show(this, tResult.MessageKey, Resources.ErrorCaption, MessageBoxButtons.OK, MessageBoxIcon.Error); // temp
-                return;
+                if (dataGridViewMain.CurrentRow == null) return;
+
+                Question tSelectedQuestion = (Question)dataGridViewMain.CurrentRow.DataBoundItem;
+
+                var tResult = mQuestionService.GetChildQuestion(tSelectedQuestion);
+                if (tResult.IsSuccess)
+
+                    tSelectedQuestion = tResult.Value;
+                else
+                {
+                    ShowErrorBox(tResult.Status);
+                    return;
+                }
+
+                using (var tForm = new DialogForm(tSelectedQuestion))
+                {
+                    tForm.ShowDialog(this);
+                    LoadQuestions();
+                }
             }
-
-            using (var tForm = new DialogForm(tSelectedQuestion))
+            catch (Exception tEx)
             {
-                tForm.ShowDialog(this);
-                LoadQuestions();
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
 
@@ -229,57 +245,81 @@ namespace SurveyQuestionsConfigurator
 
         private void SortQuestions(string pColumnName)
         {
-            if (mQuestionsList == null || mQuestionsList.Count < 1)
-                return;
-
-            bool tAsc = mSortColumnsDictionary[pColumnName];// Gets the current sort direction for the given column from the dictionary
-
-            switch (pColumnName)
+            try
             {
-                case "QuestionText":
-                    dataGridViewMain.DataSource = tAsc
-                        ? mQuestionsList.OrderBy(q => q.QuestionText).ToList()
-                        : mQuestionsList.OrderByDescending(q => q.QuestionText).ToList();
-                    break;
+                if (mQuestionsList == null || mQuestionsList.Count < 1)
+                    return;
 
-                case "QuestionOrder":
-                    dataGridViewMain.DataSource = tAsc
-                        ? mQuestionsList.OrderBy(q => q.QuestionOrder).ToList()
-                        : mQuestionsList.OrderByDescending(q => q.QuestionOrder).ToList();
-                    break;
+                bool tAsc = mSortColumnsDictionary[pColumnName];// Gets the current sort direction for the given column from the dictionary
 
-                case "QuestionType":
-                    dataGridViewMain.DataSource = tAsc
-                        ? mQuestionsList.OrderBy(q => q.QuestionType).ToList()
-                        : mQuestionsList.OrderByDescending(q => q.QuestionType).ToList();
-                    break;
+                switch (pColumnName)
+                {
+                    case "QuestionText":
+                        dataGridViewMain.DataSource = tAsc
+                            ? mQuestionsList.OrderBy(q => q.QuestionText).ToList()
+                            : mQuestionsList.OrderByDescending(q => q.QuestionText).ToList();
+                        break;
+
+                    case "QuestionOrder":
+                        dataGridViewMain.DataSource = tAsc
+                            ? mQuestionsList.OrderBy(q => q.QuestionOrder).ToList()
+                            : mQuestionsList.OrderByDescending(q => q.QuestionOrder).ToList();
+                        break;
+
+                    case "QuestionType":
+                        dataGridViewMain.DataSource = tAsc
+                            ? mQuestionsList.OrderBy(q => q.QuestionType).ToList()
+                            : mQuestionsList.OrderByDescending(q => q.QuestionType).ToList();
+                        break;
+                }
+
+                mSortColumnsDictionary[pColumnName] = !tAsc;
             }
-
-            mSortColumnsDictionary[pColumnName] = !tAsc;
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                ShowErrorBox(ResultStatus.UnexpectedError);
+            }
         }
 
         private void DataGridViewMain_ColumnHeaderMouseClick(object pSender, DataGridViewCellMouseEventArgs pE)
         {
-            if (mQuestionsList == null || mQuestionsList.Count < 1)
-                return;
+            try
+            {
+                if (mQuestionsList == null || mQuestionsList.Count < 1)
+                    return;
 
-            string tPropertyName = dataGridViewMain.Columns[pE.ColumnIndex].DataPropertyName;
-            bool tAscending = mSortColumnsDictionary[tPropertyName];
+                string tPropertyName = dataGridViewMain.Columns[pE.ColumnIndex].DataPropertyName;
+                bool tAscending = mSortColumnsDictionary[tPropertyName];
 
-            SortQuestions(tPropertyName);
+                SortQuestions(tPropertyName);
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                ShowErrorBox(ResultStatus.UnexpectedError);
+            }
         }
 
         private void DataGridViewMain_CellContentClick(object pSender, DataGridViewCellMouseEventArgs pE)
         {
-            if (dataGridViewMain.CurrentRow != null && dataGridViewMain.CurrentRow.DataBoundItem != null)
+            try
             {
-                btnDelete.Enabled = true;
-                btnUpdate.Enabled = true;
+                if (dataGridViewMain.CurrentRow != null && dataGridViewMain.CurrentRow.DataBoundItem != null)
+                {
+                    btnDelete.Enabled = true;
+                    btnUpdate.Enabled = true;
+                }
+                else
+                {
+                    btnDelete.Enabled = false;
+                    btnUpdate.Enabled = false;
+                }
             }
-            else
+            catch (Exception tEx)
             {
-                btnDelete.Enabled = false;
-                btnUpdate.Enabled = false;
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
 
@@ -297,61 +337,86 @@ namespace SurveyQuestionsConfigurator
 
         private void SwitchLanguage(string culture)
         {
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
-            Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
-
-            var res = new ComponentResourceManager(typeof(MainForm));
-
-            res.ApplyResources(this, "$this");//applies to form level properties only
-
-            foreach (Control c in Controls)
-                ApplyResourcesRecursive(res, c);
-
-            // DataGridView columns are not controls (they do not inherit from Control),
-            // so they are not localized by ApplyResources / ApplyResourcesRecursive.
-            // Column headers must therefore be localized manually using the Resources file.
-            foreach (DataGridViewColumn col in dataGridViewMain.Columns)
+            try
             {
-                col.HeaderText = Resources.ResourceManager.GetString(col.DataPropertyName);
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
+                Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
+
+                var res = new ComponentResourceManager(typeof(MainForm));
+
+                res.ApplyResources(this, "$this");//applies to form level properties only
+
+                foreach (Control c in Controls)
+                    ApplyResourcesRecursive(res, c);
+
+                // DataGridView columns are not controls (they do not inherit from Control),
+                // so they are not localized by ApplyResources / ApplyResourcesRecursive.
+                // Column headers must therefore be localized manually using the Resources file.
+                foreach (DataGridViewColumn col in dataGridViewMain.Columns)
+                {
+                    col.HeaderText = Resources.ResourceManager.GetString(col.DataPropertyName);
+                }
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
 
         // Recursively applies localization resources to all child controls.
         private void ApplyResourcesRecursive(ComponentResourceManager res, Control control)
         {
-            res.ApplyResources(control, control.Name);
+            try
+            {
+                res.ApplyResources(control, control.Name);
 
-            foreach (Control child in control.Controls)
-                ApplyResourcesRecursive(res, child);
+                foreach (Control child in control.Controls)
+                    ApplyResourcesRecursive(res, child);
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                ShowErrorBox(ResultStatus.UnexpectedError);
+            }
         }
 
         private void ShowErrorBox(ResultStatus pStatus)
         {
-            CustomMessageBox.Show(Resources.ResourceManager.GetString(pStatus.ToString()), "Error", ButtonTypes.Ok, IconTypes.Error);
+            try
+            {
+                CustomMessageBox.Show(Resources.ResourceManager.GetString(pStatus.ToString()), "Error", ButtonTypes.Ok, IconTypes.Error);
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                MessageBox.Show("Unexpected error happend");
+            }
         }
 
         //changes languge based on the option that the user chooses
         private void LanguagesComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string tSelectedLang = LanguagesComboBox.SelectedItem.ToString();
-
-            switch (tSelectedLang)
+            try
             {
-                case "English":
-                    SwitchLanguage("en");
-                    break;
+                string tSelectedLang = LanguagesComboBox.SelectedItem.ToString();
 
-                case "Arabic":
-                    SwitchLanguage("ar");
-                    break;
+                switch (tSelectedLang)
+                {
+                    case "English":
+                        SwitchLanguage("en");
+                        break;
+
+                    case "Arabic":
+                        SwitchLanguage("ar");
+                        break;
+                }
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            CustomMessageBox.Show("هل أنت متأكد أنك تريد حذف السؤال؟ \n\n This is just a test question",
-                "حذف", ButtonTypes.YesNo, IconTypes.Question
-                );
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                ShowErrorBox(ResultStatus.UnexpectedError);
+            }
         }
     }
 }

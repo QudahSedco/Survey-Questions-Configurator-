@@ -11,14 +11,13 @@ namespace SurveyQuestionsConfiguratorModels.Result
         Success = 0,
         Generic = -1,
         UnexpectedError = -2,
-        DatabaseConnection = -3,
         DatabaseError = -4,
-        UnknownType = -5,
+        UnknownTypeError = -5,
         ValidationError = -6,
         SqlTableDependencyError = -7,
         OutOfRangeError = -8,
         NullError = -9,
         NullOrWhiteSpaceError = -10,
-        LengthTooLong = -11
+        LengthTooLongError = -11
     }
 }
