@@ -35,6 +35,8 @@ namespace SurveyQuestionsConfigurator
                 this.StartPosition = FormStartPosition.CenterParent;
                 mAppSetting = new AppSetting();
                 mQuestionService = new QuestionService();
+                WindowsRadioButton.Checked = true;
+                SQLGroupBox.Visible = false;
                 PopulateFields();
             }
             catch (Exception tEx)
@@ -75,9 +77,17 @@ namespace SurveyQuestionsConfigurator
                 {
                     DataSource = ServerTextBox.Text.Trim(),
                     InitialCatalog = DatabaseNameTextBox.Text.Trim(),
-                    UserID = UserNameTextBox.Text.Trim(),
-                    Password = PasswordTextBox.Text
                 };
+                if (WindowsRadioButton.Checked)
+                {
+                    tBuilder.IntegratedSecurity = true;
+                }
+                else
+                {
+                    tBuilder.IntegratedSecurity = false;
+                    tBuilder.UserID = UserNameTextBox.Text.Trim();
+                    tBuilder.Password = PasswordTextBox.Text;
+                }
                 return tBuilder.ConnectionString;
             }
             catch (Exception tEx)
@@ -102,23 +112,24 @@ namespace SurveyQuestionsConfigurator
                     errorProvider.SetError(DatabaseNameTextBox, Resources.NullOrWhiteSpaceError);
                     return;
                 }
-                if (String.IsNullOrEmpty(UserNameTextBox.Text))
+                if (WindowsRadioButton.Checked)
                 {
-                    errorProvider.SetError(UserNameTextBox, Resources.NullOrWhiteSpaceError);
-                    return;
-                }
-                if (String.IsNullOrEmpty(PasswordTextBox.Text))
-                {
-                    errorProvider.SetError(PasswordTextBox, Resources.NullOrWhiteSpaceError);
-                    return;
+                    if (String.IsNullOrEmpty(UserNameTextBox.Text))
+                    {
+                        errorProvider.SetError(UserNameTextBox, Resources.NullOrWhiteSpaceError);
+                        return;
+                    }
+                    if (String.IsNullOrEmpty(PasswordTextBox.Text))
+                    {
+                        errorProvider.SetError(PasswordTextBox, Resources.NullOrWhiteSpaceError);
+                        return;
+                    }
                 }
 
                 string tConnectionString = BuildConnectionString();
 
-                // Test before saving
                 var tResult = mQuestionService.TestConnection(tConnectionString);
 
-                // Save to App.config using your AppSetting class
                 if (!tResult.IsSuccess)
                 {
                     CustomMessageBox.Show(Resources.DatabaseConnectionError, Resources.ErrorCaption, ButtonTypes.Ok, IconTypes.Error);
@@ -156,5 +167,25 @@ namespace SurveyQuestionsConfigurator
                 CustomMessageBox.Show(Resources.UnexpectedError, Resources.ErrorCaption, ButtonTypes.Ok, IconTypes.Error);
             }
         }
+
+        private void WindowsRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (WindowsRadioButton.Checked)
+            {
+                SQLGroupBox.Visible = false;
+                UserNameTextBox.Clear();
+                PasswordTextBox.Clear();
+            }
+        }
+
+        private void SQLRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (SQLRadioButton.Checked)
+            {
+                SQLGroupBox.Visible = true;
+            }
+        }
+
+       
     }
 }

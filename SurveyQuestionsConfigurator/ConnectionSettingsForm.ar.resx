@@ -124,17 +124,14 @@
     <value>حفظ</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="lblPassword.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 107</value>
+  <data name="PasswordTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 47</value>
   </data>
-  <data name="lblPassword.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 13</value>
-  </data>
-  <data name="lblPassword.Text" xml:space="preserve">
-    <value>كلمة المرور</value>
+  <data name="UserNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 19</value>
   </data>
   <data name="lblUserName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 81</value>
+    <value>273, 22</value>
   </data>
   <data name="lblUserName.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 13</value>
@@ -142,14 +139,50 @@
   <data name="lblUserName.Text" xml:space="preserve">
     <value>اسم المستخدم</value>
   </data>
+  <data name="lblPassword.Location" type="System.Drawing.Point, System.Drawing">
+    <value>284, 50</value>
+  </data>
+  <data name="lblPassword.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 13</value>
+  </data>
+  <data name="lblPassword.Text" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
+  <data name="SQLGroupBox.Text" xml:space="preserve">
+    <value>بيانات الدخول إلى SQL Server</value>
+  </data>
+  <data name="SQLRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 66</value>
+  </data>
+  <data name="lblAuthenticationType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 70</value>
+  </data>
+  <data name="lblAuthenticationType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 13</value>
+  </data>
+  <data name="lblAuthenticationType.Text" xml:space="preserve">
+    <value>نوع تسجيل الدخول</value>
+  </data>
+  <data name="ServerTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 14</value>
+  </data>
+  <data name="DatabaseNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 40</value>
+  </data>
   <data name="lblDatabaseName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 55</value>
+    <value>249, 43</value>
   </data>
   <data name="lblDatabaseName.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 13</value>
   </data>
   <data name="lblDatabaseName.Text" xml:space="preserve">
     <value>اسم قاعدة البيانات</value>
+  </data>
+  <data name="WindowsRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>58, 66</value>
+  </data>
+  <data name="MainDBGroupBox.Text" xml:space="preserve">
+    <value>إعدادات قاعدة البيانات</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
@@ -163,7 +196,7 @@
     <value>إعدادات الاتصال</value>
   </data>
   <data name="lblServer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 29</value>
+    <value>277, 16</value>
   </data>
   <data name="lblServer.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 13</value>
