@@ -117,533 +117,253 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>376, 218</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="lblPassword.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="lblDatabaseName.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;btnTestConnection.Name" xml:space="preserve">
-    <value>btnTestConnection</value>
-  </data>
-  <data name="lblAuthenticationType.Text" xml:space="preserve">
-    <value>Authentication Type</value>
-  </data>
-  <data name="lblPassword.Text" xml:space="preserve">
-    <value>Password</value>
-  </data>
-  <data name="&gt;&gt;DatabaseNameTextBox.Parent" xml:space="preserve">
-    <value>MainDBGroupBox</value>
-  </data>
-  <data name="SQLGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 111</value>
-  </data>
-  <data name="lblUserName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 13</value>
-  </data>
-  <data name="&gt;&gt;SQLGroupBox.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ServerTextBox.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;lblServer.Name" xml:space="preserve">
-    <value>lblServer</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="lblUserName.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblServer.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="btnTestConnection.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblServer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 17</value>
   </data>
-  <data name="lblServer.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="lblServer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 13</value>
   </data>
-  <data name="&gt;&gt;lblServer.Parent" xml:space="preserve">
-    <value>MainDBGroupBox</value>
-  </data>
-  <data name="&gt;&gt;lblPassword.Parent" xml:space="preserve">
-    <value>SQLGroupBox</value>
-  </data>
-  <data name="ServerTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>114, 14</value>
-  </data>
-  <data name="&gt;&gt;lblDatabaseName.Parent" xml:space="preserve">
-    <value>MainDBGroupBox</value>
-  </data>
-  <data name="&gt;&gt;btnSave.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="lblDatabaseName.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="MainDBGroupBox.Text" xml:space="preserve">
-    <value>Database Settings</value>
-  </data>
-  <data name="MainDBGroupBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="UserNameTextBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="lblUserName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 21</value>
-  </data>
-  <data name="&gt;&gt;WindowsRadioButton.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;UserNameTextBox.Name" xml:space="preserve">
-    <value>UserNameTextBox</value>
-  </data>
-  <data name="DatabaseNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 20</value>
-  </data>
-  <data name="MainDBGroupBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblDatabaseName.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="btnSave.IconPadding" type="System.Int32, mscorlib">
+  <data name="lblServer.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="lblServer.Text" xml:space="preserve">
     <value>Server</value>
   </data>
-  <data name="&gt;&gt;PasswordTextBox.Parent" xml:space="preserve">
-    <value>SQLGroupBox</value>
+  <data name="&gt;&gt;lblServer.Name" xml:space="preserve">
+    <value>lblServer</value>
   </data>
-  <data name="PasswordTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+  <data name="&gt;&gt;lblServer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lblAuthenticationType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 13</value>
-  </data>
-  <data name="SQLGroupBox.Text" xml:space="preserve">
-    <value>SQL Server Credentials</value>
-  </data>
-  <data name="&gt;&gt;lblAuthenticationType.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblServer.Parent" xml:space="preserve">
     <value>MainDBGroupBox</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>ConnectionSettingsForm</value>
+  <data name="&gt;&gt;lblServer.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="lblServer.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="ServerTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>114, 14</value>
   </data>
-  <data name="DatabaseNameTextBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="ServerTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 22</value>
   </data>
-  <data name="lblAuthenticationType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 72</value>
-  </data>
-  <data name="&gt;&gt;UserNameTextBox.ZOrder" xml:space="preserve">
+  <data name="ServerTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;DatabaseNameTextBox.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;ServerTextBox.Name" xml:space="preserve">
+    <value>ServerTextBox</value>
   </data>
-  <data name="&gt;&gt;MainDBGroupBox.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;ServerTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="UserNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 20</value>
+  <data name="&gt;&gt;ServerTextBox.Parent" xml:space="preserve">
+    <value>MainDBGroupBox</value>
+  </data>
+  <data name="&gt;&gt;ServerTextBox.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblDatabaseName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblDatabaseName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 43</value>
+  </data>
+  <data name="lblDatabaseName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 13</value>
+  </data>
+  <data name="lblDatabaseName.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblDatabaseName.Text" xml:space="preserve">
+    <value>Database name</value>
+  </data>
+  <data name="&gt;&gt;lblDatabaseName.Name" xml:space="preserve">
+    <value>lblDatabaseName</value>
+  </data>
+  <data name="&gt;&gt;lblDatabaseName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDatabaseName.Parent" xml:space="preserve">
+    <value>MainDBGroupBox</value>
+  </data>
+  <data name="&gt;&gt;lblDatabaseName.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="DatabaseNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>114, 40</value>
+  </data>
+  <data name="DatabaseNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 22</value>
+  </data>
+  <data name="DatabaseNameTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;DatabaseNameTextBox.Name" xml:space="preserve">
+    <value>DatabaseNameTextBox</value>
   </data>
   <data name="&gt;&gt;DatabaseNameTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lblAuthenticationType.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+  <data name="&gt;&gt;DatabaseNameTextBox.Parent" xml:space="preserve">
+    <value>MainDBGroupBox</value>
   </data>
-  <data name="lblUserName.Error" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;DatabaseNameTextBox.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
-  <data name="WindowsRadioButton.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblUserName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblUserName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 21</value>
+  </data>
+  <data name="lblUserName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 13</value>
+  </data>
+  <data name="lblUserName.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblUserName.Text" xml:space="preserve">
+    <value>User name</value>
+  </data>
+  <data name="&gt;&gt;lblUserName.Name" xml:space="preserve">
+    <value>lblUserName</value>
+  </data>
+  <data name="&gt;&gt;lblUserName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblUserName.Parent" xml:space="preserve">
+    <value>SQLGroupBox</value>
+  </data>
+  <data name="&gt;&gt;lblUserName.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblPassword.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblPassword.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 47</value>
   </data>
-  <data name="&gt;&gt;MainDBGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="lblUserName.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="lblServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 13</value>
-  </data>
-  <data name="lblDatabaseName.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblUserName.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblDatabaseName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 13</value>
-  </data>
-  <data name="&gt;&gt;lblUserName.Parent" xml:space="preserve">
-    <value>SQLGroupBox</value>
-  </data>
-  <data name="ServerTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 20</value>
-  </data>
-  <data name="lblAuthenticationType.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;lblUserName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="DatabaseNameTextBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="WindowsRadioButton.Text" xml:space="preserve">
-    <value>Windows</value>
-  </data>
-  <data name="lblPassword.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="UserNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>114, 18</value>
-  </data>
-  <data name="&gt;&gt;SQLGroupBox.Name" xml:space="preserve">
-    <value>SQLGroupBox</value>
-  </data>
-  <data name="&gt;&gt;btnTestConnection.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Connection Settings</value>
-  </data>
-  <data name="btnSave.Text" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="lblServer.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;ServerTextBox.Parent" xml:space="preserve">
-    <value>MainDBGroupBox</value>
-  </data>
-  <data name="&gt;&gt;WindowsRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="btnTestConnection.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 23</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="SQLRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>233, 70</value>
-  </data>
-  <data name="MainDBGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 93</value>
-  </data>
-  <data name="lblPassword.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;PasswordTextBox.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;btnSave.Name" xml:space="preserve">
-    <value>btnSave</value>
-  </data>
-  <data name="lblServer.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="PasswordTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 20</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="WindowsRadioButton.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="DatabaseNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>114, 40</value>
-  </data>
-  <data name="btnTestConnection.Text" xml:space="preserve">
-    <value>Test Connection</value>
-  </data>
-  <data name="&gt;&gt;btnTestConnection.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;DatabaseNameTextBox.Name" xml:space="preserve">
-    <value>DatabaseNameTextBox</value>
-  </data>
-  <data name="btnSave.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="PasswordTextBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="SQLGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="ServerTextBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblUserName.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;WindowsRadioButton.Name" xml:space="preserve">
-    <value>WindowsRadioButton</value>
-  </data>
-  <data name="UserNameTextBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="btnSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="ServerTextBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;ServerTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UserNameTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;SQLRadioButton.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="btnTestConnection.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;lblAuthenticationType.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="DatabaseNameTextBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="btnTestConnection.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="WindowsRadioButton.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="SQLGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 73</value>
-  </data>
-  <data name="SQLRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="WindowsRadioButton.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="btnSave.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="btnSave.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;lblAuthenticationType.Name" xml:space="preserve">
-    <value>lblAuthenticationType</value>
-  </data>
-  <data name="&gt;&gt;lblDatabaseName.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;PasswordTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="SQLRadioButton.Text" xml:space="preserve">
-    <value>SQL</value>
-  </data>
-  <data name="&gt;&gt;MainDBGroupBox.Name" xml:space="preserve">
-    <value>MainDBGroupBox</value>
-  </data>
-  <data name="MainDBGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;PasswordTextBox.Name" xml:space="preserve">
-    <value>PasswordTextBox</value>
-  </data>
-  <data name="PasswordTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>114, 44</value>
-  </data>
-  <data name="&gt;&gt;SQLRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="lblPassword.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 13</value>
-  </data>
-  <data name="&gt;&gt;lblServer.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;btnTestConnection.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="WindowsRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 17</value>
-  </data>
-  <data name="&gt;&gt;lblUserName.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;MainDBGroupBox.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;lblPassword.Name" xml:space="preserve">
-    <value>lblPassword</value>
-  </data>
-  <data name="&gt;&gt;lblUserName.Name" xml:space="preserve">
-    <value>lblUserName</value>
-  </data>
-  <data name="&gt;&gt;lblAuthenticationType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;UserNameTextBox.Parent" xml:space="preserve">
-    <value>SQLGroupBox</value>
-  </data>
-  <data name="btnTestConnection.Location" type="System.Drawing.Point, System.Drawing">
-    <value>189, 190</value>
-  </data>
-  <data name="SQLRadioButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+    <value>56, 13</value>
   </data>
   <data name="lblPassword.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;SQLGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lblPassword.Text" xml:space="preserve">
+    <value>Password</value>
   </data>
-  <data name="&gt;&gt;ServerTextBox.Name" xml:space="preserve">
-    <value>ServerTextBox</value>
-  </data>
-  <data name="DatabaseNameTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="WindowsRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="lblDatabaseName.Text" xml:space="preserve">
-    <value>Database name</value>
-  </data>
-  <data name="PasswordTextBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;lblDatabaseName.Name" xml:space="preserve">
-    <value>lblDatabaseName</value>
-  </data>
-  <data name="WindowsRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 70</value>
-  </data>
-  <data name="UserNameTextBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lblServer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="lblServer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 17</value>
-  </data>
-  <data name="&gt;&gt;btnSave.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PasswordTextBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;SQLRadioButton.Parent" xml:space="preserve">
-    <value>MainDBGroupBox</value>
-  </data>
-  <data name="SQLGroupBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="SQLGroupBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="SQLRadioButton.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="SQLRadioButton.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;SQLGroupBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;SQLRadioButton.Name" xml:space="preserve">
-    <value>SQLRadioButton</value>
-  </data>
-  <data name="ServerTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="lblAuthenticationType.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="btnSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>289, 190</value>
-  </data>
-  <data name="lblAuthenticationType.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblPassword.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="MainDBGroupBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblServer.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;btnSave.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;errorProvider.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;lblPassword.Name" xml:space="preserve">
+    <value>lblPassword</value>
   </data>
   <data name="&gt;&gt;lblPassword.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lblDatabaseName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 43</value>
-  </data>
-  <data name="ServerTextBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="btnTestConnection.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="SQLRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 17</value>
-  </data>
-  <data name="&gt;&gt;errorProvider.Name" xml:space="preserve">
-    <value>errorProvider</value>
-  </data>
-  <data name="&gt;&gt;WindowsRadioButton.Parent" xml:space="preserve">
-    <value>MainDBGroupBox</value>
-  </data>
-  <data name="MainDBGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
-  </data>
-  <data name="&gt;&gt;lblDatabaseName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="SQLGroupBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="lblAuthenticationType.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblUserName.Text" xml:space="preserve">
-    <value>User name</value>
+  <data name="&gt;&gt;lblPassword.Parent" xml:space="preserve">
+    <value>SQLGroupBox</value>
   </data>
   <data name="&gt;&gt;lblPassword.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="lblDatabaseName.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="UserNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>114, 18</value>
   </data>
-  <data name="SQLRadioButton.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="UserNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 22</value>
+  </data>
+  <data name="UserNameTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;UserNameTextBox.Name" xml:space="preserve">
+    <value>UserNameTextBox</value>
   </data>
   <data name="&gt;&gt;UserNameTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;UserNameTextBox.Parent" xml:space="preserve">
+    <value>SQLGroupBox</value>
+  </data>
+  <data name="&gt;&gt;UserNameTextBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="PasswordTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>114, 44</value>
+  </data>
+  <data name="PasswordTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 22</value>
+  </data>
+  <data name="PasswordTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;PasswordTextBox.Name" xml:space="preserve">
+    <value>PasswordTextBox</value>
+  </data>
+  <data name="&gt;&gt;PasswordTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PasswordTextBox.Parent" xml:space="preserve">
+    <value>SQLGroupBox</value>
+  </data>
+  <data name="&gt;&gt;PasswordTextBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btnSave.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 8.25pt</value>
+  </data>
+  <data name="btnSave.Location" type="System.Drawing.Point, System.Drawing">
+    <value>289, 190</value>
+  </data>
+  <data name="btnSave.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btnSave.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="btnSave.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="&gt;&gt;btnSave.Name" xml:space="preserve">
+    <value>btnSave</value>
+  </data>
+  <data name="&gt;&gt;btnSave.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnSave.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnSave.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnTestConnection.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 8.25pt</value>
+  </data>
+  <data name="btnTestConnection.Location" type="System.Drawing.Point, System.Drawing">
+    <value>186, 190</value>
+  </data>
+  <data name="btnTestConnection.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 23</value>
+  </data>
+  <data name="btnTestConnection.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="btnTestConnection.Text" xml:space="preserve">
+    <value>Test Connection</value>
+  </data>
+  <data name="&gt;&gt;btnTestConnection.Name" xml:space="preserve">
+    <value>btnTestConnection</value>
+  </data>
+  <data name="&gt;&gt;btnTestConnection.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnTestConnection.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnTestConnection.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="errorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -651,4 +371,160 @@
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>376, 218</value>
+  </data>
+  <data name="SQLGroupBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 8.25pt</value>
+  </data>
+  <data name="SQLGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 111</value>
+  </data>
+  <data name="SQLGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>352, 73</value>
+  </data>
+  <data name="SQLGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="SQLGroupBox.Text" xml:space="preserve">
+    <value>SQL Server Credentials</value>
+  </data>
+  <data name="&gt;&gt;SQLGroupBox.Name" xml:space="preserve">
+    <value>SQLGroupBox</value>
+  </data>
+  <data name="&gt;&gt;SQLGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SQLGroupBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;SQLGroupBox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="SQLRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="SQLRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>233, 70</value>
+  </data>
+  <data name="SQLRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 17</value>
+  </data>
+  <data name="SQLRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="SQLRadioButton.Text" xml:space="preserve">
+    <value>SQL</value>
+  </data>
+  <data name="&gt;&gt;SQLRadioButton.Name" xml:space="preserve">
+    <value>SQLRadioButton</value>
+  </data>
+  <data name="&gt;&gt;SQLRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SQLRadioButton.Parent" xml:space="preserve">
+    <value>MainDBGroupBox</value>
+  </data>
+  <data name="&gt;&gt;SQLRadioButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblAuthenticationType.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblAuthenticationType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 72</value>
+  </data>
+  <data name="lblAuthenticationType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 13</value>
+  </data>
+  <data name="lblAuthenticationType.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="lblAuthenticationType.Text" xml:space="preserve">
+    <value>Authentication Type</value>
+  </data>
+  <data name="&gt;&gt;lblAuthenticationType.Name" xml:space="preserve">
+    <value>lblAuthenticationType</value>
+  </data>
+  <data name="&gt;&gt;lblAuthenticationType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAuthenticationType.Parent" xml:space="preserve">
+    <value>MainDBGroupBox</value>
+  </data>
+  <data name="&gt;&gt;lblAuthenticationType.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="WindowsRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="WindowsRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>158, 70</value>
+  </data>
+  <data name="WindowsRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 17</value>
+  </data>
+  <data name="WindowsRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="WindowsRadioButton.Text" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="&gt;&gt;WindowsRadioButton.Name" xml:space="preserve">
+    <value>WindowsRadioButton</value>
+  </data>
+  <data name="&gt;&gt;WindowsRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;WindowsRadioButton.Parent" xml:space="preserve">
+    <value>MainDBGroupBox</value>
+  </data>
+  <data name="&gt;&gt;WindowsRadioButton.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="MainDBGroupBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 8.25pt</value>
+  </data>
+  <data name="MainDBGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="MainDBGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>352, 93</value>
+  </data>
+  <data name="MainDBGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="MainDBGroupBox.Text" xml:space="preserve">
+    <value>Database Settings</value>
+  </data>
+  <data name="&gt;&gt;MainDBGroupBox.Name" xml:space="preserve">
+    <value>MainDBGroupBox</value>
+  </data>
+  <data name="&gt;&gt;MainDBGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MainDBGroupBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;MainDBGroupBox.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Connection Settings</value>
+  </data>
+  <data name="&gt;&gt;errorProvider.Name" xml:space="preserve">
+    <value>errorProvider</value>
+  </data>
+  <data name="&gt;&gt;errorProvider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>ConnectionSettingsForm</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

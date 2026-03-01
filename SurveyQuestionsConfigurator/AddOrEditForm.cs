@@ -84,7 +84,7 @@ namespace SurveyQuestionsConfigurator
                     PopulateFields(pQuestion);
                     btnUpdate.Visible = true;
                     btnAdd.Visible = false;
-                    Text = "Edit";
+                    Text = Resources.Edit;
                 }
                 else
                 {
@@ -92,7 +92,7 @@ namespace SurveyQuestionsConfigurator
                     btnAdd.Visible = true;
                     comboBoxQuestionTypes.SelectedIndex = 0;
                     UpdateStars(trackBarStars.Value);
-                    Text = "Create";
+                    Text = Resources.Add;
                 }
             }
             catch (Exception tEx)
@@ -371,8 +371,9 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ar")
-                    lblCharNumberStartCaption.Text = $"100/{textBoxEndCaption.Text.Length.ToString()}";
-                lblCharNumberEndCaption.Text = ($"{textBoxEndCaption.Text.Length.ToString()}/100");
+                    lblCharNumberEndCaption.Text = $"100/{textBoxEndCaption.Text.Length.ToString()}";
+                else
+                    lblCharNumberEndCaption.Text = ($"{textBoxEndCaption.Text.Length.ToString()}/100");
             }
             catch (Exception tEx)
             {

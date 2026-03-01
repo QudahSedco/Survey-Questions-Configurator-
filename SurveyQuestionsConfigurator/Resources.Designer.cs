@@ -61,6 +61,15 @@ namespace SurveyQuestionsConfigurator {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        internal static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete the following Question?.
         /// </summary>
         internal static string ConfirmDelete {
@@ -102,6 +111,15 @@ namespace SurveyQuestionsConfigurator {
         internal static string DeleteCaption {
             get {
                 return ResourceManager.GetString("DeleteCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        internal static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
             }
         }
         
