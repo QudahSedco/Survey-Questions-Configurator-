@@ -1,6 +1,7 @@
 ﻿using Serilog;
 using SurveyQuestionsConfiguratorServices;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -20,63 +21,77 @@ namespace SurveyQuestionsConfigurator
     {
         private AppSetting mAppSetting;
         private QuestionService mQuestionService;
+        private const string UNEXPECTED_ERROR_MESSAGE = "An unexpected error occurred";
+        private const string DB_KEY = "SurveyDb";
 
         public ConnectionSettingsForm()
         {
-            InitializeComponent();
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.MinimizeBox = false;
-            this.MaximizeBox = false;
-            // Start position: center of the parent form that opened it
-            this.StartPosition = FormStartPosition.CenterParent;
-            mAppSetting = new AppSetting();
-            mQuestionService = new QuestionService();
-            PopulateFields();
-        }
-
-        private void PasswordTextBox_TextChanged(object sender, EventArgs e)
-        {
+            try
+            {
+                InitializeComponent();
+                this.FormBorderStyle = FormBorderStyle.FixedDialog;
+                this.MinimizeBox = false;
+                this.MaximizeBox = false;
+                this.StartPosition = FormStartPosition.CenterParent;
+                mAppSetting = new AppSetting();
+                mQuestionService = new QuestionService();
+                PopulateFields();
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                CustomMessageBox.Show(Resources.UnexpectedError, Resources.ErrorCaption, ButtonTypes.Ok, IconTypes.Error);
+                Close();
+            }
         }
 
         private void PopulateFields()
         {
-            string tConnectionString = mAppSetting.GetConnectionString("SurveyDb");
-            if (!string.IsNullOrEmpty(tConnectionString))
+            try
             {
-                var builder = new SqlConnectionStringBuilder(tConnectionString);
+                string tConnectionString = mAppSetting.GetConnectionString(DB_KEY);
+                if (!string.IsNullOrEmpty(tConnectionString))
+                {
+                    var tBuilder = new SqlConnectionStringBuilder(tConnectionString);
 
-                ServerTextBox.Text = builder.DataSource;
-                DatabaseNameTextBox.Text = builder.InitialCatalog;
-                UserNameTextBox.Text = builder.UserID;
-                PasswordTextBox.Text = builder.Password;
+                    ServerTextBox.Text = tBuilder.DataSource;
+                    DatabaseNameTextBox.Text = tBuilder.InitialCatalog;
+                    UserNameTextBox.Text = tBuilder.UserID;
+                    PasswordTextBox.Text = tBuilder.Password;
+                }
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                CustomMessageBox.Show(Resources.UnexpectedError, Resources.ErrorCaption, ButtonTypes.Ok, IconTypes.Error);
             }
         }
 
         private string BuildConnectionString()
         {
-            var builder = new SqlConnectionStringBuilder
+            try
             {
-                DataSource = ServerTextBox.Text.Trim(),         // Server textbox
-                InitialCatalog = DatabaseNameTextBox.Text.Trim(),   // Database textbox
-                UserID = UserNameTextBox.Text.Trim(),           // User textbox
-                Password = PasswordTextBox.Text              // Password textbox
-            };
-            return builder.ConnectionString;
-
-            // return "Server=.;Database=SurveyQuestionsConfiguratorDB;User Id=sa;Password=SqlTest;";
+                var tBuilder = new SqlConnectionStringBuilder
+                {
+                    DataSource = ServerTextBox.Text.Trim(),
+                    InitialCatalog = DatabaseNameTextBox.Text.Trim(),
+                    UserID = UserNameTextBox.Text.Trim(),
+                    Password = PasswordTextBox.Text
+                };
+                return tBuilder.ConnectionString;
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, "error building connection string");
+                throw;
+            }
         }
 
-        public static void SetConnectionString(string name, string value)
-        {
-            var settings = ConfigurationManager.ConnectionStrings[name];
-
-            settings.ConnectionString = value;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void btnSave_Click(object pSender, EventArgs pE)
         {
             try
             {
+                errorProvider.Clear();
                 if (String.IsNullOrEmpty(ServerTextBox.Text))
                 {
                     errorProvider.SetError(ServerTextBox, Resources.NullOrWhiteSpaceError);
@@ -84,24 +99,24 @@ namespace SurveyQuestionsConfigurator
                 }
                 if (String.IsNullOrEmpty(DatabaseNameTextBox.Text))
                 {
-                    errorProvider.SetError(ServerTextBox, Resources.NullOrWhiteSpaceError);
+                    errorProvider.SetError(DatabaseNameTextBox, Resources.NullOrWhiteSpaceError);
                     return;
                 }
                 if (String.IsNullOrEmpty(UserNameTextBox.Text))
                 {
-                    errorProvider.SetError(ServerTextBox, Resources.NullOrWhiteSpaceError);
+                    errorProvider.SetError(UserNameTextBox, Resources.NullOrWhiteSpaceError);
                     return;
                 }
-                if (String.IsNullOrEmpty(ServerTextBox.Text))
+                if (String.IsNullOrEmpty(PasswordTextBox.Text))
                 {
                     errorProvider.SetError(PasswordTextBox, Resources.NullOrWhiteSpaceError);
                     return;
                 }
 
-                string cs = BuildConnectionString();
+                string tConnectionString = BuildConnectionString();
 
                 // Test before saving
-                var tResult = mQuestionService.TestConnection(cs);
+                var tResult = mQuestionService.TestConnection(tConnectionString);
 
                 // Save to App.config using your AppSetting class
                 if (!tResult.IsSuccess)
@@ -109,29 +124,37 @@ namespace SurveyQuestionsConfigurator
                     CustomMessageBox.Show(Resources.DatabaseConnectionError, Resources.ErrorCaption, ButtonTypes.Ok, IconTypes.Error);
                     return;
                 }
-                mAppSetting.SaveConnection(cs, "SurveyDb");
+                mAppSetting.SaveConnection(tConnectionString, DB_KEY);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
-            catch (Exception ex)
+            catch (Exception tEx)
             {
-                Log.Error(ex, "Unexpected Error");
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
                 CustomMessageBox.Show(Resources.UnexpectedError, Resources.ErrorCaption, ButtonTypes.Ok, IconTypes.Error);
             }
         }
 
-        private void btnTestConnection_Click(object sender, EventArgs e)
+        private void btnTestConnection_Click(object pSender, EventArgs pE)
         {
-            string cs = BuildConnectionString();
-
-            var tResult = mQuestionService.TestConnection(cs);
-
-            if (!tResult.IsSuccess)
+            try
             {
-                CustomMessageBox.Show(Resources.DatabaseConnectionError, Resources.ErrorCaption, ButtonTypes.Ok, IconTypes.Error);
-                return;
+                string tConnectionString = BuildConnectionString();
+
+                var tResult = mQuestionService.TestConnection(tConnectionString);
+
+                if (!tResult.IsSuccess)
+                {
+                    CustomMessageBox.Show(Resources.DatabaseConnectionError, Resources.ErrorCaption, ButtonTypes.Ok, IconTypes.Error);
+                    return;
+                }
+                CustomMessageBox.Show(Resources.ConnectionSuccess, Resources.SuccessCaption, ButtonTypes.Ok, IconTypes.Success);
             }
-            CustomMessageBox.Show(Resources.ConnectionSuccess, Resources.SuccessCaption, ButtonTypes.Ok, IconTypes.Success);
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                CustomMessageBox.Show(Resources.UnexpectedError, Resources.ErrorCaption, ButtonTypes.Ok, IconTypes.Error);
+            }
         }
     }
 }

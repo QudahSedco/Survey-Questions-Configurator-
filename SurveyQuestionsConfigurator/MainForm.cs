@@ -65,6 +65,10 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 var tResult = mQuestionService.StartListening();
+                if (!tResult.IsSuccess)
+                {
+                    ShowErrorBox(tResult.Status);
+                }
 
                 dataGridViewMain.Font = new Font("Segoe UI", 13, FontStyle.Regular);
                 dataGridViewMain.Columns.Clear();
@@ -140,8 +144,11 @@ namespace SurveyQuestionsConfigurator
                 using (var tForm = new AddOrEditForm(tQuestion))
                 {
                     tForm.ShowDialog(this);
+                    if (tForm.DialogResult == DialogResult.OK)
+                    {
+                        LoadQuestions();
+                    }
                 }
-                LoadQuestions();
             }
             catch (Exception tEx)
             {
@@ -230,6 +237,10 @@ namespace SurveyQuestionsConfigurator
                 using (var tForm = new AddOrEditForm(tSelectedQuestion))
                 {
                     tForm.ShowDialog(this);
+                    if (tForm.DialogResult == DialogResult.OK)
+                    {
+                        LoadQuestions();
+                    }
                 }
             }
             catch (Exception tEx)
@@ -334,19 +345,19 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        private void SwitchLanguage(string culture)
+        private void SwitchLanguage(string pCulture)
         {
             try
             {
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
-                Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo(pCulture);
+                Thread.CurrentThread.CurrentCulture = new CultureInfo(pCulture);
 
-                var res = new ComponentResourceManager(typeof(MainForm));
+                var tRes = new ComponentResourceManager(typeof(MainForm));
 
-                res.ApplyResources(this, "$this");//applies to form level properties only
+                tRes.ApplyResources(this, "$this");//applies to form level properties only
 
-                foreach (Control c in Controls)
-                    ApplyResourcesRecursive(res, c);
+                foreach (Control tControl in Controls) //applies the all controls and the contorls inside them
+                    ApplyResourcesRecursive(tRes, tControl);
 
                 // DataGridView columns are not controls (they do not inherit from Control),
                 // so they are not localized by ApplyResources / ApplyResourcesRecursive.
@@ -364,14 +375,14 @@ namespace SurveyQuestionsConfigurator
         }
 
         // Recursively applies localization resources to all child controls.
-        private void ApplyResourcesRecursive(ComponentResourceManager res, Control control)
+        private void ApplyResourcesRecursive(ComponentResourceManager pRes, Control pControl)
         {
             try
             {
-                res.ApplyResources(control, control.Name);
+                pRes.ApplyResources(pControl, pControl.Name);
 
-                foreach (Control child in control.Controls)
-                    ApplyResourcesRecursive(res, child);
+                foreach (Control child in pControl.Controls)
+                    ApplyResourcesRecursive(pRes, child);
             }
             catch (Exception tEx)
             {
@@ -394,7 +405,7 @@ namespace SurveyQuestionsConfigurator
         }
 
         //changes languge based on the option that the user chooses
-        private void LanguagesComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void LanguagesComboBox_SelectedIndexChanged(object pSender, EventArgs pE)
         {
             try
             {
@@ -418,14 +429,14 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnChangeDataBase_Click(object pSender, EventArgs pE)
         {
-            using (var connectionForm = new ConnectionSettingsForm())
+            try
             {
-                // Show it as a modal dialog
-                connectionForm.ShowDialog();
-                try
+                using (var tConnectionForm = new ConnectionSettingsForm())
                 {
+                    tConnectionForm.ShowDialog();
+
                     mQuestionService?.StopListening();
 
                     // Create new service so it reads the updated connection string
@@ -433,11 +444,11 @@ namespace SurveyQuestionsConfigurator
                     mQuestionService.QuestionsTableChanged += OnQuestionsChanged;
                     LoadQuestions();
                 }
-                catch (Exception ex)
-                {
-                    Log.Error(ex, UNEXPECTED_ERROR_MESSAGE);
-                    ShowErrorBox(ResultStatus.UnexpectedError);
-                }
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
     }

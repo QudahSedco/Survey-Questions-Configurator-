@@ -248,7 +248,10 @@ namespace SurveyQuestionsConfigurator
                     var tResult = mQuestionService.AddQuestion(tQuestion);
 
                     if (tResult.IsSuccess)
+                    {
+                        this.DialogResult = DialogResult.OK;
                         Close();
+                    }
                     else
                     {
                         ShowErrorBox(tResult.Status);
@@ -544,7 +547,10 @@ namespace SurveyQuestionsConfigurator
                 }
 
                 if (tResult.IsSuccess)
+                {
+                    this.DialogResult = DialogResult.OK;
                     Close();
+                }
                 else ShowErrorBox(tResult.Status);
             }
             catch (Exception tEx)

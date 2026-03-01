@@ -136,6 +136,12 @@
   <data name="btnDelete.Text" xml:space="preserve">
     <value>حذف</value>
   </data>
+  <data name="btnChangeDatabase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>97, 10</value>
+  </data>
+  <data name="btnChangeDatabase.Text" xml:space="preserve">
+    <value>تغيير قاعدة البيانات</value>
+  </data>
   <data name="LanguagesComboBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 12</value>
   </data>

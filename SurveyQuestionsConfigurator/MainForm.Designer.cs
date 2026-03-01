@@ -62,10 +62,10 @@
             // 
             // pnlFooter
             // 
+            resources.ApplyResources(this.pnlFooter, "pnlFooter");
             this.pnlFooter.Controls.Add(this.btnDelete);
             this.pnlFooter.Controls.Add(this.btnUpdate);
             this.pnlFooter.Controls.Add(this.btnAdd);
-            resources.ApplyResources(this.pnlFooter, "pnlFooter");
             this.pnlFooter.Name = "pnlFooter";
             // 
             // btnDelete
@@ -88,29 +88,29 @@
             resources.ApplyResources(this.btnChangeDatabase, "btnChangeDatabase");
             this.btnChangeDatabase.Name = "btnChangeDatabase";
             this.btnChangeDatabase.UseVisualStyleBackColor = true;
-            this.btnChangeDatabase.Click += new System.EventHandler(this.button1_Click);
+            this.btnChangeDatabase.Click += new System.EventHandler(this.btnChangeDataBase_Click);
             // 
             // LanguagesComboBox
             // 
-            this.LanguagesComboBox.FormattingEnabled = true;
             resources.ApplyResources(this.LanguagesComboBox, "LanguagesComboBox");
+            this.LanguagesComboBox.FormattingEnabled = true;
             this.LanguagesComboBox.Name = "LanguagesComboBox";
             this.LanguagesComboBox.SelectedIndexChanged += new System.EventHandler(this.LanguagesComboBox_SelectedIndexChanged);
             // 
             // QuestionsListGroupBox
             // 
+            resources.ApplyResources(this.QuestionsListGroupBox, "QuestionsListGroupBox");
             this.QuestionsListGroupBox.BackColor = System.Drawing.SystemColors.Menu;
             this.QuestionsListGroupBox.Controls.Add(this.dataGridViewMain);
-            resources.ApplyResources(this.QuestionsListGroupBox, "QuestionsListGroupBox");
             this.QuestionsListGroupBox.Name = "QuestionsListGroupBox";
             this.QuestionsListGroupBox.TabStop = false;
             // 
             // dataGridViewMain
             // 
+            resources.ApplyResources(this.dataGridViewMain, "dataGridViewMain");
             this.dataGridViewMain.AllowUserToAddRows = false;
             this.dataGridViewMain.AllowUserToDeleteRows = false;
             this.dataGridViewMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            resources.ApplyResources(this.dataGridViewMain, "dataGridViewMain");
             this.dataGridViewMain.Name = "dataGridViewMain";
             this.dataGridViewMain.ReadOnly = true;
             this.dataGridViewMain.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewMain_CellContentClick);

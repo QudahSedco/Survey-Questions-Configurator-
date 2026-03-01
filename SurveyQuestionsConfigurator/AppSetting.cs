@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -13,20 +14,44 @@ namespace SurveyQuestionsConfigurator
 
         public AppSetting()
         {
-            config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            try
+            {
+                config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, "Unexpected error");
+                throw;
+            }
         }
 
         public string GetConnectionString(string key)
         {
-            return config.ConnectionStrings.ConnectionStrings[key].ConnectionString;
+            try
+            {
+                return config.ConnectionStrings.ConnectionStrings[key].ConnectionString;
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, "Unexpected error");
+                throw;
+            }
         }
 
         public void SaveConnection(string connectionString, string Key)
         {
-            config.ConnectionStrings.ConnectionStrings[Key].ConnectionString = connectionString;
-            config.ConnectionStrings.ConnectionStrings[Key].ProviderName = "System.Data.SqlClient";
-            config.Save(ConfigurationSaveMode.Modified);
-            ConfigurationManager.RefreshSection("connectionStrings");
+            try
+            {
+                config.ConnectionStrings.ConnectionStrings[Key].ConnectionString = connectionString;
+                config.ConnectionStrings.ConnectionStrings[Key].ProviderName = "System.Data.SqlClient";
+                config.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection("connectionStrings");
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, "Unexpected error");
+                throw;
+            }
         }
     }
 }
