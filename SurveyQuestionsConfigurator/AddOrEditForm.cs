@@ -53,11 +53,11 @@ namespace SurveyQuestionsConfigurator
                 if (Thread.CurrentThread.CurrentUICulture.Name.StartsWith("ar"))
                 {
                     this.RightToLeft = RightToLeft.Yes;
-                    this.RightToLeft = RightToLeft.Yes;
                     pnlStars.RightToLeft = RightToLeft.Yes;
                     pnlSmileyFaces.RightToLeft = RightToLeft.Yes;
                     pnlSlider.RightToLeft = RightToLeft.Yes;
                     lblSmileyFaces.RightToLeft = RightToLeft.Yes;
+                    lblSmileyFaces.TextAlign = ContentAlignment.MiddleRight;
                     this.RightToLeftLayout = true;
                 }
 
@@ -318,8 +318,10 @@ namespace SurveyQuestionsConfigurator
                 pnlStars.Visible = false;
                 pnlSmileyFaces.Visible = false;
                 pnlSlider.Visible = false;
+                if (comboBoxQuestionTypes.SelectedValue == null) return;
 
-                QuestionType tSelected = (QuestionType)comboBoxQuestionTypes.SelectedValue;
+                if (!(comboBoxQuestionTypes.SelectedValue is QuestionType tSelected))
+                    return;
 
                 switch (tSelected)
                 {
@@ -608,7 +610,6 @@ namespace SurveyQuestionsConfigurator
             catch (Exception tEx)
             {
                 Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
-                ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
     }

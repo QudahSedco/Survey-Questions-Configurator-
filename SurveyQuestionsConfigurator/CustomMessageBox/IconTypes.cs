@@ -9,6 +9,7 @@ namespace SurveyQuestionsConfigurator
     public enum IconTypes
     {
         Error,
-        Question
+        Question,
+        Success
     }
 }

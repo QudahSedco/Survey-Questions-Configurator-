@@ -115,6 +115,26 @@ namespace SurveyQuestionsConfigurator.Repositories
             }
         }
 
+        public Result<bool> TestConnection(String pConnectionString)
+        {
+            try
+            {
+                using (SqlConnection tConnection = new SqlConnection(pConnectionString))
+                    tConnection.Open();
+                return Result<bool>.Success(true);
+            }
+            catch (SqlException ex)
+            {
+                Log.Error(ex, "Error connecting to Database");
+                return Result<bool>.Failure(ResultStatus.DatabaseConnectionError);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, UNEXPECTED_ERROR_MESSAGE);
+                return Result<bool>.Failure(ResultStatus.UnexpectedError);
+            }
+        }
+
         //Inserts into the base table then retrieves the Id created by the Database and uses it to create a child record
         public Result<bool> AddQuestion(Question pQuestion)
         {

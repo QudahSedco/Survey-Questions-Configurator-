@@ -141,6 +141,7 @@ namespace SurveyQuestionsConfigurator
                 {
                     tForm.ShowDialog(this);
                 }
+                LoadQuestions();
             }
             catch (Exception tEx)
             {
@@ -388,7 +389,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception tEx)
             {
                 Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
-                MessageBox.Show("Unexpected error happend");
+                MessageBox.Show("Unexpected error happened");
             }
         }
 
@@ -414,6 +415,29 @@ namespace SurveyQuestionsConfigurator
             {
                 Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
                 ShowErrorBox(ResultStatus.UnexpectedError);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (var connectionForm = new ConnectionSettingsForm())
+            {
+                // Show it as a modal dialog
+                connectionForm.ShowDialog();
+                try
+                {
+                    mQuestionService?.StopListening();
+
+                    // Create new service so it reads the updated connection string
+                    mQuestionService = new QuestionService();
+                    mQuestionService.QuestionsTableChanged += OnQuestionsChanged;
+                    LoadQuestions();
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex, UNEXPECTED_ERROR_MESSAGE);
+                    ShowErrorBox(ResultStatus.UnexpectedError);
+                }
             }
         }
     }

@@ -70,6 +70,24 @@ namespace SurveyQuestionsConfigurator {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Connection to the database was successful.
+        /// </summary>
+        internal static string ConnectionSuccess {
+            get {
+                return ResourceManager.GetString("ConnectionSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error Connecting to Database check connection string.
+        /// </summary>
+        internal static string DatabaseConnectionError {
+            get {
+                return ResourceManager.GetString("DatabaseConnectionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A database error occurred. Please check your connection..
         /// </summary>
         internal static string DatabaseError {
@@ -255,6 +273,15 @@ namespace SurveyQuestionsConfigurator {
         internal static string StartCaptionEmptyError {
             get {
                 return ResourceManager.GetString("StartCaptionEmptyError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Success.
+        /// </summary>
+        internal static string SuccessCaption {
+            get {
+                return ResourceManager.GetString("SuccessCaption", resourceCulture);
             }
         }
         

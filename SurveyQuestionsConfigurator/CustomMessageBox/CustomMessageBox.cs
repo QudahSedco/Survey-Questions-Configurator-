@@ -99,6 +99,9 @@ namespace SurveyQuestionsConfigurator
                 case IconTypes.Error:
                     return SystemIcons.Error.ToBitmap();
 
+                case IconTypes.Success:
+                    return SystemIcons.Information.ToBitmap();
+
                 default:
                     return SystemIcons.Information.ToBitmap();
             }

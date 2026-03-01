@@ -71,6 +71,19 @@ namespace SurveyQuestionsConfiguratorServices
             }
         }
 
+        public Result<bool> TestConnection(String pConnectionString)
+        {
+            try
+            {
+                return mDataRepository.TestConnection(pConnectionString);
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                return Result<bool>.Failure(ResultStatus.UnexpectedError);
+            }
+        }
+
         public Result<List<Question>> GetAllQuestions()
         {
             try

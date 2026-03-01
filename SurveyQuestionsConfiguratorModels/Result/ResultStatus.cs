@@ -18,6 +18,7 @@ namespace SurveyQuestionsConfiguratorModels.Result
         OutOfRangeError = -8,
         NullError = -9,
         NullOrWhiteSpaceError = -10,
-        LengthTooLongError = -11
+        LengthTooLongError = -11,
+        DatabaseConnectionError = -12
     }
 }
