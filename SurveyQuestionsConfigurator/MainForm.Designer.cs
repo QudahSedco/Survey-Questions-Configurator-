@@ -34,10 +34,10 @@
             this.pnlFooter = new System.Windows.Forms.Panel();
             this.btnDelete = new System.Windows.Forms.Button();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.btnChangeDatabase = new System.Windows.Forms.Button();
             this.LanguagesComboBox = new System.Windows.Forms.ComboBox();
             this.QuestionsListGroupBox = new System.Windows.Forms.GroupBox();
             this.dataGridViewMain = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
             this.pnlFooter.SuspendLayout();
             this.pnlMain.SuspendLayout();
             this.QuestionsListGroupBox.SuspendLayout();
@@ -78,10 +78,17 @@
             // pnlMain
             // 
             resources.ApplyResources(this.pnlMain, "pnlMain");
-            this.pnlMain.Controls.Add(this.button1);
+            this.pnlMain.Controls.Add(this.btnChangeDatabase);
             this.pnlMain.Controls.Add(this.LanguagesComboBox);
             this.pnlMain.Controls.Add(this.QuestionsListGroupBox);
             this.pnlMain.Name = "pnlMain";
+            // 
+            // btnChangeDatabase
+            // 
+            resources.ApplyResources(this.btnChangeDatabase, "btnChangeDatabase");
+            this.btnChangeDatabase.Name = "btnChangeDatabase";
+            this.btnChangeDatabase.UseVisualStyleBackColor = true;
+            this.btnChangeDatabase.Click += new System.EventHandler(this.button1_Click);
             // 
             // LanguagesComboBox
             // 
@@ -109,13 +116,6 @@
             this.dataGridViewMain.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewMain_CellContentClick);
             this.dataGridViewMain.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewMain_ColumnHeaderMouseClick);
             // 
-            // button1
-            // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -142,7 +142,7 @@
         private System.Windows.Forms.GroupBox QuestionsListGroupBox;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.ComboBox LanguagesComboBox;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnChangeDatabase;
     }
 }
 

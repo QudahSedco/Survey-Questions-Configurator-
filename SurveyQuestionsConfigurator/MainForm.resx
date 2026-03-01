@@ -180,21 +180,6 @@
   <data name="&gt;&gt;btnUpdate.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="btnDelete.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="btnDelete.Location" type="System.Drawing.Point, System.Drawing">
-    <value>909, 2</value>
-  </data>
-  <data name="btnDelete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 29</value>
-  </data>
-  <data name="btnDelete.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="btnDelete.Text" xml:space="preserve">
-    <value>Delete</value>
-  </data>
   <data name="&gt;&gt;btnDelete.Name" xml:space="preserve">
     <value>btnDelete</value>
   </data>
@@ -231,31 +216,58 @@
   <data name="&gt;&gt;pnlFooter.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="btnDelete.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="btnDelete.Location" type="System.Drawing.Point, System.Drawing">
+    <value>909, 2</value>
+  </data>
+  <data name="btnDelete.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 29</value>
+  </data>
+  <data name="btnDelete.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="btnDelete.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="&gt;&gt;btnDelete.Name" xml:space="preserve">
+    <value>btnDelete</value>
+  </data>
+  <data name="&gt;&gt;btnDelete.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnDelete.Parent" xml:space="preserve">
+    <value>pnlFooter</value>
+  </data>
+  <data name="&gt;&gt;btnDelete.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="pnlMain.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
-  <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>808, 12</value>
+  <data name="btnChangeDatabase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>796, 12</value>
   </data>
-  <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+  <data name="btnChangeDatabase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 23</value>
   </data>
-  <data name="button1.TabIndex" type="System.Int32, mscorlib">
+  <data name="btnChangeDatabase.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="button1.Text" xml:space="preserve">
-    <value>button1</value>
+  <data name="btnChangeDatabase.Text" xml:space="preserve">
+    <value>Change Database</value>
   </data>
-  <data name="&gt;&gt;button1.Name" xml:space="preserve">
-    <value>button1</value>
+  <data name="&gt;&gt;btnChangeDatabase.Name" xml:space="preserve">
+    <value>btnChangeDatabase</value>
   </data>
-  <data name="&gt;&gt;button1.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnChangeDatabase.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnChangeDatabase.Parent" xml:space="preserve">
     <value>pnlMain</value>
   </data>
-  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnChangeDatabase.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="LanguagesComboBox.Location" type="System.Drawing.Point, System.Drawing">
@@ -278,18 +290,6 @@
   </data>
   <data name="&gt;&gt;LanguagesComboBox.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="dataGridViewMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="dataGridViewMain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 25</value>
-  </data>
-  <data name="dataGridViewMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>975, 349</value>
-  </data>
-  <data name="dataGridViewMain.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
   </data>
   <data name="&gt;&gt;dataGridViewMain.Name" xml:space="preserve">
     <value>dataGridViewMain</value>
@@ -353,6 +353,30 @@
   </data>
   <data name="&gt;&gt;pnlMain.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="dataGridViewMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="dataGridViewMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 25</value>
+  </data>
+  <data name="dataGridViewMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>975, 349</value>
+  </data>
+  <data name="dataGridViewMain.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewMain.Name" xml:space="preserve">
+    <value>dataGridViewMain</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewMain.Parent" xml:space="preserve">
+    <value>QuestionsListGroupBox</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewMain.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

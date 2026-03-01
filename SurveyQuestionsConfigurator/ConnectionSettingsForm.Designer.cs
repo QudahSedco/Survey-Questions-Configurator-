@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConnectionSettingsForm));
             this.lblServer = new System.Windows.Forms.Label();
             this.ServerTextBox = new System.Windows.Forms.TextBox();
             this.lblDatabaseName = new System.Windows.Forms.Label();
@@ -38,98 +40,74 @@
             this.PasswordTextBox = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnTestConnection = new System.Windows.Forms.Button();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // lblServer
             // 
-            this.lblServer.AutoSize = true;
-            this.lblServer.Location = new System.Drawing.Point(14, 29);
+            resources.ApplyResources(this.lblServer, "lblServer");
             this.lblServer.Name = "lblServer";
-            this.lblServer.Size = new System.Drawing.Size(38, 13);
-            this.lblServer.TabIndex = 0;
-            this.lblServer.Text = "Server";
             // 
             // ServerTextBox
             // 
-            this.ServerTextBox.Location = new System.Drawing.Point(102, 26);
+            resources.ApplyResources(this.ServerTextBox, "ServerTextBox");
             this.ServerTextBox.Name = "ServerTextBox";
-            this.ServerTextBox.Size = new System.Drawing.Size(219, 20);
-            this.ServerTextBox.TabIndex = 1;
             // 
             // lblDatabaseName
             // 
-            this.lblDatabaseName.AutoSize = true;
-            this.lblDatabaseName.Location = new System.Drawing.Point(14, 55);
+            resources.ApplyResources(this.lblDatabaseName, "lblDatabaseName");
             this.lblDatabaseName.Name = "lblDatabaseName";
-            this.lblDatabaseName.Size = new System.Drawing.Size(82, 13);
-            this.lblDatabaseName.TabIndex = 2;
-            this.lblDatabaseName.Text = "Database name";
             // 
             // DatabaseNameTextBox
             // 
-            this.DatabaseNameTextBox.Location = new System.Drawing.Point(102, 52);
+            resources.ApplyResources(this.DatabaseNameTextBox, "DatabaseNameTextBox");
             this.DatabaseNameTextBox.Name = "DatabaseNameTextBox";
-            this.DatabaseNameTextBox.Size = new System.Drawing.Size(219, 20);
-            this.DatabaseNameTextBox.TabIndex = 3;
             // 
             // lblUserName
             // 
-            this.lblUserName.AutoSize = true;
-            this.lblUserName.Location = new System.Drawing.Point(14, 81);
+            resources.ApplyResources(this.lblUserName, "lblUserName");
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(58, 13);
-            this.lblUserName.TabIndex = 6;
-            this.lblUserName.Text = "User name";
             // 
             // lblPassword
             // 
-            this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(14, 107);
+            resources.ApplyResources(this.lblPassword, "lblPassword");
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(53, 13);
-            this.lblPassword.TabIndex = 7;
-            this.lblPassword.Text = "Password";
             // 
             // UserNameTextBox
             // 
-            this.UserNameTextBox.Location = new System.Drawing.Point(102, 78);
+            resources.ApplyResources(this.UserNameTextBox, "UserNameTextBox");
             this.UserNameTextBox.Name = "UserNameTextBox";
-            this.UserNameTextBox.Size = new System.Drawing.Size(219, 20);
-            this.UserNameTextBox.TabIndex = 8;
             // 
             // PasswordTextBox
             // 
-            this.PasswordTextBox.Location = new System.Drawing.Point(102, 104);
+            resources.ApplyResources(this.PasswordTextBox, "PasswordTextBox");
             this.PasswordTextBox.Name = "PasswordTextBox";
-            this.PasswordTextBox.Size = new System.Drawing.Size(219, 20);
-            this.PasswordTextBox.TabIndex = 9;
+            this.PasswordTextBox.UseSystemPasswordChar = true;
             this.PasswordTextBox.TextChanged += new System.EventHandler(this.PasswordTextBox_TextChanged);
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(246, 150);
+            resources.ApplyResources(this.btnSave, "btnSave");
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 10;
-            this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnTestConnection
             // 
-            this.btnTestConnection.Location = new System.Drawing.Point(146, 150);
+            resources.ApplyResources(this.btnTestConnection, "btnTestConnection");
             this.btnTestConnection.Name = "btnTestConnection";
-            this.btnTestConnection.Size = new System.Drawing.Size(94, 23);
-            this.btnTestConnection.TabIndex = 11;
-            this.btnTestConnection.Text = "TestConnection";
             this.btnTestConnection.UseVisualStyleBackColor = true;
             this.btnTestConnection.Click += new System.EventHandler(this.btnTestConnection_Click);
             // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
             // ConnectionSettingsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(350, 188);
             this.Controls.Add(this.btnTestConnection);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.PasswordTextBox);
@@ -141,7 +119,7 @@
             this.Controls.Add(this.ServerTextBox);
             this.Controls.Add(this.lblServer);
             this.Name = "ConnectionSettingsForm";
-            this.Text = "ConnectionSettingsForm";
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -159,5 +137,6 @@
         private System.Windows.Forms.TextBox PasswordTextBox;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnTestConnection;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

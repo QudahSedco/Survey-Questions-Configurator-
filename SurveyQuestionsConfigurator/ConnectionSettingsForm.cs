@@ -77,6 +77,27 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
+                if (String.IsNullOrEmpty(ServerTextBox.Text))
+                {
+                    errorProvider.SetError(ServerTextBox, Resources.NullOrWhiteSpaceError);
+                    return;
+                }
+                if (String.IsNullOrEmpty(DatabaseNameTextBox.Text))
+                {
+                    errorProvider.SetError(ServerTextBox, Resources.NullOrWhiteSpaceError);
+                    return;
+                }
+                if (String.IsNullOrEmpty(UserNameTextBox.Text))
+                {
+                    errorProvider.SetError(ServerTextBox, Resources.NullOrWhiteSpaceError);
+                    return;
+                }
+                if (String.IsNullOrEmpty(ServerTextBox.Text))
+                {
+                    errorProvider.SetError(PasswordTextBox, Resources.NullOrWhiteSpaceError);
+                    return;
+                }
+
                 string cs = BuildConnectionString();
 
                 // Test before saving
