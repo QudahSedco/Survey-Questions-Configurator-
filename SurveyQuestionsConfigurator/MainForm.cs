@@ -19,6 +19,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using SortOrder = System.Windows.Forms.SortOrder;
 
 namespace SurveyQuestionsConfigurator
 {
@@ -28,6 +29,11 @@ namespace SurveyQuestionsConfigurator
         private Dictionary<string, bool> mSortColumnsDictionary;
         private List<Question> mQuestionsList;
         private const string UNEXPECTED_ERROR_MESSAGE = "An unexpected error occurred";
+        private const string COL_QUESTION_TEXT = "QuestionText";
+        private const string COL_QUESTION_ORDER = "QuestionOrder";
+        private const string COL_QUESTION_TYPE = "QuestionType";
+        private const string EN_LANGUAGE = "English";
+        private const string AR_LANGUAGE = "Arabic";
 
         public MainForm()
         {
@@ -48,9 +54,9 @@ namespace SurveyQuestionsConfigurator
                 //keeps track of how each column is sorted (true = ascending, false = descending)
                 mSortColumnsDictionary = new Dictionary<string, bool>()
     {
-        { "QuestionText", true },
-        { "QuestionOrder", true },
-        { "QuestionType", true }
+        { COL_QUESTION_TEXT, true },
+        { COL_QUESTION_ORDER, true },
+        { COL_QUESTION_TYPE, true }
     };
             }
             catch (Exception tEx)
@@ -76,32 +82,24 @@ namespace SurveyQuestionsConfigurator
                 dataGridViewMain.AutoGenerateColumns = false;
                 dataGridViewMain.MultiSelect = false;
 
-                // this is what shows in the grid
-
                 //creating the columns for the data grid view
                 DataGridViewTextBoxColumn tColText = new DataGridViewTextBoxColumn();
-                tColText.Name = "Grid_QuestionText";
-                tColText.HeaderText = Resources.QuestionText;
-                tColText.DataPropertyName = "QuestionText";
+                tColText.HeaderText = "Question text";
+                tColText.DataPropertyName = COL_QUESTION_TEXT;
                 tColText.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 tColText.SortMode = DataGridViewColumnSortMode.Automatic;
-
                 dataGridViewMain.Columns.Add(tColText);
 
                 DataGridViewTextBoxColumn tColOrder = new DataGridViewTextBoxColumn();
-                tColOrder.Name = "Grid_QuestionOrder";
                 tColOrder.HeaderText = "Order";
-
-                tColOrder.DataPropertyName = "QuestionOrder";
+                tColOrder.DataPropertyName = COL_QUESTION_ORDER;
                 tColOrder.Width = 170;
                 tColOrder.SortMode = DataGridViewColumnSortMode.Automatic;
                 dataGridViewMain.Columns.Add(tColOrder);
 
                 DataGridViewTextBoxColumn tColType = new DataGridViewTextBoxColumn();
-
-                tColType.Name = "Grid_QuestionType";
                 tColType.HeaderText = "Type";
-                tColType.DataPropertyName = "QuestionType";
+                tColType.DataPropertyName = COL_QUESTION_TYPE;
                 tColType.Width = 160;
                 tColType.SortMode = DataGridViewColumnSortMode.Automatic;
                 dataGridViewMain.Columns.Add(tColType);
@@ -116,12 +114,13 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        //Ensures this method runs on the UI thread since UI updates must happen there
+        //Loads questions everytime a change happens in the database
+        //The method is subscribed to Service event
         private void OnQuestionsChanged()
         {
             try
             {
-                if (InvokeRequired)
+                if (InvokeRequired)//Ensures this method runs on the UI thread since UI updates must happen there
                 {
                     Invoke(new Action(OnQuestionsChanged));
                     return;
@@ -135,7 +134,7 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        //Passing null to Form2 to open it in "Add New Question" mode instead of edit mode
+        //Passing null to add/edit form to open it in "Add New Question" mode instead of edit mode
         private void btnAdd_Click(object pSender, EventArgs pE)
         {
             try
@@ -152,7 +151,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE + "while adding a question");
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
                 ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
@@ -215,7 +214,7 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        //Edit button passes the selected object and opens dialog form
+        //Edit button passes the selected question object and opens add/edit form in edit mode
         private void btnEdit_Click(object pSender, EventArgs pE)
         {
             try
@@ -253,7 +252,7 @@ namespace SurveyQuestionsConfigurator
         //sorts questions using the propertyname saved in a dictionary data structure<string,bool>
         //if its true then its ascending if false its descending
 
-        private void SortQuestions(string pColumnName)
+        private void SortQuestions(string pColumnName, int pColumnIndex)
         {
             try
             {
@@ -264,24 +263,27 @@ namespace SurveyQuestionsConfigurator
 
                 switch (pColumnName)
                 {
-                    case "QuestionText":
+                    case COL_QUESTION_TEXT:
                         dataGridViewMain.DataSource = tAsc
                             ? mQuestionsList.OrderBy(q => q.QuestionText).ToList()
                             : mQuestionsList.OrderByDescending(q => q.QuestionText).ToList();
                         break;
 
-                    case "QuestionOrder":
+                    case COL_QUESTION_ORDER:
                         dataGridViewMain.DataSource = tAsc
                             ? mQuestionsList.OrderBy(q => q.QuestionOrder).ToList()
                             : mQuestionsList.OrderByDescending(q => q.QuestionOrder).ToList();
                         break;
 
-                    case "QuestionType":
+                    case COL_QUESTION_TYPE:
                         dataGridViewMain.DataSource = tAsc
                             ? mQuestionsList.OrderBy(q => q.QuestionType).ToList()
                             : mQuestionsList.OrderByDescending(q => q.QuestionType).ToList();
                         break;
                 }
+                dataGridViewMain.Columns[pColumnIndex]
+           .HeaderCell.SortGlyphDirection =
+               tAsc ? SortOrder.Ascending : SortOrder.Descending;
 
                 mSortColumnsDictionary[pColumnName] = !tAsc;
             }
@@ -292,6 +294,7 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
+        //calls sort questions method on the column clicked on
         private void DataGridViewMain_ColumnHeaderMouseClick(object pSender, DataGridViewCellMouseEventArgs pE)
         {
             try
@@ -302,7 +305,7 @@ namespace SurveyQuestionsConfigurator
                 string tPropertyName = dataGridViewMain.Columns[pE.ColumnIndex].DataPropertyName;
                 bool tAscending = mSortColumnsDictionary[tPropertyName];
 
-                SortQuestions(tPropertyName);
+                SortQuestions(tPropertyName, pE.ColumnIndex);
             }
             catch (Exception tEx)
             {
@@ -333,6 +336,7 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
+        //stop sqltable dependency once the form is closed
         private void FormMain_FormClosing(object pSender, FormClosingEventArgs pE)
         {
             try
@@ -345,6 +349,7 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
+        //switches the langauge based on the user selection in the langauge combobox
         private void SwitchLanguage(string pCulture)
         {
             try
@@ -356,7 +361,7 @@ namespace SurveyQuestionsConfigurator
 
                 tRes.ApplyResources(this, "$this");//applies to form level properties only
 
-                foreach (Control tControl in Controls) //applies the all controls and the contorls inside them
+                foreach (Control tControl in Controls) //applies to all controls and the contorls inside them
                     ApplyResourcesRecursive(tRes, tControl);
 
                 // DataGridView columns are not controls (they do not inherit from Control),
@@ -391,6 +396,7 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
+        //shows custom error box made this method to write less code when throwing erros
         private void ShowErrorBox(ResultStatus pStatus)
         {
             try
@@ -399,8 +405,8 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
-                MessageBox.Show("Unexpected error happened");
+                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE + "while tryin to show custom message box");
+                MessageBox.Show(UNEXPECTED_ERROR_MESSAGE);
             }
         }
 
@@ -413,11 +419,11 @@ namespace SurveyQuestionsConfigurator
 
                 switch (tSelectedLang)
                 {
-                    case "English":
+                    case EN_LANGUAGE:
                         SwitchLanguage("en");
                         break;
 
-                    case "Arabic":
+                    case AR_LANGUAGE:
                         SwitchLanguage("ar");
                         break;
                 }
@@ -429,6 +435,8 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
+        //opens connection setting form and allows the user to change the database connection string
+        //if successful starts listening for changes on the new database
         private void btnChangeDataBase_Click(object pSender, EventArgs pE)
         {
             try
@@ -442,7 +450,7 @@ namespace SurveyQuestionsConfigurator
                         mQuestionService?.StopListening();
                         mQuestionService = new QuestionService();
                         mQuestionService.QuestionsTableChanged += OnQuestionsChanged;
-                        mQuestionService.StartListening();
+                        mQuestionService?.StartListening();
                         LoadQuestions();
                     }
                 }
