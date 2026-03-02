@@ -32,8 +32,8 @@ namespace SurveyQuestionsConfigurator
 
         public string MessageText
         {
-            get => label1.Text;
-            set => label1.Text = value;
+            get => lblText.Text;
+            set => lblText.Text = value;
         }
 
         public string TitleText
@@ -50,9 +50,9 @@ namespace SurveyQuestionsConfigurator
             set
             {
                 _image = value;
-                pictureBox1.Image = _image;
-                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-                pictureBox1.RightToLeft = RightToLeft.No;
+                IconPictureBox.Image = _image;
+                IconPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+                IconPictureBox.RightToLeft = RightToLeft.No;
             }
         }
 
@@ -70,7 +70,7 @@ namespace SurveyQuestionsConfigurator
                 box.MessageText = message;
                 box.TitleText = title;
                 box.IconImage = HandleIcon(iconTypes);
-                box.pictureBox1.RightToLeft = RightToLeft.No;
+                box.IconPictureBox.RightToLeft = RightToLeft.No;
                 box.StartPosition = FormStartPosition.CenterParent;
 
                 switch (buttonTypes)

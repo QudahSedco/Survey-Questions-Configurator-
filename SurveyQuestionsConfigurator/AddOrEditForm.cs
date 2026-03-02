@@ -41,7 +41,7 @@ namespace SurveyQuestionsConfigurator
                 MinimizeBox = false;
 
                 textBoxQuestionText.TabIndex = 0;
-                textBoxQuestionText.Focus();
+                this.ActiveControl = textBoxQuestionText;
 
                 numericUpDownQuestionOrder.TabIndex = 1;
                 comboBoxQuestionTypes.TabIndex = 2;

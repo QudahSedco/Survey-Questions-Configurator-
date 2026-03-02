@@ -244,7 +244,6 @@
             this.errorProvider.SetIconAlignment(this.lblCharNumberStartCaption, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("lblCharNumberStartCaption.IconAlignment"))));
             this.errorProvider.SetIconPadding(this.lblCharNumberStartCaption, ((int)(resources.GetObject("lblCharNumberStartCaption.IconPadding"))));
             this.lblCharNumberStartCaption.Name = "lblCharNumberStartCaption";
-         
             // 
             // lblEndCaption
             // 

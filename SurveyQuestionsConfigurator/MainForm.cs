@@ -436,13 +436,15 @@ namespace SurveyQuestionsConfigurator
                 using (var tConnectionForm = new ConnectionSettingsForm())
                 {
                     tConnectionForm.ShowDialog();
-
-                    mQuestionService?.StopListening();
-
                     // Create new service so it reads the updated connection string
-                    mQuestionService = new QuestionService();
-                    mQuestionService.QuestionsTableChanged += OnQuestionsChanged;
-                    LoadQuestions();
+                    if (tConnectionForm.DialogResult == DialogResult.OK)
+                    {
+                        mQuestionService?.StopListening();
+                        mQuestionService = new QuestionService();
+                        mQuestionService.QuestionsTableChanged += OnQuestionsChanged;
+                        mQuestionService.StartListening();
+                        LoadQuestions();
+                    }
                 }
             }
             catch (Exception tEx)

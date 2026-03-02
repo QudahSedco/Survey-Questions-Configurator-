@@ -33,12 +33,12 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.btnNo = new System.Windows.Forms.Button();
             this.BtnYes = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.IconPictureBox = new System.Windows.Forms.PictureBox();
+            this.lblText = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.IconPictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -73,23 +73,23 @@
             this.BtnYes.UseVisualStyleBackColor = true;
             this.BtnYes.Click += new System.EventHandler(this.BtnYes_Click);
             // 
-            // pictureBox1
+            // IconPictureBox
             // 
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            resources.ApplyResources(this.IconPictureBox, "IconPictureBox");
+            this.IconPictureBox.Name = "IconPictureBox";
+            this.IconPictureBox.TabStop = false;
+            this.IconPictureBox.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // label1
+            // lblText
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.lblText, "lblText");
+            this.lblText.Name = "lblText";
             // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblText, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.IconPictureBox, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // panel1
@@ -110,7 +110,7 @@
             this.Name = "CustomMessageBox";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.IconPictureBox)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -123,9 +123,9 @@
         #endregion
 
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblText;
         private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox IconPictureBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button BtnYes;

@@ -37,6 +37,7 @@ namespace SurveyQuestionsConfigurator
                 mQuestionService = new QuestionService();
                 WindowsRadioButton.Checked = true;
                 SQLGroupBox.Visible = false;
+                this.ActiveControl = ServerTextBox;
                 PopulateFields();
             }
             catch (Exception tEx)
@@ -112,7 +113,7 @@ namespace SurveyQuestionsConfigurator
                     errorProvider.SetError(DatabaseNameTextBox, Resources.NullOrWhiteSpaceError);
                     return;
                 }
-                if (WindowsRadioButton.Checked)
+                if (SQLRadioButton.Checked)
                 {
                     if (String.IsNullOrEmpty(UserNameTextBox.Text))
                     {
@@ -185,7 +186,5 @@ namespace SurveyQuestionsConfigurator
                 SQLGroupBox.Visible = true;
             }
         }
-
-       
     }
 }
