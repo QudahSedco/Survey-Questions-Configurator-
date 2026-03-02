@@ -489,7 +489,7 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                CustomMessageBox.Show(Resources.ResourceManager.GetString(pStatus.ToString()), "Error", ButtonTypes.Ok, IconTypes.Error);
+                CustomMessageBox.Show(Resources.ResourceManager.GetString(pStatus.ToString()), Resources.ErrorCaption, ButtonTypes.Ok, IconTypes.Error);
             }
             catch (Exception tEx)
             {

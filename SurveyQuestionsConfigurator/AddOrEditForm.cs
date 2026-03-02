@@ -22,12 +22,25 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SurveyQuestionsConfigurator
 {
+    /// <summary>
+    /// Handles creation and editing of survey questions including Star, Smiley Faces, and Slider types.
+    /// Provides input validation, localized display, and dynamic form updates based on question type.
+    /// </summary>
     public partial class AddOrEditForm : Form
     {
         private QuestionService mQuestionService;
         private Question mEditingQuestion;
         private const string ARABIC_CULTURE_CODE = "ar";
 
+        /// <summary>
+        /// Initializes a new instance of the AddOrEditForm.
+        /// Sets up form properties, tab indices, and question type options.
+        /// If a Question object is provided, the form enters Edit mode and populates controls with the question data.
+        /// Otherwise, the form enters Add mode with default values.
+        /// </summary>
+        /// <param name="pQuestion">
+        /// The Question to edit. Pass null to create a new question.
+        /// </param>
         public AddOrEditForm(Question pQuestion)
         {
             try
@@ -78,11 +91,18 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
+        /// <summary>
+        /// Retrieves the localized string for a given enum value from the Resources file.
+        /// Builds the resource key in the format "EnumType_EnumValue".
+        /// If the resource is not found, the enum's name is returned as a fallback.
+        /// </summary>
+        /// <param name="value">The enum value to localize.</param>
+        /// <returns>The localized string if found; otherwise, the enum's name.</returns>
         private string GetLocalizedDescription(Enum value)
         {
             try
             {
-                // Build the resource key: QuestionType_Slider
+                // Build the resource key example QuestionType_Slider
                 string resourceKey = $"{value.GetType().Name}_{value}";
 
                 string localizedValue = Resources.ResourceManager.GetString(resourceKey);
@@ -98,7 +118,12 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        //Fills the form with values from the question passed from the main form
+        /// <summary>
+        /// Fills the form controls with values from the provided question object.
+        /// Determines the specific question type (Star, SmileyFaces, or Slider)
+        /// and populates type-specific controls accordingly.
+        /// </summary>
+        /// <param name="pQuestion">The question object whose values will populate the form.</param>
         private void PopulateFields(Question pQuestion)
         {
             try
@@ -135,7 +160,12 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        //create button creates a new question
+        /// <summary>
+        /// Creates a new question based on the current form inputs and adds it to the database.
+        /// Validates input fields and creates the appropriate Question subtype.
+        /// </summary>
+        /// <param name="pSender">The sender of the event.</param>
+        /// <param name="pE">The event arguments.</param>
         private void btnAdd_Click(object pSender, EventArgs pE)
         {
             try
@@ -241,7 +271,10 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        //prints the stars according to the trackbar
+        /// <summary>
+        /// Updates the star label according to the given value sent from the trackbar and displays it visually.
+        /// </summary>
+        /// <param name="pValue">Number of stars to display (1–10)</param>
         private void UpdateStars(int pValue)
         {
             try
@@ -253,10 +286,14 @@ namespace SurveyQuestionsConfigurator
             catch (Exception tEx)
             {
                 Log.Error(tEx, tEx.Message);
+                throw;
             }
         }
 
-        //prints smiley faces according to the trackbar
+        /// <summary>
+        /// Updates the smiley faces label according to the given value sent from the trackbar and displays it visually.
+        /// </summary>
+        /// <param name="pValue">Number of smiley faces to display</param>
         private void UpdateSmileyFace(int pValue)
         {
             try
@@ -273,9 +310,15 @@ namespace SurveyQuestionsConfigurator
             catch (Exception tEx)
             {
                 Log.Error(tEx, tEx.Message);
+                throw;
             }
         }
 
+        /// <summary>
+        /// Handles scrolling of the stars trackbar and updates the stars label and number display.
+        /// </summary>
+        /// <param name="pSender">The trackbar control that triggered the event</param>
+        /// <param name="pE">Event arguments</param>
         private void TrackBarStars_Scroll(object pSender, EventArgs pE)
         {
             try
@@ -290,6 +333,13 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
+        /// <summary>
+        /// Handles the change of the selected question type in the combo box.
+        /// Shows the appropriate panel based on the selection.
+        /// Hides all other panels and brings the selected one to the front.
+        /// </summary>
+        /// <param name="pSender">The sender object.</param>
+        /// <param name="pE">Event arguments.</param>
         private void ComboBoxQuestionType_SelectedIndexChanged(object pSender, EventArgs pE)
         {
             try
@@ -327,6 +377,11 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
+        /// <summary>
+        /// Handles scrolling of the smiley faces  and updates the stars label and number display.
+        /// </summary>
+        /// <param name="pSender">The sender object.</param>
+        /// <param name="pE">Event arguments.</param>
         private void trackBarSmiley_Scroll(object pSender, EventArgs pE)
         {
             try
@@ -341,7 +396,12 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        //shows the number of chars the user entered for end caption text box
+        /// <summary>
+        /// Updates the character count label for the End Caption text box
+        /// based on the current text length and the current UI culture.
+        /// </summary>
+        /// <param name="pSender">The sender object.</param>
+        /// <param name="pE">Event arguments.</param>
         private void textBoxEndCaption_TextChanged(object pSender, EventArgs pE)
         {
             try
@@ -354,13 +414,17 @@ namespace SurveyQuestionsConfigurator
             catch (Exception tEx)
             {
                 Log.Error(tEx, tEx.Message);
+                ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
 
-        //update button handles update logic
-        //if type didn't change calls update method
-        //if type did change calls UpdateChildTableType
-        //that deletes the old type record and inserts a new record according to the new type chosen
+        /// <summary>
+        /// Updates the existing question if the type hasn't changed,
+        /// or replaces it with a new type if the type has changed.
+        /// Performs validation for each question type.
+        /// </summary>
+        /// <param name="pSender">The sender object.</param>
+        /// <param name="pE">Event arguments.</param>
         private void btnUpdate_Click(object pSender, EventArgs pE)
         {
             try
@@ -382,7 +446,7 @@ namespace SurveyQuestionsConfigurator
                 var tOldType = mEditingQuestion.QuestionType;
                 var tNewType = (QuestionType)comboBoxQuestionTypes.SelectedValue;
 
-                Result<bool> tResult = Result<bool>.Failure(ResultStatus.UnknownTypeError); // temp
+                Result<bool> tResult = Result<bool>.Failure(ResultStatus.UnknownTypeError);
 
                 if (tOldType == tNewType)//if type didn't change
                 {
@@ -437,8 +501,8 @@ namespace SurveyQuestionsConfigurator
                             break;
                     }
                 }
-                //if type changed call UpdateChildTableType that takes the new question and the old type
-                //deletes the old type record from Database and inserts the new type in the correct table
+                //IF type changed call UpdateChildTableType that takes the new question and the old type
+                //Deletes the old type record from Database and inserts the new type in the correct table
                 else
                 {
                     Question tNewQuestion = null;
@@ -537,6 +601,11 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
+        /// <summary>
+        /// Closes the form without saving any changes.
+        /// </summary>
+        /// <param name="pSender">The sender object.</param>
+        /// <param name="pE">Event arguments.</param>
         private void btnCancel_Click(object pSender, EventArgs pE)
         {
             try
@@ -550,7 +619,12 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        //shows the number of chars entered by the user into the question text textbox
+        /// <summary>
+        /// Updates the character counter label as the user types in the question text box.
+        /// based on the current text length and the current UI culture.
+        /// </summary>
+        /// <param name="pSender">The sender object.</param>
+        /// <param name="pE">Event arguments.</param>
         private void textBoxQuestionText_TextChanged(object pSender, EventArgs pE)
         {
             try
@@ -567,7 +641,12 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        //shows the number of chars entered by the user into the start caption text box
+        /// <summary>
+        /// Updates the character count label for the Start Caption text box
+        /// based on the current text length and the current UI culture.
+        /// </summary>
+        /// <param name="pSender">The sender object.</param>
+        /// <param name="pE">Event arguments.</param>
         private void textBoxStartCaption_TextChanged(object pSender, EventArgs pE)
         {
             try
@@ -584,6 +663,11 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
+        /// <summary>
+        /// Shows a custom error message box based on a ResultStatus.
+        /// Falls back to a standard MessageBox if the custom box fails.
+        /// </summary>
+        /// <param name="pStatus">The ResultStatus indicating the error type.</param>
         private void ShowErrorBox(ResultStatus pStatus)
         {
             try
@@ -592,12 +676,14 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, "Error happend trying to show custom error box");
+                Log.Error(tEx, tEx.Message);
                 MessageBox.Show(Resources.UnexpectedError, Resources.ErrorCaption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        //populate combo box with enum value
+        /// <summary>
+        /// Populates the QuestionType combo box with localized enum values.
+        /// </summary>
         private void PopulateTypeComboBox()
         {
             try
@@ -617,7 +703,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception tEx)
             {
                 Log.Error(tEx, tEx.Message);
-                this.Close();
+                throw;
             }
         }
     }
