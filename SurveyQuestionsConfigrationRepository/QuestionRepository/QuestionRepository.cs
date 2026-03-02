@@ -97,7 +97,7 @@ namespace SurveyQuestionsConfigurator.Repositories
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, "Error starting SqlTableDependency");
+                Log.Error(tEx, tEx.Message);
                 return Result<bool>.Failure(ResultStatus.SqlTableDependencyError);
             }
         }

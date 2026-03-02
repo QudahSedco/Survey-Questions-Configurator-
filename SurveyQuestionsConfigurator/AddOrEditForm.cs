@@ -689,7 +689,7 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 comboBoxQuestionTypes.DataSource = Enum.GetValues(typeof(QuestionType))
-             .Cast<QuestionType>()//returns an array of enum values so we cast it
+             .Cast<QuestionType>()//returns an array of object values so we cast it
              .Select(q => new
              {
                  Value = q,

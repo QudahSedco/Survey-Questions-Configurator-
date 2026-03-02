@@ -17,12 +17,19 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace SurveyQuestionsConfigurator
 {
+    /// <summary>
+    /// Form that allows the user to view, test, and update the database connection
+    /// </summary>
     public partial class ConnectionSettingsForm : Form
     {
         private AppSetting mAppSetting;
         private QuestionService mQuestionService;
         private const string DB_KEY = "SurveyDb";
 
+        /// <summary>
+        /// Initializes a new instance of the ConnectionSettingsForm class,
+        /// sets up the UI, loads existing connection settings
+        /// </summary>
         public ConnectionSettingsForm()
         {
             try
@@ -42,19 +49,23 @@ namespace SurveyQuestionsConfigurator
             catch (Exception tEx)
             {
                 Log.Error(tEx, tEx.Message);
-                CustomMessageBox.Show(Resources.UnexpectedError, Resources.ErrorCaption, ButtonTypes.Ok, IconTypes.Error);
-                Close();
+                throw;
             }
         }
 
+        /// <summary>
+        /// Populates the form fields with values read from the connection string
+        /// stored in the configuration file.
+        /// </summary>
         private void PopulateFields()
         {
             try
             {
                 string tConnectionString = mAppSetting.GetConnectionString(DB_KEY);
+
                 if (!string.IsNullOrEmpty(tConnectionString))
                 {
-                    var tBuilder = new SqlConnectionStringBuilder(tConnectionString);
+                    var tBuilder = new SqlConnectionStringBuilder(tConnectionString);//Builds the SQL connection string dynamically
 
                     ServerTextBox.Text = tBuilder.DataSource;
                     DatabaseNameTextBox.Text = tBuilder.InitialCatalog;
@@ -69,11 +80,16 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
+        /// <summary>
+        /// Builds a SQL Server connection string based on the values
+        /// entered in the form fields and the selected authentication type.
+        /// </summary>
+        /// <returns>A valid connection string based on user input.</returns>
         private string BuildConnectionString()
         {
             try
             {
-                var tBuilder = new SqlConnectionStringBuilder
+                var tBuilder = new SqlConnectionStringBuilder// Builds the SQL connection string dynamically
                 {
                     DataSource = ServerTextBox.Text.Trim(),
                     InitialCatalog = DatabaseNameTextBox.Text.Trim(),
@@ -92,11 +108,15 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, "error building connection string");
+                Log.Error(tEx, tEx.Message);
                 throw;
             }
         }
 
+        /// <summary>
+        /// Validates user input, tests the database connection, and saves
+        /// the connection string to the configuration file if successful.
+        /// </summary>
         private void btnSave_Click(object pSender, EventArgs pE)
         {
             try
@@ -146,6 +166,10 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
+        /// <summary>
+        /// Tests the database connection using the currently entered connection details
+        /// and shows a success or error message to the user.
+        /// </summary>
         private void btnTestConnection_Click(object pSender, EventArgs pE)
         {
             try
@@ -168,21 +192,43 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
+        /// <summary>
+        /// Hides SQL authentication fields and clears username/password if selected.
+        /// </summary>
         private void WindowsRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (WindowsRadioButton.Checked)
+            try
             {
-                SQLGroupBox.Visible = false;
-                UserNameTextBox.Clear();
-                PasswordTextBox.Clear();
+                if (WindowsRadioButton.Checked)
+                {
+                    SQLGroupBox.Visible = false;
+                    UserNameTextBox.Clear();
+                    PasswordTextBox.Clear();
+                }
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, tEx.Message);
+                CustomMessageBox.Show(Resources.UnexpectedError, Resources.ErrorCaption, ButtonTypes.Ok, IconTypes.Error);
             }
         }
 
+        /// <summary>
+        /// Shows SQL authentication fields when selected.
+        /// </summary>
         private void SQLRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (SQLRadioButton.Checked)
+            try
             {
-                SQLGroupBox.Visible = true;
+                if (SQLRadioButton.Checked)
+                {
+                    SQLGroupBox.Visible = true;
+                }
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, tEx.Message);
+                CustomMessageBox.Show(Resources.UnexpectedError, Resources.ErrorCaption, ButtonTypes.Ok, IconTypes.Error);
             }
         }
     }
