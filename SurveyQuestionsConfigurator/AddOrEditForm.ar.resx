@@ -119,52 +119,52 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>585, 406</value>
+    <value>580, 398</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>504, 373</value>
+    <value>496, 362</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>إلغاء</value>
   </data>
   <data name="btnUpdate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>423, 373</value>
+    <value>415, 362</value>
   </data>
   <data name="btnUpdate.Text" xml:space="preserve">
     <value>تحديث</value>
   </data>
   <data name="textBoxQuestionText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>81, 13</value>
+    <value>97, 13</value>
   </data>
   <data name="lblCharNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 13</value>
+    <value>14, 13</value>
   </data>
   <data name="lblCharNumber.Text" xml:space="preserve">
     <value>1000/0</value>
   </data>
   <data name="comboBoxQuestionTypes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>81, 155</value>
+    <value>97, 155</value>
   </data>
   <data name="lblTypeOfQuestion.Location" type="System.Drawing.Point, System.Drawing">
     <value>464, 158</value>
   </data>
   <data name="lblTypeOfQuestion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 20</value>
-  </data>
-  <data name="lblTypeOfQuestion.Text" xml:space="preserve">
-    <value>نوع السؤال</value>
-  </data>
-  <data name="lblQuestionText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>461, 50</value>
-  </data>
-  <data name="lblQuestionText.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 20</value>
   </data>
+  <data name="lblTypeOfQuestion.Text" xml:space="preserve">
+    <value>نوع السؤال:</value>
+  </data>
+  <data name="lblQuestionText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>461, 45</value>
+  </data>
+  <data name="lblQuestionText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 20</value>
+  </data>
   <data name="lblQuestionText.Text" xml:space="preserve">
-    <value>نص السؤال</value>
+    <value>نص السؤال:</value>
   </data>
   <data name="numericUpDownQuestionOrder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>81, 122</value>
+    <value>97, 124</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="numericUpDownQuestionOrder.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
@@ -174,103 +174,25 @@
     <value>452, 124</value>
   </data>
   <data name="lblQuestionOrder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 20</value>
+    <value>94, 20</value>
   </data>
   <data name="lblQuestionOrder.Text" xml:space="preserve">
-    <value>ترتيب السؤال</value>
+    <value>ترتيب السؤال:</value>
   </data>
-  <data name="groupBox1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9.75pt</value>
+  <data name="BaseQuestionsGroupBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 8.25pt</value>
   </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>553, 189</value>
-  </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>خصائص السؤال الأساسية</value>
-  </data>
-  <data name="lblCharNumberEndCaption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 102</value>
-  </data>
-  <data name="lblCharNumberEndCaption.Text" xml:space="preserve">
-    <value>100/0</value>
-  </data>
-  <data name="lblCharNumberStartCaption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 74</value>
-  </data>
-  <data name="lblCharNumberStartCaption.Text" xml:space="preserve">
-    <value>100/0</value>
-  </data>
-  <data name="lblEndCaption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>445, 101</value>
-  </data>
-  <data name="lblEndCaption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 20</value>
-  </data>
-  <data name="lblEndCaption.Text" xml:space="preserve">
-    <value>تسمية النهاية</value>
-  </data>
-  <data name="textBoxEndCaption.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 11.25pt</value>
-  </data>
-  <data name="textBoxEndCaption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>75, 100</value>
-  </data>
-  <data name="textBoxEndCaption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>303, 27</value>
-  </data>
-  <data name="textBoxStartCaption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>75, 68</value>
-  </data>
-  <data name="lblStartCaption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>445, 72</value>
-  </data>
-  <data name="lblStartCaption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 20</value>
-  </data>
-  <data name="lblStartCaption.Text" xml:space="preserve">
-    <value>تسمية البداية</value>
-  </data>
-  <data name="lblEndValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>455, 43</value>
-  </data>
-  <data name="lblEndValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 20</value>
-  </data>
-  <data name="lblEndValue.Text" xml:space="preserve">
-    <value>قيمة النهاية</value>
-  </data>
-  <data name="numericUpDownEndValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>75, 36</value>
-  </data>
-  <data name="numericUpDownEndValue.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="numericUpDownStartValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>75, 3</value>
-  </data>
-  <data name="numericUpDownStartValue.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="lblStartValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>455, 10</value>
-  </data>
-  <data name="lblStartValue.Text" xml:space="preserve">
-    <value>قيمة البداية</value>
-  </data>
-  <data name="pnlSlider.Size" type="System.Drawing.Size, System.Drawing">
-    <value>547, 129</value>
+  <data name="BaseQuestionsGroupBox.Text" xml:space="preserve">
+    <value>السؤال الأساسي</value>
   </data>
   <data name="lblFacesNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>34, 15</value>
+    <value>46, 15</value>
   </data>
   <data name="trackBarSmileyFaces.Location" type="System.Drawing.Point, System.Drawing">
-    <value>75, 46</value>
-  </data>
-  <data name="lblSmileyFaces.Location" type="System.Drawing.Point, System.Drawing">
-    <value>190, 7</value>
+    <value>91, 46</value>
   </data>
   <data name="lblNumberofSmileyfaces.Location" type="System.Drawing.Point, System.Drawing">
-    <value>395, 46</value>
+    <value>398, 46</value>
   </data>
   <data name="lblNumberofSmileyfaces.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 20</value>
@@ -278,20 +200,23 @@
   <data name="lblNumberofSmileyfaces.Text" xml:space="preserve">
     <value>عدد الوجوه المبتسمة</value>
   </data>
+  <data name="lblSmileyFaces.Location" type="System.Drawing.Point, System.Drawing">
+    <value>208, 7</value>
+  </data>
   <data name="pnlSmileyFaces.Size" type="System.Drawing.Size, System.Drawing">
-    <value>538, 100</value>
+    <value>544, 100</value>
   </data>
   <data name="lblNumberOfStars.Location" type="System.Drawing.Point, System.Drawing">
-    <value>52, 10</value>
+    <value>57, 14</value>
   </data>
   <data name="trackBarStars.Location" type="System.Drawing.Point, System.Drawing">
-    <value>62, 39</value>
+    <value>91, 39</value>
   </data>
   <data name="lblStars.Location" type="System.Drawing.Point, System.Drawing">
-    <value>118, 4</value>
+    <value>139, 4</value>
   </data>
   <data name="lblNumberOfStarsText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>459, 43</value>
+    <value>462, 43</value>
   </data>
   <data name="lblNumberOfStarsText.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 20</value>
@@ -302,17 +227,92 @@
   <data name="pnlStars.Size" type="System.Drawing.Size, System.Drawing">
     <value>541, 100</value>
   </data>
-  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>553, 153</value>
+  <data name="lblCharNumberEndCaption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 101</value>
   </data>
-  <data name="groupBox2.Text" xml:space="preserve">
+  <data name="lblCharNumberEndCaption.Text" xml:space="preserve">
+    <value>100/0</value>
+  </data>
+  <data name="lblCharNumberStartCaption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 77</value>
+  </data>
+  <data name="lblCharNumberStartCaption.Text" xml:space="preserve">
+    <value>100/0</value>
+  </data>
+  <data name="lblEndCaption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>445, 101</value>
+  </data>
+  <data name="lblEndCaption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 20</value>
+  </data>
+  <data name="lblEndCaption.Text" xml:space="preserve">
+    <value>تسمية النهاية:</value>
+  </data>
+  <data name="textBoxEndCaption.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
+  <data name="textBoxEndCaption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>91, 101</value>
+  </data>
+  <data name="textBoxEndCaption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>303, 27</value>
+  </data>
+  <data name="textBoxStartCaption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>91, 71</value>
+  </data>
+  <data name="lblStartCaption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>445, 72</value>
+  </data>
+  <data name="lblStartCaption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 20</value>
+  </data>
+  <data name="lblStartCaption.Text" xml:space="preserve">
+    <value>تسمية البداية:</value>
+  </data>
+  <data name="lblEndValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>455, 43</value>
+  </data>
+  <data name="lblEndValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 20</value>
+  </data>
+  <data name="lblEndValue.Text" xml:space="preserve">
+    <value>قيمة النهاية:</value>
+  </data>
+  <data name="numericUpDownEndValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>91, 35</value>
+  </data>
+  <data name="numericUpDownEndValue.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="numericUpDownStartValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>91, 3</value>
+  </data>
+  <data name="numericUpDownStartValue.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="lblStartValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>455, 10</value>
+  </data>
+  <data name="lblStartValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 20</value>
+  </data>
+  <data name="lblStartValue.Text" xml:space="preserve">
+    <value>قيمة البداية:</value>
+  </data>
+  <data name="pnlSlider.Size" type="System.Drawing.Size, System.Drawing">
+    <value>547, 129</value>
+  </data>
+  <data name="TypeGroupBox.Text" xml:space="preserve">
     <value>خصائص النوع</value>
   </data>
   <data name="pnlMain.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 4</value>
   </data>
   <data name="pnlMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>571, 363</value>
+    <value>571, 356</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -322,7 +322,7 @@
     <value>True</value>
   </data>
   <data name="btnAdd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>423, 373</value>
+    <value>415, 362</value>
   </data>
   <data name="btnAdd.Text" xml:space="preserve">
     <value>حفظ</value>

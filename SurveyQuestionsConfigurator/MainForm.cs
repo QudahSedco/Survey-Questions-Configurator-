@@ -23,25 +23,43 @@ using SortOrder = System.Windows.Forms.SortOrder;
 
 namespace SurveyQuestionsConfigurator
 {
+    /// <summary>
+    /// Main application form for managing survey questions.
+    ///
+    /// Provides functionality to:
+    /// Display all questions in a sortable DataGridView
+    /// Add, edit, and delete questions using the AddOrEditForm
+    /// Change application language (English/Arabic)
+    /// Update database connection settings dynamically
+    /// Handle UI updates and localization
+    /// Respond to database changes via events
+    /// </summary>
+
     public partial class MainForm : Form
     {
         private QuestionService mQuestionService;
         private Dictionary<string, bool> mSortColumnsDictionary;
         private List<Question> mQuestionsList;
-        private const string UNEXPECTED_ERROR_MESSAGE = "An unexpected error occurred";
         private const string COL_QUESTION_TEXT = "QuestionText";
         private const string COL_QUESTION_ORDER = "QuestionOrder";
         private const string COL_QUESTION_TYPE = "QuestionType";
-        private const string EN_LANGUAGE = "English";
-        private const string AR_LANGUAGE = "Arabic";
+        private const string ENGLISH_LANGUAGE = "English";
+        private const string ARABIC_LANGUAGE = "Arabic";
+
+        /// <summary>
+        /// Initializes the main form, sets up language options,
+        /// configures form properties, initializes the question service,
+        /// subscribes to the QuestionsTableChanged event, and
+        /// sets up the initial sort direction for each data grid column.
+        /// </summary>
 
         public MainForm()
         {
             try
             {
                 InitializeComponent();
-                LanguagesComboBox.Items.Add("English");
-                LanguagesComboBox.Items.Add("Arabic");
+                LanguagesComboBox.Items.Add(ENGLISH_LANGUAGE);
+                LanguagesComboBox.Items.Add(ARABIC_LANGUAGE);
                 LanguagesComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
                 LanguagesComboBox.SelectedIndex = 0;
                 FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -61,11 +79,21 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
 
+        /// <summary>
+        /// Handles the MainForm load event.
+        ///
+        /// Starts listening for changes in the questions database via QuestionService.
+        /// Configures and adds DataGridView columns for displaying questions.
+        /// Loads existing questions into the DataGridView.
+        /// Initializes button states (Delete, Update) as disabled.
+        /// </summary>
+        /// <param name="pSender">The object that raised the event.</param>
+        /// <param name="pE">Event arguments associated with the load event.</param>
         private void FormMain_Load(object pSender, EventArgs pE)
         {
             try
@@ -103,19 +131,24 @@ namespace SurveyQuestionsConfigurator
                 tColType.Width = 160;
                 tColType.SortMode = DataGridViewColumnSortMode.Automatic;
                 dataGridViewMain.Columns.Add(tColType);
+
                 LoadQuestions();
                 btnDelete.Enabled = false;
                 btnUpdate.Enabled = false;
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
 
-        //Loads questions everytime a change happens in the database
-        //The method is subscribed to Service event
+        /// <summary>
+        /// Event handler that responds to changes in the questions database.
+        /// Ensures the method executes on the UI thread if invoked from a background thread.
+        /// Calls LoadQuestions() to refresh the DataGridView with the latest questions.
+        /// This method is subscribed to the QuestionService.QuestionsTableChanged event.
+        /// </summary>
         private void OnQuestionsChanged()
         {
             try
@@ -129,12 +162,16 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
 
-        //Passing null to add/edit form to open it in "Add New Question" mode instead of edit mode
+        /// <summary>
+        /// Opens the AddOrEditForm in add mode to create a new question.
+        /// Passes null to the form to indicate creation rather than editing.
+        /// Refreshes the questions list after the form closes if a new question was added.
+        /// </summary>
         private void btnAdd_Click(object pSender, EventArgs pE)
         {
             try
@@ -151,12 +188,16 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
 
-        //Deletes selected question
+        /// <summary>
+        /// Deletes the currently selected question from the database.
+        /// Prompts the user for confirmation before deletion.
+        /// Refreshes the questions list if the deletion is successful.
+        /// </summary>
         private void btnDelete_Click(object pSender, EventArgs pE)
         {
             try
@@ -167,7 +208,7 @@ namespace SurveyQuestionsConfigurator
                 Question tSelectedQuestion = (Question)dataGridViewMain.CurrentRow.DataBoundItem;
 
                 DialogResult tAnswer = CustomMessageBox.Show($"{Resources.ConfirmDelete}\n\n{tSelectedQuestion.QuestionText}",
-     Resources.DeleteCaption, ButtonTypes.YesNo, IconTypes.Question);
+                Resources.DeleteCaption, ButtonTypes.YesNo, IconTypes.Question);
 
                 if (tAnswer == DialogResult.Yes)
                 {
@@ -181,12 +222,17 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
 
-        //Loads questions from Database
+        /// <summary>
+        /// Retrieves all questions from the database using the question service,
+        /// binds them to the main data grid view, and disables the Delete and Update buttons
+        /// until a question is selected.
+        /// Shows an error box if the retrieval fails.
+        /// </summary>
         private void LoadQuestions()
         {
             try
@@ -209,12 +255,17 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
 
-        //Edit button passes the selected question object and opens add/edit form in edit mode
+        /// <summary>
+        /// Opens the AddOrEditForm in edit mode for the selected question.
+        /// Retrieves the full child question type (Star, Smiley, or Slider) since
+        /// the DataGridView holds only base Question objects. Reloads the questions
+        /// after the form closes if changes were saved.
+        /// </summary>
         private void btnEdit_Click(object pSender, EventArgs pE)
         {
             try
@@ -244,14 +295,17 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
 
-        //sorts questions using the propertyname saved in a dictionary data structure<string,bool>
-        //if its true then its ascending if false its descending
-
+        /// <summary>
+        /// Sorts the questions in the DataGridView based on the specified column.
+        /// Uses the mSortColumnsDictionary<String ,bool> to determine the current sort direction
+        /// for each column (true = ascending, false = descending) and toggles it
+        /// after sorting. Updates the column header to display the correct sort glyph.
+        /// </summary>
         private void SortQuestions(string pColumnName, int pColumnIndex)
         {
             try
@@ -281,20 +335,23 @@ namespace SurveyQuestionsConfigurator
                             : mQuestionsList.OrderByDescending(q => q.QuestionType).ToList();
                         break;
                 }
-                dataGridViewMain.Columns[pColumnIndex]
-           .HeaderCell.SortGlyphDirection =
-               tAsc ? SortOrder.Ascending : SortOrder.Descending;
+                //displays an arrow based on sort order
+                dataGridViewMain.Columns[pColumnIndex].HeaderCell.SortGlyphDirection = tAsc ? SortOrder.Ascending : SortOrder.Descending;
 
                 mSortColumnsDictionary[pColumnName] = !tAsc;
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
 
-        //calls sort questions method on the column clicked on
+        /// <summary>
+        /// Handles the event when a DataGridView column header is clicked.
+        /// Retrieves the column's property name and index then calls SortQuestions to
+        /// sort the grid based on that column.
+        /// </summary>
         private void DataGridViewMain_ColumnHeaderMouseClick(object pSender, DataGridViewCellMouseEventArgs pE)
         {
             try
@@ -303,17 +360,21 @@ namespace SurveyQuestionsConfigurator
                     return;
 
                 string tPropertyName = dataGridViewMain.Columns[pE.ColumnIndex].DataPropertyName;
-                bool tAscending = mSortColumnsDictionary[tPropertyName];
 
                 SortQuestions(tPropertyName, pE.ColumnIndex);
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
 
+        /// <summary>
+        /// Handles the event when a cell in the DataGridView is clicked.
+        /// Enables or disables the Delete and Update buttons based on whether
+        /// a row with a valid bound question is selected.
+        /// </summary>
         private void DataGridViewMain_CellContentClick(object pSender, DataGridViewCellMouseEventArgs pE)
         {
             try
@@ -331,12 +392,15 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
 
-        //stop sqltable dependency once the form is closed
+        /// <summary>
+        /// Stops listening to database changes via SQL dependency when the form is closing.
+        /// Ensures that background database notifications are properly disposed.
+        /// </summary>
         private void FormMain_FormClosing(object pSender, FormClosingEventArgs pE)
         {
             try
@@ -345,15 +409,24 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, "Error while trying to stop sqldependency");
+                Log.Error(tEx, tEx.Message);
             }
         }
 
-        //switches the langauge based on the user selection in the langauge combobox
+        /// <summary>
+        /// Switches the application's language based on the selected culture.
+        /// Updates all form controls and DataGridView column headers with localized resources.
+        /// Suspends layout during updates to improve performance and prevent UI flicker.
+        /// </summary>
+        /// <param name="pCulture">The culture code to switch to (e.g., "en" or "ar").</param>
         private void SwitchLanguage(string pCulture)
         {
             try
             {
+                // Temporarily suspends layout logic for this control and its children
+                // Prevents the form from repainting after each control update, which avoids flicker or freezing
+                this.SuspendLayout();
+
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(pCulture);
                 Thread.CurrentThread.CurrentCulture = new CultureInfo(pCulture);
 
@@ -367,19 +440,30 @@ namespace SurveyQuestionsConfigurator
                 // DataGridView columns are not controls (they do not inherit from Control),
                 // so they are not localized by ApplyResources / ApplyResourcesRecursive.
                 // Column headers must therefore be localized manually using the Resources file.
+                dataGridViewMain.SuspendLayout();
                 foreach (DataGridViewColumn col in dataGridViewMain.Columns)
                 {
                     col.HeaderText = Resources.ResourceManager.GetString(col.DataPropertyName);
                 }
+                dataGridViewMain.ResumeLayout();
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
+            }
+            finally
+            { //All layout changes are applied at once, improving performance and preventing UI flicker
+                this.ResumeLayout();
             }
         }
 
-        // Recursively applies localization resources to all child controls.
+        /// <summary>
+        /// Recursively applies localization resources to the specified control and all its child controls.
+        /// Ensures that each control's properties are updated according to the current culture.
+        /// </summary>
+        /// <param name="pRes">The ComponentResourceManager used to apply the localized resources.</param>
+        /// <param name="pControl">The control to which resources should be applied recursively.</param>
         private void ApplyResourcesRecursive(ComponentResourceManager pRes, Control pControl)
         {
             try
@@ -391,12 +475,16 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
 
-        //shows custom error box made this method to write less code when throwing erros
+        /// <summary>
+        /// Displays a custom error message box for the specified ResultStatus.
+        /// Wraps the call to CustomMessageBox to simplify error handling in the form.
+        /// </summary>
+        /// <param name="pStatus">The ResultStatus value used to retrieve the localized error message.</param>
         private void ShowErrorBox(ResultStatus pStatus)
         {
             try
@@ -405,12 +493,18 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE + "while tryin to show custom message box");
-                MessageBox.Show(UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
+                MessageBox.Show(tEx.Message);
             }
         }
 
-        //changes languge based on the option that the user chooses
+        /// <summary>
+        /// Handles the language selection change in the combo box.
+        /// Calls SwitchLanguage with the corresponding culture code based on the selected language.
+        /// </summary>
+        /// <param name="pSender">The source of the event.</param>
+        /// <param name="pE">Event arguments.</param>
+        ///
         private void LanguagesComboBox_SelectedIndexChanged(object pSender, EventArgs pE)
         {
             try
@@ -419,24 +513,30 @@ namespace SurveyQuestionsConfigurator
 
                 switch (tSelectedLang)
                 {
-                    case EN_LANGUAGE:
+                    case ENGLISH_LANGUAGE:
                         SwitchLanguage("en");
                         break;
 
-                    case AR_LANGUAGE:
+                    case ARABIC_LANGUAGE:
                         SwitchLanguage("ar");
                         break;
                 }
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
 
-        //opens connection setting form and allows the user to change the database connection string
-        //if successful starts listening for changes on the new database
+        /// <summary>
+        /// Opens the connection settings form to allow the user to change the database connection string.
+        /// If the user confirms changes, stops the current QuestionService, creates a new instance
+        /// with the updated connection, subscribes to the QuestionsTableChanged event,
+        /// starts listening for database changes, and reloads the questions.
+        /// </summary>
+        /// <param name="pSender">The source of the event.</param>
+        /// <param name="pE">Event arguments.</param>
         private void btnChangeDataBase_Click(object pSender, EventArgs pE)
         {
             try
@@ -444,20 +544,24 @@ namespace SurveyQuestionsConfigurator
                 using (var tConnectionForm = new ConnectionSettingsForm())
                 {
                     tConnectionForm.ShowDialog();
-                    // Create new service so it reads the updated connection string
+
                     if (tConnectionForm.DialogResult == DialogResult.OK)
                     {
                         mQuestionService?.StopListening();
-                        mQuestionService = new QuestionService();
+                        mQuestionService = new QuestionService();// Create new service so it reads the updated connection string
                         mQuestionService.QuestionsTableChanged += OnQuestionsChanged;
-                        mQuestionService?.StartListening();
+                        var tResult = mQuestionService.StartListening();
+                        if (!tResult.IsSuccess)
+                        {
+                            ShowErrorBox(tResult.Status);
+                        }
                         LoadQuestions();
                     }
                 }
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }

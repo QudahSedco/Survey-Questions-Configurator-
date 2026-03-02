@@ -26,9 +26,7 @@ namespace SurveyQuestionsConfigurator
     {
         private QuestionService mQuestionService;
         private Question mEditingQuestion;
-
-        private ComponentResourceManager mRes = new ComponentResourceManager(typeof(MainForm));
-        private const string UNEXPECTED_ERROR_MESSAGE = "An unexpected error occurred";
+        private const string ARABIC_CULTURE_CODE = "ar";
 
         public AddOrEditForm(Question pQuestion)
         {
@@ -42,7 +40,6 @@ namespace SurveyQuestionsConfigurator
 
                 textBoxQuestionText.TabIndex = 0;
                 this.ActiveControl = textBoxQuestionText;
-
                 numericUpDownQuestionOrder.TabIndex = 1;
                 comboBoxQuestionTypes.TabIndex = 2;
                 numericUpDownStartValue.TabIndex = 3;
@@ -50,30 +47,9 @@ namespace SurveyQuestionsConfigurator
                 textBoxStartCaption.TabIndex = 5;
                 textBoxEndCaption.TabIndex = 6;
 
-                if (Thread.CurrentThread.CurrentUICulture.Name.StartsWith("ar"))
-                {
-                    this.RightToLeft = RightToLeft.Yes;
-                    pnlStars.RightToLeft = RightToLeft.Yes;
-                    pnlSmileyFaces.RightToLeft = RightToLeft.Yes;
-                    pnlSlider.RightToLeft = RightToLeft.Yes;
-                    lblSmileyFaces.RightToLeft = RightToLeft.Yes;
-                    lblSmileyFaces.TextAlign = ContentAlignment.MiddleRight;
-                    this.RightToLeftLayout = true;
-                }
-
                 mQuestionService = new QuestionService();
 
-                comboBoxQuestionTypes.DataSource = Enum.GetValues(typeof(QuestionType))
-             .Cast<QuestionType>()//returns an array of enum values so we cast it
-             .Select(q => new
-             {
-                 Value = q,
-                 Text = GetLocalizedDescription(q)
-             })
-             .ToList();
-
-                comboBoxQuestionTypes.DisplayMember = "Text";
-                comboBoxQuestionTypes.ValueMember = "Value";
+                PopulateTypeComboBox();
 
                 pnlSmileyFaces.Visible = true;
 
@@ -97,8 +73,8 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
-                ShowErrorBox(ResultStatus.UnexpectedError);
+                Log.Error(tEx, tEx.Message);
+                throw;
             }
         }
 
@@ -116,7 +92,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
                 return value.ToString();
             }
@@ -154,7 +130,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
@@ -260,7 +236,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
@@ -276,7 +252,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
             }
         }
 
@@ -296,7 +272,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
             }
         }
 
@@ -309,7 +285,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
@@ -346,7 +322,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
@@ -360,7 +336,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
@@ -377,7 +353,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
             }
         }
 
@@ -550,13 +526,13 @@ namespace SurveyQuestionsConfigurator
                 if (tResult.IsSuccess)
                 {
                     this.DialogResult = DialogResult.OK;
-                    Close();
+                    this.Close();
                 }
                 else ShowErrorBox(tResult.Status);
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
@@ -565,11 +541,11 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                Close();
+                this.Close();
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
@@ -579,14 +555,14 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ar")
+                if (Thread.CurrentThread.CurrentUICulture.Name.StartsWith(ARABIC_CULTURE_CODE))
                     lblCharNumber.Text = $"1000/{textBoxQuestionText.Text.Length.ToString()}";
                 else
                     lblCharNumber.Text = $"{textBoxQuestionText.Text.Length.ToString()}/1000";
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
@@ -596,14 +572,14 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ar")
+                if (Thread.CurrentThread.CurrentUICulture.Name.StartsWith(ARABIC_CULTURE_CODE))
                     lblCharNumberStartCaption.Text = $"100/{textBoxStartCaption.Text.Length.ToString()}";
                 else
                     lblCharNumberStartCaption.Text = $"{textBoxStartCaption.Text.Length.ToString()}/100";
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
             }
         }
@@ -612,11 +588,36 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                CustomMessageBox.Show(Resources.ResourceManager.GetString(pStatus.ToString()), "Error", ButtonTypes.Ok, IconTypes.Error);
+                CustomMessageBox.Show(Resources.ResourceManager.GetString(pStatus.ToString()), Resources.ErrorCaption, ButtonTypes.Ok, IconTypes.Error);
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, "Error happend trying to show custom error box");
+                MessageBox.Show(Resources.UnexpectedError, Resources.ErrorCaption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        //populate combo box with enum value
+        private void PopulateTypeComboBox()
+        {
+            try
+            {
+                comboBoxQuestionTypes.DataSource = Enum.GetValues(typeof(QuestionType))
+             .Cast<QuestionType>()//returns an array of enum values so we cast it
+             .Select(q => new
+             {
+                 Value = q,
+                 Text = GetLocalizedDescription(q)
+             })
+             .ToList();
+
+                comboBoxQuestionTypes.DisplayMember = "Text";
+                comboBoxQuestionTypes.ValueMember = "Value";
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, tEx.Message);
+                this.Close();
             }
         }
     }

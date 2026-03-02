@@ -58,13 +58,13 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblCharNumber = new System.Windows.Forms.Label();
             this.pnlMain = new System.Windows.Forms.Panel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.BaseQuestionsGroupBox = new System.Windows.Forms.GroupBox();
+            this.TypeGroupBox = new System.Windows.Forms.GroupBox();
             this.pnlSmileyFaces = new System.Windows.Forms.Panel();
             this.lblFacesNumber = new System.Windows.Forms.Label();
             this.trackBarSmileyFaces = new System.Windows.Forms.TrackBar();
-            this.lblSmileyFaces = new System.Windows.Forms.Label();
             this.lblNumberofSmileyfaces = new System.Windows.Forms.Label();
+            this.lblSmileyFaces = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuestionOrder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarStars)).BeginInit();
             this.pnlStars.SuspendLayout();
@@ -73,8 +73,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEndValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartValue)).BeginInit();
             this.pnlMain.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.BaseQuestionsGroupBox.SuspendLayout();
+            this.TypeGroupBox.SuspendLayout();
             this.pnlSmileyFaces.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSmileyFaces)).BeginInit();
             this.SuspendLayout();
@@ -365,42 +365,42 @@
             // 
             resources.ApplyResources(this.pnlMain, "pnlMain");
             this.pnlMain.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlMain.Controls.Add(this.groupBox1);
-            this.pnlMain.Controls.Add(this.groupBox2);
+            this.pnlMain.Controls.Add(this.BaseQuestionsGroupBox);
+            this.pnlMain.Controls.Add(this.TypeGroupBox);
             this.errorProvider.SetError(this.pnlMain, resources.GetString("pnlMain.Error"));
             this.errorProvider.SetIconAlignment(this.pnlMain, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("pnlMain.IconAlignment"))));
             this.errorProvider.SetIconPadding(this.pnlMain, ((int)(resources.GetObject("pnlMain.IconPadding"))));
             this.pnlMain.Name = "pnlMain";
             // 
-            // groupBox1
+            // BaseQuestionsGroupBox
             // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.groupBox1.Controls.Add(this.textBoxQuestionText);
-            this.groupBox1.Controls.Add(this.lblCharNumber);
-            this.groupBox1.Controls.Add(this.comboBoxQuestionTypes);
-            this.groupBox1.Controls.Add(this.lblTypeOfQuestion);
-            this.groupBox1.Controls.Add(this.lblQuestionText);
-            this.groupBox1.Controls.Add(this.numericUpDownQuestionOrder);
-            this.groupBox1.Controls.Add(this.lblQuestionOrder);
-            this.errorProvider.SetError(this.groupBox1, resources.GetString("groupBox1.Error"));
-            this.errorProvider.SetIconAlignment(this.groupBox1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("groupBox1.IconAlignment"))));
-            this.errorProvider.SetIconPadding(this.groupBox1, ((int)(resources.GetObject("groupBox1.IconPadding"))));
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.TabStop = false;
+            resources.ApplyResources(this.BaseQuestionsGroupBox, "BaseQuestionsGroupBox");
+            this.BaseQuestionsGroupBox.BackColor = System.Drawing.SystemColors.Control;
+            this.BaseQuestionsGroupBox.Controls.Add(this.textBoxQuestionText);
+            this.BaseQuestionsGroupBox.Controls.Add(this.lblCharNumber);
+            this.BaseQuestionsGroupBox.Controls.Add(this.comboBoxQuestionTypes);
+            this.BaseQuestionsGroupBox.Controls.Add(this.lblTypeOfQuestion);
+            this.BaseQuestionsGroupBox.Controls.Add(this.lblQuestionText);
+            this.BaseQuestionsGroupBox.Controls.Add(this.numericUpDownQuestionOrder);
+            this.BaseQuestionsGroupBox.Controls.Add(this.lblQuestionOrder);
+            this.errorProvider.SetError(this.BaseQuestionsGroupBox, resources.GetString("BaseQuestionsGroupBox.Error"));
+            this.errorProvider.SetIconAlignment(this.BaseQuestionsGroupBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("BaseQuestionsGroupBox.IconAlignment"))));
+            this.errorProvider.SetIconPadding(this.BaseQuestionsGroupBox, ((int)(resources.GetObject("BaseQuestionsGroupBox.IconPadding"))));
+            this.BaseQuestionsGroupBox.Name = "BaseQuestionsGroupBox";
+            this.BaseQuestionsGroupBox.TabStop = false;
             // 
-            // groupBox2
+            // TypeGroupBox
             // 
-            resources.ApplyResources(this.groupBox2, "groupBox2");
-            this.groupBox2.BackColor = System.Drawing.SystemColors.Control;
-            this.groupBox2.Controls.Add(this.pnlSlider);
-            this.groupBox2.Controls.Add(this.pnlSmileyFaces);
-            this.groupBox2.Controls.Add(this.pnlStars);
-            this.errorProvider.SetError(this.groupBox2, resources.GetString("groupBox2.Error"));
-            this.errorProvider.SetIconAlignment(this.groupBox2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("groupBox2.IconAlignment"))));
-            this.errorProvider.SetIconPadding(this.groupBox2, ((int)(resources.GetObject("groupBox2.IconPadding"))));
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.TabStop = false;
+            resources.ApplyResources(this.TypeGroupBox, "TypeGroupBox");
+            this.TypeGroupBox.BackColor = System.Drawing.SystemColors.Control;
+            this.TypeGroupBox.Controls.Add(this.pnlSmileyFaces);
+            this.TypeGroupBox.Controls.Add(this.pnlStars);
+            this.TypeGroupBox.Controls.Add(this.pnlSlider);
+            this.errorProvider.SetError(this.TypeGroupBox, resources.GetString("TypeGroupBox.Error"));
+            this.errorProvider.SetIconAlignment(this.TypeGroupBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("TypeGroupBox.IconAlignment"))));
+            this.errorProvider.SetIconPadding(this.TypeGroupBox, ((int)(resources.GetObject("TypeGroupBox.IconPadding"))));
+            this.TypeGroupBox.Name = "TypeGroupBox";
+            this.TypeGroupBox.TabStop = false;
             // 
             // pnlSmileyFaces
             // 
@@ -408,8 +408,8 @@
             this.pnlSmileyFaces.BackColor = System.Drawing.SystemColors.Control;
             this.pnlSmileyFaces.Controls.Add(this.lblFacesNumber);
             this.pnlSmileyFaces.Controls.Add(this.trackBarSmileyFaces);
-            this.pnlSmileyFaces.Controls.Add(this.lblSmileyFaces);
             this.pnlSmileyFaces.Controls.Add(this.lblNumberofSmileyfaces);
+            this.pnlSmileyFaces.Controls.Add(this.lblSmileyFaces);
             this.errorProvider.SetError(this.pnlSmileyFaces, resources.GetString("pnlSmileyFaces.Error"));
             this.errorProvider.SetIconAlignment(this.pnlSmileyFaces, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("pnlSmileyFaces.IconAlignment"))));
             this.errorProvider.SetIconPadding(this.pnlSmileyFaces, ((int)(resources.GetObject("pnlSmileyFaces.IconPadding"))));
@@ -436,14 +436,6 @@
             this.trackBarSmileyFaces.Value = 2;
             this.trackBarSmileyFaces.Scroll += new System.EventHandler(this.trackBarSmiley_Scroll);
             // 
-            // lblSmileyFaces
-            // 
-            resources.ApplyResources(this.lblSmileyFaces, "lblSmileyFaces");
-            this.errorProvider.SetError(this.lblSmileyFaces, resources.GetString("lblSmileyFaces.Error"));
-            this.errorProvider.SetIconAlignment(this.lblSmileyFaces, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("lblSmileyFaces.IconAlignment"))));
-            this.errorProvider.SetIconPadding(this.lblSmileyFaces, ((int)(resources.GetObject("lblSmileyFaces.IconPadding"))));
-            this.lblSmileyFaces.Name = "lblSmileyFaces";
-            // 
             // lblNumberofSmileyfaces
             // 
             resources.ApplyResources(this.lblNumberofSmileyfaces, "lblNumberofSmileyfaces");
@@ -451,6 +443,14 @@
             this.errorProvider.SetIconAlignment(this.lblNumberofSmileyfaces, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("lblNumberofSmileyfaces.IconAlignment"))));
             this.errorProvider.SetIconPadding(this.lblNumberofSmileyfaces, ((int)(resources.GetObject("lblNumberofSmileyfaces.IconPadding"))));
             this.lblNumberofSmileyfaces.Name = "lblNumberofSmileyfaces";
+            // 
+            // lblSmileyFaces
+            // 
+            resources.ApplyResources(this.lblSmileyFaces, "lblSmileyFaces");
+            this.errorProvider.SetError(this.lblSmileyFaces, resources.GetString("lblSmileyFaces.Error"));
+            this.errorProvider.SetIconAlignment(this.lblSmileyFaces, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("lblSmileyFaces.IconAlignment"))));
+            this.errorProvider.SetIconPadding(this.lblSmileyFaces, ((int)(resources.GetObject("lblSmileyFaces.IconPadding"))));
+            this.lblSmileyFaces.Name = "lblSmileyFaces";
             // 
             // AddOrEditForm
             // 
@@ -471,9 +471,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEndValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartValue)).EndInit();
             this.pnlMain.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
+            this.BaseQuestionsGroupBox.ResumeLayout(false);
+            this.BaseQuestionsGroupBox.PerformLayout();
+            this.TypeGroupBox.ResumeLayout(false);
             this.pnlSmileyFaces.ResumeLayout(false);
             this.pnlSmileyFaces.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSmileyFaces)).EndInit();
@@ -516,7 +516,7 @@
         private System.Windows.Forms.TrackBar trackBarSmileyFaces;
         private System.Windows.Forms.Label lblSmileyFaces;
         private System.Windows.Forms.Label lblNumberofSmileyfaces;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox BaseQuestionsGroupBox;
+        private System.Windows.Forms.GroupBox TypeGroupBox;
     }
 }

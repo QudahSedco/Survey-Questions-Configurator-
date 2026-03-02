@@ -21,7 +21,6 @@ namespace SurveyQuestionsConfigurator
     {
         private AppSetting mAppSetting;
         private QuestionService mQuestionService;
-        private const string UNEXPECTED_ERROR_MESSAGE = "An unexpected error occurred";
         private const string DB_KEY = "SurveyDb";
 
         public ConnectionSettingsForm()
@@ -42,7 +41,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 CustomMessageBox.Show(Resources.UnexpectedError, Resources.ErrorCaption, ButtonTypes.Ok, IconTypes.Error);
                 Close();
             }
@@ -65,7 +64,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 CustomMessageBox.Show(Resources.UnexpectedError, Resources.ErrorCaption, ButtonTypes.Ok, IconTypes.Error);
             }
         }
@@ -142,7 +141,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 CustomMessageBox.Show(Resources.UnexpectedError, Resources.ErrorCaption, ButtonTypes.Ok, IconTypes.Error);
             }
         }
@@ -164,7 +163,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception tEx)
             {
-                Log.Error(tEx, UNEXPECTED_ERROR_MESSAGE);
+                Log.Error(tEx, tEx.Message);
                 CustomMessageBox.Show(Resources.UnexpectedError, Resources.ErrorCaption, ButtonTypes.Ok, IconTypes.Error);
             }
         }
