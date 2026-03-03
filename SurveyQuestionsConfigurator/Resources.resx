@@ -127,7 +127,7 @@
     <value>Connection to the database was successful</value>
   </data>
   <data name="DatabaseConnectionError" xml:space="preserve">
-    <value>Error Connecting to Database check connection string</value>
+    <value>Error connecting to database check connection string</value>
   </data>
   <data name="DatabaseError" xml:space="preserve">
     <value>A database error occurred. Please check your connection.</value>

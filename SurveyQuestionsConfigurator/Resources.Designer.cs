@@ -88,7 +88,7 @@ namespace SurveyQuestionsConfigurator {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error Connecting to Database check connection string.
+        ///   Looks up a localized string similar to Error connecting to database check connection string.
         /// </summary>
         internal static string DatabaseConnectionError {
             get {
