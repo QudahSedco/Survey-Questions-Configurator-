@@ -93,6 +93,7 @@ namespace SurveyQuestionsConfigurator
                 {
                     DataSource = ServerTextBox.Text.Trim(),
                     InitialCatalog = DatabaseNameTextBox.Text.Trim(),
+                    ConnectTimeout = 3
                 };
                 if (WindowsRadioButton.Checked)
                 {
@@ -167,13 +168,37 @@ namespace SurveyQuestionsConfigurator
         }
 
         /// <summary>
-        /// Tests the database connection using the currently entered connection details
+        /// Validates user input,Tests the database connection using the currently entered connection details
         /// and shows a success or error message to the user.
         /// </summary>
         private void btnTestConnection_Click(object pSender, EventArgs pE)
         {
             try
             {
+                errorProvider.Clear();
+                if (String.IsNullOrEmpty(ServerTextBox.Text))
+                {
+                    errorProvider.SetError(ServerTextBox, Resources.NullOrWhiteSpaceError);
+                    return;
+                }
+                if (String.IsNullOrEmpty(DatabaseNameTextBox.Text))
+                {
+                    errorProvider.SetError(DatabaseNameTextBox, Resources.NullOrWhiteSpaceError);
+                    return;
+                }
+                if (SQLRadioButton.Checked)
+                {
+                    if (String.IsNullOrEmpty(UserNameTextBox.Text))
+                    {
+                        errorProvider.SetError(UserNameTextBox, Resources.NullOrWhiteSpaceError);
+                        return;
+                    }
+                    if (String.IsNullOrEmpty(PasswordTextBox.Text))
+                    {
+                        errorProvider.SetError(PasswordTextBox, Resources.NullOrWhiteSpaceError);
+                        return;
+                    }
+                }
                 string tConnectionString = BuildConnectionString();
 
                 var tResult = mQuestionService.TestConnection(tConnectionString);

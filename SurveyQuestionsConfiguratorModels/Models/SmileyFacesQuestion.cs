@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace SurveyQuestionsConfigurator.Models
 {
+    /// <summary>
+    /// Represents a smiley type survey question with a number of smiley faces.
+    /// </summary>
     public class SmileyFacesQuestion : Question
     {
         private int mNumberOfSmileyFaces;
