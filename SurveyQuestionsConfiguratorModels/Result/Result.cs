@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace SurveyQuestionsConfiguratorModels
 {
+    /// <summary>
+    /// Represents the outcome of an operation, containing a status and an optional value.
+    /// Use Success(T) Failure(ResultStatus) to create instances.
+    /// </summary>
     public class Result<T>
     {
         public ResultStatus Status { get; }
@@ -26,11 +30,19 @@ namespace SurveyQuestionsConfiguratorModels
             Status = pStatus;
         }
 
+        /// <summary>
+        /// Creates a successful result with the given value.
+        /// </summary>
+        /// <param name="value">The value produced by the operation.</param>
         public static Result<T> Success(T value)
         {
             return new Result<T>(value, ResultStatus.Success);
         }
 
+        /// <summary>
+        /// Creates a failed result with the given status.
+        /// </summary>
+        /// <param name="status">The failure status describing what went wrong.</param>
         public static Result<T> Failure(ResultStatus status)
         {
             return new Result<T>(status);

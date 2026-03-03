@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace SurveyQuestionsConfigurator.Models
 {
+    /// <summary>
+    /// Represents a star type survey question with a number of stars
+    /// </summary>
     public class StarQuestion : Question
     {
         private int mNumberStars;

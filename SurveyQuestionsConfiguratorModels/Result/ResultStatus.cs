@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace SurveyQuestionsConfiguratorModels.Result
 {
+    /// <summary>
+    /// Represents the possible outcomes of an Result object,
+    /// including success and different error conditions.
+    /// </summary>
     public enum ResultStatus
     {
         Success = 0,
-        Generic = -1,
+        GenericError = -1,
         UnexpectedError = -2,
         DatabaseError = -4,
         UnknownTypeError = -5,

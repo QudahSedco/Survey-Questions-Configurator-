@@ -2,6 +2,9 @@
 
 namespace SurveyQuestionsConfigurator.Models
 {
+    /// <summary>
+    /// Represents a slider-type survey question with a numeric range and labels for each end.
+    /// </summary>
     public class SliderQuestion : Question
     {
         private int mStartValue;

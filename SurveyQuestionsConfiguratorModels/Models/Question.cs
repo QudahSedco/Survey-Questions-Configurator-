@@ -2,6 +2,11 @@
 
 namespace SurveyQuestionsConfigurator.Models
 {
+    /// <summary>
+    /// Represents an abstract base class for a survey question.
+    /// Contains common properties shared across all question types,
+    /// including text, display order, and type.
+    /// </summary>
     public abstract class Question
     {
         private int mId;
@@ -41,12 +46,6 @@ namespace SurveyQuestionsConfigurator.Models
 
                 mQuestionOrder = value;
             }
-        }
-
-        //prop just to display the question text and question type in the list next to each other
-        public string DisplayText
-        {
-            get { return $"{mQuestionText} - ({QuestionType})"; }
         }
 
         public int Id
