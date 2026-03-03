@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace SurveyQuestionsConfigurator.Repositories
 {
+    /// <summary>
+    /// Defines data access operations for survey questions.
+    /// This provides CRUD operations for question entities.
+    /// </summary>
     internal interface IQuestionRepository
     {
         Result<List<Question>> GetAllQuestions();
