@@ -68,7 +68,8 @@ namespace SurveyQuestionsConfigurator
                 mQuestionService = new QuestionService();
 
                 mQuestionService.QuestionsTableChanged += OnQuestionsChanged;
-
+                // Localize the QuestionType column values on every cell render based on current culture
+                dataGridViewMain.CellFormatting += DataGridViewMain_CellFormatting;
                 //keeps track of how each column is sorted (true = ascending, false = descending)
                 mSortColumnsDictionary = new Dictionary<string, bool>()
     {
@@ -557,6 +558,35 @@ namespace SurveyQuestionsConfigurator
                         }
                         LoadQuestions();
                     }
+                }
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, tEx.Message);
+                ShowErrorBox(ResultStatus.UnexpectedError);
+            }
+        }
+
+        /// <summary>
+        /// Handles the CellFormatting event for the main DataGridView.
+        /// Intercepts the QuestionType column and replaces the raw enum value
+        /// with a localized display string based on the current UI culture.
+        /// </summary>
+        /// <param name="pSender">The source of the event.</param>
+        /// <param name="pE">Event arguments containing the cell's column index and value to format.</param>
+        private void DataGridViewMain_CellFormatting(object pSender, DataGridViewCellFormattingEventArgs pE)
+        {
+            try
+            {
+                if (dataGridViewMain.Columns[pE.ColumnIndex].DataPropertyName == COL_QUESTION_TYPE && pE.Value != null)
+                {
+                    switch ((QuestionType)pE.Value)
+                    {
+                        case QuestionType.Smiley: pE.Value = Resources.ResourceManager.GetString("QuestionType_Smiley"); break;
+                        case QuestionType.Slider: pE.Value = Resources.ResourceManager.GetString("QuestionType_Slider"); break;
+                        case QuestionType.Star: pE.Value = Resources.ResourceManager.GetString("QuestionType_Star"); break;
+                    }
+                    pE.FormattingApplied = true; // tells DataGridView not to apply further formatting
                 }
             }
             catch (Exception tEx)

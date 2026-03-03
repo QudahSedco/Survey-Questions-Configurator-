@@ -44,6 +44,7 @@ namespace SurveyQuestionsConfigurator
                 WindowsRadioButton.Checked = true;
                 SQLGroupBox.Visible = false;
                 this.ActiveControl = ServerTextBox;
+
                 PopulateFields();
             }
             catch (Exception tEx)
@@ -71,6 +72,7 @@ namespace SurveyQuestionsConfigurator
                     DatabaseNameTextBox.Text = tBuilder.InitialCatalog;
                     UserNameTextBox.Text = tBuilder.UserID;
                     PasswordTextBox.Text = tBuilder.Password;
+                    tBuilder.ConnectTimeout = 3;
                 }
             }
             catch (Exception tEx)
@@ -118,10 +120,15 @@ namespace SurveyQuestionsConfigurator
         /// Validates user input, tests the database connection, and saves
         /// the connection string to the configuration file if successful.
         /// </summary>
-        private void btnSave_Click(object pSender, EventArgs pE)
+        private async void btnSave_Click(object pSender, EventArgs pE)
         {
             try
             {
+                btnTestConnection.Enabled = false;
+                btnSave.Enabled = false;
+                this.UseWaitCursor = true;
+                SetUIEnabled(false);
+
                 errorProvider.Clear();
                 if (String.IsNullOrEmpty(ServerTextBox.Text))
                 {
@@ -149,7 +156,7 @@ namespace SurveyQuestionsConfigurator
 
                 string tConnectionString = BuildConnectionString();
 
-                var tResult = mQuestionService.TestConnection(tConnectionString);
+                var tResult = await Task.Run(() => mQuestionService.TestConnection(tConnectionString));
 
                 if (!tResult.IsSuccess)
                 {
@@ -165,16 +172,27 @@ namespace SurveyQuestionsConfigurator
                 Log.Error(tEx, tEx.Message);
                 CustomMessageBox.Show(Resources.UnexpectedError, Resources.ErrorCaption, ButtonTypes.Ok, IconTypes.Error);
             }
+            finally
+            {
+                btnTestConnection.Enabled = true;
+                btnSave.Enabled = true;
+                this.UseWaitCursor = false;
+                SetUIEnabled(true);
+            }
         }
 
         /// <summary>
         /// Validates user input,Tests the database connection using the currently entered connection details
         /// and shows a success or error message to the user.
         /// </summary>
-        private void btnTestConnection_Click(object pSender, EventArgs pE)
+        private async void btnTestConnection_Click(object pSender, EventArgs pE)
         {
             try
             {
+                btnTestConnection.Enabled = false;
+                btnSave.Enabled = false;
+                this.UseWaitCursor = true;
+                SetUIEnabled(false);
                 errorProvider.Clear();
                 if (String.IsNullOrEmpty(ServerTextBox.Text))
                 {
@@ -201,7 +219,7 @@ namespace SurveyQuestionsConfigurator
                 }
                 string tConnectionString = BuildConnectionString();
 
-                var tResult = mQuestionService.TestConnection(tConnectionString);
+                var tResult = await Task.Run(() => mQuestionService.TestConnection(tConnectionString));
 
                 if (!tResult.IsSuccess)
                 {
@@ -215,12 +233,19 @@ namespace SurveyQuestionsConfigurator
                 Log.Error(tEx, tEx.Message);
                 CustomMessageBox.Show(Resources.UnexpectedError, Resources.ErrorCaption, ButtonTypes.Ok, IconTypes.Error);
             }
+            finally
+            {
+                btnTestConnection.Enabled = true;
+                btnSave.Enabled = true;
+                this.UseWaitCursor = false;
+                SetUIEnabled(true);
+            }
         }
 
         /// <summary>
         /// Hides SQL authentication fields and clears username/password if selected.
         /// </summary>
-        private void WindowsRadioButton_CheckedChanged(object sender, EventArgs e)
+        private void WindowsRadioButton_CheckedChanged(object pSender, EventArgs pE)
         {
             try
             {
@@ -241,7 +266,7 @@ namespace SurveyQuestionsConfigurator
         /// <summary>
         /// Shows SQL authentication fields when selected.
         /// </summary>
-        private void SQLRadioButton_CheckedChanged(object sender, EventArgs e)
+        private void SQLRadioButton_CheckedChanged(object pSender, EventArgs pE)
         {
             try
             {
@@ -255,6 +280,23 @@ namespace SurveyQuestionsConfigurator
                 Log.Error(tEx, tEx.Message);
                 CustomMessageBox.Show(Resources.UnexpectedError, Resources.ErrorCaption, ButtonTypes.Ok, IconTypes.Error);
             }
+        }
+
+        /// <summary>
+        /// Enables or disables all interactive UI controls on the form.
+        /// Used to prevent user interaction while an testing connection string.
+        /// </summary>
+        /// <param name="pEnabled">True to enable all controls, false to disable them.</param>
+        private void SetUIEnabled(bool pEnabled)
+        {
+            ServerTextBox.Enabled = pEnabled;
+            DatabaseNameTextBox.Enabled = pEnabled;
+            UserNameTextBox.Enabled = pEnabled;
+            PasswordTextBox.Enabled = pEnabled;
+            WindowsRadioButton.Enabled = pEnabled;
+            SQLRadioButton.Enabled = pEnabled;
+            btnSave.Enabled = pEnabled;
+            btnTestConnection.Enabled = pEnabled;
         }
     }
 }
