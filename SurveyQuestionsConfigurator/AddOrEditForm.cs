@@ -34,7 +34,6 @@ namespace SurveyQuestionsConfigurator
 
         /// <summary>
         /// Initializes a new instance of the AddOrEditForm.
-        /// Sets up form properties, tab indices, and question type options.
         /// If a Question object is provided, the form enters Edit mode and populates controls with the question data.
         /// Otherwise, the form enters Add mode with default values.
         /// </summary>
@@ -98,7 +97,7 @@ namespace SurveyQuestionsConfigurator
         /// </summary>
         /// <param name="value">The enum value to localize.</param>
         /// <returns>The localized string if found; otherwise, the enum's name.</returns>
-        private string GetLocalizedDescription(Enum value)
+        private string GetLocalizedEnum(Enum value)
         {
             try
             {
@@ -113,7 +112,6 @@ namespace SurveyQuestionsConfigurator
             catch (Exception tEx)
             {
                 Log.Error(tEx, tEx.Message);
-                ShowErrorBox(ResultStatus.UnexpectedError);
                 return value.ToString();
             }
         }
@@ -121,7 +119,7 @@ namespace SurveyQuestionsConfigurator
         /// <summary>
         /// Fills the form controls with values from the provided question object.
         /// Determines the specific question type (Star, SmileyFaces, or Slider)
-        /// and populates type-specific controls accordingly.
+        /// and populates type specific controls accordingly.
         /// </summary>
         /// <param name="pQuestion">The question object whose values will populate the form.</param>
         private void PopulateFields(Question pQuestion)
@@ -156,7 +154,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception tEx)
             {
                 Log.Error(tEx, tEx.Message);
-                ShowErrorBox(ResultStatus.UnexpectedError);
+                throw;
             }
         }
 
@@ -693,7 +691,7 @@ namespace SurveyQuestionsConfigurator
              .Select(q => new
              {
                  Value = q,
-                 Text = GetLocalizedDescription(q)
+                 Text = GetLocalizedEnum(q)
              })
              .ToList();
 

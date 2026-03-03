@@ -70,9 +70,13 @@ namespace SurveyQuestionsConfigurator
 
                     ServerTextBox.Text = tBuilder.DataSource;
                     DatabaseNameTextBox.Text = tBuilder.InitialCatalog;
+
+                    bool isWindowsAuth = tBuilder.IntegratedSecurity;
+                    WindowsRadioButton.Checked = isWindowsAuth;
+                    SQLRadioButton.Checked = !isWindowsAuth;
+
                     UserNameTextBox.Text = tBuilder.UserID;
                     PasswordTextBox.Text = tBuilder.Password;
-                    tBuilder.ConnectTimeout = 3;
                 }
             }
             catch (Exception tEx)
@@ -95,7 +99,7 @@ namespace SurveyQuestionsConfigurator
                 {
                     DataSource = ServerTextBox.Text.Trim(),
                     InitialCatalog = DatabaseNameTextBox.Text.Trim(),
-                    ConnectTimeout = 3
+                    ConnectTimeout = 5
                 };
                 if (WindowsRadioButton.Checked)
                 {
@@ -127,7 +131,7 @@ namespace SurveyQuestionsConfigurator
                 btnTestConnection.Enabled = false;
                 btnSave.Enabled = false;
                 this.UseWaitCursor = true;
-                SetUIEnabled(false);
+                SetUIEnabled(false); //disables UI elements
 
                 errorProvider.Clear();
                 if (String.IsNullOrEmpty(ServerTextBox.Text))
@@ -177,7 +181,7 @@ namespace SurveyQuestionsConfigurator
                 btnTestConnection.Enabled = true;
                 btnSave.Enabled = true;
                 this.UseWaitCursor = false;
-                SetUIEnabled(true);
+                SetUIEnabled(true);//enables UI elements
             }
         }
 
@@ -192,7 +196,8 @@ namespace SurveyQuestionsConfigurator
                 btnTestConnection.Enabled = false;
                 btnSave.Enabled = false;
                 this.UseWaitCursor = true;
-                SetUIEnabled(false);
+                SetUIEnabled(false);//disables UI elements
+
                 errorProvider.Clear();
                 if (String.IsNullOrEmpty(ServerTextBox.Text))
                 {
@@ -238,7 +243,7 @@ namespace SurveyQuestionsConfigurator
                 btnTestConnection.Enabled = true;
                 btnSave.Enabled = true;
                 this.UseWaitCursor = false;
-                SetUIEnabled(true);
+                SetUIEnabled(true);//enables UI elements
             }
         }
 
@@ -284,7 +289,7 @@ namespace SurveyQuestionsConfigurator
 
         /// <summary>
         /// Enables or disables all interactive UI controls on the form.
-        /// Used to prevent user interaction while an testing connection string.
+        /// Used to prevent user interaction while testing connection string.
         /// </summary>
         /// <param name="pEnabled">True to enable all controls, false to disable them.</param>
         private void SetUIEnabled(bool pEnabled)

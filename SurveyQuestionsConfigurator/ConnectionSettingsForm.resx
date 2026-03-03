@@ -404,6 +404,21 @@
   <data name="&gt;&gt;SQLGroupBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="SQLRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="SQLRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>233, 70</value>
+  </data>
+  <data name="SQLRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 17</value>
+  </data>
+  <data name="SQLRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="SQLRadioButton.Text" xml:space="preserve">
+    <value>SQL</value>
+  </data>
   <data name="&gt;&gt;SQLRadioButton.Name" xml:space="preserve">
     <value>SQLRadioButton</value>
   </data>
@@ -416,6 +431,21 @@
   <data name="&gt;&gt;SQLRadioButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="lblAuthenticationType.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblAuthenticationType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 72</value>
+  </data>
+  <data name="lblAuthenticationType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 13</value>
+  </data>
+  <data name="lblAuthenticationType.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="lblAuthenticationType.Text" xml:space="preserve">
+    <value>Authentication Type:</value>
+  </data>
   <data name="&gt;&gt;lblAuthenticationType.Name" xml:space="preserve">
     <value>lblAuthenticationType</value>
   </data>
@@ -427,6 +457,21 @@
   </data>
   <data name="&gt;&gt;lblAuthenticationType.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="WindowsRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="WindowsRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>158, 70</value>
+  </data>
+  <data name="WindowsRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 17</value>
+  </data>
+  <data name="WindowsRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="WindowsRadioButton.Text" xml:space="preserve">
+    <value>Windows</value>
   </data>
   <data name="&gt;&gt;WindowsRadioButton.Name" xml:space="preserve">
     <value>WindowsRadioButton</value>
@@ -481,86 +526,5 @@
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="WindowsRadioButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="WindowsRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 70</value>
-  </data>
-  <data name="WindowsRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 17</value>
-  </data>
-  <data name="WindowsRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="WindowsRadioButton.Text" xml:space="preserve">
-    <value>Windows</value>
-  </data>
-  <data name="&gt;&gt;WindowsRadioButton.Name" xml:space="preserve">
-    <value>WindowsRadioButton</value>
-  </data>
-  <data name="&gt;&gt;WindowsRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;WindowsRadioButton.Parent" xml:space="preserve">
-    <value>MainDBGroupBox</value>
-  </data>
-  <data name="&gt;&gt;WindowsRadioButton.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="SQLRadioButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="SQLRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>233, 70</value>
-  </data>
-  <data name="SQLRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 17</value>
-  </data>
-  <data name="SQLRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="SQLRadioButton.Text" xml:space="preserve">
-    <value>SQL</value>
-  </data>
-  <data name="&gt;&gt;SQLRadioButton.Name" xml:space="preserve">
-    <value>SQLRadioButton</value>
-  </data>
-  <data name="&gt;&gt;SQLRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SQLRadioButton.Parent" xml:space="preserve">
-    <value>MainDBGroupBox</value>
-  </data>
-  <data name="&gt;&gt;SQLRadioButton.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblAuthenticationType.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblAuthenticationType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 72</value>
-  </data>
-  <data name="lblAuthenticationType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 13</value>
-  </data>
-  <data name="lblAuthenticationType.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="lblAuthenticationType.Text" xml:space="preserve">
-    <value>Authentication Type:</value>
-  </data>
-  <data name="&gt;&gt;lblAuthenticationType.Name" xml:space="preserve">
-    <value>lblAuthenticationType</value>
-  </data>
-  <data name="&gt;&gt;lblAuthenticationType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblAuthenticationType.Parent" xml:space="preserve">
-    <value>MainDBGroupBox</value>
-  </data>
-  <data name="&gt;&gt;lblAuthenticationType.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
 </root>

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace SurveyQuestionsConfigurator
 {
+    /// <summary>
+    /// Specifies the type of icon displayed in the custom message box.
+    /// </summary>
     public enum IconTypes
     {
         Error,

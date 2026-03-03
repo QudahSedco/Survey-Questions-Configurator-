@@ -130,7 +130,7 @@
     <value>حدث خطأ أثناء الاتصال بقاعدة البيانات. يرجى التحقق من إعدادات الاتصال</value>
   </data>
   <data name="DatabaseError" xml:space="preserve">
-    <value>حدث خطأ في قاعدة البيانات. يرجى التحقق من الاتصال.</value>
+    <value>حدث خطأ في قاعدة البيانات. يرجى المحاولة مرة أخرى</value>
   </data>
   <data name="DeleteCaption" xml:space="preserve">
     <value>حذف</value>
@@ -187,7 +187,7 @@
     <value>لا يمكن أن يكون عدد الرموز التعبيرية أقل من 2 أو أكثر من 5</value>
   </data>
   <data name="SqlTableDependencyError" xml:space="preserve">
-    <value>(SQL table Dependency)حدث خطأ أثناء الوصول إلى جدول قاعدة البيانات باستخدام </value>
+    <value>حدثت مشكلة أثناء تحديث الأسئلة في الوقت الفعلي. قد لا تظهر التغييرات التي أجراها المستخدمون الآخرون فورًا. يرجى التواصل مع مسؤول النظام إذا استمرت المشكلة</value>
   </data>
   <data name="StarsNumberError" xml:space="preserve">
     <value>لا يمكن أن يكون عدد النجوم أقل من 1</value>

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace SurveyQuestionsConfigurator
 {
+    /// <summary>
+    /// Specifies which buttons are displayed in the custom message box.
+    /// </summary>
     public enum ButtonTypes
     {
         YesNo,

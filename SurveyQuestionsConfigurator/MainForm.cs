@@ -25,8 +25,6 @@ namespace SurveyQuestionsConfigurator
 {
     /// <summary>
     /// Main application form for managing survey questions.
-    ///
-    /// Provides functionality to:
     /// Display all questions in a sortable DataGridView
     /// Add, edit, and delete questions using the AddOrEditForm
     /// Change application language (English/Arabic)
@@ -40,9 +38,11 @@ namespace SurveyQuestionsConfigurator
         private QuestionService mQuestionService;
         private Dictionary<string, bool> mSortColumnsDictionary;
         private List<Question> mQuestionsList;
+
         private const string COL_QUESTION_TEXT = "QuestionText";
         private const string COL_QUESTION_ORDER = "QuestionOrder";
         private const string COL_QUESTION_TYPE = "QuestionType";
+
         private const string ENGLISH_LANGUAGE = "English";
         private const string ARABIC_LANGUAGE = "Arabic";
 
@@ -58,25 +58,27 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 InitializeComponent();
+
                 LanguagesComboBox.Items.Add(ENGLISH_LANGUAGE);
                 LanguagesComboBox.Items.Add(ARABIC_LANGUAGE);
                 LanguagesComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
                 LanguagesComboBox.SelectedIndex = 0;
+
                 FormBorderStyle = FormBorderStyle.FixedDialog;
                 MinimizeBox = true;
                 StartPosition = FormStartPosition.CenterScreen;
-                mQuestionService = new QuestionService();
 
+                mQuestionService = new QuestionService();
                 mQuestionService.QuestionsTableChanged += OnQuestionsChanged;
                 // Localize the QuestionType column values on every cell render based on current culture
                 dataGridViewMain.CellFormatting += DataGridViewMain_CellFormatting;
                 //keeps track of how each column is sorted (true = ascending, false = descending)
                 mSortColumnsDictionary = new Dictionary<string, bool>()
-    {
-        { COL_QUESTION_TEXT, true },
-        { COL_QUESTION_ORDER, true },
-        { COL_QUESTION_TYPE, true }
-    };
+                {
+                    { COL_QUESTION_TEXT, true },
+                    { COL_QUESTION_ORDER, true },
+                    { COL_QUESTION_TYPE, true }
+                };
             }
             catch (Exception tEx)
             {
@@ -86,8 +88,6 @@ namespace SurveyQuestionsConfigurator
         }
 
         /// <summary>
-        /// Handles the MainForm load event.
-        ///
         /// Starts listening for changes in the questions database via QuestionService.
         /// Configures and adds DataGridView columns for displaying questions.
         /// Loads existing questions into the DataGridView.
@@ -111,7 +111,7 @@ namespace SurveyQuestionsConfigurator
                 dataGridViewMain.AutoGenerateColumns = false;
                 dataGridViewMain.MultiSelect = false;
 
-                //creating the columns for the data grid view
+                //Creating the columns for the data grid view
                 DataGridViewTextBoxColumn tColText = new DataGridViewTextBoxColumn();
                 tColText.HeaderText = "Question text";
                 tColText.DataPropertyName = COL_QUESTION_TEXT;
@@ -305,7 +305,7 @@ namespace SurveyQuestionsConfigurator
         /// Sorts the questions in the DataGridView based on the specified column.
         /// Uses the mSortColumnsDictionary<String ,bool> to determine the current sort direction
         /// for each column (true = ascending, false = descending) and toggles it
-        /// after sorting. Updates the column header to display the correct sort glyph.
+        /// after sorting updates the column header to display the correct sort glyph.
         /// </summary>
         private void SortQuestions(string pColumnName, int pColumnIndex)
         {
@@ -441,7 +441,9 @@ namespace SurveyQuestionsConfigurator
                 // DataGridView columns are not controls (they do not inherit from Control),
                 // so they are not localized by ApplyResources / ApplyResourcesRecursive.
                 // Column headers must therefore be localized manually using the Resources file.
+
                 dataGridViewMain.SuspendLayout();
+
                 foreach (DataGridViewColumn col in dataGridViewMain.Columns)
                 {
                     col.HeaderText = Resources.ResourceManager.GetString(col.DataPropertyName);
@@ -454,7 +456,8 @@ namespace SurveyQuestionsConfigurator
                 ShowErrorBox(ResultStatus.UnexpectedError);
             }
             finally
-            { //All layout changes are applied at once, improving performance and preventing UI flicker
+            {
+                //All layout changes are applied at once, improving performance and preventing UI flicker
                 this.ResumeLayout();
             }
         }
@@ -495,7 +498,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception tEx)
             {
                 Log.Error(tEx, tEx.Message);
-                MessageBox.Show(tEx.Message);
+                MessageBox.Show(Resources.UnexpectedError);
             }
         }
 

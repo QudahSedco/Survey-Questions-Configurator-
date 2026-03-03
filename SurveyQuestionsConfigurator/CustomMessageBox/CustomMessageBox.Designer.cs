@@ -78,7 +78,6 @@
             resources.ApplyResources(this.IconPictureBox, "IconPictureBox");
             this.IconPictureBox.Name = "IconPictureBox";
             this.IconPictureBox.TabStop = false;
-            this.IconPictureBox.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // lblText
             // 
@@ -108,7 +107,6 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "CustomMessageBox";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.IconPictureBox)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);

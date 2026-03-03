@@ -97,7 +97,7 @@ namespace SurveyQuestionsConfigurator {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A database error occurred. Please check your connection..
+        ///   Looks up a localized string similar to A database error occurred. Please check try again.
         /// </summary>
         internal static string DatabaseError {
             get {
@@ -268,7 +268,7 @@ namespace SurveyQuestionsConfigurator {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error occurred while accessing the database table using sql table dependency.
+        ///   Looks up a localized string similar to A problem occurred while updating the questions in real time. Changes made by other users may not appear immediately. Please contact your administrator if the issue persists..
         /// </summary>
         internal static string SqlTableDependencyError {
             get {

@@ -117,1280 +117,344 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;BaseQuestionsGroupBox.Parent" xml:space="preserve">
-    <value>pnlMain</value>
-  </data>
-  <data name="lblNumberOfStars.Text" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblCharNumberEndCaption.Error" xml:space="preserve">
-    <value />
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="lblSmileyFaces.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 30</value>
+  <data name="btnAdd.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
   </data>
-  <data name="&gt;&gt;lblCharNumber.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="btnAdd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>415, 361</value>
   </data>
-  <data name="lblEndValue.Text" xml:space="preserve">
-    <value>End value:</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="numericUpDownEndValue.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="btnAdd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 28</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="lblCharNumber.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;lblCharNumberEndCaption.ZOrder" xml:space="preserve">
+  <data name="btnAdd.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="btnUpdate.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="lblFacesNumber.Text" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;pnlSmileyFaces.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="BaseQuestionsGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 3</value>
-  </data>
-  <data name="&gt;&gt;lblNumberOfStars.Parent" xml:space="preserve">
-    <value>pnlStars</value>
-  </data>
-  <data name="trackBarStars.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblNumberofSmileyfaces.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 20</value>
-  </data>
-  <data name="trackBarStars.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 36</value>
-  </data>
-  <data name="&gt;&gt;lblStartCaption.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="textBoxStartCaption.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="lblQuestionText.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="textBoxQuestionText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 19</value>
-  </data>
-  <data name="&gt;&gt;trackBarStars.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="numericUpDownQuestionOrder.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 11.25pt</value>
-  </data>
-  <data name="lblStartCaption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 20</value>
-  </data>
-  <data name="lblCharNumberStartCaption.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;lblQuestionText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="textBoxStartCaption.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="textBoxEndCaption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 99</value>
-  </data>
-  <data name="&gt;&gt;textBoxStartCaption.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="lblQuestionText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 61</value>
-  </data>
-  <data name="&gt;&gt;lblEndCaption.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="lblStartValue.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownQuestionOrder.Parent" xml:space="preserve">
-    <value>BaseQuestionsGroupBox</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownStartValue.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="numericUpDownStartValue.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;textBoxQuestionText.Name" xml:space="preserve">
-    <value>textBoxQuestionText</value>
-  </data>
-  <data name="&gt;&gt;comboBoxQuestionTypes.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pnlStars.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 17</value>
-  </data>
-  <data name="lblStartCaption.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
   </data>
   <data name="btnAdd.Text" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="&gt;&gt;lblEndCaption.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;btnAdd.Name" xml:space="preserve">
+    <value>btnAdd</value>
   </data>
-  <data name="lblSmileyFaces.Location" type="System.Drawing.Point, System.Drawing">
-    <value>268, 4</value>
+  <data name="&gt;&gt;btnAdd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lblNumberOfStars.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+  <data name="&gt;&gt;btnAdd.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="&gt;&gt;textBoxStartCaption.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="lblSmileyFaces.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 15.75pt</value>
-  </data>
-  <data name="&gt;&gt;lblTypeOfQuestion.Name" xml:space="preserve">
-    <value>lblTypeOfQuestion</value>
-  </data>
-  <data name="lblFacesNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 20</value>
-  </data>
-  <data name="numericUpDownStartValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>303, 27</value>
-  </data>
-  <data name="&gt;&gt;lblCharNumber.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnAdd.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;lblStars.Type" xml:space="preserve">
+  <data name="textBoxQuestionText.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
+  <data name="textBoxQuestionText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>164, 19</value>
+  </data>
+  <data name="textBoxQuestionText.MaxLength" type="System.Int32, mscorlib">
+    <value>1000</value>
+  </data>
+  <data name="textBoxQuestionText.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="textBoxQuestionText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>303, 92</value>
+  </data>
+  <data name="textBoxQuestionText.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;textBoxQuestionText.Name" xml:space="preserve">
+    <value>textBoxQuestionText</value>
+  </data>
+  <data name="&gt;&gt;textBoxQuestionText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxQuestionText.Parent" xml:space="preserve">
+    <value>BaseQuestionsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;textBoxQuestionText.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblQuestionText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="lblQuestionText.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblQuestionText.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
+  <data name="lblQuestionText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 61</value>
+  </data>
+  <data name="lblQuestionText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="lblQuestionText.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblQuestionText.Text" xml:space="preserve">
+    <value>Question text:</value>
+  </data>
+  <data name="&gt;&gt;lblQuestionText.Name" xml:space="preserve">
+    <value>lblQuestionText</value>
+  </data>
+  <data name="&gt;&gt;lblQuestionText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblQuestionText.Parent" xml:space="preserve">
+    <value>BaseQuestionsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;lblQuestionText.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="numericUpDownQuestionOrder.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
+  <data name="numericUpDownQuestionOrder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>164, 117</value>
+  </data>
+  <data name="numericUpDownQuestionOrder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>303, 27</value>
+  </data>
+  <data name="numericUpDownQuestionOrder.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownQuestionOrder.Name" xml:space="preserve">
+    <value>numericUpDownQuestionOrder</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownQuestionOrder.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownQuestionOrder.Parent" xml:space="preserve">
+    <value>BaseQuestionsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownQuestionOrder.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblQuestionOrder.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblQuestionOrder.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
+  <data name="lblQuestionOrder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 121</value>
+  </data>
+  <data name="lblQuestionOrder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="lblQuestionOrder.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblQuestionOrder.Text" xml:space="preserve">
+    <value>Question order:</value>
+  </data>
+  <data name="&gt;&gt;lblQuestionOrder.Name" xml:space="preserve">
+    <value>lblQuestionOrder</value>
+  </data>
+  <data name="&gt;&gt;lblQuestionOrder.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblQuestionOrder.Parent" xml:space="preserve">
     <value>BaseQuestionsGroupBox</value>
   </data>
-  <data name="lblEndCaption.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 11.25pt</value>
-  </data>
-  <data name="TypeGroupBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="lblStars.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 4</value>
-  </data>
-  <data name="lblCharNumber.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;lblCharNumberEndCaption.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="lblEndCaption.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="pnlSlider.Size" type="System.Drawing.Size, System.Drawing">
-    <value>530, 129</value>
-  </data>
-  <data name="textBoxQuestionText.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="textBoxQuestionText.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 11.25pt</value>
-  </data>
-  <data name="btnCancel.Text" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="&gt;&gt;textBoxQuestionText.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;btnUpdate.Name" xml:space="preserve">
-    <value>btnUpdate</value>
-  </data>
-  <data name="lblCharNumberStartCaption.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="btnUpdate.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblNumberOfStarsText.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;lblQuestionOrder.ZOrder" xml:space="preserve">
     <value>6</value>
-  </data>
-  <data name="&gt;&gt;lblStartCaption.Parent" xml:space="preserve">
-    <value>pnlSlider</value>
-  </data>
-  <data name="&gt;&gt;lblStars.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="comboBoxQuestionTypes.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblCharNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>472, 22</value>
   </data>
   <data name="comboBoxQuestionTypes.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 11.25pt</value>
   </data>
-  <data name="textBoxStartCaption.MaxLength" type="System.Int32, mscorlib">
-    <value>100</value>
-  </data>
-  <data name="lblTypeOfQuestion.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="lblTypeOfQuestion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 149</value>
-  </data>
-  <data name="&gt;&gt;lblNumberofSmileyfaces.Parent" xml:space="preserve">
-    <value>pnlSmileyFaces</value>
-  </data>
-  <data name="&gt;&gt;pnlSlider.Parent" xml:space="preserve">
-    <value>TypeGroupBox</value>
-  </data>
-  <data name="lblEndValue.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="btnUpdate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>415, 361</value>
-  </data>
-  <data name="lblCharNumber.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblCharNumberStartCaption.Text" xml:space="preserve">
-    <value>0/100</value>
-  </data>
-  <data name="lblEndCaption.Text" xml:space="preserve">
-    <value>End caption:</value>
-  </data>
-  <data name="lblStartValue.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 11.25pt</value>
-  </data>
-  <data name="lblQuestionOrder.Text" xml:space="preserve">
-    <value>Question order:</value>
-  </data>
-  <data name="lblTypeOfQuestion.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 28</value>
-  </data>
-  <data name="btnUpdate.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblCharNumber.Text" xml:space="preserve">
-    <value>0/1000</value>
-  </data>
-  <data name="comboBoxQuestionTypes.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="lblCharNumberEndCaption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>467, 99</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>583, 397</value>
-  </data>
-  <data name="&gt;&gt;trackBarSmileyFaces.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnAdd.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;pnlStars.Parent" xml:space="preserve">
-    <value>TypeGroupBox</value>
-  </data>
-  <data name="lblQuestionOrder.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pnlMain.Name" xml:space="preserve">
-    <value>pnlMain</value>
-  </data>
-  <data name="lblQuestionOrder.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="textBoxEndCaption.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="numericUpDownEndValue.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="textBoxStartCaption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 69</value>
-  </data>
-  <data name="comboBoxQuestionTypes.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="lblFacesNumber.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 11.25pt</value>
-  </data>
-  <data name="btnAdd.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lblEndCaption.Parent" xml:space="preserve">
-    <value>pnlSlider</value>
-  </data>
-  <data name="&gt;&gt;lblQuestionOrder.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;comboBoxQuestionTypes.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;BaseQuestionsGroupBox.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblStartValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 10</value>
-  </data>
-  <data name="&gt;&gt;lblStars.Parent" xml:space="preserve">
-    <value>pnlStars</value>
-  </data>
-  <data name="pnlMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>573, 351</value>
-  </data>
-  <data name="&gt;&gt;lblCharNumberStartCaption.Parent" xml:space="preserve">
-    <value>pnlSlider</value>
-  </data>
-  <data name="pnlStars.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;lblCharNumberStartCaption.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="lblStars.Text" xml:space="preserve">
-    <value>☆☆☆☆☆☆☆☆☆☆</value>
-  </data>
-  <data name="&gt;&gt;pnlSlider.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblStartValue.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;lblNumberOfStarsText.Name" xml:space="preserve">
-    <value>lblNumberOfStarsText</value>
-  </data>
-  <data name="textBoxStartCaption.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="textBoxQuestionText.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="pnlStars.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;lblCharNumberEndCaption.Parent" xml:space="preserve">
-    <value>pnlSlider</value>
-  </data>
-  <data name="lblTypeOfQuestion.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 11.25pt</value>
-  </data>
-  <data name="lblCharNumber.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="textBoxQuestionText.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblStartCaption.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
-    <value>btnCancel</value>
-  </data>
-  <data name="&gt;&gt;lblCharNumber.Parent" xml:space="preserve">
-    <value>BaseQuestionsGroupBox</value>
-  </data>
-  <data name="btnAdd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>415, 361</value>
-  </data>
-  <data name="lblStartValue.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblEndValue.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 11.25pt</value>
+  <data name="comboBoxQuestionTypes.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="comboBoxQuestionTypes.Location" type="System.Drawing.Point, System.Drawing">
     <value>164, 149</value>
   </data>
-  <data name="btnCancel.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;lblTypeOfQuestion.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pnlSlider.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="trackBarSmileyFaces.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 37</value>
-  </data>
-  <data name="BaseQuestionsGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>554, 189</value>
-  </data>
-  <data name="lblStars.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="lblQuestionOrder.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;lblStartCaption.Name" xml:space="preserve">
-    <value>lblStartCaption</value>
-  </data>
-  <data name="numericUpDownStartValue.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="pnlMain.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;comboBoxQuestionTypes.Parent" xml:space="preserve">
-    <value>BaseQuestionsGroupBox</value>
-  </data>
-  <data name="lblNumberofSmileyfaces.Text" xml:space="preserve">
-    <value>Number of Smiley faces</value>
-  </data>
-  <data name="&gt;&gt;trackBarSmileyFaces.Parent" xml:space="preserve">
-    <value>pnlSmileyFaces</value>
-  </data>
-  <data name="pnlSmileyFaces.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="lblQuestionText.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lblFacesNumber.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;textBoxStartCaption.Name" xml:space="preserve">
-    <value>textBoxStartCaption</value>
-  </data>
-  <data name="trackBarSmileyFaces.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;lblCharNumber.Name" xml:space="preserve">
-    <value>lblCharNumber</value>
-  </data>
-  <data name="&gt;&gt;lblEndCaption.Name" xml:space="preserve">
-    <value>lblEndCaption</value>
-  </data>
-  <data name="btnAdd.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="BaseQuestionsGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="numericUpDownQuestionOrder.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;lblNumberOfStars.Name" xml:space="preserve">
-    <value>lblNumberOfStars</value>
-  </data>
-  <data name="&gt;&gt;lblCharNumberStartCaption.Name" xml:space="preserve">
-    <value>lblCharNumberStartCaption</value>
-  </data>
-  <data name="lblStars.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 32</value>
-  </data>
-  <data name="lblStartCaption.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblCharNumberStartCaption.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownQuestionOrder.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="lblStartValue.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="lblTypeOfQuestion.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblEndValue.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblCharNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="&gt;&gt;lblNumberofSmileyfaces.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="trackBarSmileyFaces.Size" type="System.Drawing.Size, System.Drawing">
-    <value>303, 45</value>
-  </data>
-  <data name="lblQuestionOrder.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>496, 361</value>
-  </data>
-  <data name="lblTypeOfQuestion.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblStartCaption.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="pnlMain.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="pnlSlider.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="numericUpDownEndValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 35</value>
-  </data>
-  <data name="lblNumberOfStars.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 20</value>
-  </data>
-  <data name="lblNumberofSmileyfaces.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 11.25pt</value>
-  </data>
-  <data name="lblCharNumberStartCaption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 18</value>
-  </data>
-  <data name="lblStars.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="trackBarStars.Size" type="System.Drawing.Size, System.Drawing">
-    <value>303, 45</value>
-  </data>
-  <data name="lblSmileyFaces.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownEndValue.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;btnUpdate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pnlMain.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;BaseQuestionsGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="textBoxEndCaption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>303, 24</value>
-  </data>
-  <data name="lblSmileyFaces.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="textBoxQuestionText.MaxLength" type="System.Int32, mscorlib">
-    <value>1000</value>
-  </data>
-  <data name="&gt;&gt;lblQuestionText.Parent" xml:space="preserve">
-    <value>BaseQuestionsGroupBox</value>
-  </data>
-  <data name="pnlSlider.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11.25pt</value>
-  </data>
-  <data name="lblFacesNumber.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;trackBarStars.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="lblNumberOfStarsText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 20</value>
-  </data>
-  <data name="&gt;&gt;textBoxEndCaption.Name" xml:space="preserve">
-    <value>textBoxEndCaption</value>
-  </data>
-  <data name="lblFacesNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>466, 12</value>
-  </data>
-  <data name="&gt;&gt;lblQuestionOrder.Name" xml:space="preserve">
-    <value>lblQuestionOrder</value>
-  </data>
-  <data name="&gt;&gt;pnlSmileyFaces.Parent" xml:space="preserve">
-    <value>TypeGroupBox</value>
-  </data>
-  <data name="trackBarStars.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="lblQuestionOrder.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 11.25pt</value>
-  </data>
-  <data name="numericUpDownStartValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 3</value>
-  </data>
-  <data name="lblNumberOfStarsText.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 11.25pt</value>
-  </data>
-  <data name="&gt;&gt;lblSmileyFaces.Name" xml:space="preserve">
-    <value>lblSmileyFaces</value>
-  </data>
-  <data name="&gt;&gt;lblFacesNumber.Name" xml:space="preserve">
-    <value>lblFacesNumber</value>
-  </data>
-  <data name="&gt;&gt;trackBarSmileyFaces.Name" xml:space="preserve">
-    <value>trackBarSmileyFaces</value>
-  </data>
-  <data name="&gt;&gt;lblTypeOfQuestion.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="lblNumberOfStarsText.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblQuestionOrder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 121</value>
-  </data>
-  <data name="&gt;&gt;lblEndValue.Parent" xml:space="preserve">
-    <value>pnlSlider</value>
-  </data>
-  <data name="lblStars.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;lblNumberofSmileyfaces.Name" xml:space="preserve">
-    <value>lblNumberofSmileyfaces</value>
-  </data>
-  <data name="&gt;&gt;lblStartValue.Parent" xml:space="preserve">
-    <value>pnlSlider</value>
-  </data>
-  <data name="btnCancel.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="numericUpDownEndValue.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="lblNumberOfStars.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="pnlMain.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lblNumberOfStarsText.Parent" xml:space="preserve">
-    <value>pnlStars</value>
-  </data>
-  <data name="BaseQuestionsGroupBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;pnlStars.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="lblCharNumber.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;pnlSmileyFaces.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lblStartCaption.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;lblCharNumberEndCaption.Name" xml:space="preserve">
-    <value>lblCharNumberEndCaption</value>
-  </data>
-  <data name="&gt;&gt;lblCharNumberStartCaption.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="lblCharNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 20</value>
-  </data>
-  <data name="textBoxEndCaption.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;trackBarStars.Name" xml:space="preserve">
-    <value>trackBarStars</value>
-  </data>
-  <data name="textBoxEndCaption.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="btnCancel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9.75pt</value>
-  </data>
-  <data name="lblCharNumberEndCaption.Text" xml:space="preserve">
-    <value>0/100</value>
-  </data>
-  <data name="lblNumberofSmileyfaces.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-1, 12</value>
-  </data>
-  <data name="numericUpDownQuestionOrder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 117</value>
-  </data>
-  <data name="lblFacesNumber.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;btnUpdate.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;TypeGroupBox.Parent" xml:space="preserve">
-    <value>pnlMain</value>
-  </data>
-  <data name="trackBarStars.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblNumberofSmileyfaces.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;numericUpDownEndValue.Parent" xml:space="preserve">
-    <value>pnlSlider</value>
-  </data>
-  <data name="&gt;&gt;lblEndValue.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="numericUpDownQuestionOrder.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;lblNumberOfStars.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;TypeGroupBox.Name" xml:space="preserve">
-    <value>TypeGroupBox</value>
-  </data>
-  <data name="comboBoxQuestionTypes.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="textBoxEndCaption.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownQuestionOrder.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="lblQuestionText.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="lblSmileyFaces.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblSmileyFaces.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="btnAdd.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9.75pt</value>
-  </data>
-  <data name="&gt;&gt;lblStartValue.Name" xml:space="preserve">
-    <value>lblStartValue</value>
-  </data>
-  <data name="pnlSlider.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;numericUpDownEndValue.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="btnAdd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 28</value>
-  </data>
-  <data name="numericUpDownQuestionOrder.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;btnAdd.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="lblTypeOfQuestion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 20</value>
-  </data>
-  <data name="&gt;&gt;lblEndValue.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="numericUpDownStartValue.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="lblCharNumberEndCaption.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblEndValue.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="numericUpDownQuestionOrder.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;lblNumberOfStarsText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>AddOrEditForm</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownStartValue.Parent" xml:space="preserve">
-    <value>pnlSlider</value>
-  </data>
-  <data name="lblQuestionOrder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 20</value>
-  </data>
-  <data name="lblEndValue.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="TypeGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>554, 153</value>
-  </data>
-  <data name="lblQuestionText.Text" xml:space="preserve">
-    <value>Question text:</value>
-  </data>
-  <data name="&gt;&gt;errorProvider.Name" xml:space="preserve">
-    <value>errorProvider</value>
-  </data>
-  <data name="&gt;&gt;pnlStars.Name" xml:space="preserve">
-    <value>pnlStars</value>
-  </data>
-  <data name="&gt;&gt;lblStartValue.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="lblEndCaption.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblNumberofSmileyfaces.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;trackBarSmileyFaces.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="TypeGroupBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9.75pt</value>
-  </data>
-  <data name="pnlSmileyFaces.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="lblEndCaption.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblCharNumberStartCaption.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;lblStars.Name" xml:space="preserve">
-    <value>lblStars</value>
-  </data>
-  <data name="lblFacesNumber.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="lblEndCaption.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="lblStartValue.Text" xml:space="preserve">
-    <value>Start value:</value>
-  </data>
-  <data name="&gt;&gt;TypeGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="numericUpDownEndValue.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="lblNumberofSmileyfaces.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblStartCaption.Text" xml:space="preserve">
-    <value>Start caption:</value>
-  </data>
-  <data name="lblEndCaption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 101</value>
-  </data>
-  <data name="numericUpDownEndValue.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="TypeGroupBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="pnlStars.Size" type="System.Drawing.Size, System.Drawing">
-    <value>530, 100</value>
-  </data>
-  <data name="lblCharNumberEndCaption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 18</value>
-  </data>
-  <data name="pnlSmileyFaces.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;lblQuestionOrder.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="lblNumberofSmileyfaces.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;BaseQuestionsGroupBox.Name" xml:space="preserve">
-    <value>BaseQuestionsGroupBox</value>
-  </data>
-  <data name="lblNumberOfStars.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="numericUpDownEndValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>303, 27</value>
-  </data>
-  <data name="&gt;&gt;lblQuestionText.Name" xml:space="preserve">
-    <value>lblQuestionText</value>
-  </data>
-  <data name="btnUpdate.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9.75pt</value>
-  </data>
-  <data name="&gt;&gt;pnlStars.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="lblCharNumberEndCaption.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;pnlMain.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="trackBarSmileyFaces.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="TypeGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="&gt;&gt;lblNumberOfStarsText.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="pnlSlider.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="lblStartValue.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="textBoxEndCaption.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11.25pt</value>
-  </data>
-  <data name="numericUpDownStartValue.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;lblTypeOfQuestion.Parent" xml:space="preserve">
-    <value>BaseQuestionsGroupBox</value>
-  </data>
-  <data name="lblNumberOfStarsText.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblStars.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblQuestionText.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblSmileyFaces.Text" xml:space="preserve">
-    <value>:):)</value>
-  </data>
-  <data name="pnlMain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 4</value>
-  </data>
-  <data name="btnAdd.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;pnlSlider.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="pnlSmileyFaces.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="pnlSlider.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 17</value>
-  </data>
-  <data name="&gt;&gt;textBoxEndCaption.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;pnlMain.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownStartValue.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;lblSmileyFaces.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="textBoxStartCaption.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblFacesNumber.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblStartCaption.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;lblSmileyFaces.Parent" xml:space="preserve">
-    <value>pnlSmileyFaces</value>
-  </data>
-  <data name="lblNumberOfStarsText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 17</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownEndValue.Name" xml:space="preserve">
-    <value>numericUpDownEndValue</value>
-  </data>
-  <data name="lblTypeOfQuestion.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="lblStars.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 18pt</value>
-  </data>
-  <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblCharNumberStartCaption.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="&gt;&gt;btnUpdate.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Add/Edit</value>
-  </data>
-  <data name="lblEndValue.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="btnUpdate.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;lblNumberofSmileyfaces.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pnlStars.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="BaseQuestionsGroupBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="trackBarStars.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="lblQuestionText.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 11.25pt</value>
-  </data>
-  <data name="&gt;&gt;textBoxEndCaption.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="numericUpDownStartValue.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 11.25pt</value>
-  </data>
-  <data name="comboBoxQuestionTypes.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;lblNumberOfStars.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;errorProvider.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="btnAdd.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="numericUpDownStartValue.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblQuestionText.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="lblStartCaption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 69</value>
-  </data>
-  <data name="&gt;&gt;lblEndValue.Name" xml:space="preserve">
-    <value>lblEndValue</value>
-  </data>
-  <data name="lblCharNumberEndCaption.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="BaseQuestionsGroupBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="textBoxQuestionText.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblTypeOfQuestion.Text" xml:space="preserve">
-    <value>Type of question:</value>
-  </data>
-  <data name="textBoxQuestionText.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="textBoxStartCaption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>303, 24</value>
-  </data>
-  <data name="textBoxQuestionText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>303, 92</value>
-  </data>
-  <data name="&gt;&gt;btnAdd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;trackBarStars.Parent" xml:space="preserve">
-    <value>pnlStars</value>
-  </data>
-  <data name="&gt;&gt;lblQuestionText.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;pnlSlider.Name" xml:space="preserve">
-    <value>pnlSlider</value>
-  </data>
-  <data name="lblCharNumber.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 11.25pt</value>
-  </data>
-  <data name="pnlMain.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="lblStartCaption.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 11.25pt</value>
-  </data>
-  <data name="TypeGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 195</value>
-  </data>
-  <data name="pnlStars.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;textBoxQuestionText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="comboBoxQuestionTypes.Size" type="System.Drawing.Size, System.Drawing">
     <value>303, 28</value>
   </data>
-  <data name="textBoxStartCaption.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11.25pt</value>
-  </data>
-  <data name="&gt;&gt;pnlMain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblFacesNumber.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="lblStartValue.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lblFacesNumber.Parent" xml:space="preserve">
-    <value>pnlSmileyFaces</value>
-  </data>
-  <data name="lblStartValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 20</value>
-  </data>
-  <data name="TypeGroupBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;btnAdd.Name" xml:space="preserve">
-    <value>btnAdd</value>
-  </data>
-  <data name="lblEndValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 20</value>
-  </data>
-  <data name="lblStars.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="pnlSmileyFaces.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 19</value>
-  </data>
-  <data name="TypeGroupBox.Text" xml:space="preserve">
-    <value>Type Properties</value>
-  </data>
-  <data name="BaseQuestionsGroupBox.Text" xml:space="preserve">
-    <value>Base question</value>
-  </data>
-  <data name="lblCharNumberEndCaption.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="lblNumberOfStars.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 11.25pt</value>
-  </data>
-  <data name="numericUpDownEndValue.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 11.25pt</value>
-  </data>
-  <data name="lblNumberOfStars.Error" xml:space="preserve">
-    <value />
+  <data name="comboBoxQuestionTypes.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;comboBoxQuestionTypes.Name" xml:space="preserve">
     <value>comboBoxQuestionTypes</value>
   </data>
-  <data name="trackBarStars.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+  <data name="&gt;&gt;comboBoxQuestionTypes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lblCharNumberStartCaption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>467, 69</value>
+  <data name="&gt;&gt;comboBoxQuestionTypes.Parent" xml:space="preserve">
+    <value>BaseQuestionsGroupBox</value>
   </data>
-  <data name="btnUpdate.Text" xml:space="preserve">
-    <value>Update</value>
+  <data name="&gt;&gt;comboBoxQuestionTypes.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="lblSmileyFaces.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="lblNumberOfStarsText.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNumberOfStarsText.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
+  <data name="lblNumberOfStarsText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 17</value>
+  </data>
+  <data name="lblNumberOfStarsText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 20</value>
+  </data>
+  <data name="lblNumberOfStarsText.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="lblNumberOfStarsText.Text" xml:space="preserve">
     <value>Number of stars</value>
   </data>
-  <data name="numericUpDownQuestionOrder.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;lblNumberOfStarsText.Name" xml:space="preserve">
+    <value>lblNumberOfStarsText</value>
   </data>
-  <data name="&gt;&gt;pnlSmileyFaces.Name" xml:space="preserve">
-    <value>pnlSmileyFaces</value>
+  <data name="&gt;&gt;lblNumberOfStarsText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lblCharNumberStartCaption.Error" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;lblNumberOfStarsText.Parent" xml:space="preserve">
+    <value>pnlStars</value>
   </data>
-  <data name="lblNumberofSmileyfaces.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="&gt;&gt;lblNumberOfStarsText.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
-  <data name="&gt;&gt;textBoxQuestionText.Parent" xml:space="preserve">
+  <data name="trackBarStars.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="trackBarStars.Location" type="System.Drawing.Point, System.Drawing">
+    <value>158, 36</value>
+  </data>
+  <data name="trackBarStars.Size" type="System.Drawing.Size, System.Drawing">
+    <value>303, 45</value>
+  </data>
+  <data name="trackBarStars.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;trackBarStars.Name" xml:space="preserve">
+    <value>trackBarStars</value>
+  </data>
+  <data name="&gt;&gt;trackBarStars.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;trackBarStars.Parent" xml:space="preserve">
+    <value>pnlStars</value>
+  </data>
+  <data name="&gt;&gt;trackBarStars.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblStars.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblStars.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 18pt</value>
+  </data>
+  <data name="lblStars.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 4</value>
+  </data>
+  <data name="lblStars.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 32</value>
+  </data>
+  <data name="lblStars.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lblStars.Text" xml:space="preserve">
+    <value>☆☆☆☆☆☆☆☆☆☆</value>
+  </data>
+  <data name="&gt;&gt;lblStars.Name" xml:space="preserve">
+    <value>lblStars</value>
+  </data>
+  <data name="&gt;&gt;lblStars.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblStars.Parent" xml:space="preserve">
+    <value>pnlStars</value>
+  </data>
+  <data name="&gt;&gt;lblStars.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblTypeOfQuestion.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblTypeOfQuestion.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
+  <data name="lblTypeOfQuestion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 149</value>
+  </data>
+  <data name="lblTypeOfQuestion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>122, 20</value>
+  </data>
+  <data name="lblTypeOfQuestion.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblTypeOfQuestion.Text" xml:space="preserve">
+    <value>Type of question:</value>
+  </data>
+  <data name="&gt;&gt;lblTypeOfQuestion.Name" xml:space="preserve">
+    <value>lblTypeOfQuestion</value>
+  </data>
+  <data name="&gt;&gt;lblTypeOfQuestion.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTypeOfQuestion.Parent" xml:space="preserve">
     <value>BaseQuestionsGroupBox</value>
   </data>
-  <data name="btnUpdate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 28</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownQuestionOrder.Name" xml:space="preserve">
-    <value>numericUpDownQuestionOrder</value>
-  </data>
-  <data name="lblNumberOfStarsText.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="lblCharNumberEndCaption.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="lblQuestionText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left, Right</value>
-  </data>
-  <data name="textBoxEndCaption.MaxLength" type="System.Int32, mscorlib">
-    <value>100</value>
-  </data>
-  <data name="lblNumberOfStarsText.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="numericUpDownQuestionOrder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>303, 27</value>
-  </data>
-  <data name="btnCancel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="lblEndValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 42</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownStartValue.Name" xml:space="preserve">
-    <value>numericUpDownStartValue</value>
-  </data>
-  <data name="&gt;&gt;textBoxStartCaption.Parent" xml:space="preserve">
-    <value>pnlSlider</value>
-  </data>
-  <data name="&gt;&gt;textBoxEndCaption.Parent" xml:space="preserve">
-    <value>pnlSlider</value>
-  </data>
-  <data name="pnlSmileyFaces.Size" type="System.Drawing.Size, System.Drawing">
-    <value>533, 100</value>
-  </data>
-  <data name="lblFacesNumber.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="trackBarSmileyFaces.Error" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;lblTypeOfQuestion.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="lblNumberOfStars.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblNumberOfStars.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
   <data name="lblNumberOfStars.Location" type="System.Drawing.Point, System.Drawing">
     <value>466, 4</value>
   </data>
-  <data name="lblEndCaption.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="lblNumberOfStars.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 20</value>
   </data>
-  <data name="lblQuestionOrder.Error" xml:space="preserve">
-    <value />
+  <data name="lblNumberOfStars.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
   </data>
-  <data name="lblEndCaption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 20</value>
-  </data>
-  <data name="&gt;&gt;lblSmileyFaces.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="trackBarSmileyFaces.IconPadding" type="System.Int32, mscorlib">
+  <data name="lblNumberOfStars.Text" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="lblQuestionText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+  <data name="&gt;&gt;lblNumberOfStars.Name" xml:space="preserve">
+    <value>lblNumberOfStars</value>
   </data>
-  <data name="&gt;&gt;TypeGroupBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;lblNumberOfStars.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNumberOfStars.Parent" xml:space="preserve">
+    <value>pnlStars</value>
+  </data>
+  <data name="&gt;&gt;lblNumberOfStars.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="pnlStars.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 17</value>
+  </data>
+  <data name="pnlStars.Size" type="System.Drawing.Size, System.Drawing">
+    <value>530, 100</value>
+  </data>
+  <data name="pnlStars.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;pnlStars.Name" xml:space="preserve">
+    <value>pnlStars</value>
+  </data>
+  <data name="&gt;&gt;pnlStars.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlStars.Parent" xml:space="preserve">
+    <value>TypeGroupBox</value>
+  </data>
+  <data name="&gt;&gt;pnlStars.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <metadata name="errorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -1398,4 +462,625 @@
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>583, 397</value>
+  </data>
+  <data name="btnCancel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
+  </data>
+  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>496, 361</value>
+  </data>
+  <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 28</value>
+  </data>
+  <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="btnCancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
+    <value>btnCancel</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btnUpdate.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
+  </data>
+  <data name="btnUpdate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>415, 361</value>
+  </data>
+  <data name="btnUpdate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 28</value>
+  </data>
+  <data name="btnUpdate.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="btnUpdate.Text" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="&gt;&gt;btnUpdate.Name" xml:space="preserve">
+    <value>btnUpdate</value>
+  </data>
+  <data name="&gt;&gt;btnUpdate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnUpdate.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnUpdate.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="pnlMain.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="lblCharNumber.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblCharNumber.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
+  <data name="lblCharNumber.Location" type="System.Drawing.Point, System.Drawing">
+    <value>472, 22</value>
+  </data>
+  <data name="lblCharNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="lblCharNumber.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 20</value>
+  </data>
+  <data name="lblCharNumber.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="lblCharNumber.Text" xml:space="preserve">
+    <value>0/1000</value>
+  </data>
+  <data name="&gt;&gt;lblCharNumber.Name" xml:space="preserve">
+    <value>lblCharNumber</value>
+  </data>
+  <data name="&gt;&gt;lblCharNumber.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCharNumber.Parent" xml:space="preserve">
+    <value>BaseQuestionsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;lblCharNumber.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="BaseQuestionsGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 3</value>
+  </data>
+  <data name="BaseQuestionsGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>554, 189</value>
+  </data>
+  <data name="BaseQuestionsGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="BaseQuestionsGroupBox.Text" xml:space="preserve">
+    <value>Base question</value>
+  </data>
+  <data name="&gt;&gt;BaseQuestionsGroupBox.Name" xml:space="preserve">
+    <value>BaseQuestionsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;BaseQuestionsGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BaseQuestionsGroupBox.Parent" xml:space="preserve">
+    <value>pnlMain</value>
+  </data>
+  <data name="&gt;&gt;BaseQuestionsGroupBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblCharNumberEndCaption.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblCharNumberEndCaption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>467, 99</value>
+  </data>
+  <data name="lblCharNumberEndCaption.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="lblCharNumberEndCaption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 18</value>
+  </data>
+  <data name="lblCharNumberEndCaption.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="lblCharNumberEndCaption.Text" xml:space="preserve">
+    <value>0/100</value>
+  </data>
+  <data name="&gt;&gt;lblCharNumberEndCaption.Name" xml:space="preserve">
+    <value>lblCharNumberEndCaption</value>
+  </data>
+  <data name="&gt;&gt;lblCharNumberEndCaption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCharNumberEndCaption.Parent" xml:space="preserve">
+    <value>pnlSlider</value>
+  </data>
+  <data name="&gt;&gt;lblCharNumberEndCaption.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblCharNumberStartCaption.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblCharNumberStartCaption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>467, 69</value>
+  </data>
+  <data name="lblCharNumberStartCaption.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="lblCharNumberStartCaption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 18</value>
+  </data>
+  <data name="lblCharNumberStartCaption.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="lblCharNumberStartCaption.Text" xml:space="preserve">
+    <value>0/100</value>
+  </data>
+  <data name="&gt;&gt;lblCharNumberStartCaption.Name" xml:space="preserve">
+    <value>lblCharNumberStartCaption</value>
+  </data>
+  <data name="&gt;&gt;lblCharNumberStartCaption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCharNumberStartCaption.Parent" xml:space="preserve">
+    <value>pnlSlider</value>
+  </data>
+  <data name="&gt;&gt;lblCharNumberStartCaption.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblEndCaption.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblEndCaption.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
+  <data name="lblEndCaption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 101</value>
+  </data>
+  <data name="lblEndCaption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 20</value>
+  </data>
+  <data name="lblEndCaption.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="lblEndCaption.Text" xml:space="preserve">
+    <value>End caption:</value>
+  </data>
+  <data name="&gt;&gt;lblEndCaption.Name" xml:space="preserve">
+    <value>lblEndCaption</value>
+  </data>
+  <data name="&gt;&gt;lblEndCaption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblEndCaption.Parent" xml:space="preserve">
+    <value>pnlSlider</value>
+  </data>
+  <data name="&gt;&gt;lblEndCaption.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="textBoxEndCaption.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 11.25pt</value>
+  </data>
+  <data name="textBoxEndCaption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>157, 99</value>
+  </data>
+  <data name="textBoxEndCaption.MaxLength" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <data name="textBoxEndCaption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>303, 24</value>
+  </data>
+  <data name="textBoxEndCaption.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;textBoxEndCaption.Name" xml:space="preserve">
+    <value>textBoxEndCaption</value>
+  </data>
+  <data name="&gt;&gt;textBoxEndCaption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxEndCaption.Parent" xml:space="preserve">
+    <value>pnlSlider</value>
+  </data>
+  <data name="&gt;&gt;textBoxEndCaption.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="textBoxStartCaption.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 11.25pt</value>
+  </data>
+  <data name="textBoxStartCaption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>157, 69</value>
+  </data>
+  <data name="textBoxStartCaption.MaxLength" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <data name="textBoxStartCaption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>303, 24</value>
+  </data>
+  <data name="textBoxStartCaption.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;textBoxStartCaption.Name" xml:space="preserve">
+    <value>textBoxStartCaption</value>
+  </data>
+  <data name="&gt;&gt;textBoxStartCaption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxStartCaption.Parent" xml:space="preserve">
+    <value>pnlSlider</value>
+  </data>
+  <data name="&gt;&gt;textBoxStartCaption.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblStartCaption.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblStartCaption.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
+  <data name="lblStartCaption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 69</value>
+  </data>
+  <data name="lblStartCaption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 20</value>
+  </data>
+  <data name="lblStartCaption.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="lblStartCaption.Text" xml:space="preserve">
+    <value>Start caption:</value>
+  </data>
+  <data name="&gt;&gt;lblStartCaption.Name" xml:space="preserve">
+    <value>lblStartCaption</value>
+  </data>
+  <data name="&gt;&gt;lblStartCaption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblStartCaption.Parent" xml:space="preserve">
+    <value>pnlSlider</value>
+  </data>
+  <data name="&gt;&gt;lblStartCaption.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblEndValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblEndValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
+  <data name="lblEndValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 42</value>
+  </data>
+  <data name="lblEndValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 20</value>
+  </data>
+  <data name="lblEndValue.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="lblEndValue.Text" xml:space="preserve">
+    <value>End value:</value>
+  </data>
+  <data name="&gt;&gt;lblEndValue.Name" xml:space="preserve">
+    <value>lblEndValue</value>
+  </data>
+  <data name="&gt;&gt;lblEndValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblEndValue.Parent" xml:space="preserve">
+    <value>pnlSlider</value>
+  </data>
+  <data name="&gt;&gt;lblEndValue.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="numericUpDownEndValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
+  <data name="numericUpDownEndValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>157, 35</value>
+  </data>
+  <data name="numericUpDownEndValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>303, 27</value>
+  </data>
+  <data name="numericUpDownEndValue.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownEndValue.Name" xml:space="preserve">
+    <value>numericUpDownEndValue</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownEndValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownEndValue.Parent" xml:space="preserve">
+    <value>pnlSlider</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownEndValue.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="numericUpDownStartValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
+  <data name="numericUpDownStartValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>158, 3</value>
+  </data>
+  <data name="numericUpDownStartValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>303, 27</value>
+  </data>
+  <data name="numericUpDownStartValue.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownStartValue.Name" xml:space="preserve">
+    <value>numericUpDownStartValue</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownStartValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownStartValue.Parent" xml:space="preserve">
+    <value>pnlSlider</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownStartValue.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="lblStartValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblStartValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
+  <data name="lblStartValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 10</value>
+  </data>
+  <data name="lblStartValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 20</value>
+  </data>
+  <data name="lblStartValue.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="lblStartValue.Text" xml:space="preserve">
+    <value>Start value:</value>
+  </data>
+  <data name="&gt;&gt;lblStartValue.Name" xml:space="preserve">
+    <value>lblStartValue</value>
+  </data>
+  <data name="&gt;&gt;lblStartValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblStartValue.Parent" xml:space="preserve">
+    <value>pnlSlider</value>
+  </data>
+  <data name="&gt;&gt;lblStartValue.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="pnlSlider.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 11.25pt</value>
+  </data>
+  <data name="pnlSlider.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 17</value>
+  </data>
+  <data name="pnlSlider.Size" type="System.Drawing.Size, System.Drawing">
+    <value>530, 129</value>
+  </data>
+  <data name="pnlSlider.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;pnlSlider.Name" xml:space="preserve">
+    <value>pnlSlider</value>
+  </data>
+  <data name="&gt;&gt;pnlSlider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlSlider.Parent" xml:space="preserve">
+    <value>TypeGroupBox</value>
+  </data>
+  <data name="&gt;&gt;pnlSlider.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblFacesNumber.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFacesNumber.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
+  <data name="lblFacesNumber.Location" type="System.Drawing.Point, System.Drawing">
+    <value>466, 12</value>
+  </data>
+  <data name="lblFacesNumber.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 20</value>
+  </data>
+  <data name="lblFacesNumber.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblFacesNumber.Text" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lblFacesNumber.Name" xml:space="preserve">
+    <value>lblFacesNumber</value>
+  </data>
+  <data name="&gt;&gt;lblFacesNumber.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFacesNumber.Parent" xml:space="preserve">
+    <value>pnlSmileyFaces</value>
+  </data>
+  <data name="&gt;&gt;lblFacesNumber.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="trackBarSmileyFaces.Location" type="System.Drawing.Point, System.Drawing">
+    <value>158, 37</value>
+  </data>
+  <data name="trackBarSmileyFaces.Size" type="System.Drawing.Size, System.Drawing">
+    <value>303, 45</value>
+  </data>
+  <data name="trackBarSmileyFaces.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;trackBarSmileyFaces.Name" xml:space="preserve">
+    <value>trackBarSmileyFaces</value>
+  </data>
+  <data name="&gt;&gt;trackBarSmileyFaces.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;trackBarSmileyFaces.Parent" xml:space="preserve">
+    <value>pnlSmileyFaces</value>
+  </data>
+  <data name="&gt;&gt;trackBarSmileyFaces.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblNumberofSmileyfaces.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNumberofSmileyfaces.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
+  <data name="lblNumberofSmileyfaces.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-1, 12</value>
+  </data>
+  <data name="lblNumberofSmileyfaces.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 20</value>
+  </data>
+  <data name="lblNumberofSmileyfaces.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblNumberofSmileyfaces.Text" xml:space="preserve">
+    <value>Number of Smiley faces</value>
+  </data>
+  <data name="&gt;&gt;lblNumberofSmileyfaces.Name" xml:space="preserve">
+    <value>lblNumberofSmileyfaces</value>
+  </data>
+  <data name="&gt;&gt;lblNumberofSmileyfaces.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNumberofSmileyfaces.Parent" xml:space="preserve">
+    <value>pnlSmileyFaces</value>
+  </data>
+  <data name="&gt;&gt;lblNumberofSmileyfaces.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblSmileyFaces.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSmileyFaces.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 15.75pt</value>
+  </data>
+  <data name="lblSmileyFaces.Location" type="System.Drawing.Point, System.Drawing">
+    <value>268, 4</value>
+  </data>
+  <data name="lblSmileyFaces.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 30</value>
+  </data>
+  <data name="lblSmileyFaces.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblSmileyFaces.Text" xml:space="preserve">
+    <value>:):)</value>
+  </data>
+  <data name="&gt;&gt;lblSmileyFaces.Name" xml:space="preserve">
+    <value>lblSmileyFaces</value>
+  </data>
+  <data name="&gt;&gt;lblSmileyFaces.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSmileyFaces.Parent" xml:space="preserve">
+    <value>pnlSmileyFaces</value>
+  </data>
+  <data name="&gt;&gt;lblSmileyFaces.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="pnlSmileyFaces.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="pnlSmileyFaces.Size" type="System.Drawing.Size, System.Drawing">
+    <value>533, 100</value>
+  </data>
+  <data name="pnlSmileyFaces.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;pnlSmileyFaces.Name" xml:space="preserve">
+    <value>pnlSmileyFaces</value>
+  </data>
+  <data name="&gt;&gt;pnlSmileyFaces.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlSmileyFaces.Parent" xml:space="preserve">
+    <value>TypeGroupBox</value>
+  </data>
+  <data name="&gt;&gt;pnlSmileyFaces.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="TypeGroupBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
+  </data>
+  <data name="TypeGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 195</value>
+  </data>
+  <data name="TypeGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>554, 153</value>
+  </data>
+  <data name="TypeGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="TypeGroupBox.Text" xml:space="preserve">
+    <value>Type Properties</value>
+  </data>
+  <data name="&gt;&gt;TypeGroupBox.Name" xml:space="preserve">
+    <value>TypeGroupBox</value>
+  </data>
+  <data name="&gt;&gt;TypeGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TypeGroupBox.Parent" xml:space="preserve">
+    <value>pnlMain</value>
+  </data>
+  <data name="&gt;&gt;TypeGroupBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="pnlMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 4</value>
+  </data>
+  <data name="pnlMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>573, 351</value>
+  </data>
+  <data name="pnlMain.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;pnlMain.Name" xml:space="preserve">
+    <value>pnlMain</value>
+  </data>
+  <data name="&gt;&gt;pnlMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlMain.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pnlMain.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Add/Edit</value>
+  </data>
+  <data name="&gt;&gt;errorProvider.Name" xml:space="preserve">
+    <value>errorProvider</value>
+  </data>
+  <data name="&gt;&gt;errorProvider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>AddOrEditForm</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
