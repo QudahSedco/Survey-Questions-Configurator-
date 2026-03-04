@@ -57,39 +57,39 @@ namespace SurveyQuestionsConfigurator
         /// The dialog blocks the calling window until the user responds
         /// and returns the selected DialogResult.
         /// </summary>
-        /// <param name="message">The message text to display in the dialog.</param>
-        /// <param name="title">The title text shown in the dialog's title bar.</param>
-        /// <param name="buttonTypes">Determines which buttons are shown</param>
-        /// <param name="iconTypes">Determines which icon is displayed in the dialog.</param>
+        /// <param name="pMessage">The message text to display in the dialog.</param>
+        /// <param name="pTitle">The title text shown in the dialog's title bar.</param>
+        /// <param name="pButtonTypes">Determines which buttons are shown</param>
+        /// <param name="pIconTypes">Determines which icon is displayed in the dialog.</param>
         /// <returns></returns>
-        public static DialogResult Show(string message, string title, ButtonTypes buttonTypes, IconTypes iconTypes)
+        public static DialogResult Show(string pMessage, string pTitle, ButtonTypes pButtonTypes, IconTypes pIconTypes)
         {
             try
             {
-                using (var box = new CustomMessageBox())
+                using (var tForm = new CustomMessageBox())
                 {
-                    box.btnOK.Visible = false;
-                    box.BtnYes.Visible = false;
-                    box.btnNo.Visible = false;
-                    box.lblText.Text = message;
-                    box.Text = title;
-                    box.IconPictureBox.Image = HandleIcon(iconTypes);
-                    box.IconPictureBox.RightToLeft = RightToLeft.No;
-                    box.StartPosition = FormStartPosition.CenterParent;
+                    tForm.btnOK.Visible = false;
+                    tForm.BtnYes.Visible = false;
+                    tForm.btnNo.Visible = false;
+                    tForm.lblText.Text = pMessage;
+                    tForm.Text = pTitle;
+                    tForm.IconPictureBox.Image = HandleIcon(pIconTypes);
+                    tForm.IconPictureBox.RightToLeft = RightToLeft.No;
+                    tForm.StartPosition = FormStartPosition.CenterParent;
 
-                    switch (buttonTypes)
+                    switch (pButtonTypes)
                     {
                         case ButtonTypes.Ok:
-                            box.btnOK.Visible = true;
+                            tForm.btnOK.Visible = true;
                             break;
 
                         case ButtonTypes.YesNo:
-                            box.BtnYes.Visible = true;
-                            box.btnNo.Visible = true;
+                            tForm.BtnYes.Visible = true;
+                            tForm.btnNo.Visible = true;
                             break;
                     }
 
-                    return box.ShowDialog();
+                    return tForm.ShowDialog();
                 }
             }
             catch (Exception tEx)
@@ -131,17 +131,17 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void btnOK_Click(object pSender, EventArgs pE)
         {
             this.DialogResult = DialogResult.OK;
         }
 
-        private void BtnYes_Click(object sender, EventArgs e)
+        private void BtnYes_Click(object pSender, EventArgs pE)
         {
             this.DialogResult = DialogResult.Yes;
         }
 
-        private void btnNo_Click(object sender, EventArgs e)
+        private void btnNo_Click(object pSender, EventArgs pE)
         {
             this.DialogResult = DialogResult.No;
         }

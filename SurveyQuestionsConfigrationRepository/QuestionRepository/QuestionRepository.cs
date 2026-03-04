@@ -45,7 +45,8 @@ namespace SurveyQuestionsConfigurator.Repositories
 
         public event Action QuestionsTableChanged;
 
-        private readonly string mConnectionString = ConfigurationManager.ConnectionStrings["SurveyDb"].ConnectionString;
+        private const string DB_KEY = "SurveyDb";
+        private readonly string mConnectionString = ConfigurationManager.ConnectionStrings[DB_KEY].ConnectionString;
 
         //Table names
 
@@ -822,6 +823,9 @@ namespace SurveyQuestionsConfigurator.Repositories
                                 case SliderQuestion tSliderQuestion:
                                     AddSliderQuestion(tSliderQuestion, tConnection, tTransaction);
                                     break;
+
+                                default:
+                                    return Result<bool>.Failure(ResultStatus.UnknownTypeError);
                             }
 
                             tTransaction.Commit();

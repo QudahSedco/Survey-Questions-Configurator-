@@ -9,7 +9,7 @@ namespace SurveyQuestionsConfiguratorModels
 {
     /// <summary>
     /// Represents the outcome of an operation, containing a status and an optional value.
-    /// Use Success(T) Failure(ResultStatus) to create instances.
+    /// Use Success(T) or Failure(ResultStatus) to create instances.
     /// </summary>
     public class Result<T>
     {

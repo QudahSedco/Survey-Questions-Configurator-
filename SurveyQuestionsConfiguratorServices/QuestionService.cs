@@ -289,13 +289,13 @@ namespace SurveyQuestionsConfiguratorServices
                         return Result<bool>.Failure(ResultStatus.ValidationError);
 
                     if (string.IsNullOrWhiteSpace(tSliderQuestion.StartValueCaption))
-                        return Result<bool>.Failure(ResultStatus.ValidationError);
+                        return Result<bool>.Failure(ResultStatus.NullOrWhiteSpaceError);
 
                     if (tSliderQuestion.StartValueCaption.Length > 100)
                         return Result<bool>.Failure(ResultStatus.LengthTooLongError);
 
                     if (string.IsNullOrWhiteSpace(tSliderQuestion.EndValueCaption))
-                        return Result<bool>.Failure(ResultStatus.ValidationError);
+                        return Result<bool>.Failure(ResultStatus.NullOrWhiteSpaceError);
 
                     if (tSliderQuestion.EndValueCaption.Length > 100)
                         return Result<bool>.Failure(ResultStatus.LengthTooLongError);
