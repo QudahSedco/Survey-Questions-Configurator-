@@ -34,10 +34,10 @@
             this.pnlFooter = new System.Windows.Forms.Panel();
             this.btnDelete = new System.Windows.Forms.Button();
             this.pnlMain = new System.Windows.Forms.Panel();
-            this.btnChangeDatabase = new System.Windows.Forms.Button();
-            this.LanguagesComboBox = new System.Windows.Forms.ComboBox();
             this.QuestionsListGroupBox = new System.Windows.Forms.GroupBox();
             this.dataGridViewMain = new System.Windows.Forms.DataGridView();
+            this.btnChangeDatabase = new System.Windows.Forms.Button();
+            this.LanguagesComboBox = new System.Windows.Forms.ComboBox();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.pnlFooter.SuspendLayout();
             this.pnlMain.SuspendLayout();
@@ -83,20 +83,6 @@
             this.pnlMain.Controls.Add(this.QuestionsListGroupBox);
             this.pnlMain.Name = "pnlMain";
             // 
-            // btnChangeDatabase
-            // 
-            resources.ApplyResources(this.btnChangeDatabase, "btnChangeDatabase");
-            this.btnChangeDatabase.Name = "btnChangeDatabase";
-            this.btnChangeDatabase.UseVisualStyleBackColor = true;
-            this.btnChangeDatabase.Click += new System.EventHandler(this.btnChangeDataBase_Click);
-            // 
-            // LanguagesComboBox
-            // 
-            resources.ApplyResources(this.LanguagesComboBox, "LanguagesComboBox");
-            this.LanguagesComboBox.FormattingEnabled = true;
-            this.LanguagesComboBox.Name = "LanguagesComboBox";
-            this.LanguagesComboBox.SelectedIndexChanged += new System.EventHandler(this.LanguagesComboBox_SelectedIndexChanged);
-            // 
             // QuestionsListGroupBox
             // 
             resources.ApplyResources(this.QuestionsListGroupBox, "QuestionsListGroupBox");
@@ -115,6 +101,20 @@
             this.dataGridViewMain.ReadOnly = true;
             this.dataGridViewMain.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewMain_CellContentClick);
             this.dataGridViewMain.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewMain_ColumnHeaderMouseClick);
+            // 
+            // btnChangeDatabase
+            // 
+            resources.ApplyResources(this.btnChangeDatabase, "btnChangeDatabase");
+            this.btnChangeDatabase.Name = "btnChangeDatabase";
+            this.btnChangeDatabase.UseVisualStyleBackColor = true;
+            this.btnChangeDatabase.Click += new System.EventHandler(this.btnChangeDataBase_Click);
+            // 
+            // LanguagesComboBox
+            // 
+            resources.ApplyResources(this.LanguagesComboBox, "LanguagesComboBox");
+            this.LanguagesComboBox.FormattingEnabled = true;
+            this.LanguagesComboBox.Name = "LanguagesComboBox";
+            this.LanguagesComboBox.SelectedIndexChanged += new System.EventHandler(this.LanguagesComboBox_SelectedIndexChanged);
             // 
             // pnlHeader
             // 

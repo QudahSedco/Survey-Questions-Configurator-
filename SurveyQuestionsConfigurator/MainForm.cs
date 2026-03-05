@@ -544,7 +544,7 @@ namespace SurveyQuestionsConfigurator
         /// </summary>
         /// <param name="pSender">The source of the event.</param>
         /// <param name="pE">Event arguments.</param>
-        private void btnChangeDataBase_Click(object pSender, EventArgs pE)
+        private async void btnChangeDataBase_Click(object pSender, EventArgs pE)
         {
             try
             {
@@ -557,7 +557,7 @@ namespace SurveyQuestionsConfigurator
                     if (tConnectionForm.DialogResult == DialogResult.OK)
                     {
                         mQuestionService?.StopListening();
-                        Thread.Sleep(500);// Wait briefly to allow SqlTableDependency to fully dispose
+                        await Task.Delay(500);//Wait briefly to allow SqlTableDependency to fully dispose
                         mQuestionService = new QuestionService();// Create new service so it reads the updated connection string
                         mQuestionService.QuestionsTableChanged += OnQuestionsChanged;
                         var tResult = mQuestionService.StartListening();

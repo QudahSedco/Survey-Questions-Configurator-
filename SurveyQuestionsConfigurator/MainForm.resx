@@ -249,20 +249,44 @@
   <data name="pnlMain.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
+  <data name="&gt;&gt;QuestionsListGroupBox.Name" xml:space="preserve">
+    <value>QuestionsListGroupBox</value>
+  </data>
+  <data name="&gt;&gt;QuestionsListGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;QuestionsListGroupBox.Parent" xml:space="preserve">
+    <value>pnlMain</value>
+  </data>
+  <data name="&gt;&gt;QuestionsListGroupBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="pnlMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="pnlMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="pnlMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1004, 444</value>
+  </data>
+  <data name="pnlMain.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;pnlMain.Name" xml:space="preserve">
+    <value>pnlMain</value>
+  </data>
+  <data name="&gt;&gt;pnlMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlMain.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pnlMain.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="QuestionsListGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="dataGridViewMain.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="dataGridViewMain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 25</value>
-  </data>
-  <data name="dataGridViewMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>975, 343</value>
-  </data>
-  <data name="dataGridViewMain.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
   </data>
   <data name="&gt;&gt;dataGridViewMain.Name" xml:space="preserve">
     <value>dataGridViewMain</value>
@@ -303,35 +327,35 @@
   <data name="&gt;&gt;QuestionsListGroupBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="pnlMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="dataGridViewMain.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="pnlMain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="dataGridViewMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 25</value>
   </data>
-  <data name="pnlMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1004, 444</value>
+  <data name="dataGridViewMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>975, 343</value>
   </data>
-  <data name="pnlMain.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+  <data name="dataGridViewMain.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
-  <data name="&gt;&gt;pnlMain.Name" xml:space="preserve">
-    <value>pnlMain</value>
+  <data name="&gt;&gt;dataGridViewMain.Name" xml:space="preserve">
+    <value>dataGridViewMain</value>
   </data>
-  <data name="&gt;&gt;pnlMain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;dataGridViewMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pnlMain.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;dataGridViewMain.Parent" xml:space="preserve">
+    <value>QuestionsListGroupBox</value>
   </data>
-  <data name="&gt;&gt;pnlMain.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;dataGridViewMain.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="btnChangeDatabase.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="btnChangeDatabase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>802, 11</value>
+    <value>799, 12</value>
   </data>
   <data name="btnChangeDatabase.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 23</value>
@@ -358,7 +382,7 @@
     <value>Top, Right</value>
   </data>
   <data name="LanguagesComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>915, 11</value>
+    <value>915, 12</value>
   </data>
   <data name="LanguagesComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 21</value>
