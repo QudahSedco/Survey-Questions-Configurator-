@@ -555,19 +555,16 @@ namespace SurveyQuestionsConfigurator
 
                     if (tConnectionForm.DialogResult == DialogResult.OK)
                     {
-                        for (int i = 0; i < 20; i++)
+                        mQuestionService?.StopListening();
+                        await Task.Delay(500);//Wait briefly to allow SqlTableDependency to fully dispose
+                        mQuestionService = new QuestionService();// Create new service so it reads the updated connection string
+                        mQuestionService.QuestionsTableChanged += OnQuestionsChanged;
+                        var tResult = mQuestionService.StartListening();
+                        if (!tResult.IsSuccess)
                         {
-                            mQuestionService?.StopListening();
-                            //await Task.Delay(500);//Wait briefly to allow SqlTableDependency to fully dispose
-                            mQuestionService = new QuestionService();// Create new service so it reads the updated connection string
-                            mQuestionService.QuestionsTableChanged += OnQuestionsChanged;
-                            var tResult = mQuestionService.StartListening();
-                            if (!tResult.IsSuccess)
-                            {
-                                ShowErrorBox(tResult.Status);
-                            }
-                            LoadQuestions();
+                            ShowErrorBox(tResult.Status);
                         }
+                        LoadQuestions();
                     }
                 }
             }
