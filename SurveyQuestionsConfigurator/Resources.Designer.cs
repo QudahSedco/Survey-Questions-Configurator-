@@ -106,7 +106,7 @@ namespace SurveyQuestionsConfigurator {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A database error occurred. Please check try again.
+        ///   Looks up a localized string similar to A database error occurred please  try again.
         /// </summary>
         internal static string DatabaseError {
             get {

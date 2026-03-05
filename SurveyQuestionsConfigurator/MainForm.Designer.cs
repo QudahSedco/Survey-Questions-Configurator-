@@ -38,10 +38,12 @@
             this.LanguagesComboBox = new System.Windows.Forms.ComboBox();
             this.QuestionsListGroupBox = new System.Windows.Forms.GroupBox();
             this.dataGridViewMain = new System.Windows.Forms.DataGridView();
+            this.pnlHeader = new System.Windows.Forms.Panel();
             this.pnlFooter.SuspendLayout();
             this.pnlMain.SuspendLayout();
             this.QuestionsListGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMain)).BeginInit();
+            this.pnlHeader.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAdd
@@ -62,10 +64,10 @@
             // 
             // pnlFooter
             // 
-            resources.ApplyResources(this.pnlFooter, "pnlFooter");
             this.pnlFooter.Controls.Add(this.btnDelete);
             this.pnlFooter.Controls.Add(this.btnUpdate);
             this.pnlFooter.Controls.Add(this.btnAdd);
+            resources.ApplyResources(this.pnlFooter, "pnlFooter");
             this.pnlFooter.Name = "pnlFooter";
             // 
             // btnDelete
@@ -78,8 +80,6 @@
             // pnlMain
             // 
             resources.ApplyResources(this.pnlMain, "pnlMain");
-            this.pnlMain.Controls.Add(this.btnChangeDatabase);
-            this.pnlMain.Controls.Add(this.LanguagesComboBox);
             this.pnlMain.Controls.Add(this.QuestionsListGroupBox);
             this.pnlMain.Name = "pnlMain";
             // 
@@ -107,28 +107,38 @@
             // 
             // dataGridViewMain
             // 
-            resources.ApplyResources(this.dataGridViewMain, "dataGridViewMain");
             this.dataGridViewMain.AllowUserToAddRows = false;
             this.dataGridViewMain.AllowUserToDeleteRows = false;
+            resources.ApplyResources(this.dataGridViewMain, "dataGridViewMain");
             this.dataGridViewMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewMain.Name = "dataGridViewMain";
             this.dataGridViewMain.ReadOnly = true;
             this.dataGridViewMain.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewMain_CellContentClick);
             this.dataGridViewMain.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewMain_ColumnHeaderMouseClick);
             // 
+            // pnlHeader
+            // 
+            this.pnlHeader.Controls.Add(this.LanguagesComboBox);
+            this.pnlHeader.Controls.Add(this.btnChangeDatabase);
+            resources.ApplyResources(this.pnlHeader, "pnlHeader");
+            this.pnlHeader.Name = "pnlHeader";
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pnlHeader);
             this.Controls.Add(this.pnlFooter);
             this.Controls.Add(this.pnlMain);
             this.Name = "MainForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.pnlFooter.ResumeLayout(false);
             this.pnlMain.ResumeLayout(false);
             this.QuestionsListGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMain)).EndInit();
+            this.pnlHeader.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -143,6 +153,7 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.ComboBox LanguagesComboBox;
         private System.Windows.Forms.Button btnChangeDatabase;
+        private System.Windows.Forms.Panel pnlHeader;
     }
 }
 

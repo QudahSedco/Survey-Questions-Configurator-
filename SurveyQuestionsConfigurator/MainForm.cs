@@ -103,12 +103,6 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                var tResult = mQuestionService.StartListening();
-                if (!tResult.IsSuccess)
-                {
-                    ShowErrorBox(tResult.Status);
-                }
-
                 dataGridViewMain.Font = new Font("Segoe UI", 13, FontStyle.Regular);
                 dataGridViewMain.Columns.Clear();
                 dataGridViewMain.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
@@ -138,7 +132,6 @@ namespace SurveyQuestionsConfigurator
                 tColType.SortMode = DataGridViewColumnSortMode.Automatic;
                 dataGridViewMain.Columns.Add(tColType);
 
-                LoadQuestions();
                 btnDelete.Enabled = false;
                 btnUpdate.Enabled = false;
             }
@@ -606,6 +599,38 @@ namespace SurveyQuestionsConfigurator
             {
                 Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
+            }
+        }
+
+        /// <summary>
+        /// loads questions and start listening after the form loads
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void MainForm_Shown(object sender, EventArgs e)
+        {
+            try
+            {
+                btnAdd.Enabled = false;
+                btnChangeDatabase.Enabled = false;
+                this.UseWaitCursor = true;
+                var tResult = await Task.Run(() => mQuestionService.StartListening());
+
+                LoadQuestions();
+
+                if (!tResult.IsSuccess)
+                    ShowErrorBox(tResult.Status);
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, tEx.Message);
+                ShowErrorBox(ResultStatus.UnexpectedError);
+            }
+            finally
+            {
+                this.UseWaitCursor = false;
+                btnAdd.Enabled = true;
+                btnChangeDatabase.Enabled = true;
             }
         }
     }
