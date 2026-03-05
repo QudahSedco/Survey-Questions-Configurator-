@@ -548,6 +548,8 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
+                btnChangeDatabase.Enabled = false;
+
                 using (var tConnectionForm = new ConnectionSettingsForm())
                 {
                     tConnectionForm.ShowDialog();
@@ -555,6 +557,7 @@ namespace SurveyQuestionsConfigurator
                     if (tConnectionForm.DialogResult == DialogResult.OK)
                     {
                         mQuestionService?.StopListening();
+                        Thread.Sleep(500);// Wait briefly to allow SqlTableDependency to fully dispose
                         mQuestionService = new QuestionService();// Create new service so it reads the updated connection string
                         mQuestionService.QuestionsTableChanged += OnQuestionsChanged;
                         var tResult = mQuestionService.StartListening();
@@ -570,6 +573,10 @@ namespace SurveyQuestionsConfigurator
             {
                 Log.Error(tEx, tEx.Message);
                 ShowErrorBox(ResultStatus.UnexpectedError);
+            }
+            finally
+            {
+                btnChangeDatabase.Enabled = true;
             }
         }
 
@@ -603,10 +610,11 @@ namespace SurveyQuestionsConfigurator
         }
 
         /// <summary>
-        /// loads questions and start listening after the form loads
+        /// loads questions and start listening to database changes after the form fully loads
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The source of the event</param>
+        /// <param name="e">Event arguments containing the cell's column index and value to format.</param>
+
         private async void MainForm_Shown(object sender, EventArgs e)
         {
             try

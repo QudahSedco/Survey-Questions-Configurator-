@@ -115,7 +115,7 @@ namespace SurveyQuestionsConfigurator.Repositories
             {
                 mSqlTableDependency = new SqlTableDependency<QuestionTableColumns>(mConnectionString, QUESTIONS_TABLE);
                 mSqlTableDependency.OnChanged += OnQuestionsTableChanged;
-                mSqlTableDependency.Start();
+                mSqlTableDependency?.Start();
                 return Result<bool>.Success(true);
             }
             catch (Exception tEx)

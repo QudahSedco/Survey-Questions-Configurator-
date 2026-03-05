@@ -167,6 +167,7 @@ namespace SurveyQuestionsConfigurator
                     CustomMessageBox.Show(Resources.DatabaseConnectionError, Resources.ErrorCaption, ButtonTypes.Ok, IconTypes.Error);
                     return;
                 }
+
                 mAppSetting.SaveConnection(tConnectionString, DB_KEY);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
@@ -302,6 +303,12 @@ namespace SurveyQuestionsConfigurator
             SQLRadioButton.Enabled = pEnabled;
             btnSave.Enabled = pEnabled;
             btnTestConnection.Enabled = pEnabled;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

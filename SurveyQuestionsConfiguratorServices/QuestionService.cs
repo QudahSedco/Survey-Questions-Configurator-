@@ -246,60 +246,68 @@ namespace SurveyQuestionsConfiguratorServices
         /// </returns>
         private Result<bool> ValidateQuestion(Question pQuestion)
         {
-            if (pQuestion == null)
-                return Result<bool>.Failure(ResultStatus.NullError);
-
-            if (string.IsNullOrWhiteSpace(pQuestion.QuestionText))
-
-                return Result<bool>.Failure(ResultStatus.NullOrWhiteSpaceError);
-
-            if (pQuestion.QuestionText.Length > 1000)
-
-                return Result<bool>.Failure(ResultStatus.LengthTooLongError);
-
-            if (pQuestion.QuestionOrder < 1)
-                return Result<bool>.Failure(ResultStatus.ValidationError);
-
-            if (!Enum.IsDefined(typeof(QuestionType), pQuestion.QuestionType))
-                return Result<bool>.Failure(ResultStatus.UnknownTypeError);
-
-            switch (pQuestion)
+            try
             {
-                case StarQuestion tStarQuestion:
-                    if (tStarQuestion.NumberOfStars < 1 || tStarQuestion.NumberOfStars > 10)
-                        return Result<bool>.Failure(ResultStatus.OutOfRangeError);
-                    break;
+                if (pQuestion == null)
+                    return Result<bool>.Failure(ResultStatus.NullError);
 
-                case SmileyFacesQuestion tSmileyFacesQuestion:
+                if (string.IsNullOrWhiteSpace(pQuestion.QuestionText))
 
-                    if (tSmileyFacesQuestion.NumberOfSmileyFaces < 2 || tSmileyFacesQuestion.NumberOfSmileyFaces > 5)
-                        return Result<bool>.Failure(ResultStatus.OutOfRangeError);
+                    return Result<bool>.Failure(ResultStatus.NullOrWhiteSpaceError);
 
-                    break;
+                if (pQuestion.QuestionText.Length > 1000)
 
-                case SliderQuestion tSliderQuestion:
+                    return Result<bool>.Failure(ResultStatus.LengthTooLongError);
 
-                    if (tSliderQuestion.StartValue < 0 || tSliderQuestion.StartValue > 99)
-                        return Result<bool>.Failure(ResultStatus.OutOfRangeError);
+                if (pQuestion.QuestionOrder < 1)
+                    return Result<bool>.Failure(ResultStatus.ValidationError);
 
-                    if (tSliderQuestion.EndValue < 1 || tSliderQuestion.EndValue > 100)
-                        return Result<bool>.Failure(ResultStatus.OutOfRangeError);
+                if (!Enum.IsDefined(typeof(QuestionType), pQuestion.QuestionType))
+                    return Result<bool>.Failure(ResultStatus.UnknownTypeError);
 
-                    if (tSliderQuestion.StartValue >= tSliderQuestion.EndValue)
-                        return Result<bool>.Failure(ResultStatus.ValidationError);
+                switch (pQuestion)
+                {
+                    case StarQuestion tStarQuestion:
+                        if (tStarQuestion.NumberOfStars < 1 || tStarQuestion.NumberOfStars > 10)
+                            return Result<bool>.Failure(ResultStatus.OutOfRangeError);
+                        break;
 
-                    if (string.IsNullOrWhiteSpace(tSliderQuestion.StartValueCaption))
-                        return Result<bool>.Failure(ResultStatus.NullOrWhiteSpaceError);
+                    case SmileyFacesQuestion tSmileyFacesQuestion:
 
-                    if (tSliderQuestion.StartValueCaption.Length > 100)
-                        return Result<bool>.Failure(ResultStatus.LengthTooLongError);
+                        if (tSmileyFacesQuestion.NumberOfSmileyFaces < 2 || tSmileyFacesQuestion.NumberOfSmileyFaces > 5)
+                            return Result<bool>.Failure(ResultStatus.OutOfRangeError);
 
-                    if (string.IsNullOrWhiteSpace(tSliderQuestion.EndValueCaption))
-                        return Result<bool>.Failure(ResultStatus.NullOrWhiteSpaceError);
+                        break;
 
-                    if (tSliderQuestion.EndValueCaption.Length > 100)
-                        return Result<bool>.Failure(ResultStatus.LengthTooLongError);
-                    break;
+                    case SliderQuestion tSliderQuestion:
+
+                        if (tSliderQuestion.StartValue < 0 || tSliderQuestion.StartValue > 99)
+                            return Result<bool>.Failure(ResultStatus.OutOfRangeError);
+
+                        if (tSliderQuestion.EndValue < 1 || tSliderQuestion.EndValue > 100)
+                            return Result<bool>.Failure(ResultStatus.OutOfRangeError);
+
+                        if (tSliderQuestion.StartValue >= tSliderQuestion.EndValue)
+                            return Result<bool>.Failure(ResultStatus.ValidationError);
+
+                        if (string.IsNullOrWhiteSpace(tSliderQuestion.StartValueCaption))
+                            return Result<bool>.Failure(ResultStatus.NullOrWhiteSpaceError);
+
+                        if (tSliderQuestion.StartValueCaption.Length > 100)
+                            return Result<bool>.Failure(ResultStatus.LengthTooLongError);
+
+                        if (string.IsNullOrWhiteSpace(tSliderQuestion.EndValueCaption))
+                            return Result<bool>.Failure(ResultStatus.NullOrWhiteSpaceError);
+
+                        if (tSliderQuestion.EndValueCaption.Length > 100)
+                            return Result<bool>.Failure(ResultStatus.LengthTooLongError);
+                        break;
+                }
+            }
+            catch (Exception tEx)
+            {
+                Log.Error(tEx, tEx.Message);
+                throw;
             }
 
             return Result<bool>.Success(true);
