@@ -64,10 +64,10 @@
             // 
             // pnlFooter
             // 
+            resources.ApplyResources(this.pnlFooter, "pnlFooter");
             this.pnlFooter.Controls.Add(this.btnDelete);
             this.pnlFooter.Controls.Add(this.btnUpdate);
             this.pnlFooter.Controls.Add(this.btnAdd);
-            resources.ApplyResources(this.pnlFooter, "pnlFooter");
             this.pnlFooter.Name = "pnlFooter";
             // 
             // btnDelete
@@ -93,9 +93,9 @@
             // 
             // dataGridViewMain
             // 
+            resources.ApplyResources(this.dataGridViewMain, "dataGridViewMain");
             this.dataGridViewMain.AllowUserToAddRows = false;
             this.dataGridViewMain.AllowUserToDeleteRows = false;
-            resources.ApplyResources(this.dataGridViewMain, "dataGridViewMain");
             this.dataGridViewMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewMain.Name = "dataGridViewMain";
             this.dataGridViewMain.ReadOnly = true;
@@ -118,9 +118,9 @@
             // 
             // pnlHeader
             // 
+            resources.ApplyResources(this.pnlHeader, "pnlHeader");
             this.pnlHeader.Controls.Add(this.LanguagesComboBox);
             this.pnlHeader.Controls.Add(this.btnChangeDatabase);
-            resources.ApplyResources(this.pnlHeader, "pnlHeader");
             this.pnlHeader.Name = "pnlHeader";
             // 
             // MainForm
