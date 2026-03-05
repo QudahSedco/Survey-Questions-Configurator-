@@ -303,6 +303,7 @@ namespace SurveyQuestionsConfigurator
             SQLRadioButton.Enabled = pEnabled;
             btnSave.Enabled = pEnabled;
             btnTestConnection.Enabled = pEnabled;
+            btnCancel.Enabled = pEnabled;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
