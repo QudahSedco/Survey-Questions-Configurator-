@@ -59,11 +59,10 @@ namespace SurveyQuestionsConfigurator
             {
                 InitializeComponent();
                 mLanguageList = new List<Language>
-{
-    new Language { Key = ENGLISH_LANGUAGE, Display = Resources.English_Language },
-    new Language { Key = ARABIC_LANGUAGE, Display = Resources.Arabic_language }
-};
-
+                {
+                 new Language { Key = ENGLISH_LANGUAGE, Display = Resources.English_Language },
+                 new Language { Key = ARABIC_LANGUAGE, Display = Resources.Arabic_language }
+                };
                 LanguagesComboBox.DataSource = mLanguageList;
                 LanguagesComboBox.DisplayMember = "Display";
                 LanguagesComboBox.ValueMember = "Key";
