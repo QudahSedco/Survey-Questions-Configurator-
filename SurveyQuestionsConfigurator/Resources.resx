@@ -120,6 +120,9 @@
   <data name="Add" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="Arabic_language" xml:space="preserve">
+    <value>Arabic</value>
+  </data>
   <data name="ConfirmDelete" xml:space="preserve">
     <value>Are you sure you want to delete the following Question?</value>
   </data>
@@ -140,6 +143,9 @@
   </data>
   <data name="EndCaptionEmptyError" xml:space="preserve">
     <value>End caption cannot be empty or white space</value>
+  </data>
+  <data name="English_Language" xml:space="preserve">
+    <value>English</value>
   </data>
   <data name="ErrorCaption" xml:space="preserve">
     <value>Error</value>

@@ -38,7 +38,7 @@ namespace SurveyQuestionsConfigurator
         private QuestionService mQuestionService;
         private Dictionary<string, bool> mSortColumnsDictionary;
         private List<Question> mQuestionsList;
-
+        private List<Language> mLanguageList;
         private const string COL_QUESTION_TEXT = "QuestionText";
         private const string COL_QUESTION_ORDER = "QuestionOrder";
         private const string COL_QUESTION_TYPE = "QuestionType";
@@ -58,12 +58,16 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 InitializeComponent();
+                mLanguageList = new List<Language>
+{
+    new Language { Key = ENGLISH_LANGUAGE, Display = Resources.English_Language },
+    new Language { Key = ARABIC_LANGUAGE, Display = Resources.Arabic_language }
+};
 
-                LanguagesComboBox.Items.Add(ENGLISH_LANGUAGE);
-                LanguagesComboBox.Items.Add(ARABIC_LANGUAGE);
+                LanguagesComboBox.DataSource = mLanguageList;
+                LanguagesComboBox.DisplayMember = "Display";
+                LanguagesComboBox.ValueMember = "Key";
                 LanguagesComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-                LanguagesComboBox.SelectedIndex = 0;
-
                 FormBorderStyle = FormBorderStyle.FixedDialog;
                 MinimizeBox = true;
                 StartPosition = FormStartPosition.CenterScreen;
@@ -110,6 +114,7 @@ namespace SurveyQuestionsConfigurator
                 dataGridViewMain.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
                 dataGridViewMain.AutoGenerateColumns = false;
                 dataGridViewMain.MultiSelect = false;
+                dataGridViewMain.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
                 //Creating the columns for the data grid view
                 DataGridViewTextBoxColumn tColText = new DataGridViewTextBoxColumn();
@@ -433,6 +438,11 @@ namespace SurveyQuestionsConfigurator
 
                 var tRes = new ComponentResourceManager(typeof(MainForm));
 
+                mLanguageList[0].Display = Resources.English_Language;
+                mLanguageList[1].Display = Resources.Arabic_language;
+
+                LanguagesComboBox.Refresh();
+
                 tRes.ApplyResources(this, "$this");//applies to form level properties only
 
                 foreach (Control tControl in Controls) //applies to all controls and the contorls inside them
@@ -513,7 +523,7 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                string tSelectedLang = LanguagesComboBox.SelectedItem.ToString();
+                string tSelectedLang = LanguagesComboBox.SelectedValue.ToString();
 
                 switch (tSelectedLang)
                 {

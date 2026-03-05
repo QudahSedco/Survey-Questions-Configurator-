@@ -70,6 +70,15 @@ namespace SurveyQuestionsConfigurator {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Arabic.
+        /// </summary>
+        internal static string Arabic_language {
+            get {
+                return ResourceManager.GetString("Arabic_language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete the following Question?.
         /// </summary>
         internal static string ConfirmDelete {
@@ -129,6 +138,15 @@ namespace SurveyQuestionsConfigurator {
         internal static string EndCaptionEmptyError {
             get {
                 return ResourceManager.GetString("EndCaptionEmptyError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to English.
+        /// </summary>
+        internal static string English_Language {
+            get {
+                return ResourceManager.GetString("English_Language", resourceCulture);
             }
         }
         
